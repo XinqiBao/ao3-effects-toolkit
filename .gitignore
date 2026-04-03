@@ -1,0 +1,10 @@
+.context/
+.playwright-mcp/
+.playwright-cli/
+.worktrees/
+local/
+output/
+node_modules/
+artifacts/
+.DS_Store
+tags

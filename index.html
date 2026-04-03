@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AO3 Envelope Demo</title>
+    <link rel="stylesheet" href="ao3-workskin.css" />
+    <style>
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top, rgba(255, 241, 220, 0.42), transparent 34%),
+          linear-gradient(180deg, #f7ecdd 0%, #e7d6c3 100%);
+        color: #2d241d;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua",
+          "URW Palladio L", Georgia, serif;
+      }
+
+      .page-shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 48px 20px 72px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-size: 0.78rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #7b5c42;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.25rem, 5vw, 4.75rem);
+        line-height: 0.94;
+        font-weight: 600;
+        color: #4f2d1f;
+      }
+
+      .hero p,
+      .notes li,
+      .paths li {
+        font-size: 1.05rem;
+        line-height: 1.65;
+      }
+
+      .hero p {
+        max-width: 58rem;
+        margin: 0;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.9fr;
+        gap: 20px;
+        align-items: start;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        background: rgba(255, 250, 242, 0.78);
+        border: 1px solid rgba(103, 74, 55, 0.18);
+        border-radius: 24px;
+        box-shadow: 0 18px 44px rgba(82, 53, 35, 0.12);
+        padding: 22px 22px 24px;
+        backdrop-filter: blur(8px);
+      }
+
+      .card h2 {
+        margin: 0 0 12px;
+        font-size: 1.15rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #6b4630;
+      }
+
+      .card p {
+        margin: 0;
+        line-height: 1.7;
+      }
+
+      .notes,
+      .paths {
+        margin: 14px 0 0;
+        padding-left: 18px;
+      }
+
+      .file-links {
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .file-links a {
+        display: inline-block;
+        color: #663b24;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(102, 59, 36, 0.35);
+        width: fit-content;
+      }
+
+      .demo-heading {
+        margin: 0 0 10px;
+        font-size: 1.35rem;
+        color: #4f2d1f;
+      }
+
+      .demo-copy {
+        margin: 0 0 26px;
+        max-width: 52rem;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .page-shell {
+          padding: 36px 16px 60px;
+        }
+
+        .card {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero">
+        <p class="eyebrow">AO3 Research + Local Prototype</p>
+        <h1>Envelope opening, but within AO3's rules.</h1>
+        <p>
+          This page tries two directions with only HTML and CSS. The first one
+          mirrors the familiar AO3 hover-to-open approach. The second keeps the
+          same visual language but uses links plus
+          <code>:target</code> so the interaction can be tapped instead of
+          hovered.
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>What the research says</h2>
+          <ul class="notes">
+            <li>AO3 explicitly disallows JavaScript in posted works.</li>
+            <li>AO3 only allows a limited subset of HTML and CSS, but the subset is enough for layered paper effects.</li>
+            <li>The classic envelope effect on AO3 is built from stacked blocks, z-index, transform, and transition.</li>
+            <li>Downloads do not keep work skins, and readers can hide custom creator styles.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Files in this folder</h2>
+          <p>
+            The local demo is here, and the AO3-ready pieces are split out so
+            you can paste them into a work skin and chapter body.
+          </p>
+          <div class="file-links">
+            <a href="ao3-workskin.css">ao3-workskin.css</a>
+            <a href="snippets/hover-envelope.html">snippets/hover-envelope.html</a>
+            <a href="snippets/tap-envelope.html">snippets/tap-envelope.html</a>
+            <a href="README.md">README.md</a>
+          </div>
+        </article>
+      </section>
+
+      <section id="workskin">
+        <h2 class="demo-heading">Local experiments</h2>
+        <p class="demo-copy">
+          Version A is the safe replication path for AO3 because it uses the
+          same hover logic people already use in work skins. Version B is the
+          stronger reading experience if you want touch interaction, and it
+          should be tested in AO3 preview because it relies on link targeting
+          instead of hover.
+        </p>
+
+        <section class="demo-block">
+          <p class="demo-label">Version A / Hover clone</p>
+          <div class="ao3-envelope ao3-envelope--hover">
+            <div class="ao3-envelope-shell">
+              <span class="ao3-envelope-shadow"></span>
+              <span class="ao3-envelope-back"></span>
+              <span class="ao3-envelope-peek"></span>
+              <span class="ao3-envelope-flap-wrap">
+                <span class="ao3-envelope-flap"></span>
+              </span>
+              <span class="ao3-envelope-front"></span>
+              <span class="ao3-envelope-fold ao3-envelope-fold--left"></span>
+              <span class="ao3-envelope-fold ao3-envelope-fold--right"></span>
+              <span class="ao3-envelope-stamp">AO3</span>
+              <span class="ao3-envelope-address ao3-envelope-address--from"
+                >Han Liu<br />2C Lantern Lane<br />Cloud District</span
+              >
+              <span class="ao3-envelope-address ao3-envelope-address--to"
+                >To the reader who opened this chapter</span
+              >
+              <span class="ao3-envelope-hint">Hover to unfold</span>
+            </div>
+
+            <div class="ao3-letter-stack">
+              <div class="ao3-letter-panel ao3-letter-panel--one">
+                <div class="ao3-letter-scroll">
+                  <p class="ao3-letter-kicker">First Fold</p>
+                  <p>Dear Reader,</p>
+                  <p>
+                    This first panel is doing the job that the top section of an
+                    AO3 letter usually does: it reveals quickly, sets the mood,
+                    and makes the envelope feel like something physical instead
+                    of a flat image.
+                  </p>
+                </div>
+              </div>
+
+              <div class="ao3-letter-panel ao3-letter-panel--two">
+                <div class="ao3-letter-scroll">
+                  <p class="ao3-letter-kicker">Second Fold</p>
+                  <p>
+                    The middle sheet uses the same trick as the tutorial-style
+                    work skins: layered rectangles, slightly different paper
+                    tones, and delayed movement so the opening feels staged
+                    rather than instant.
+                  </p>
+                </div>
+              </div>
+
+              <div class="ao3-letter-panel ao3-letter-panel--three">
+                <div class="ao3-letter-scroll">
+                  <p class="ao3-letter-kicker">Third Fold</p>
+                  <p>
+                    On AO3, this kind of interaction has to stay readable even
+                    after the work skin is disabled. So treat the animation as
+                    an enhancement, not the only way a reader can access the
+                    text.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="demo-block">
+          <p class="demo-label">Version B / Tap-open experiment</p>
+          <div id="ao3-envelope-reset"></div>
+          <div id="ao3-envelope-target-demo" class="ao3-envelope ao3-envelope--target">
+            <a
+              class="ao3-envelope-toggle ao3-envelope-toggle--open"
+              href="#ao3-envelope-target-demo"
+              >Open envelope</a
+            >
+            <a
+              class="ao3-envelope-toggle ao3-envelope-toggle--close"
+              href="#ao3-envelope-reset"
+              >Close letter</a
+            >
+            <div class="ao3-envelope-shell">
+              <span class="ao3-envelope-shadow"></span>
+              <span class="ao3-envelope-back"></span>
+              <span class="ao3-envelope-peek"></span>
+              <span class="ao3-envelope-flap-wrap">
+                <span class="ao3-envelope-flap"></span>
+              </span>
+              <span class="ao3-envelope-front"></span>
+              <span class="ao3-envelope-fold ao3-envelope-fold--left"></span>
+              <span class="ao3-envelope-fold ao3-envelope-fold--right"></span>
+              <span class="ao3-envelope-stamp">OPEN</span>
+              <span class="ao3-envelope-address ao3-envelope-address--from"
+                >Archive Copy<br />Filed for later</span
+              >
+              <span class="ao3-envelope-address ao3-envelope-address--to"
+                >Tap once to open, use the close link to reset</span
+              >
+              <span class="ao3-envelope-hint">Tap to unfold</span>
+            </div>
+
+            <div class="ao3-letter-stack">
+              <div class="ao3-letter-panel ao3-letter-panel--one">
+                <div class="ao3-letter-scroll">
+                  <p class="ao3-letter-kicker">Touch-friendly</p>
+                  <p>
+                    This version exists because hover is awkward on phones and
+                    tablets. The visual language stays almost identical, but the
+                    state change now comes from a normal link and the CSS
+                    <code>:target</code> selector.
+                  </p>
+                </div>
+              </div>
+
+              <div class="ao3-letter-panel ao3-letter-panel--two">
+                <div class="ao3-letter-scroll">
+                  <p class="ao3-letter-kicker">AO3 caveat</p>
+                  <p>
+                    This is a stronger AO3 experiment because it only uses
+                    anchors, IDs, and CSS selectors AO3 work skins already rely
+                    on for other interactive fic patterns.
+                  </p>
+                </div>
+              </div>
+
+              <div class="ao3-letter-panel ao3-letter-panel--three">
+                <div class="ao3-letter-scroll">
+                  <p class="ao3-letter-kicker">Recommendation</p>
+                  <p>
+                    If your audience is mostly desktop readers, publish the
+                    hover version first. If mobile readability matters more, use
+                    this as the next thing to test in AO3 preview.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
