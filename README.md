@@ -14,9 +14,13 @@ envelope-opening effect built without JavaScript.
 ## Files
 
 - `index.html`: local demo page with two interaction models
+- `validation.html`: forced open/closed states for visual verification
 - `ao3-workskin.css`: CSS to paste into a work skin
 - `snippets/hover-envelope.html`: safest AO3 publishing path
 - `snippets/tap-envelope.html`: touch-friendly experiment using anchor links and `:target`
+- `snippets/minimal-envelope.html`: smallest smoke test to confirm the skin is attached
+- `AO3-POSTING.md`: concrete AO3 publishing steps and example workflows
+- `scripts/capture-validation.sh`: local screenshot script for repeatable visual checks
 
 ## Suggested publishing order
 
@@ -24,9 +28,10 @@ envelope-opening effect built without JavaScript.
 2. Paste in `ao3-workskin.css`.
 3. Attach that work skin to your work.
 4. Switch the chapter editor to HTML.
-5. Paste `snippets/hover-envelope.html` first.
+5. Paste `snippets/minimal-envelope.html` first as a wiring test.
 6. Use Preview inside AO3 and adjust spacing and text lengths.
-7. Only test `snippets/tap-envelope.html` after the hover version works.
+7. Replace the smoke test with `snippets/hover-envelope.html`.
+8. Only test `snippets/tap-envelope.html` after the hover version works.
 
 ## Practical caveats
 
@@ -37,3 +42,17 @@ envelope-opening effect built without JavaScript.
   narrow screen before posting.
 - If you use more than one click-open letter in the same chapter, change the
   `id` values in `snippets/tap-envelope.html` so the links do not collide.
+- AO3 allows `details` and `summary` in HTML, but the validated touch-friendly
+  version in this repo uses links and `:target` because it maps more directly
+  to the same anchor behavior AO3 already documents.
+
+## Validation
+
+Run the local screenshot loop with:
+
+```bash
+./scripts/capture-validation.sh
+```
+
+This saves desktop screenshots to `artifacts/index-home.png` and
+`artifacts/validation-states.png`.

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AO3 Envelope Validation</title>
+    <link rel="stylesheet" href="ao3-workskin.css" />
+    <style>
+      body {
+        margin: 0;
+        background: #efe1cf;
+        color: #3c2c20;
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      .frame {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 32px 20px 60px;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 2.6rem;
+        line-height: 0.95;
+      }
+
+      p {
+        margin: 0 0 24px;
+        max-width: 48rem;
+        line-height: 1.7;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="frame">
+      <h1>Validation states for AO3 envelope work skin</h1>
+      <p>
+        This page is only for local verification. It shows desktop and mobile
+        widths, plus forced-open states, so the screenshots reveal whether the
+        layers, spacing, and unfolded panels still read correctly.
+      </p>
+
+      <section id="workskin">
+        <div class="preview-grid">
+          <section class="preview-card">
+            <p class="demo-label">Desktop / Hover closed</p>
+            <p class="preview-note">
+              Baseline closed state for the hover version.
+            </p>
+            <div class="ao3-envelope ao3-envelope--hover">
+              <div class="ao3-envelope-shell">
+                <span class="ao3-envelope-shadow"></span>
+                <span class="ao3-envelope-back"></span>
+                <span class="ao3-envelope-peek"></span>
+                <span class="ao3-envelope-flap-wrap">
+                  <span class="ao3-envelope-flap"></span>
+                </span>
+                <span class="ao3-envelope-front"></span>
+                <span class="ao3-envelope-fold ao3-envelope-fold--left"></span>
+                <span class="ao3-envelope-fold ao3-envelope-fold--right"></span>
+                <span class="ao3-envelope-stamp">AO3</span>
+                <span class="ao3-envelope-address ao3-envelope-address--from"
+                  >Han Liu<br />2C Lantern Lane<br />Cloud District</span
+                >
+                <span class="ao3-envelope-address ao3-envelope-address--to"
+                  >To the reader who opened this chapter</span
+                >
+                <span class="ao3-envelope-hint">Hover to unfold</span>
+              </div>
+
+              <div class="ao3-letter-stack">
+                <div class="ao3-letter-panel ao3-letter-panel--one">
+                  <div class="ao3-letter-scroll">
+                    <p class="ao3-letter-kicker">First Fold</p>
+                    <p>Dear Reader,</p>
+                    <p>Put the first block of letter text here.</p>
+                  </div>
+                </div>
+                <div class="ao3-letter-panel ao3-letter-panel--two">
+                  <div class="ao3-letter-scroll">
+                    <p class="ao3-letter-kicker">Second Fold</p>
+                    <p>Put the second block of letter text here.</p>
+                  </div>
+                </div>
+                <div class="ao3-letter-panel ao3-letter-panel--three">
+                  <div class="ao3-letter-scroll">
+                    <p class="ao3-letter-kicker">Third Fold</p>
+                    <p>Put the final block of letter text here.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="preview-card">
+            <p class="demo-label">Desktop / Forced open</p>
+            <p class="preview-note">
+              Local-only open state for visual validation of panel spacing.
+            </p>
+            <div class="ao3-envelope ao3-envelope--hover ao3-envelope--preview-open">
+              <div class="ao3-envelope-shell">
+                <span class="ao3-envelope-shadow"></span>
+                <span class="ao3-envelope-back"></span>
+                <span class="ao3-envelope-peek"></span>
+                <span class="ao3-envelope-flap-wrap">
+                  <span class="ao3-envelope-flap"></span>
+                </span>
+                <span class="ao3-envelope-front"></span>
+                <span class="ao3-envelope-fold ao3-envelope-fold--left"></span>
+                <span class="ao3-envelope-fold ao3-envelope-fold--right"></span>
+                <span class="ao3-envelope-stamp">AO3</span>
+                <span class="ao3-envelope-address ao3-envelope-address--from"
+                  >Han Liu<br />2C Lantern Lane<br />Cloud District</span
+                >
+                <span class="ao3-envelope-address ao3-envelope-address--to"
+                  >To the reader who opened this chapter</span
+                >
+                <span class="ao3-envelope-hint">Open state preview</span>
+              </div>
+
+              <div class="ao3-letter-stack">
+                <div class="ao3-letter-panel ao3-letter-panel--one">
+                  <div class="ao3-letter-scroll">
+                    <p class="ao3-letter-kicker">First Fold</p>
+                    <p>Dear Reader,</p>
+                    <p>Put the first block of letter text here.</p>
+                  </div>
+                </div>
+                <div class="ao3-letter-panel ao3-letter-panel--two">
+                  <div class="ao3-letter-scroll">
+                    <p class="ao3-letter-kicker">Second Fold</p>
+                    <p>Put the second block of letter text here.</p>
+                  </div>
+                </div>
+                <div class="ao3-letter-panel ao3-letter-panel--three">
+                  <div class="ao3-letter-scroll">
+                    <p class="ao3-letter-kicker">Third Fold</p>
+                    <p>Put the final block of letter text here.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="preview-card preview-card--mobile">
+            <p class="demo-label">Mobile / Target closed</p>
+            <p class="preview-note">
+              Simulated narrow-screen version for tap-based interaction.
+            </p>
+            <div style="max-width: 390px; margin: 0 auto">
+              <div id="validation-reset"></div>
+              <div id="validation-open" class="ao3-envelope ao3-envelope--target">
+                <a
+                  class="ao3-envelope-toggle ao3-envelope-toggle--open"
+                  href="#validation-open"
+                  >Open envelope</a
+                >
+                <a
+                  class="ao3-envelope-toggle ao3-envelope-toggle--close"
+                  href="#validation-reset"
+                  >Close letter</a
+                >
+                <div class="ao3-envelope-shell">
+                  <span class="ao3-envelope-shadow"></span>
+                  <span class="ao3-envelope-back"></span>
+                  <span class="ao3-envelope-peek"></span>
+                  <span class="ao3-envelope-flap-wrap">
+                    <span class="ao3-envelope-flap"></span>
+                  </span>
+                  <span class="ao3-envelope-front"></span>
+                  <span class="ao3-envelope-fold ao3-envelope-fold--left"></span>
+                  <span class="ao3-envelope-fold ao3-envelope-fold--right"></span>
+                  <span class="ao3-envelope-stamp">OPEN</span>
+                  <span class="ao3-envelope-address ao3-envelope-address--from"
+                    >Archive Copy<br />Mobile Friendly</span
+                  >
+                  <span class="ao3-envelope-address ao3-envelope-address--to"
+                    >Tap once to open, use the close link to reset</span
+                  >
+                  <span class="ao3-envelope-hint">Tap to unfold</span>
+                </div>
+
+                <div class="ao3-letter-stack">
+                  <div class="ao3-letter-panel ao3-letter-panel--one">
+                    <div class="ao3-letter-scroll">
+                      <p class="ao3-letter-kicker">First Fold</p>
+                      <p>Put the first block of letter text here.</p>
+                    </div>
+                  </div>
+                  <div class="ao3-letter-panel ao3-letter-panel--two">
+                    <div class="ao3-letter-scroll">
+                      <p class="ao3-letter-kicker">Second Fold</p>
+                      <p>Put the second block of letter text here.</p>
+                    </div>
+                  </div>
+                  <div class="ao3-letter-panel ao3-letter-panel--three">
+                    <div class="ao3-letter-scroll">
+                      <p class="ao3-letter-kicker">Third Fold</p>
+                      <p>Put the final block of letter text here.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="preview-card preview-card--mobile">
+            <p class="demo-label">Mobile / Forced open</p>
+            <p class="preview-note">
+              Narrow-screen open state for readability verification.
+            </p>
+            <div style="max-width: 390px; margin: 0 auto">
+              <div class="ao3-envelope ao3-envelope--target ao3-envelope--preview-open">
+                <div class="ao3-envelope-shell">
+                  <span class="ao3-envelope-shadow"></span>
+                  <span class="ao3-envelope-back"></span>
+                  <span class="ao3-envelope-peek"></span>
+                  <span class="ao3-envelope-flap-wrap">
+                    <span class="ao3-envelope-flap"></span>
+                  </span>
+                  <span class="ao3-envelope-front"></span>
+                  <span class="ao3-envelope-fold ao3-envelope-fold--left"></span>
+                  <span class="ao3-envelope-fold ao3-envelope-fold--right"></span>
+                  <span class="ao3-envelope-stamp">OPEN</span>
+                  <span class="ao3-envelope-address ao3-envelope-address--from"
+                    >Archive Copy<br />Mobile Friendly</span
+                  >
+                  <span class="ao3-envelope-address ao3-envelope-address--to"
+                    >Tap once to open, use the close link to reset</span
+                  >
+                  <span class="ao3-envelope-hint">Open state preview</span>
+                </div>
+
+                <div class="ao3-letter-stack">
+                  <div class="ao3-letter-panel ao3-letter-panel--one">
+                    <div class="ao3-letter-scroll">
+                      <p class="ao3-letter-kicker">First Fold</p>
+                      <p>Put the first block of letter text here.</p>
+                    </div>
+                  </div>
+                  <div class="ao3-letter-panel ao3-letter-panel--two">
+                    <div class="ao3-letter-scroll">
+                      <p class="ao3-letter-kicker">Second Fold</p>
+                      <p>Put the second block of letter text here.</p>
+                    </div>
+                  </div>
+                  <div class="ao3-letter-panel ao3-letter-panel--three">
+                    <div class="ao3-letter-scroll">
+                      <p class="ao3-letter-kicker">Third Fold</p>
+                      <p>Put the final block of letter text here.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
