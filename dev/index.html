@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AO3 Envelope Demo</title>
-    <link rel="stylesheet" href="ao3-workskin.css" />
+    <title>AO3 Envelope Developer Preview</title>
+    <link rel="stylesheet" href="../bundle/work-skin.css" />
     <style>
       body {
         margin: 0;
@@ -136,39 +136,38 @@
   <body>
     <main class="page-shell">
       <section class="hero">
-        <p class="eyebrow">AO3 Research + Local Prototype</p>
-        <h1>Envelope opening, but within AO3's rules.</h1>
+        <p class="eyebrow">Developer Preview</p>
+        <h1>AO3 envelope previews and validation states.</h1>
         <p>
-          This page tries two directions with only HTML and CSS. The first one
-          mirrors the familiar AO3 hover-to-open approach. The second keeps the
-          same visual language but uses links plus
-          <code>:target</code> so the interaction can be tapped instead of
-          hovered.
+          This page is for local preview only. Normal AO3 users should start in
+          the user-facing bundle and guides, then come here only if they want
+          to inspect or maintain the local prototype.
         </p>
       </section>
 
       <section class="grid">
         <article class="card">
-          <h2>What the research says</h2>
+          <h2>Project Constraints</h2>
           <ul class="notes">
             <li>AO3 explicitly disallows JavaScript in posted works.</li>
             <li>AO3 only allows a limited subset of HTML and CSS, but the subset is enough for layered paper effects.</li>
-            <li>The classic envelope effect on AO3 is built from stacked blocks, z-index, transform, and transition.</li>
+            <li>The effect is built from stacked blocks, z-index, transform, and transition.</li>
             <li>Downloads do not keep work skins, and readers can hide custom creator styles.</li>
           </ul>
         </article>
 
         <article class="card">
-          <h2>Files in this folder</h2>
+          <h2>User Bundle</h2>
           <p>
-            The local demo is here, and the AO3-ready pieces are split out so
-            you can paste them into a work skin and chapter body.
+            These are the only files most AO3 users should actually copy from.
           </p>
           <div class="file-links">
-            <a href="ao3-workskin.css">ao3-workskin.css</a>
-            <a href="snippets/hover-envelope.html">snippets/hover-envelope.html</a>
-            <a href="snippets/tap-envelope.html">snippets/tap-envelope.html</a>
-            <a href="README.md">README.md</a>
+            <a href="../guides/START-HERE-ZH.md">guides/START-HERE-ZH.md</a>
+            <a href="../guides/FAQ-ZH.md">guides/FAQ-ZH.md</a>
+            <a href="../bundle/work-skin.css">bundle/work-skin.css</a>
+            <a href="../bundle/smoke-test.html">bundle/smoke-test.html</a>
+            <a href="../bundle/hover-template-zh.html">bundle/hover-template-zh.html</a>
+            <a href="../bundle/tap-template-zh.html">bundle/tap-template-zh.html</a>
           </div>
         </article>
       </section>
@@ -176,11 +175,10 @@
       <section id="workskin">
         <h2 class="demo-heading">Local experiments</h2>
         <p class="demo-copy">
-          Version A is the safe replication path for AO3 because it uses the
-          same hover logic people already use in work skins. Version B is the
-          stronger reading experience if you want touch interaction, and it
-          should be tested in AO3 preview because it relies on link targeting
-          instead of hover.
+          Version A is the stable hover version. Version B is the
+          touch-friendlier target-based version. This page keeps both for local
+          iteration, but the user-facing bundle only exposes the smallest
+          copy-paste path.
         </p>
 
         <section class="demo-block">

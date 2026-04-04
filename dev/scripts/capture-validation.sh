@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 ARTIFACTS="$ROOT/artifacts"
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 PORT="${1:-4173}"
@@ -17,11 +17,11 @@ sleep 1
 "$CHROME" --headless=new --disable-gpu --hide-scrollbars \
   --window-size=1440,2600 \
   --screenshot="$ARTIFACTS/index-home.png" \
-  "http://127.0.0.1:$PORT/"
+  "http://127.0.0.1:$PORT/dev/"
 
 "$CHROME" --headless=new --disable-gpu --hide-scrollbars \
   --window-size=1600,3400 \
   --screenshot="$ARTIFACTS/validation-states.png" \
-  "http://127.0.0.1:$PORT/validation.html"
+  "http://127.0.0.1:$PORT/dev/validation.html"
 
 echo "Saved screenshots to $ARTIFACTS"
