@@ -1,0 +1,165 @@
+/* ========================================
+   Secret Divider — CSS (scoped under #workskin)
+   ======================================== */
+
+#workskin .secret-divider-container {
+  margin: 1.8em auto;
+  max-width: 540px;
+  text-align: center;
+}
+
+#workskin .secret-divider {
+  position: relative;
+  display: block;
+  padding: 0;
+  cursor: default;
+  transition: padding 0.6s ease;
+}
+
+/* ---- Ornament line (always visible) ---- */
+
+#workskin .secret-divider__ornament {
+  display: block;
+  color: #8a7d6b;
+  font-size: 1em;
+  letter-spacing: 0.35em;
+  user-select: none;
+  transition:
+    color 0.6s ease,
+    transform 0.6s ease,
+    letter-spacing 0.6s ease;
+}
+
+/* ---- Hidden text ---- */
+
+#workskin .secret-divider__text {
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.6s ease,
+    opacity 0.6s ease,
+    padding 0.6s ease;
+}
+
+#workskin .secret-divider__text-inner {
+  display: block;
+  margin: 0.7em auto;
+  max-width: 460px;
+  padding: 0.9em 1.2em;
+  color: #5a4f42;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.92em;
+  font-style: italic;
+  line-height: 1.65;
+  text-align: center;
+  white-space: pre-line;
+}
+
+/* ======================================== */
+/* HOVER mode — reveal on :hover            */
+/* ======================================== */
+
+#workskin .secret-divider--hover:hover .secret-divider__ornament {
+  color: #a08c74;
+  transform: scale(1.06);
+  letter-spacing: 0.5em;
+}
+
+#workskin .secret-divider--hover:hover .secret-divider__text {
+  max-height: 15em;
+  opacity: 1;
+}
+
+/* ======================================== */
+/* DETAILS / SUMMARY mode — reveal on [open] */
+/* ======================================== */
+
+#workskin .secret-divider--details .secret-divider__summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+
+#workskin .secret-divider--details .secret-divider__summary::marker,
+#workskin .secret-divider--details .secret-divider__summary::-webkit-details-marker {
+  content: "";
+  display: none;
+}
+
+#workskin .secret-divider--details[open] .secret-divider__ornament {
+  color: #a08c74;
+  transform: scale(1.06);
+  letter-spacing: 0.5em;
+}
+
+#workskin .secret-divider--details[open] .secret-divider__text {
+  max-height: 15em;
+  opacity: 1;
+}
+
+#workskin .secret-divider__summary-hint {
+  display: block;
+  margin-top: 0.3em;
+  color: rgba(138, 125, 107, 0.5);
+  font-size: 0.68em;
+  font-style: italic;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity 0.4s ease;
+}
+
+#workskin .secret-divider--details[open] .secret-divider__summary-hint {
+  opacity: 0;
+}
+
+/* ======================================== */
+/* PREVIEW mode — forced open for validation */
+/* ======================================== */
+
+#workskin .secret-divider--preview-open .secret-divider__ornament {
+  color: #a08c74;
+  transform: scale(1.06);
+  letter-spacing: 0.5em;
+}
+
+#workskin .secret-divider--preview-open .secret-divider__text {
+  max-height: 15em;
+  opacity: 1;
+}
+
+/* ======================================== */
+/* FLANKING ornaments (::before / ::after)  */
+/* ======================================== */
+
+#workskin .secret-divider--with-flanks .secret-divider__ornament {
+  position: relative;
+}
+
+#workskin .secret-divider--with-flanks .secret-divider__ornament::before,
+#workskin .secret-divider--with-flanks .secret-divider__ornament::after {
+  display: inline;
+  color: #b5a892;
+  font-size: 0.82em;
+  transition: color 0.6s ease;
+}
+
+#workskin .secret-divider--with-flanks .secret-divider__ornament::before {
+  content: "\2726";
+  margin-right: 0.6em;
+}
+
+#workskin .secret-divider--with-flanks .secret-divider__ornament::after {
+  content: "\2726";
+  margin-left: 0.6em;
+}
+
+#workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::before,
+#workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::after,
+#workskin .secret-divider--with-flanks.secret-divider--details[open] .secret-divider__ornament::before,
+#workskin .secret-divider--with-flanks.secret-divider--details[open] .secret-divider__ornament::after,
+#workskin .secret-divider--with-flanks.secret-divider--preview-open .secret-divider__ornament::before,
+#workskin .secret-divider--with-flanks.secret-divider--preview-open .secret-divider__ornament::after {
+  color: #c9b89e;
+}

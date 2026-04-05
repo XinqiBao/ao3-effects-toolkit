@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AO3 Chat Messages — Preview</title>
+  <link rel="stylesheet" href="work-skin.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(140deg, #e8edf2 0%, #d4dde8 50%, #ebf0f5 100%);
+      min-height: 100vh;
+      color: #2d2a27;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    }
+    .shell { max-width: 960px; margin: 0 auto; padding: 44px 20px 64px; }
+    .hero__label { font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: #5a6a7a; }
+    .hero__title { font-size: clamp(1.8rem, 4vw, 3rem); line-height: .92; font-weight: 700; color: #2a3a4a; margin: 4px 0 8px; }
+    .hero__desc { font-size: 1rem; line-height: 1.6; max-width: 52rem; color: #4a5568; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 28px;
+    }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+    .grid .card:nth-child(odd) { margin-right: 10px; }
+    .grid .card:nth-child(even) { margin-left: 10px; }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(100, 120, 140, 0.15);
+      border-radius: 20px;
+      padding: 20px;
+    }
+    .card__label { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: #5a6a7a; margin-bottom: 6px; }
+    .card__note { font-size: .82em; color: #6b7b8c; margin-bottom: 14px; line-height: 1.5; }
+    .card--mobile { max-width: 390px; justify-self: center; width: 100%; }
+    @media (max-width: 860px) {
+      .grid .card:nth-child(odd) { margin-right: 0; margin-bottom: 10px; }
+      .grid .card:nth-child(even) { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+<main class="shell">
+  <section>
+    <p class="hero__label">AO3 Chat Messages — Local Preview</p>
+    <h1 class="hero__title">对话气泡效果预览</h1>
+    <p class="hero__desc">桌面 hover、移动端 details/summary 各展示关闭和展开四种状态。</p>
+  </section>
+
+  <div id="workskin">
+  <div class="grid">
+
+    <section class="card">
+      <p class="card__label">桌面 / 关闭态</p>
+      <p class="card__note">预览条显示，消息区域隐藏。</p>
+      <div class="chat-conversation chat-conversation--hover">
+        <div class="chat-preview">
+          <span class="chat-preview__text"><span class="chat-preview__msg">【发送者名字】</span></span>
+          <span class="chat-preview__chevron"></span>
+        </div>
+        <div class="chat-conversation__stack">
+          <div class="chat-meta"><span class="chat-timestamp">Today 9:41 AM</span>
+            <div class="chat-bubbles"><span class="chat-bubble chat-bubble--received">【第一条消息】</span></div>
+          </div>
+          <div class="chat-meta"><span class="chat-timestamp">Today 9:42 AM</span>
+            <div class="chat-bubbles"><span class="chat-bubble chat-bubble--sent">【第二条消息】</span></div>
+          </div>
+          <span class="chat-conversation__hint">Hover to reveal</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <p class="card__label">桌面 / 展开态</p>
+      <p class="card__note">强制展开验证消息布局。</p>
+      <div class="chat-conversation chat-conversation--preview-open">
+        <div class="chat-preview">
+          <span class="chat-preview__text"><span class="chat-preview__msg">【发送者名字】</span></span>
+          <span class="chat-preview__chevron"></span>
+        </div>
+        <div class="chat-conversation__stack">
+          <div class="chat-meta"><span class="chat-timestamp">Today 9:41 AM</span>
+            <div class="chat-bubbles">
+              <span class="chat-bubble chat-bubble--received">你好！最近怎么样？</span>
+              <span class="chat-bubble chat-bubble--received">好久没联系了。</span>
+            </div>
+          </div>
+          <div class="chat-meta"><span class="chat-timestamp">Today 9:42 AM</span>
+            <div class="chat-bubbles"><span class="chat-bubble chat-bubble--sent">挺好的！刚看完你写的故事。</span></div>
+          </div>
+          <div class="chat-meta"><span class="chat-timestamp">Today 9:43 AM</span>
+            <div class="chat-bubbles"><span class="chat-bubble chat-bubble--received">感觉如何？</span></div>
+          </div>
+          <div class="chat-meta"><span class="chat-timestamp">Today 9:44 AM</span>
+            <div class="chat-bubbles"><span class="chat-bubble chat-bubble--sent">超棒的。写得太好了。</span></div>
+          </div>
+          <span class="chat-conversation__hint">Hover to collapse</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card--mobile">
+      <p class="card__label">移动 / 关闭态</p>
+      <p class="card__note">触屏预览条，消息区域压缩。</p>
+      <details class="chat-conversation chat-conversation--details">
+        <summary>
+          <div class="chat-preview">
+            <span class="chat-preview__text"><span class="chat-preview__msg">【发送者名字】</span></span>
+            <span class="chat-preview__chevron"></span>
+          </div>
+          <div class="chat-conversation__stack">
+            <div class="chat-meta"><span class="chat-timestamp">Today 9:41 AM</span>
+              <div class="chat-bubbles"><span class="chat-bubble chat-bubble--received">消息内容</span></div>
+            </div>
+            <span class="chat-conversation__hint">点击展开</span>
+          </div>
+        </summary>
+      </details>
+    </section>
+
+    <section class="card card--mobile">
+      <p class="card__label">移动 / 展开态</p>
+      <p class="card__note">触屏展开后完整对话。</p>
+      <details class="chat-conversation chat-conversation--details" open>
+        <summary>
+          <div class="chat-preview">
+            <span class="chat-preview__text"><span class="chat-preview__msg">【发送者名字】</span></span>
+            <span class="chat-preview__chevron"></span>
+          </div>
+          <div class="chat-conversation__stack">
+            <div class="chat-meta"><span class="chat-timestamp">Today 9:41 AM</span>
+              <div class="chat-bubbles"><span class="chat-bubble chat-bubble--received">你好！</span></div>
+            </div>
+            <div class="chat-meta"><span class="chat-timestamp">Today 9:42 AM</span>
+              <div class="chat-bubbles"><span class="chat-bubble chat-bubble--sent">嗨！有什么事？</span></div>
+            </div>
+            <div class="chat-meta"><span class="chat-timestamp">Today 9:43 AM</span>
+              <div class="chat-bubbles"><span class="chat-bubble chat-bubble--received">想请你帮忙看看我写的东西。</span></div>
+            </div>
+            <div class="chat-meta"><span class="chat-timestamp">Today 9:44 AM</span>
+              <div class="chat-bubbles"><span class="chat-bubble chat-bubble--sent">当然，让我看看。</span></div>
+            </div>
+            <span class="chat-conversation__hint">点击折叠</span>
+          </div>
+        </summary>
+      </details>
+    </section>
+
+  </div>
+  </div>
+</main>
+</body>
+</html>

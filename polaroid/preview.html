@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AO3 Polaroid — Preview</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(140deg, #e8e0d0 0%, #ddd5c5 40%, #ede6da 100%);
+      min-height: 100vh;
+      color: #2d241d;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    }
+    .shell { max-width: 1120px; margin: 0 auto; padding: 44px 20px 64px; }
+    .hero { margin-bottom: 36px; }
+    .hero__label {
+      font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+      color: #7b5c42;
+    }
+    .hero__title { font-size: clamp(2rem, 4.8vw, 4rem); line-height: .92; font-weight: 600; color: #4f2d1f; margin: 4px 0 8px; }
+    .hero__desc { font-size: 1.02rem; line-height: 1.6; max-width: 56rem; }
+    .grid {
+      display: grid; gap: 20px;
+      grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+    }
+    @media (max-width: 860px) { .grid { --cols: 1; } }
+    .card {
+      background: rgba(255 250 242 / .78);
+      border: 1px solid rgba(103 74 55 / .18);
+      border-radius: 20px; padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .card__label {
+      font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: #6b4630; margin-bottom: 6px;
+    }
+    .card__note { font-size: .82em; color: #7b6b5c; margin-bottom: 12px; line-height: 1.5; }
+    .card--mobile { max-width: 390px; justify-self: center; width: 100%; }
+    .card--mobile > .polaroid-gallery { max-width: 390px; margin: 0 auto; }
+
+    /* Force-open override for preview */
+    .card--flipped .polaroid-inner { transform: rotateY(180deg) !important; }
+    .card--flipped .polaroid-front { opacity: 0 !important; z-index: 1 !important; transition-delay: 0s !important; }
+    .card--flipped .polaroid-back { opacity: 1 !important; z-index: 2 !important; transition-delay: 0.2s !important; }
+  </style>
+  <link rel="stylesheet" href="work-skin.css">
+</head>
+<body>
+<main class="shell">
+
+  <section class="hero">
+    <p class="hero__label">AO3 Polaroid — Local Preview</p>
+    <h1 class="hero__title">拍立得相框效果预览</h1>
+    <p class="hero__desc">桌面关闭态、桌面翻转态、移动端三态集中展示。同一套 CSS 与 AO3 发布版本一致。</p>
+  </section>
+
+  <div id="workskin">
+  <div class="grid">
+
+    <!-- A: Desktop / Hover closed -->
+    <section class="card">
+      <p class="card__label">桌面 · 关闭态</p>
+      <p class="card__note">默认状态下显示拍立得正面。</p>
+      <div class="polaroid-gallery">
+        <div class="polaroid-container">
+          <div class="polaroid-inner polaroid--hover">
+            <span class="polaroid-front">
+              <span class="polaroid-frame"></span>
+              <span class="polaroid-image"></span>
+              <span class="polaroid-caption">summer of &#39;92</span>
+            </span>
+            <span class="polaroid-back">
+              <span class="polaroid-back-inner">
+                <p class="polaroid-message">背面留言在翻转后可见。</p>
+              </span>
+            </span>
+          </div>
+          <span class="polaroid-hint">悬停翻转</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- B: Desktop / Hover forced open (flipped) -->
+    <section class="card card--flipped">
+      <p class="card__label">桌面 · 翻转态</p>
+      <p class="card__note">强制 .polaroid--preview-open，显示背面文字。</p>
+      <div class="polaroid-gallery">
+        <div class="polaroid-container">
+          <div class="polaroid-inner polaroid--hover polaroid--preview-open">
+            <span class="polaroid-front">
+              <span class="polaroid-frame"></span>
+              <span class="polaroid-image"></span>
+              <span class="polaroid-caption">rainy tuesday</span>
+            </span>
+            <span class="polaroid-back">
+              <span class="polaroid-back-inner">
+                <p class="polaroid-message">You brought me coffee&#10;and said nothing at all.&#10;It was enough.</p>
+              </span>
+            </span>
+          </div>
+          <span class="polaroid-hint">悬停翻转</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- C: Mobile / Details closed -->
+    <section class="card card--mobile">
+      <p class="card__label">移动 · 关闭态</p>
+      <p class="card__note">触屏版，点击 summary 翻转。</p>
+      <div class="polaroid-gallery">
+        <div class="polaroid-container">
+          <details class="polaroid-inner polaroid--details">
+            <summary>
+              <span class="polaroid-front">
+                <span class="polaroid-frame"></span>
+                <span class="polaroid-image"></span>
+                <span class="polaroid-caption">the last train home</span>
+              </span>
+              <span class="polaroid-back">
+                <span class="polaroid-back-inner">
+                  <p class="polaroid-message">Platform 4, 11:47pm.&#10;You fell asleep on my shoulder.&#10;I didn&#39;t move the whole way.</p>
+                </span>
+              </span>
+            </summary>
+          </details>
+          <span class="polaroid-hint">点击翻转</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  </div>
+</main>
+</body>
+</html>

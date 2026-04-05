@@ -1,0 +1,235 @@
+/* ============================================================
+   AO3 Chat Messages — iOS/iMessage style conversation
+   All selectors scoped under #workskin
+   ============================================================ */
+
+/* ---------- Container ---------- */
+
+#workskin .chat-conversation {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f2f2f7;
+  cursor: pointer;
+}
+
+/* ---------- Details/summary — hide default marker ---------- */
+
+#workskin details.chat-conversation--details summary::-webkit-details-marker,
+#workskin details.chat-conversation--details::marker,
+#workskin details.chat-conversation--details summary::marker {
+  display: none !important;
+  content: "" !important;
+}
+
+/* ---------- Stack (full message list) ---------- */
+
+#workskin .chat-conversation__stack {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 8px;
+}
+
+/* Hover mode: stack is hidden until hover */
+#workskin .chat-conversation--hover .chat-conversation__stack {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+  transition: max-height 0.5s ease, opacity 0.35s ease, padding 0.5s ease;
+}
+
+#workskin .chat-conversation--hover:hover .chat-conversation__stack,
+#workskin .chat-conversation--preview-open .chat-conversation__stack {
+  max-height: 4000px;
+  opacity: 1;
+  padding: 10px 10px 8px;
+}
+
+/* Tap mode: stack is hidden until details[open] */
+#workskin .chat-conversation--details .chat-conversation__stack {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 10px;
+  transition: max-height 0.5s ease, opacity 0.35s ease, padding 0.5s ease;
+}
+
+#workskin .chat-conversation--details[open] .chat-conversation__stack {
+  max-height: 4000px;
+  opacity: 1;
+  padding: 10px 10px 8px;
+}
+
+/* ---------- Preview bar (collapsed state) ---------- */
+
+#workskin .chat-preview {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  color: #6b6b6e;
+  font-size: 0.8em;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    "Segoe UI", sans-serif;
+}
+
+/* Hover mode: hide preview when hovered */
+#workskin .chat-conversation--hover:hover .chat-preview,
+#workskin .chat-conversation--preview-open .chat-preview {
+  display: none;
+}
+
+/* Tap mode: hide preview when open */
+#workskin .chat-conversation--details[open] .chat-preview {
+  display: none;
+}
+
+/* ---------- Hint ---------- */
+
+#workskin .chat-conversation__hint {
+  display: block;
+  padding: 0 0 8px;
+  color: #9e9ea0;
+  font-size: 0.7em;
+  font-style: italic;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    "Segoe UI", sans-serif;
+  max-height: 24px;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.4s ease;
+  overflow: hidden;
+}
+
+#workskin .chat-conversation--hover:hover .chat-conversation__hint,
+#workskin .chat-conversation--details[open] .chat-conversation__hint,
+#workskin .chat-conversation--preview-open .chat-conversation__hint {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+}
+
+#workskin .chat-preview__text {
+  flex: 1;
+}
+
+#workskin .chat-preview__msg {
+  font-weight: 500;
+  color: #333;
+}
+
+#workskin .chat-preview__chevron {
+  display: block;
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, transparent 50%, #6b6b6e 50%);
+  border-radius: 0 0 2px 0;
+  margin-left: 8px;
+}
+
+/* ---------- Bubbles container ---------- */
+
+#workskin .chat-bubbles {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Chat meta (timestamp + bubbles) ---------- */
+
+#workskin .chat-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+#workskin .chat-meta:first-child {
+  margin-top: 0;
+}
+
+/* ---------- Timestamp ---------- */
+
+#workskin .chat-timestamp {
+  font-size: 0.65em;
+  color: #8e8e93;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    "Segoe UI", sans-serif;
+  padding: 2px 6px 4px 8px;
+}
+
+/* ---------- Bubble ---------- */
+
+#workskin .chat-bubble {
+  display: block;
+  max-width: 78%;
+  padding: 7px 12px 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    "Segoe UI", sans-serif;
+  font-size: 0.88em;
+  line-height: 1.38;
+  margin-bottom: 2px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Sent: green, right-aligned */
+#workskin .chat-bubble--sent {
+  background: #34C759;
+  color: #fff;
+  align-self: flex-end;
+  border-radius: 18px 18px 4px 18px;
+}
+
+/* Received: light gray, left-aligned */
+#workskin .chat-bubble--received {
+  background: #E9E9EB;
+  color: #1c1c1e;
+  align-self: flex-start;
+  border-radius: 18px 18px 18px 4px;
+}
+
+/* Consecutive same-type bubbles */
+#workskin .chat-bubble--sent + .chat-bubble--sent,
+#workskin .chat-bubble--received + .chat-bubble--received {
+  margin-top: -1px;
+  padding-top: 6px;
+}
+
+/* ---------- Mobile responsive ---------- */
+
+@media (max-width: 540px) {
+  #workskin .chat-conversation {
+    border-radius: 14px;
+  }
+
+  #workskin .chat-conversation__stack {
+    padding: 8px 6px 6px;
+  }
+
+  #workskin .chat-bubble {
+    max-width: 85%;
+    font-size: 0.84em;
+    padding: 6px 10px 7px;
+  }
+
+  #workskin .chat-bubble--sent {
+    border-radius: 16px 16px 3px 16px;
+  }
+
+  #workskin .chat-bubble--received {
+    border-radius: 16px 16px 16px 3px;
+  }
+
+  #workskin .chat-preview {
+    font-size: 0.76em;
+    padding: 9px 12px;
+  }
+
+  #workskin .chat-timestamp {
+    font-size: 0.62em;
+    padding-left: 6px;
+  }
+}

@@ -13,6 +13,12 @@
   - hover 版本可通过 `.trifold-letter--preview-open` 验证展开态
   - tap 版本可通过设置 `details.open = true` 验证展开态
 - 移动端断点（<= 720px）下，三折位移和交替倾斜均成立
+- `chat-messages/work-skin.css` 本地结构检查通过 ✅
+- `secret-divider/work-skin.css` 本地结构检查通过 ✅
+- `polaroid/smoke-test.html`、`hover-template.html`、`tap-template.html` 本地检查通过 ✅
+- `typewriter/smoke-test.html`、`hover-template.html`、`tap-template.html` 本地检查通过 ✅
+
+> ⚠️ 以上新特效仅通过本地结构和 CSS lint 检查，尚未在 AO3 上实时验证。
 
 ## AO3 解析限制
 
@@ -25,6 +31,13 @@
 | `pointer-events`                | 避免使用                     |
 | 带 `/` 的 `border-radius`椭圆   | 去掉 `/` 部分                |
 | HTML 中的 `id` 属性              | AO3 会剥掉，不能用于锚点       |
+
+以下 CSS 属性在 AO3 上**未经实测**：
+
+| 未经实测的属性              | 风险说明                          |
+|---------------------------|-----------------------------------|
+| `@keyframes` / `animation` | AO3 可能过滤动画属性；typewriter 光标闪烁依赖此属性 |
+| `perspective` / `transform-style: preserve-3d` | 3D 变换效果 polaroid 翻转依赖此属性 |
 
 已确认 AO3 会保留的 HTML 标签：
 
