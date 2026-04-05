@@ -1,0 +1,439 @@
+#workskin .preview-grid > .preview-card {
+  margin-bottom: 1.2em;
+}
+
+#workskin .demo-block {
+  margin: 0 auto 3.5em;
+  max-width: 680px;
+}
+
+#workskin .preview-card {
+  padding: 1.1em 1em 1.3em;
+  background: rgba(255, 253, 249, 0.86);
+  border: 1px solid rgba(117, 103, 86, 0.14);
+  border-radius: 1.4em;
+}
+
+#workskin .preview-card--mobile {
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+#workskin .preview-note {
+  margin: 0 0 1.1em;
+  color: #716457;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.8em;
+  line-height: 1.55;
+}
+
+#workskin .demo-label {
+  margin: 0 0 0.9em;
+  color: #6f6253;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78em;
+  font-weight: bold;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+#workskin .letter-stage {
+  position: relative;
+  margin: 0 auto;
+  max-width: 780px;
+  padding: 1.4em 1.05em 1.7em;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.9) 0%, rgba(248, 246, 240, 0.96) 34%, rgba(241, 237, 229, 0.98) 100%);
+  border: 1px solid rgba(145, 140, 130, 0.18);
+  border-radius: 1.85em;
+  box-shadow:
+    0 18px 38px rgba(67, 64, 58, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+#workskin .trifold-letter,
+#workskin .trifold-letter--details {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 600px;
+  max-width: 100%;
+  height: 272px;
+  transition: height 1.2s ease;
+}
+
+#workskin .trifold-letter--details {
+  display: block;
+}
+
+#workskin .trifold-letter__stack {
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif;
+  list-style: none;
+}
+
+#workskin .trifold-letter--details > .trifold-letter__stack::marker,
+#workskin .trifold-letter--details > .trifold-letter__stack::-webkit-details-marker {
+  content: "";
+  display: none;
+}
+
+#workskin .trifold-letter__shadow,
+#workskin .letter-cover,
+#workskin .letter-top,
+#workskin .letter-mid,
+#workskin .letter-bot,
+#workskin .trifold-letter__hint,
+#workskin .letter-stamp,
+#workskin .letter-from,
+#workskin .letter-to,
+#workskin .letter-cover-text,
+#workskin .letter-top-text,
+#workskin .letter-mid-text,
+#workskin .letter-bot-text {
+  position: absolute;
+  display: block;
+}
+
+#workskin .trifold-letter__shadow {
+  left: 10%;
+  right: 10%;
+  bottom: 14px;
+  height: 26px;
+  background: #6d6d6d;
+  opacity: 0.08;
+  border-radius: 999px;
+}
+
+#workskin .letter-cover,
+#workskin .letter-top,
+#workskin .letter-mid,
+#workskin .letter-bot {
+  box-sizing: border-box;
+  color: #383c45;
+  background: #f5f5f2;
+  box-shadow: rgba(0, 0, 0, 0.063) -5px -3px 10px 1px;
+  transition:
+    top 1.05s ease,
+    left 1.05s ease,
+    transform 1.05s ease,
+    box-shadow 1.05s ease;
+}
+
+#workskin .letter-cover {
+  top: -20px;
+  left: -20px;
+  width: 110%;
+  min-height: 242px;
+  max-height: 242px;
+  color: #272a30;
+  background: #e8e8e5;
+  border: 1px solid rgba(56, 60, 69, 0.314);
+  box-shadow:
+    rgba(0, 0, 0, 0.063) -2px 1px 5px 1px,
+    rgba(0, 0, 0, 0.063) 1px -2px 5px 1px;
+  z-index: 8;
+}
+
+#workskin .letter-cover-text {
+  top: 58px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 72%;
+  min-width: 52%;
+  min-height: 96px;
+}
+
+#workskin .letter-from,
+#workskin .letter-to {
+  color: #272a30;
+}
+
+#workskin .letter-from {
+  left: 0;
+  top: 0;
+  max-width: 180px;
+  font-size: 0.95em;
+  font-weight: 600;
+  line-height: 1.32;
+  white-space: pre-line;
+}
+
+#workskin .letter-stamp {
+  top: -6px;
+  right: -4%;
+  width: 108px;
+  height: 122px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 244, 241, 0.98) 100%),
+    linear-gradient(135deg, rgba(72, 130, 214, 0.22) 0%, rgba(214, 126, 72, 0.2) 100%);
+  border: 1px solid rgba(154, 154, 154, 0.22);
+  border-radius: 4px;
+  box-shadow: 0 10px 18px rgba(46, 46, 46, 0.12);
+  color: #4f5561;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.72em;
+  font-weight: bold;
+  letter-spacing: 0.18em;
+  line-height: 122px;
+  text-align: center;
+  transform: rotate(-4deg);
+}
+
+#workskin .letter-to {
+  top: 108px;
+  left: 29%;
+  right: 8%;
+  font-size: 1.1em;
+  font-weight: 700;
+  text-align: center;
+}
+
+#workskin .letter-top,
+#workskin .letter-mid,
+#workskin .letter-bot {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 202px;
+}
+
+#workskin .letter-top {
+  border-top: 1px solid rgba(56, 60, 69, 0.314);
+  border-left: 1px solid rgba(56, 60, 69, 0.314);
+  border-right: 1px solid rgba(56, 60, 69, 0.314);
+  border-radius: 4px 4px 0 0;
+  z-index: 7;
+}
+
+#workskin .letter-mid {
+  border-left: 1px solid rgba(56, 60, 69, 0.314);
+  border-right: 1px solid rgba(56, 60, 69, 0.314);
+  z-index: 6;
+}
+
+#workskin .letter-bot {
+  left: 0.1px;
+  border-bottom: 1px solid rgba(56, 60, 69, 0.314);
+  border-left: 1px solid rgba(56, 60, 69, 0.314);
+  border-right: 1px solid rgba(56, 60, 69, 0.314);
+  border-radius: 0 0 4px 4px;
+  z-index: 5;
+}
+
+#workskin .letter-top-text,
+#workskin .letter-mid-text,
+#workskin .letter-bot-text {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 88%;
+  color: #383c45;
+  font-size: 0.84em;
+  line-height: 1.58;
+}
+
+#workskin .letter-top-text {
+  top: -26px;
+  min-height: 170px;
+}
+
+#workskin .letter-mid-text {
+  top: -10px;
+  min-height: 210px;
+}
+
+#workskin .letter-bot-text {
+  top: -18px;
+  min-height: 160px;
+}
+
+#workskin .letter-kicker,
+#workskin .letter-body {
+  display: block;
+}
+
+#workskin .letter-kicker {
+  margin-bottom: 1em;
+  color: #737882;
+  font-size: 0.68em;
+  font-weight: bold;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#workskin .letter-body {
+  white-space: pre-line;
+}
+
+#workskin .trifold-letter__hint {
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  color: rgba(77, 79, 86, 0.58);
+  font-size: 0.62em;
+  font-style: italic;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 9;
+}
+
+#workskin .trifold-letter--hover:hover,
+#workskin .trifold-letter--details[open],
+#workskin .trifold-letter--preview-open {
+  height: 660px;
+}
+
+#workskin .trifold-letter--hover:hover .letter-cover,
+#workskin .trifold-letter--details[open] .letter-cover,
+#workskin .trifold-letter--preview-open .letter-cover {
+  top: -100px;
+  left: 0;
+  transform: rotate(5deg);
+  z-index: 0;
+}
+
+#workskin .trifold-letter--hover:hover .letter-top,
+#workskin .trifold-letter--details[open] .letter-top,
+#workskin .trifold-letter--preview-open .letter-top {
+  top: 0;
+  left: -20px;
+  transform: skew(5deg);
+}
+
+#workskin .trifold-letter--hover:hover .letter-mid,
+#workskin .trifold-letter--details[open] .letter-mid,
+#workskin .trifold-letter--preview-open .letter-mid {
+  top: 200px;
+  left: -20px;
+  transform: skew(-5deg);
+}
+
+#workskin .trifold-letter--hover:hover .letter-bot,
+#workskin .trifold-letter--details[open] .letter-bot,
+#workskin .trifold-letter--preview-open .letter-bot {
+  top: 400px;
+  left: -20px;
+  transform: skew(5deg);
+}
+
+#workskin .trifold-letter--details[open] .trifold-letter__hint,
+#workskin .trifold-letter--preview-open .trifold-letter__hint {
+  color: rgba(77, 79, 86, 0.74);
+}
+
+@media (max-width: 720px) {
+  #workskin .letter-stage {
+    padding: 1.05em 0.7em 1.25em;
+    border-radius: 1.5em;
+  }
+
+  #workskin .trifold-letter,
+  #workskin .trifold-letter--details {
+    height: 224px;
+  }
+
+  #workskin .trifold-letter--hover:hover,
+  #workskin .trifold-letter--details[open],
+  #workskin .trifold-letter--preview-open {
+    height: 512px;
+  }
+
+  #workskin .letter-cover {
+    top: -14px;
+    left: -14px;
+    min-height: 196px;
+    max-height: 196px;
+  }
+
+  #workskin .letter-cover-text {
+    top: 40px;
+    max-width: 76%;
+  }
+
+  #workskin .letter-from {
+    max-width: 120px;
+    font-size: 0.7em;
+  }
+
+  #workskin .letter-stamp {
+    top: -2px;
+    right: -2%;
+    width: 76px;
+    height: 88px;
+    font-size: 0.56em;
+    line-height: 88px;
+  }
+
+  #workskin .letter-to {
+    top: 84px;
+    left: 27%;
+    right: 6%;
+    font-size: 0.82em;
+  }
+
+  #workskin .letter-top,
+  #workskin .letter-mid,
+  #workskin .letter-bot {
+    height: 164px;
+  }
+
+  #workskin .letter-top-text,
+  #workskin .letter-mid-text,
+  #workskin .letter-bot-text {
+    max-width: 90%;
+    font-size: 0.72em;
+    line-height: 1.54;
+  }
+
+  #workskin .letter-top-text {
+    top: -18px;
+    min-height: 138px;
+  }
+
+  #workskin .letter-mid-text {
+    top: -6px;
+    min-height: 170px;
+  }
+
+  #workskin .letter-bot-text {
+    top: -12px;
+    min-height: 140px;
+  }
+
+  #workskin .trifold-letter--hover:hover .letter-cover,
+  #workskin .trifold-letter--details[open] .letter-cover,
+  #workskin .trifold-letter--preview-open .letter-cover {
+    top: -74px;
+  }
+
+  #workskin .trifold-letter--hover:hover .letter-top,
+  #workskin .trifold-letter--details[open] .letter-top,
+  #workskin .trifold-letter--preview-open .letter-top {
+    left: -12px;
+    transform: skew(4deg);
+  }
+
+  #workskin .trifold-letter--hover:hover .letter-mid,
+  #workskin .trifold-letter--details[open] .letter-mid,
+  #workskin .trifold-letter--preview-open .letter-mid {
+    top: 156px;
+    left: -12px;
+    transform: skew(-4deg);
+  }
+
+  #workskin .trifold-letter--hover:hover .letter-bot,
+  #workskin .trifold-letter--details[open] .letter-bot,
+  #workskin .trifold-letter--preview-open .letter-bot {
+    top: 312px;
+    left: -12px;
+    transform: skew(4deg);
+  }
+}

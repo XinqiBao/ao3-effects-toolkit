@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AO3 Envelope — Preview</title>
+  <link rel="stylesheet" href="work-skin.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(140deg in oklch, #efe1cf 0%, #e6d8c7 40%, #f3eadf 100%);
+      min-height: 100vh;
+      color: #2d241d;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    }
+    .shell { max-width: 1120px; margin: 0 auto; padding: 44px 20px 64px; }
+    .hero { margin-bottom: 36px; }
+    .hero__label {
+      font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+      color: #7b5c42;
+    }
+    .hero__title { font-size: clamp(2rem, 4.8vw, 4rem); line-height: .92; font-weight: 600; color: #4f2d1f; margin: 4px 0 8px; }
+    .hero__desc { font-size: 1.02rem; line-height: 1.6; max-width: 56rem; }
+    .grid {
+      display: grid; gap: 20px;
+      grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+    }
+    @media (max-width: 860px) { .grid { --cols: 1; } }
+    .card {
+      background: rgba(255 250 242 / .78);
+      border: 1px solid rgba(103 74 55 / .18);
+      border-radius: 20px; padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .card__label {
+      font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: #6b4630; margin-bottom: 6px;
+    }
+    .card__note { font-size: .82em; color: #7b6b5c; margin-bottom: 12px; line-height: 1.5; }
+    .card--mobile { max-width: 390px; justify-self: center; width: 100%; }
+    .card--mobile > div[style], .card--mobile > .letter-stage { max-width: 390px; margin: 0 auto; }
+    /* Force-open class for preview */
+    .trifold-letter--forced-open { height: 660px !important; }
+    .trifold-letter--forced-open > details { display: block !important; }
+    .trifold-letter--forced-open .letter-cover { top: -100px !important; left: 0 !important; transform: rotate(5deg) !important; z-index: 0 !important; }
+    .trifold-letter--forced-open .letter-top    { top: 0 !important;   left: -20px !important; transform: skew(5deg)  !important; }
+    .trifold-letter--forced-open .letter-mid   { top: 200px !important; left: -20px !important; transform: skew(-5deg) !important; }
+    .trifold-letter--forced-open .letter-bot   { top: 400px !important; left: -20px !important; transform: skew(5deg)  !important; }
+    @media (max-width: 720px) {
+      .trifold-letter--forced-open { height: 512px !important; }
+      .trifold-letter--forced-open .letter-cover { top: -74px !important; }
+      .trifold-letter--forced-open .letter-top  { left: -12px !important; transform: skew(4deg)  !important; }
+      .trifold-letter--forced-open .letter-mid { top: 156px !important; left: -12px !important; transform: skew(-4deg) !important; }
+      .trifold-letter--forced-open .letter-bot { top: 312px !important; left: -12px !important; transform: skew(4deg)  !important; }
+    }
+  </style>
+</head>
+<body>
+<main class="shell">
+
+  <section class="hero">
+    <p class="hero__label">AO3 Envelope — Local Preview</p>
+    <h1 class="hero__title">信封效果预览面板</h1>
+    <p class="hero__desc">桌面 / 移动、关闭 / 展开，四种状态集中展示。同一套 CSS 与 AO3 发布版本一致。</p>
+  </section>
+
+  <div class="grid">
+
+    <!-- A1: Desktop / Hover closed -->
+    <section class="card">
+      <p class="card__label">桌面 / Hover · 关闭态</p>
+      <p class="card__note">背卡、阴影、折页层级的基线状态。</p>
+      <div class="letter-stage">
+        <div class="trifold-letter trifold-letter--hover">
+          <div class="trifold-letter__stack">
+            <span class="trifold-letter__shadow"></span>
+            <span class="letter-cover"><span class="letter-cover-text">
+              <span class="letter-from">预览作者&#10;本地验证&#10;AO3 Preview</span>
+              <span class="letter-stamp">AO3</span>
+              <span class="letter-to">写给打开这封信的读者</span>
+            </span></span>
+            <span class="letter-top"><span class="letter-top-text">
+              <span class="letter-kicker">第一折</span>
+              <span class="letter-body">检查关闭态时第一折的露出高度和文字区边距。</span>
+            </span></span>
+            <span class="letter-mid"><span class="letter-mid-text">
+              <span class="letter-kicker">第二折</span>
+              <span class="letter-body">检查中间折页保持在正确层级。</span>
+            </span></span>
+            <span class="letter-bot"><span class="letter-bot-text">
+              <span class="letter-kicker">第三折</span>
+              <span class="letter-body">检查底部折页边缘和整体阴影关系。</span>
+            </span></span>
+            <span class="trifold-letter__hint">悬停展开</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A2: Desktop / Hover forced open -->
+    <section class="card trifold-letter--forced-open">
+      <p class="card__label">桌面 / Hover · 展开态</p>
+      <p class="card__note">三折展开后的位移与交替倾斜。</p>
+      <div class="letter-stage">
+        <div class="trifold-letter trifold-letter--hover">
+          <div class="trifold-letter__stack">
+            <span class="trifold-letter__shadow"></span>
+            <span class="letter-cover"><span class="letter-cover-text">
+              <span class="letter-from">预览作者&#10;本地验证&#10;AO3 Preview</span>
+              <span class="letter-stamp">AO3</span>
+              <span class="letter-to">写给打开这封信的读者</span>
+            </span></span>
+            <span class="letter-top"><span class="letter-top-text">
+              <span class="letter-kicker">第一折</span>
+              <span class="letter-body">向下展开，保持与背卡不同的倾斜角。</span>
+            </span></span>
+            <span class="letter-mid"><span class="letter-mid-text">
+              <span class="letter-kicker">第二折</span>
+              <span class="letter-body">与第一折反向倾斜，形成交替节奏。</span>
+            </span></span>
+            <span class="letter-bot"><span class="letter-bot-text">
+              <span class="letter-kicker">第三折</span>
+              <span class="letter-body">继续下移，同时保持可读性。</span>
+            </span></span>
+            <span class="trifold-letter__hint">悬停展开</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- B1: Mobile / Details closed -->
+    <section class="card card--mobile">
+      <p class="card__label">移动 / Details · 关闭态</p>
+      <p class="card__note">触屏入口和折页密度检查。</p>
+      <div class="letter-stage">
+        <details class="trifold-letter trifold-letter--details">
+          <summary class="trifold-letter__stack">
+            <span class="trifold-letter__shadow"></span>
+            <span class="letter-cover"><span class="letter-cover-text">
+              <span class="letter-from">归档副本&#10;触屏版本&#10;AO3 Preview</span>
+              <span class="letter-stamp">AO3</span>
+              <span class="letter-to">点击后展开三折信纸</span>
+            </span></span>
+            <span class="letter-top"><span class="letter-top-text">
+              <span class="letter-kicker">第一折</span>
+              <span class="letter-body">检查触屏版在窄宽度下的留白。</span>
+            </span></span>
+            <span class="letter-mid"><span class="letter-mid-text">
+              <span class="letter-kicker">第二折</span>
+              <span class="letter-body">关闭态不应提前露出过多内容。</span>
+            </span></span>
+            <span class="letter-bot"><span class="letter-bot-text">
+              <span class="letter-kicker">第三折</span>
+              <span class="letter-body">检查间距与背景的协调度。</span>
+            </span></span>
+            <span class="trifold-letter__hint">点击展开</span>
+          </summary>
+        </details>
+      </div>
+    </section>
+
+    <!-- B2: Mobile / Details open -->
+    <section class="card card--mobile">
+      <p class="card__label">移动 / Details · 展开态</p>
+      <p class="card__note">移动断点下的可读性和展开位移。</p>
+      <div class="letter-stage">
+        <details class="trifold-letter trifold-letter--details" open>
+          <summary class="trifold-letter__stack">
+            <span class="trifold-letter__shadow"></span>
+            <span class="letter-cover"><span class="letter-cover-text">
+              <span class="letter-from">归档副本&#10;触屏版本&#10;AO3 Preview</span>
+              <span class="letter-stamp">AO3</span>
+              <span class="letter-to">点击后展开三折信纸</span>
+            </span></span>
+            <span class="letter-top"><span class="letter-top-text">
+              <span class="letter-kicker">触屏优先</span>
+              <span class="letter-body">移动断点下仍清晰可读。</span>
+            </span></span>
+            <span class="letter-mid"><span class="letter-mid-text">
+              <span class="letter-kicker">AO3 限制</span>
+              <span class="letter-body">`details/summary` 会被保留，AO3 会剥掉 `id`。</span>
+            </span></span>
+            <span class="letter-bot"><span class="letter-bot-text">
+              <span class="letter-kicker">建议</span>
+              <span class="letter-body">默认用 hover 版；触屏优先时换此模板。</span>
+            </span></span>
+            <span class="trifold-letter__hint">展开态预览</span>
+          </summary>
+        </details>
+      </div>
+    </section>
+
+  </div>
+</main>
+</body>
+</html>
