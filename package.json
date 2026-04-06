@@ -1,13 +1,13 @@
 {
   "name": "ao3",
   "version": "1.0.0",
-  "description": "CSS-only trifold letter/envelope effect for Archive of Our Own works. Pure CSS — no JavaScript.",
+  "description": "CSS-only visual effects toolkit for Archive of Our Own works. Pure CSS — no JavaScript.",
   "main": "index.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tools/verify.mjs"
   },
   "repository": {
     "type": "git",
