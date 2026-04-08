@@ -1,162 +1,84 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AO3 Secret Divider — Preview</title>
-  <link rel="stylesheet" href="work-skin.css">
+  <link rel="stylesheet" href="../assets/preview-shell.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: linear-gradient(140deg in oklch, #efe1cf 0%, #e6d8c7 40%, #f3eadf 100%);
-      min-height: 100vh;
-      color: #2d241d;
-      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-    }
-    .shell { max-width: 1120px; margin: 0 auto; padding: 44px 20px 64px; }
-    .hero { margin-bottom: 36px; }
-    .hero__label {
-      font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
-      color: #7b5c42;
-    }
-    .hero__title { font-size: clamp(2rem, 4.8vw, 4rem); line-height: .92; font-weight: 600; color: #4f2d1f; margin: 4px 0 8px; }
-    .hero__desc { font-size: 1.02rem; line-height: 1.6; max-width: 56rem; }
-    .grid {
-      display: grid; gap: 20px;
-      grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
-    }
-    @media (max-width: 860px) { .grid { --cols: 1; } }
-    .card {
-      background: rgba(255 250 242 / .78);
-      border: 1px solid rgba(103 74 55 / .18);
-      border-radius: 20px; padding: 24px 20px;
-      backdrop-filter: blur(6px);
-    }
-    .card__label {
-      font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
-      color: #6b4630; margin-bottom: 6px;
-    }
-    .card__note { font-size: .82em; color: #7b6b5c; margin-bottom: 14px; line-height: 1.5; }
-    .card--mobile { max-width: 390px; justify-self: center; width: 100%; }
-    .preview-divider {
-      margin: 2em auto;
-      max-width: 440px;
-      text-align: center;
-    }
-    .preview-divider__orn {
-      display: block;
-      color: #8a7d6b;
-      font-size: 1em;
-      letter-spacing: 0.35em;
-      user-select: none;
-      transition: color 0.6s ease, transform 0.6s ease, letter-spacing 0.6s ease;
-    }
-    .preview-divider__txt {
-      display: block;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.6s ease, opacity 0.6s ease;
-    }
-    .preview-divider__txt-inner {
-      display: block;
-      margin: 0.7em auto;
-      max-width: 460px;
-      padding: 0.9em 1.2em;
-      color: #5a4f42;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 0.92em;
-      font-style: italic;
-      line-height: 1.65;
-      text-align: center;
-      white-space: pre-line;
-    }
-    /* Force-open for preview */
-    .preview-divider--forced .preview-divider__orn {
-      color: #a08c74;
-      transform: scale(1.06);
-      letter-spacing: 0.5em;
-    }
-    .preview-divider--forced .preview-divider__txt {
-      max-height: 15em;
-      opacity: 1;
+    /* Ensure the animating container has a stable large-enough height for GIF capture */
+    [data-panel="desktop-closed"] .secret-divider-container {
+      min-height: 300px;
     }
   </style>
+  <link rel="stylesheet" href="work-skin.css">
 </head>
 <body>
 <main class="shell">
-
   <section class="hero">
     <p class="hero__label">AO3 Secret Divider — Local Preview</p>
-    <h1 class="hero__title">装饰分隔器效果预览</h1>
-    <p class="hero__desc">桌面 / 移动、隐藏 / 显示，四种状态集中展示。同一套 CSS 与 AO3 发布版本一致。</p>
+    <h1 class="hero__title">Secret Divider Effect</h1>
+    <p class="hero__desc">Desktop hover and mobile tap, hidden and revealed — four states. Same CSS as the AO3 published version.</p>
   </section>
-
   <div id="workskin">
   <div class="grid">
 
-    <!-- A1: Desktop / Hover closed -->
-    <section class="card">
-      <p class="card__label">桌面 / Hover · 隐藏态</p>
-      <p class="card__note">只显示装饰分隔符，隐藏文字。</p>
-      <div class="preview-divider">
-        <span class="preview-divider__orn">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
-        <span class="preview-divider__txt">
-          <span class="preview-divider__txt-inner">这是一段隐藏的文字，悬停时才会显示。</span>
-        </span>
+    <!-- Live hover works here — hover this card to see the reveal -->
+    <section class="card" data-panel="desktop-closed">
+      <p class="card__label">Desktop / Hover · Hidden</p>
+      <p class="card__note">Ornament only — hover this card to reveal the text.</p>
+      <div class="secret-divider-container">
+        <div class="secret-divider secret-divider--hover secret-divider--with-flanks">
+          <span class="secret-divider__ornament">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
+          <span class="secret-divider__text">
+            <span class="secret-divider__text-inner">some things are only meant for those who stop to look.</span>
+          </span>
+        </div>
       </div>
     </section>
 
-    <!-- A2: Desktop / Hover forced open -->
-    <section class="card preview-divider--forced">
-      <p class="card__label">桌面 / Hover · 显示态</p>
-      <p class="card__note">装饰符轻微放大，隐藏文字淡入。</p>
-      <div class="preview-divider">
-        <span class="preview-divider__orn">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
-        <span class="preview-divider__txt">
-          <span class="preview-divider__txt-inner">这是一段隐藏的文字，悬停时才会显示。</span>
-        </span>
+    <section class="card" data-panel="desktop-open">
+      <p class="card__label">Desktop / Hover · Revealed</p>
+      <p class="card__note">Force-open — ornament expands, text fades in.</p>
+      <div class="secret-divider-container">
+        <div class="secret-divider secret-divider--hover secret-divider--preview-open secret-divider--with-flanks">
+          <span class="secret-divider__ornament">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
+          <span class="secret-divider__text">
+            <span class="secret-divider__text-inner">some things are only meant for those who stop to look.</span>
+          </span>
+        </div>
       </div>
     </section>
 
-    <!-- B1: Mobile / Details closed -->
-    <section class="card card--mobile">
-      <p class="card__label">移动 / Details · 隐藏态</p>
-      <p class="card__note">触屏入口，点击展开隐藏文字。</p>
-      <div class="preview-divider">
+    <section class="card card--mobile" data-panel="mobile-closed">
+      <p class="card__label">Mobile / Tap · Hidden</p>
+      <p class="card__note">Touch entry — tap to reveal.</p>
+      <div class="secret-divider-container">
         <details class="secret-divider secret-divider--details secret-divider--with-flanks">
           <summary class="secret-divider__summary">
             <span class="secret-divider__ornament">&#10043;&#160;&#160;&#10053;&#160;&#10044;&#160;&#10053;&#160;&#10043;</span>
-            <span class="secret-divider__summary-hint">轻触展开</span>
+            <span class="secret-divider__summary-hint">Tap to reveal</span>
           </summary>
           <span class="secret-divider__text">
-            <span class="secret-divider__text-inner">
-【触屏版隐藏内容】
-移动设备上轻触展开的秘密文字。
-确保在小屏幕下也清晰可读。
-            </span>
+            <span class="secret-divider__text-inner">some things are only meant for those who stop to look.</span>
           </span>
         </details>
       </div>
     </section>
 
-    <!-- B2: Mobile / Details open -->
-    <section class="card card--mobile">
-      <p class="card__label">移动 / Details · 展开态</p>
-      <p class="card__note">移动断点下的可读性和展开效果。</p>
-      <div class="preview-divider">
+    <section class="card card--mobile" data-panel="mobile-open">
+      <p class="card__label">Mobile / Tap · Revealed</p>
+      <p class="card__note">Expanded — readability on narrow screens.</p>
+      <div class="secret-divider-container">
         <details class="secret-divider secret-divider--details secret-divider--with-flanks" open>
           <summary class="secret-divider__summary">
             <span class="secret-divider__ornament">&#10043;&#160;&#160;&#10053;&#160;&#10044;&#160;&#10053;&#160;&#10043;</span>
-            <span class="secret-divider__summary-hint">轻触展开</span>
+            <span class="secret-divider__summary-hint">Tap to reveal</span>
           </summary>
           <span class="secret-divider__text">
-            <span class="secret-divider__text-inner">
-【触屏版隐藏内容】
-移动设备上轻触展开的秘密文字。
-details/summary 会被 AO3 保留，
-适合触屏优先的场景。
-            </span>
+            <span class="secret-divider__text-inner">some things are only meant for those who stop to look.
+
+"every page you turn is a tenderness i never spoke aloud."</span>
           </span>
         </details>
       </div>
