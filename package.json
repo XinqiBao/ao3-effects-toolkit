@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "node tools/verify.mjs"
+    "test": "node --test tools/*.test.mjs && node tools/verify.mjs"
   },
   "repository": {
     "type": "git",

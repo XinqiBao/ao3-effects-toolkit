@@ -7,111 +7,243 @@
   <link rel="stylesheet" href="../assets/preview-shell.css">
   <link rel="stylesheet" href="work-skin.css">
   <style>
-    .card--flipped .polaroid-front { opacity: 0 !important; }
-    .card--flipped .polaroid-back  { opacity: 1 !important; transition-delay: 0s !important; }
-    .card--mobile > .polaroid-gallery { max-width: 390px; margin: 0 auto; }
+    .card--flipped .polaroid-front {
+      opacity: 0 !important;
+    }
+
+    .card--flipped .polaroid-back {
+      opacity: 1 !important;
+      transition-delay: 0s !important;
+    }
+
+    .card__prop-zone {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-transform: none;
+      letter-spacing: 0.08em;
+    }
+
+    .card__prop-zone::after {
+      content: "";
+      width: 72px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(122, 93, 71, 0), rgba(122, 93, 71, 0.5));
+      flex: 0 0 auto;
+    }
+
+    #workskin .card__stage-shell {
+      background:
+        linear-gradient(180deg, rgba(255, 251, 246, 0.88), rgba(235, 223, 210, 0.96)),
+        linear-gradient(135deg, rgba(167, 138, 110, 0.08), rgba(255, 255, 255, 0));
+    }
+
+    #workskin .card__stage {
+      align-items: flex-start;
+      padding-top: 18px;
+    }
+
+    #workskin .polaroid-gallery {
+      width: 100%;
+      padding: 8px 10px 2px;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(217, 198, 182, 0.12)),
+        linear-gradient(165deg, rgba(135, 103, 83, 0.12), rgba(255, 255, 255, 0));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        0 22px 34px rgba(88, 61, 45, 0.1);
+    }
+
+    #workskin .polaroid-container {
+      margin: 0;
+    }
+
+    #workskin .polaroid-gallery::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 18px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(228, 213, 201, 0.12)),
+        repeating-linear-gradient(
+          90deg,
+          rgba(124, 92, 72, 0.07) 0,
+          rgba(124, 92, 72, 0.07) 2px,
+          transparent 2px,
+          transparent 8px
+        );
+    }
+
+    #workskin .polaroid-frame {
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.12),
+        0 18px 28px rgba(63, 45, 33, 0.14);
+    }
+
+    #workskin .polaroid-image {
+      background-color: #c6b9aa;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    #workskin .polaroid-image--a {
+      background-image: url("../assets/preview-media/polaroid-photo-a.jpg");
+    }
+
+    #workskin .polaroid-image--b {
+      background-image: url("../assets/preview-media/polaroid-photo-b.jpg");
+    }
+
+    #workskin .polaroid-caption {
+      letter-spacing: 0.03em;
+    }
+
+    #workskin .polaroid-back-inner {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 242, 235, 0.98)),
+        repeating-linear-gradient(
+          180deg,
+          transparent 0,
+          transparent 24px,
+          rgba(173, 144, 122, 0.1) 24px,
+          rgba(173, 144, 122, 0.1) 25px
+        );
+    }
+
+    #workskin .polaroid-message {
+      max-width: 14em;
+    }
+
+    .card--mobile {
+      max-width: 410px;
+    }
   </style>
 </head>
 <body>
 <main class="shell">
   <section class="hero">
-    <p class="hero__label">AO3 Polaroid — Local Preview</p>
-    <h1 class="hero__title">Polaroid Effect</h1>
-    <p class="hero__desc">Desktop hover and mobile tap, front and back — four states. Same CSS as the AO3 published version.</p>
+    <p class="hero__label">Curated Archive / Archive Standard</p>
+    <h1 class="hero__title">Polaroid</h1>
+    <p class="hero__desc">Two prints are presented as quiet front and back studies, with the reveal kept plain.</p>
   </section>
   <div id="workskin">
   <div class="grid">
 
-    <section class="card" data-panel="desktop-closed">
+    <section class="card" data-panel="desktop-closed" data-preview-family="standard">
       <p class="card__label">Desktop / Hover · Front</p>
-      <p class="card__note">Default state — polaroid front face.</p>
-      <div class="polaroid-gallery">
-        <div class="polaroid-container">
-          <div class="polaroid-inner polaroid--hover">
-            <span class="polaroid-front">
-              <span class="polaroid-frame"></span>
-              <span class="polaroid-image"></span>
-              <span class="polaroid-caption">summer of &#39;92</span>
-            </span>
-            <span class="polaroid-back">
-              <span class="polaroid-back-inner">
-                <p class="polaroid-message">Back message visible after flip.</p>
-              </span>
-            </span>
+      <p class="card__note">A studio portrait kept flat in the archive, with a brief reverse note.</p>
+      <div class="card__stage-shell">
+        <p class="card__prop-zone">Studio Portrait / Front / Reverse Note</p>
+        <div class="card__stage" data-stage>
+          <div class="polaroid-gallery" data-capture-frame>
+            <div class="polaroid-container">
+              <div class="polaroid-inner polaroid--hover">
+                <span class="polaroid-front">
+                  <span class="polaroid-frame"></span>
+                  <span class="polaroid-image polaroid-image--a"></span>
+                  <span class="polaroid-caption">studio portrait</span>
+                </span>
+                <span class="polaroid-back">
+                  <span class="polaroid-back-inner">
+                    <span class="polaroid-message">Filed without a sitter name. The reverse keeps only the date and archive number.</span>
+                  </span>
+                </span>
+              </div>
+            </div>
           </div>
-          <span class="polaroid-hint">Hover to flip</span>
         </div>
       </div>
+      <p class="card__hint">Hover should turn the portrait over in place, with the back note staying quiet and plain.</p>
     </section>
 
-    <section class="card card--flipped" data-panel="desktop-open">
+    <section class="card card--flipped" data-panel="desktop-open" data-preview-family="standard">
       <p class="card__label">Desktop / Hover · Back</p>
-      <p class="card__note">Force-flipped — back face with message.</p>
-      <div class="polaroid-gallery">
-        <div class="polaroid-container">
-          <div class="polaroid-inner polaroid--hover polaroid--preview-open">
-            <span class="polaroid-front">
-              <span class="polaroid-frame"></span>
-              <span class="polaroid-image"></span>
-              <span class="polaroid-caption">rainy tuesday</span>
-            </span>
-            <span class="polaroid-back">
-              <span class="polaroid-back-inner">
-                <p class="polaroid-message">You brought me coffee&#10;and said nothing at all.&#10;It was enough.</p>
-              </span>
-            </span>
+      <p class="card__note">The same studio portrait, now showing its reverse note.</p>
+      <div class="card__stage-shell">
+        <p class="card__prop-zone">Studio Portrait / Back / Reverse Note</p>
+        <div class="card__stage" data-stage>
+          <div class="polaroid-gallery" data-capture-frame>
+            <div class="polaroid-container">
+              <div class="polaroid-inner polaroid--hover polaroid--preview-open">
+                <span class="polaroid-front">
+                  <span class="polaroid-frame"></span>
+                  <span class="polaroid-image polaroid-image--a"></span>
+                  <span class="polaroid-caption">studio portrait</span>
+                </span>
+                <span class="polaroid-back">
+                  <span class="polaroid-back-inner">
+                    <span class="polaroid-message">Filed without a sitter name. The reverse keeps only the date and archive number.</span>
+                  </span>
+                </span>
+              </div>
+            </div>
           </div>
-          <span class="polaroid-hint">Hover to flip</span>
         </div>
       </div>
+      <p class="card__hint">The open state should feel like the same print lifted and turned, not a second image.</p>
     </section>
 
-    <section class="card card--mobile" data-panel="mobile-closed">
+    <section class="card card--mobile" data-panel="mobile-closed" data-preview-family="standard">
       <p class="card__label">Mobile / Tap · Front</p>
-      <p class="card__note">Touch version — tap to flip.</p>
-      <div class="polaroid-gallery">
-        <div class="polaroid-container">
-          <details class="polaroid-inner polaroid--details">
-            <summary>
-              <span class="polaroid-front">
-                <span class="polaroid-frame"></span>
-                <span class="polaroid-image"></span>
-                <span class="polaroid-caption">the last train home</span>
-              </span>
-              <span class="polaroid-back">
-                <span class="polaroid-back-inner">
-                  <p class="polaroid-message">Platform 4, 11:47pm.&#10;You fell asleep on my shoulder.&#10;I didn&#39;t move the whole way.</p>
-                </span>
-              </span>
-            </summary>
-          </details>
-          <span class="polaroid-hint">Tap to flip</span>
+      <p class="card__note">A harbor print with the reverse pared down to port date and destination.</p>
+      <div class="card__stage-shell">
+        <p class="card__prop-zone">Harbor Departure / Front / Reverse Note</p>
+        <div class="card__stage" data-stage>
+          <div class="polaroid-gallery" data-capture-frame>
+            <div class="polaroid-container">
+              <details class="polaroid-inner polaroid--details">
+                <summary>
+                  <span class="polaroid-front">
+                    <span class="polaroid-frame"></span>
+                    <span class="polaroid-image polaroid-image--b"></span>
+                    <span class="polaroid-caption">harbor departure</span>
+                  </span>
+                  <span class="polaroid-back">
+                    <span class="polaroid-back-inner">
+                      <span class="polaroid-message">Port date and destination only.</span>
+                    </span>
+                  </span>
+                </summary>
+              </details>
+            </div>
+          </div>
         </div>
       </div>
+      <p class="card__hint">Tap should turn the harbor print over in place, keeping the card quiet.</p>
     </section>
 
-    <section class="card card--mobile" data-panel="mobile-open">
+    <section class="card card--mobile" data-panel="mobile-open" data-preview-family="standard">
       <p class="card__label">Mobile / Tap · Back</p>
-      <p class="card__note">Expanded — back face on narrow screen.</p>
-      <div class="polaroid-gallery">
-        <div class="polaroid-container">
-          <details class="polaroid-inner polaroid--details" open>
-            <summary>
-              <span class="polaroid-front">
-                <span class="polaroid-frame"></span>
-                <span class="polaroid-image"></span>
-                <span class="polaroid-caption">first snow</span>
-              </span>
-              <span class="polaroid-back">
-                <span class="polaroid-back-inner">
-                  <p class="polaroid-message">We stood there&#10;until our fingers went numb.&#10;Neither of us wanted to leave.</p>
-                </span>
-              </span>
-            </summary>
-          </details>
-          <span class="polaroid-hint">Tap to flip</span>
+      <p class="card__note">The same harbor print, now showing the reverse note.</p>
+      <div class="card__stage-shell">
+        <p class="card__prop-zone">Harbor Departure / Back / Reverse Note</p>
+        <div class="card__stage" data-stage>
+          <div class="polaroid-gallery" data-capture-frame>
+            <div class="polaroid-container">
+              <details class="polaroid-inner polaroid--details" open>
+                <summary>
+                  <span class="polaroid-front">
+                    <span class="polaroid-frame"></span>
+                    <span class="polaroid-image polaroid-image--b"></span>
+                    <span class="polaroid-caption">harbor departure</span>
+                  </span>
+                  <span class="polaroid-back">
+                    <span class="polaroid-back-inner">
+                      <span class="polaroid-message">Port date and destination only.</span>
+                    </span>
+                  </span>
+                </summary>
+              </details>
+            </div>
+          </div>
         </div>
       </div>
+      <p class="card__hint">The open state should stay centered and readable, like a simple archive card.</p>
     </section>
 
   </div>

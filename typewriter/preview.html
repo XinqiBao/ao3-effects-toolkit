@@ -7,100 +7,195 @@
   <link rel="stylesheet" href="../assets/preview-shell.css">
   <link rel="stylesheet" href="work-skin.css">
   <style>
-    /* Ensure the animating container has a stable large-enough height for GIF capture */
-    [data-panel="desktop-closed"] .typewriter-container {
-      min-height: 400px;
+    #workskin .card__stage-shell {
+      background:
+        radial-gradient(circle at top, rgba(94, 91, 88, 0.2), transparent 34%),
+        linear-gradient(180deg, #302c29 0%, #262220 52%, #1b1816 100%);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 28px 44px rgba(24, 20, 18, 0.16);
+    }
+
+    #workskin .card__prop-zone {
+      background: rgba(255, 255, 255, 0.05);
+      color: #c7b9a8;
+    }
+
+    #workskin .card__hint {
+      color: #c0b2a1;
+      max-width: 34rem;
+    }
+
+    #workskin .card__stage {
+      padding-top: 18px;
+    }
+
+    #workskin .typewriter-stage {
+      width: 100%;
+      max-width: none;
+      padding: 1.2em 1.05em 1.35em;
+      background:
+        linear-gradient(180deg, rgba(20, 20, 20, 0.98), rgba(13, 13, 13, 0.98)),
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.04), transparent 50%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 16px 26px rgba(0, 0, 0, 0.35);
+    }
+
+    #workskin .typewriter-stage::before {
+      content: "";
+      display: block;
+      height: 12px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 18px 6px, #5a4d43 0 3px, transparent 3px),
+        radial-gradient(circle at 40px 6px, #5a4d43 0 3px, transparent 3px),
+        radial-gradient(circle at 62px 6px, #5a4d43 0 3px, transparent 3px);
+      opacity: 0.75;
+    }
+
+    #workskin .typewriter-container {
+      max-width: 620px;
+    }
+
+    #workskin .typewriter-prompt {
+      color: #8f8a84;
+      padding-top: 2.1em;
+      padding-bottom: 2.1em;
+    }
+
+    #workskin .typewriter-text {
+      color: #d6d1cc;
+    }
+
+    #workskin .typewriter-line {
+      white-space: normal;
+    }
+
+    #workskin .typewriter-cursor {
+      background: #d6d1cc;
+    }
+
+    #workskin .typewriter-hint {
+      color: #7e776f;
     }
   </style>
 </head>
 <body>
 <main class="shell">
   <section class="hero">
-    <p class="hero__label">AO3 Typewriter — Local Preview</p>
-    <h1 class="hero__title">Typewriter Effect</h1>
-    <p class="hero__desc">Desktop hover and mobile tap, collapsed and expanded — four states. Same CSS as the AO3 published version.</p>
+    <p class="hero__label">Curated Archive / Archive Standard</p>
+    <h1 class="hero__title">Typewriter</h1>
+    <p class="hero__desc">A dark transcript panel where each line enters in order, with the reveal paced like reading a preserved page.</p>
   </section>
   <div id="workskin">
   <div class="grid">
 
-    <section class="card" data-panel="desktop-closed">
-      <p class="card__label">Desktop / Hover · Collapsed</p>
-      <p class="card__note">Before hover — prompt text only.</p>
-      <div class="typewriter-stage">
-        <div class="typewriter-container typewriter--hover">
-          <span class="typewriter-prompt">Begin typing to read...</span>
-          <div class="typewriter-text">
-            <span class="typewriter-line">The rain had not stopped since Tuesday.</span>
-            <span class="typewriter-line">She sat by the window with a cold cup of tea,</span>
-            <span class="typewriter-line">watching the streetlights blur through the glass,</span>
-            <span class="typewriter-line">and wondered how long the quiet would last.</span>
-            <span class="typewriter-line">The answer, as always, was longer than she hoped.</span>
+    <section class="card" data-panel="desktop-closed" data-preview-family="tall">
+      <p class="card__label">Desktop / Hover · Closed</p>
+      <p class="card__note">The closed state should feel like a kept record, not a placeholder box.</p>
+      <div class="card__stage-shell">
+        <p class="card__prop-zone">Filed Transcript / Desk Lamp / Before Reveal</p>
+        <div class="card__stage" data-stage>
+          <div class="typewriter-stage typewriter--hover" data-capture-frame>
+            <div class="typewriter-container">
+              <span class="typewriter-prompt">Begin transcript...</span>
+              <div class="typewriter-text">
+                <span class="typewriter-line">Filed transcript / room twelve</span>
+                <span class="typewriter-line">Rain on the stairwell.</span>
+                <span class="typewriter-line">The keys stop mid-line.</span>
+                <span class="typewriter-line">One page leaves the stack.</span>
+                <span class="typewriter-line">Then the room remembers.</span>
+              </div>
+              <span class="typewriter-cursor"></span>
+              <span class="typewriter-hint">Hover to read</span>
+            </div>
           </div>
-          <span class="typewriter-cursor"></span>
-          <span class="typewriter-hint">Hover to read</span>
         </div>
       </div>
+      <p class="card__hint">The prompt should read like an index card waiting at the desk.</p>
     </section>
 
-    <section class="card typewriter--preview-open" data-panel="desktop-open">
-      <p class="card__label">Desktop / Hover · Expanded</p>
-      <p class="card__note">Lines fade in sequentially, cursor appears after last line.</p>
-      <div class="typewriter-stage">
-        <div class="typewriter-container typewriter--hover">
-          <span class="typewriter-prompt">Begin typing to read...</span>
-          <div class="typewriter-text">
-            <span class="typewriter-line">The rain had not stopped since Tuesday.</span>
-            <span class="typewriter-line">She sat by the window with a cold cup of tea,</span>
-            <span class="typewriter-line">watching the streetlights blur through the glass,</span>
-            <span class="typewriter-line">and wondered how long the quiet would last.</span>
-            <span class="typewriter-line">The answer, as always, was longer than she hoped.</span>
+    <section class="card" data-panel="desktop-open" data-preview-family="tall">
+      <p class="card__label">Desktop / Hover · Open</p>
+      <p class="card__note">The expanded view should hold the full line break rhythm without adding noise.</p>
+      <div class="card__stage-shell">
+        <p class="card__prop-zone">Filed Transcript / Desk Lamp / Open Transcript</p>
+        <div class="card__stage" data-stage>
+          <div class="typewriter-stage typewriter--hover typewriter--preview-open" data-capture-frame>
+            <div class="typewriter-container">
+              <span class="typewriter-prompt">Begin transcript...</span>
+              <div class="typewriter-text">
+                <span class="typewriter-line">Filed transcript / room twelve</span>
+                <span class="typewriter-line">Rain on the stairwell.</span>
+                <span class="typewriter-line">The keys stop mid-line.</span>
+                <span class="typewriter-line">One page leaves the stack.</span>
+                <span class="typewriter-line">Then the room remembers.</span>
+              </div>
+              <span class="typewriter-cursor"></span>
+              <span class="typewriter-hint">Transcript open</span>
+            </div>
           </div>
-          <span class="typewriter-cursor"></span>
-          <span class="typewriter-hint">Hover to read</span>
         </div>
       </div>
+      <p class="card__hint">The open state should feel like the same transcript, now fully legible.</p>
     </section>
 
-    <section class="card card--mobile" data-panel="mobile-closed">
-      <p class="card__label">Mobile / Tap · Collapsed</p>
-      <p class="card__note">Touch entry — tap to expand.</p>
-      <div class="typewriter-stage">
-        <details class="typewriter-container typewriter--details">
-          <summary>
-            <span class="typewriter-prompt">Begin typing to read...</span>
-          </summary>
-          <div class="typewriter-text">
-            <span class="typewriter-line">The rain had not stopped since Tuesday.</span>
-            <span class="typewriter-line">She sat by the window with a cold cup of tea,</span>
-            <span class="typewriter-line">watching the streetlights blur through the glass,</span>
-            <span class="typewriter-line">and wondered how long the quiet would last.</span>
-            <span class="typewriter-line">The answer, as always, was longer than she hoped.</span>
-          </div>
-          <span class="typewriter-cursor"></span>
-          <span class="typewriter-hint">Tap to read</span>
-        </details>
+    <section class="card card--mobile" data-panel="mobile-closed" data-preview-family="tall">
+      <p class="card__label">Mobile / Tap · Closed</p>
+      <p class="card__note">On touch, the transcript still needs a dense first impression inside a narrow frame.</p>
+      <div class="card__stage-shell">
+        <p class="card__prop-zone">Filed Transcript / Pocket View / Before Reveal</p>
+        <div class="card__stage" data-stage>
+          <details class="typewriter-stage typewriter--details" data-capture-frame>
+            <summary>
+              <span class="typewriter-prompt">Begin transcript...</span>
+            </summary>
+            <div class="typewriter-container">
+              <div class="typewriter-text">
+                <span class="typewriter-line">Filed transcript / room twelve</span>
+                <span class="typewriter-line">Rain on the stairwell.</span>
+                <span class="typewriter-line">The keys stop mid-line.</span>
+                <span class="typewriter-line">One page leaves the stack.</span>
+                <span class="typewriter-line">Then the room remembers.</span>
+              </div>
+              <span class="typewriter-cursor"></span>
+              <span class="typewriter-hint">Tap to read</span>
+            </div>
+          </details>
+        </div>
       </div>
+      <p class="card__hint">Tap should open the record without shifting the rest of the card.</p>
     </section>
 
-    <section class="card card--mobile" data-panel="mobile-open">
-      <p class="card__label">Mobile / Tap · Expanded</p>
-      <p class="card__note">Text readability at the mobile breakpoint.</p>
-      <div class="typewriter-stage">
-        <details class="typewriter-container typewriter--details" open>
-          <summary>
-            <span class="typewriter-prompt">Begin typing to read...</span>
-          </summary>
-          <div class="typewriter-text">
-            <span class="typewriter-line">The rain had not stopped since Tuesday.</span>
-            <span class="typewriter-line">She sat by the window with a cold cup of tea,</span>
-            <span class="typewriter-line">watching the streetlights blur through the glass,</span>
-            <span class="typewriter-line">and wondered how long the quiet would last.</span>
-            <span class="typewriter-line">The answer, as always, was longer than she hoped.</span>
-          </div>
-          <span class="typewriter-cursor"></span>
-          <span class="typewriter-hint">Tap to read</span>
-        </details>
+    <section class="card card--mobile" data-panel="mobile-open" data-preview-family="tall">
+      <p class="card__label">Mobile / Tap · Open</p>
+      <p class="card__note">The mobile open state should keep the same dark depth and reading pace.</p>
+      <div class="card__stage-shell">
+        <p class="card__prop-zone">Filed Transcript / Pocket View / Open Transcript</p>
+        <div class="card__stage" data-stage>
+          <details class="typewriter-stage typewriter--details" open data-capture-frame>
+            <summary>
+              <span class="typewriter-prompt">Begin transcript...</span>
+            </summary>
+            <div class="typewriter-container">
+              <div class="typewriter-text">
+                <span class="typewriter-line">Filed transcript / room twelve</span>
+                <span class="typewriter-line">Rain on the stairwell.</span>
+                <span class="typewriter-line">The keys stop mid-line.</span>
+                <span class="typewriter-line">One page leaves the stack.</span>
+                <span class="typewriter-line">Then the room remembers.</span>
+              </div>
+              <span class="typewriter-cursor"></span>
+              <span class="typewriter-hint">Transcript open</span>
+            </div>
+          </details>
+        </div>
       </div>
+      <p class="card__hint">The open mobile panel should read as the same archive entry, not a different layout.</p>
     </section>
 
   </div>
