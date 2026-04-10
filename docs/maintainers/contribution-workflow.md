@@ -29,6 +29,13 @@ If a note is useful only for the current operator or current machine, keep it lo
 - Update maintainer docs when repository workflows or structure change.
 - Update compatibility notes when live AO3 validation confirms or invalidates a behavior.
 
+## Documentation Maintenance
+
+- Keep the public entry set small: prefer a few canonical docs over many overlapping summaries.
+- Split current operating truth from historical explanation when a document becomes too large or noisy.
+- Revisit documentation structure after major repository changes instead of only appending new notes.
+- Keep private or operator-specific process material out of the public repository.
+
 ## Verification Expectations
 
 Minimum bar for routine changes:

@@ -1,119 +1,129 @@
-# AO3 对话气泡 — 使用指南
+# Chat Messages Guide
 
-## 快速开始
+## Quick Start
 
-不懂代码？只做这几步：
+Use these files from `effects/chat-messages/`:
 
-1. 把 `effects/chat-messages/work-skin.css` 全量复制到 AO3 的 Work Skin
-2. 把 `effects/chat-messages/hover-template.html` 贴进 AO3 的 HTML 编辑器
-3. 预览成功对话效果
+- `work-skin.css`
+- `smoke-test.html`
+- `hover-template.html`
+- `tap-template.html`
+- `preview.html`
 
-⚠️ 两个硬限制：
-- AO3 不允许 JavaScript
-- 读者可以关闭 creator styles；关键信息不要只靠视觉效果表达
+Basic flow:
 
----
+1. Copy `effects/chat-messages/work-skin.css` into your AO3 work skin.
+2. Paste `effects/chat-messages/smoke-test.html` into AO3's HTML editor.
+3. Use Preview to confirm the conversation styling loads.
+4. Replace the smoke test with either `hover-template.html` or `tap-template.html`.
 
-## 用户指南
+Hard constraints:
 
-### 第一步：创建 Work Skin
+- AO3 work content does not support JavaScript.
+- Readers can disable creator styles, so the conversation still needs to read sensibly as plain text.
 
-1. 登录 AO3 → My Dashboard → Skins → Create Work Skin
-2. 把 `effects/chat-messages/work-skin.css` 全量复制进去
-3. 保存
+## Posting On AO3
 
-### 第二步：把 Skin 挂到作品
+### 1. Create or update the work skin
 
-1. 新建或编辑作品
-2. 在 Associations 里找到 Select Work Skin
-3. 选中刚创建的 Skin
+1. Log in to AO3.
+2. Go to `My Dashboard -> Skins -> Create Work Skin`.
+3. Paste `effects/chat-messages/work-skin.css`.
+4. Save.
 
-### 第三步：测试
+### 2. Attach the skin to the work
 
-1. 正文编辑器切到 **HTML** 模式
-2. 复制 `effects/chat-messages/hover-template.html` 贴进去
-3. 点 **Preview**
+1. Create or edit a work.
+2. In `Associations`, find `Select Work Skin`.
+3. Choose the skin you just created.
 
-看到类似 iOS 消息的对话气泡，说明挂载成功。
+### 3. Run the smoke test
 
-### 第四步：换成正式模板
+1. Switch the work body editor to `HTML`.
+2. Paste `effects/chat-messages/smoke-test.html`.
+3. Open Preview.
 
-| 场景 | 文件 | 说明 |
-|------|------|------|
-| 默认推荐 | `hover-template.html` | 桌面端悬停展开 |
-| 手机/平板用户多 | `tap-template.html` | 基于 details/summary |
+If the chat preview bar and message structure render, the effect is wired up correctly.
 
-### 如何改模板
+### 4. Choose the publishing template
 
-把占位替换成真实内容：
+| Situation | File | Notes |
+|---|---|---|
+| Default desktop-first version | `hover-template.html` | Expands on hover |
+| Touch-heavy audience | `tap-template.html` | Uses `details/summary` |
 
-- `【发送者名字】`
-- `【第一条消息内容】` / `【第二条消息内容】` 等
-- `Today 9:41 AM` — 时间戳
+### 5. Replace the placeholders
 
-⚠️ 三不要：
-- 不要删 `<div class="chat-meta">` / `<span class="chat-bubble">` 标签
-- 不要改类名（`chat-bubble--sent`、`chat-bubble--received` 等）
-- 不要用 Rich Text 模式——必须用 **HTML** 模式
+Edit only the content:
 
----
+- speaker names
+- message text
+- timestamp text
 
-## FAQ
+Do not:
 
-### 为什么只有普通文字，没有对话气泡样式
+- delete structural wrappers such as `chat-meta` or `chat-bubble`
+- rename classes such as `chat-bubble--sent` or `chat-bubble--received`
+- paste in Rich Text mode
 
-Work Skin 没有成功挂到作品上。先用 hover-template 验证，确认 CSS 正确加载。
+## Troubleshooting
 
-### 手机上 hover 不好用
+### Raw HTML tags are visible
 
-改用 `tap-template.html`，基于 `<details>/<summary>`，触屏友好。
+The editor is in the wrong mode. Switch back to `HTML` mode and paste again.
 
-### 第一次该用哪个版本
+### The work shows plain text with no chat styling
 
-顺序固定：
-1. `hover-template.html` → 默认桌面端
-2. `tap-template.html` → 触屏备选
+The work skin is not attached correctly. Re-run `smoke-test.html` before trying the publishing templates.
 
-### 怎么添加更多消息
+### Which version should I start with?
 
-复制一个 `<div class="chat-meta">` 块，改消息内容和类名（`--sent` 或 `--received`）。
+Use this order:
 
-### 气泡样式能换颜色吗
+1. `smoke-test.html`
+2. `hover-template.html`
+3. `tap-template.html`
 
-可以改 `work-skin.css` 里 `.chat-bubble--sent` 的 `background` 和 `.chat-bubble--received` 的 `background`。
+### Hover does not work well on phones
 
-### 我的预览和读者看到的不一样
+Use `tap-template.html`.
 
-常见原因：
-- 读者关闭了 creator styles
-- 读者用下载阅读（下载不会保留 work skin）
+### How do I add more messages?
 
----
+Duplicate one conversation block and keep the same class structure.
 
-## 维护与验证
+### Can I change the bubble colors?
 
-### 什么时候需要验证
+Yes. Update the sent and received bubble backgrounds in `work-skin.css`.
 
-- 改了 `effects/chat-messages/work-skin.css`
-- 改了 `effects/chat-messages/*.html` 模板文件
+### My preview does not match what every reader sees
 
-### 验证流程
+Common reasons:
 
-```bash
-node tools/verify.mjs
-```
+- the reader disabled creator styles
+- the reader is using a download format such as PDF or EPUB
 
-如需真实 AO3 验证，请按 `docs/ao3-live-validation.md` 的流程执行。
+## Maintenance And Verification
 
-### 验证成功标准
+### Re-run verification after:
 
-- 折叠态：只显示预览条，消息区域隐藏
-- 展开态：对话气泡全部显示，气泡样式正确（绿色发送/灰色接收）
-- 触屏版：`details` 展开后对话气泡全部可见，发送（绿色）/接收（灰色）气泡颜色正确
+- changes to `effects/chat-messages/work-skin.css`
+- changes to any `effects/chat-messages/*.html`
+- AO3-specific compatibility adjustments
 
----
+### Local verification flow
 
-## 参考笔记
+1. Open `effects/chat-messages/preview.html` locally and inspect all four states.
+2. Run `node tools/verify.mjs --effect chat-messages`.
+3. Run `npm test` before finalizing broader repository changes.
+4. If AO3-facing behavior changed, follow `docs/ao3-live-validation.md`.
 
-- 当前发布物覆盖：hover 展开/折叠、details 展开/折叠、移动端响应
-- CSS 全部适配 AO3 限制：无 `gap`、无 `grid-template-columns: repeat()`、无 `pointer-events`
+### What success looks like
+
+- the collapsed state keeps only the preview bar visible
+- the expanded state reveals the full conversation
+- sent and received bubbles keep the intended styling in both hover and tap modes
+
+## Notes
+
+- The repository version intentionally avoids AO3-problematic CSS such as `gap`, `pointer-events`, and `grid-template-columns: repeat()`.

@@ -1,200 +1,142 @@
-# AO3 三折信纸 — 使用指南
+# Envelope Guide
 
-## 快速开始
+## Quick Start
 
-不懂代码？只做这几步：
+Use these files from `effects/envelope/`:
 
-1. 把 `effects/envelope/work-skin.css` 全量复制到 AO3 的 Work Skin
-2. 把 `effects/envelope/smoke-test.html` 贴进 AO3 的 HTML 编辑器
-3. 预览成功看到信封效果后，再换成正式模板
+- `work-skin.css`
+- `smoke-test.html`
+- `hover-template.html`
+- `tap-template.html`
+- `preview.html`
 
-你真正需要关心的文件全在 `effects/envelope/` 目录下：
+Basic flow:
 
-- `work-skin.css` — 全部 CSS 样式
-- `smoke-test.html` — 最小测试
-- `hover-template.html` — 默认正式模板
-- `tap-template.html` — 触屏/手机友好版
+1. Copy `effects/envelope/work-skin.css` into your AO3 work skin.
+2. Paste `effects/envelope/smoke-test.html` into AO3's HTML editor.
+3. Use Preview to confirm that the envelope renders.
+4. Replace the smoke test with either `hover-template.html` or `tap-template.html`.
 
-其他目录（`docs/`、`tools/`）普通用户都不需要碰。
+Hard constraints:
 
-⚠️ 两个硬限制：
-- AO3 不允许 JavaScript
-- 读者可以关闭 creator styles，关键信息不要只靠视觉效果表达
+- AO3 work content does not support JavaScript.
+- Readers can disable creator styles, so the core text still needs to make sense without the effect.
 
----
+## Posting On AO3
 
-## 用户指南
+### 1. Create or update the work skin
 
-### 第一步：创建 Work Skin
+1. Log in to AO3.
+2. Go to `My Dashboard -> Skins -> Create Work Skin`.
+3. Paste `effects/envelope/work-skin.css`.
+4. Save.
 
-1. 登录 AO3 → My Dashboard → Skins → Create Work Skin
-2. 把 `effects/envelope/work-skin.css` 全量复制进去
-3. 保存
+### 2. Attach the skin to the work
 
-### 第二步：把 Skin 挂到作品
+1. Create or edit a work.
+2. In `Associations`, find `Select Work Skin`.
+3. Choose the skin you just created.
 
-1. 新建或编辑作品
-2. 在 Associations 里找到 Select Work Skin
-3. 选中刚创建的 Skin
+### 3. Run the smoke test
 
-### 第三步：最小测试
+1. Switch the work body editor to `HTML`.
+2. Paste `effects/envelope/smoke-test.html`.
+3. Open Preview.
 
-1. 正文编辑器切到 **HTML** 模式
-2. 复制 `effects/envelope/smoke-test.html` 贴进去
-3. 点 **Preview**
+If you can see the addressed envelope and the folded letter structure, the skin is attached correctly.
 
-看到带地址的背卡和三折信纸，说明挂载成功。
+### 4. Choose the publishing template
 
-⚠️ 如果 smoke test 都没效果，**先不要上正式模板**——回到第一步排查。
+| Situation | File | Notes |
+|---|---|---|
+| Default desktop-first version | `hover-template.html` | Best first choice |
+| Touch-heavy audience | `tap-template.html` | Uses `details/summary` instead of hover |
 
-### 第四步：换成正式模板
+### 5. Replace the placeholders
 
-| 场景 | 文件 | 说明 |
-|------|------|------|
-| 默认推荐（第一次发文） | `hover-template.html` | 最稳 |
-| 手机/平板用户多 | `tap-template.html` | 基于 details/summary，不依赖 hover |
+Edit only the visible content placeholders:
 
-### 如何改模板
+- sender label or subtitle
+- sender address lines
+- recipient name or letter title
+- first panel text
+- second panel text
+- third panel text
 
-只改这些占位替换成你的内容：
+Do not:
 
-- `【寄件人或小标题】`
-- `【寄件地址第一行】`
-- `【寄件地址第二行】`
-- `【收件人名字或信件标题】`
-- `【第一折内容】`
-- `【第二折内容】`
-- `【第三折内容】`
+- delete structural tags
+- rename classes such as `trifold-letter`, `letter-cover`, `letter-top`, `letter-mid`, or `letter-bot`
+- paste in Rich Text mode
 
-⚠️ 三不要：
-- 不要删标签
-- 不要乱改类名（`trifold-letter`、`letter-cover` 等）
-- 不要用 Rich Text 模式粘贴——必须用 **HTML** 模式
+## Troubleshooting
 
----
+### Raw HTML tags are visible
 
-## FAQ
+The editor is in the wrong mode. Switch back to `HTML` mode and paste again.
 
-### 为什么看到原始 HTML 标签（`<div>`、`<span>`）
+### The work shows plain text with no envelope styling
 
-编辑器模式切错了。解决：
+The work skin is not attached correctly. Re-run `smoke-test.html` before trying the publishing templates.
 
-1. 回到编辑器
-2. 切到 **HTML** 模式
-3. 重新粘贴
+### Which version should I start with?
 
-### 为什么只有普通文字，没有信封样式
+Use this order:
 
-Work Skin 没有成功挂到作品上。先用 smoke-test 验证，smoke-test 通过前不要上正式模板。
+1. `smoke-test.html`
+2. `hover-template.html`
+3. `tap-template.html`
 
-### 第一次该用哪个版本
+### Hover does not work well on phones
 
-顺序固定：
+Use `tap-template.html`.
 
-1. `smoke-test.html` → 确认挂载成功
-2. `hover-template.html` → 默认正式版
-3. `tap-template.html` → 触屏备选
+### Why not use a `:target` anchor version?
 
-### 手机上 hover 不好用
+AO3 strips `id` attributes from work HTML, so anchor-based interaction is not reliable there.
 
-改用 `tap-template.html`，基于 `details/summary`，不依赖鼠标悬停。
+### The unfolded letter feels cramped
 
-### 为什么不建议用 `:target` 锚点版
+This effect is designed for short content blocks on each fold. It is an enhancement, not a general-purpose long-form layout system.
 
-AO3 会剥掉正文里的 `id` 属性，`#letter-open` 这类锚点在真实作品页不会保留。默认不再将其当正式模板。
+### My preview does not match what every reader sees
 
-### 展开后文字太挤
+Common reasons:
 
-每折内容太长了。这个效果的设计前提是每折只放少量文字——动画是增强，不是排版系统。
+- the reader disabled creator styles
+- the reader is using a download format such as PDF or EPUB
 
-### 我的预览和读者看到的不一样
+## Maintenance And Verification
 
-常见原因：
-- 读者关闭了 creator styles
-- 读者用下载阅读（下载不会保留 work skin）
+Use this section only when maintaining the effect.
 
-这是 AO3 的正常限制，不是模板坏了。
+### Re-run verification after:
 
-### 我该忽略哪些文件
+- changes to `effects/envelope/work-skin.css`
+- changes to any `effects/envelope/*.html`
+- AO3-specific compatibility adjustments
 
-普通用户只需要关心 `effects/envelope/` 下的内容，其他都可以忽略。
+### Local verification flow
 
----
+1. Open `effects/envelope/preview.html` locally and inspect all four states.
+2. Run `node tools/verify.mjs --effect envelope`.
+3. Run `npm test` before finalizing broader repository changes.
+4. If AO3-facing behavior changed, follow `docs/ao3-live-validation.md`.
 
-## 维护与验证
+### What success looks like
 
-> 本节面向维护者和协作者。如果你只是想发文，看上面两节就够了。
+- `smoke-test.html` includes the expected envelope and fold structure
+- the hover template opens correctly when forced with `.trifold-letter--preview-open`
+- the tap template opens correctly through `details[open]`
 
-### 什么时候需要验证
+### Common maintenance failures
 
-- 改了 `effects/envelope/work-skin.css`
-- 改了 `effects/envelope/*.html`
-- 想确认 AO3 真实解析会不会过滤某种 HTML 或 CSS
-- 想确认模板不是只在本地好看
+- mobile breakpoint behavior looks wrong because the test viewport is too narrow
+- class names in HTML were changed without matching CSS updates
+- preview-only edits accidentally diverged from the published effect CSS
 
-### 验证流程
+## Notes
 
-1. 修改 `effects/envelope/work-skin.css` 或模板文件
-2. 在本地打开 `effects/envelope/preview.html`，确认四种预览状态都正常
-3. 运行 `node tools/verify.mjs`
-4. 如需真实 AO3 验证，按 `docs/ao3-live-validation.md` 的流程执行
-
-### 验证成功标准
-
-**smoke-test**：找到 `.letter-stage`、`.trifold-letter`、`.letter-cover`、`.letter-top`、`.letter-mid`、`.letter-bot`，背卡和三折有真实背景样式。
-
-**hover-template**：结构节点完整，强制加上 `trifold-letter--preview-open` 后三折出现非零位移和非零 skew，保留交替倾斜。
-
-**tap-template**：找到 `details.trifold-letter--details` 和 `summary.trifold-letter__stack`，打开 `details.open = true` 后三折出现非零位移和交替倾斜。
-
-### 验证失败排查
-
-- **截图不生成**：确认本地 HTTP 服务器正常启动（`node --version` 可用）
-- **AO3 结构检查不通过**：窗口宽度可能触发移动断点（<= 720px），拉宽窗口重试或对照 `effects/envelope/work-skin.css` 中的 `@media` 规则
-
-### 维护者本地工作空间
-
-**永远不要提交**：AO3 work id、skin id、个人调试笔记、Playwright session 数据。保留在本地忽略目录中，不要进仓库。
-
----
-
-## 参考笔记
-
-### Works/82088401
-
-- 参考页：`https://archiveofourown.org/works/82088401/chapters/216016191`
-- 最近人工核对：2026-04-04
-
-### 关键观察
-
-- 外层容器有 work-specific 命名，不适合作为通用类名
-- 背卡、第一折、第二折、第三折明确分层
-- hover 打开时：
-  - 背卡会后移并旋转
-  - 第一折和第三折同向倾斜
-  - 第二折反向倾斜
-
-### 我们刻意不照搬的部分
-
-- 不复用参考页的 work-specific 后缀类名
-- 不追求一模一样页面主题
-- 不把参考页的所有视觉装饰原样搬进来
-- 不使用对 AO3 不稳的交互方式
-
-本仓库据此抽象出通用命名：`trifold-letter`、`letter-cover`、`letter-top`、`letter-mid`、`letter-bot`。
-
-### 2026-04-04 验证结论
-
-- `effects/envelope/work-skin.css` 已成功写入并更新 AO3 work skin
-- smoke-test、hover-template、tap-template 全部通过
-- 验证窗口宽度落在移动端断点内，tap 和 hover 均成立
-- 当前正式发布物覆盖了：AO3 真实解析、真实 Preview 渲染、移动端断点下的三折展开逻辑
-
-### 更新参考笔记
-
-参考页是灵感来源，不是绑定依赖。更新顺序：
-
-1. 在真实浏览器里打开参考页
-2. 用浏览器检查工具或 CDP 观察结构和状态变化
-3. 更新笔记
-4. 如果影响正式模板，同步更新 `effects/envelope/` 下的正式文件
+- Reference inspiration last reviewed on 2026-04-04:
+  `https://archiveofourown.org/works/82088401/chapters/216016191`
+- The repository intentionally uses generic class names rather than copying work-specific names from the reference page.
