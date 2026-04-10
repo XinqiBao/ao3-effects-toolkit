@@ -1,64 +1,58 @@
 # AO3 Compatibility
 
-来自 2026-04-04 对已登录 AO3 账号的真实验证记录。
+This document records what has been confirmed against AO3 and what is still only validated locally.
 
-只记录结果结论，具体操作步骤看 [`envelope/guide.md`](../envelope/guide.md) 的维护者部分。
+## Confirmed On AO3
 
-## 已确认可工作
+Verified on 2026-04-04 against a logged-in AO3 account:
 
-- `envelope/work-skin.css` 可成功更新到 AO3 work skin
-- `envelope/smoke-test.html`、`hover-template.html`、`tap-template.html` 均可正常渲染
-- 通用的 `trifold-letter / letter-cover / letter-top / letter-mid / letter-bot` 结构在 AO3 Preview 中可完整保留
-- 两条交互路径均有效：
-  - hover 版本可通过 `.trifold-letter--preview-open` 验证展开态
-  - tap 版本可通过设置 `details.open = true` 验证展开态
-- 移动端断点（<= 720px）下，三折位移和交替倾斜均成立
-- `chat-messages/work-skin.css` 本地结构检查通过 ✅
-- `secret-divider/work-skin.css` 本地结构检查通过 ✅
-- `polaroid/smoke-test.html`、`hover-template.html`、`tap-template.html` 本地检查通过 ✅
-- `typewriter/smoke-test.html`、`hover-template.html`、`tap-template.html` 本地检查通过 ✅
+- `effects/envelope/work-skin.css` can be saved as an AO3 work skin.
+- `effects/envelope/smoke-test.html`, `hover-template.html`, and `tap-template.html` render correctly in AO3 Preview.
+- The core `trifold-letter / letter-cover / letter-top / letter-mid / letter-bot` structure survives AO3's HTML filtering.
+- Both interaction paths work:
+  - desktop preview can be checked through `.trifold-letter--preview-open`
+  - touch preview can be checked by opening the `details` element
+- The mobile breakpoint at `<= 720px` preserves the intended fold offsets and alternating tilt.
+- AO3 preserves `<details>` and `<summary>` in posted work HTML.
 
-> ⚠️ 以上新特效仅通过本地结构和 CSS lint 检查，尚未在 AO3 上实时验证。
+## Verified Locally Only
 
-## AO3 解析限制
+The following effects currently pass repository-local structure and CSS checks, but have not yet been revalidated against a live AO3 account:
 
-以下 CSS 属性 AO3 会拒绝或过滤，在编写 work skin 时注意避免：
+- `effects/chat-messages/`
+- `effects/polaroid/`
+- `effects/secret-divider/`
+- `effects/typewriter/`
 
-| 被拒绝的 CSS                    | 替代方案                     |
-|---------------------------------|------------------------------|
-| `gap`                           | 用 `margin`                  |
-| `grid-template-columns: repeat()` | 用 `inline-block` / `flex`   |
-| `pointer-events`                | 避免使用                     |
-| 带 `/` 的 `border-radius`椭圆   | 去掉 `/` 部分                |
-| HTML 中的 `id` 属性              | AO3 会剥掉，不能用于锚点       |
+Use `docs/ao3-live-validation.md` before treating those effects as fully AO3-verified.
 
-以下 CSS 属性在 AO3 上**未经实测**：
+## Known AO3 Restrictions
 
-| 未经实测的属性              | 风险说明                          |
-|---------------------------|-----------------------------------|
-| `@keyframes` / `animation` | AO3 可能过滤动画属性；typewriter 光标闪烁依赖此属性 |
-| `perspective` / `transform-style: preserve-3d` | 3D 变换效果 polaroid 翻转依赖此属性 |
+Avoid these CSS and HTML patterns in published artifacts:
 
-已确认 AO3 会保留的 HTML 标签：
+| Unsupported or filtered | Safer replacement |
+|---|---|
+| `gap` | Use `margin` |
+| `grid-template-columns: repeat()` | Use `inline-block` or `flex` |
+| `pointer-events` | Avoid entirely |
+| `border-radius` ellipse syntax with `/` | Remove the `/` clause |
+| HTML `id` attributes | Use classes instead |
 
-- `<details>` / `<summary>`
-- `<div>` / `<span>`（需在 HTML 模式下粘贴）
+## Still Unconfirmed On AO3
 
-## 移动端方案
+These features work in local previews but have not been reconfirmed in a live AO3 post flow:
 
-- 默认推荐触屏版：`tap-template.html`（基于 details/summary）
-- 旧的 `:target` 锚点交互已退役
+| Feature | Why it still needs AO3 validation |
+|---|---|
+| `@keyframes` / `animation` | Typewriter cursor behavior depends on animation support |
+| `perspective` / `transform-style: preserve-3d` | Polaroid flip behavior depends on 3D transform support |
 
-## 更新方式
+## Recommended Validation Trigger
 
-如果你改了 `envelope/` 下的正式发布物，至少跑一次验证：
+Run local verification first:
 
 ```bash
-node tools/verify.mjs
+npm test
 ```
 
-如需真实 AO3 验证（需手动登录一次）：
-
-```bash
-node tools/verify.mjs --ao3
-```
+Then follow `docs/ao3-live-validation.md` whenever you change published CSS, published templates, or AO3-specific compatibility workarounds.

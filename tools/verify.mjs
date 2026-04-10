@@ -15,6 +15,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const EFFECTS_ROOT = join(ROOT, "effects");
 
 // ── Effect definitions ────────────────────────────────────────────────────────
 
@@ -109,7 +110,7 @@ function structureCheck() {
   console.log("\n--- Structure Check ---\n");
 
   for (const effect of targetEffects) {
-    const dir = join(ROOT, effect.name);
+    const dir = join(EFFECTS_ROOT, effect.name);
     console.log(`  [${effect.name}]`);
 
     try {

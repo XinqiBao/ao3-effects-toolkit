@@ -5,7 +5,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const POLAROID_DIR = join(ROOT, 'polaroid');
+const POLAROID_DIR = join(ROOT, 'effects', 'polaroid');
 
 const FILES = [
   'smoke-test.html',
@@ -15,7 +15,7 @@ const FILES = [
 ];
 
 for (const file of FILES) {
-  test(`polaroid/${file} keeps polaroid-message inline-safe for AO3 and preview parity`, () => {
+  test(`effects/polaroid/${file} keeps polaroid-message inline-safe for AO3 and preview parity`, () => {
     const html = readFileSync(join(POLAROID_DIR, file), 'utf8');
 
     assert.doesNotMatch(

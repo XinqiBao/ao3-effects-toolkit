@@ -21,7 +21,7 @@ test('capture reset restores the envelope preview to a fully closed first frame'
       deviceScaleFactor: 2,
     });
 
-    const url = `http://127.0.0.1:${port}/envelope/preview.html`;
+    const url = `http://127.0.0.1:${port}/effects/envelope/preview.html`;
     const captureSelector = '[data-panel="desktop-closed"] [data-capture-frame]';
     const hoverSelector = '[data-panel="desktop-closed"] .trifold-letter--hover';
 

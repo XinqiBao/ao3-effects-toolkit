@@ -1,25 +1,26 @@
 {
-  "name": "ao3",
+  "name": "ao3-effects-toolkit",
   "version": "1.0.0",
-  "description": "CSS-only visual effects toolkit for Archive of Our Own works. Pure CSS — no JavaScript.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "description": "CSS-only visual effects toolkit for Archive of Our Own works.",
   "scripts": {
     "test": "node --test tools/*.test.mjs && node tools/verify.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/XinqiBao/ao3-envelope-workskin.git"
+    "url": "git+https://github.com/XinqiBao/ao3-effects-toolkit.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "ao3",
+    "archive-of-our-own",
+    "css",
+    "workskin"
+  ],
+  "author": "Xinqi Bao",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/XinqiBao/ao3-envelope-workskin/issues"
+    "url": "https://github.com/XinqiBao/ao3-effects-toolkit/issues"
   },
-  "homepage": "https://github.com/XinqiBao/ao3-envelope-workskin#readme",
+  "homepage": "https://github.com/XinqiBao/ao3-effects-toolkit#readme",
   "dependencies": {
     "playwright": "^1.59.1"
   }

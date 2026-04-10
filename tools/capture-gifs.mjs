@@ -3,7 +3,7 @@
  * capture-gifs.mjs — Record animated GIFs for each AO3 effect.
  * Uses Playwright for frame capture, ffmpeg for GIF assembly.
  *
- * Output: assets/<effect>.gif
+ * Output: assets/demos/<effect>.gif
  * Usage:
  *   node tools/capture-gifs.mjs            # all effects
  *   node tools/capture-gifs.mjs envelope   # one effect
@@ -36,7 +36,7 @@ async function captureEffect(page, name, cfg) {
   if (existsSync(framesDir)) rmSync(framesDir, { recursive: true });
   mkdirSync(framesDir, { recursive: true });
 
-  const pageUrl = `http://localhost:${cfg.port}/${name}/preview.html`;
+  const pageUrl = `http://localhost:${cfg.port}/effects/${name}/preview.html`;
   await resetCaptureState(page, pageUrl, preset.settleMs);
   const clip = await measureCaptureClip(page, {
     captureSelector: cfg.captureSelector ?? PREVIEW_CAPTURE_SELECTOR,
@@ -115,9 +115,9 @@ async function main() {
       const { framesDir, fps, outputWidth } = await captureEffect(page, name, { ...cfg, port });
       await context.close();
 
-      const outputPath = join(root, 'assets', `${name}.gif`);
+      const outputPath = join(root, 'assets', 'demos', `${name}.gif`);
       buildGif(framesDir, outputPath, fps, outputWidth);
-      console.log(` done -> assets/${name}.gif`);
+      console.log(` done -> assets/demos/${name}.gif`);
     }
   } finally {
     await browser.close();

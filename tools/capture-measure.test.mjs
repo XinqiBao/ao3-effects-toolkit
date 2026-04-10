@@ -26,7 +26,7 @@ test('chat capture measurement includes the expanded conversation height', async
       deviceScaleFactor: 2,
     });
 
-    const url = `http://127.0.0.1:${port}/chat-messages/preview.html`;
+    const url = `http://127.0.0.1:${port}/effects/chat-messages/preview.html`;
     await resetCaptureState(page, url, FAMILY_PRESETS.standard.settleMs);
 
     const clip = await measureCaptureClip(page, {

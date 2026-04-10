@@ -5,7 +5,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const css = readFileSync(join(ROOT, 'assets', 'preview-shell.css'), 'utf8');
+const css = readFileSync(join(ROOT, 'effects', '_shared', 'preview-shell.css'), 'utf8');
 
 test('preview shell lets cards size to content without family min-height scaffolding', () => {
   assert.match(

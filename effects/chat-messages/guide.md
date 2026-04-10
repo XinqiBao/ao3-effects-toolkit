@@ -4,8 +4,8 @@
 
 不懂代码？只做这几步：
 
-1. 把 `chat-messages/work-skin.css` 全量复制到 AO3 的 Work Skin
-2. 把 `chat-messages/hover-template.html` 贴进 AO3 的 HTML 编辑器
+1. 把 `effects/chat-messages/work-skin.css` 全量复制到 AO3 的 Work Skin
+2. 把 `effects/chat-messages/hover-template.html` 贴进 AO3 的 HTML 编辑器
 3. 预览成功对话效果
 
 ⚠️ 两个硬限制：
@@ -19,7 +19,7 @@
 ### 第一步：创建 Work Skin
 
 1. 登录 AO3 → My Dashboard → Skins → Create Work Skin
-2. 把 `chat-messages/work-skin.css` 全量复制进去
+2. 把 `effects/chat-messages/work-skin.css` 全量复制进去
 3. 保存
 
 ### 第二步：把 Skin 挂到作品
@@ -31,7 +31,7 @@
 ### 第三步：测试
 
 1. 正文编辑器切到 **HTML** 模式
-2. 复制 `chat-messages/hover-template.html` 贴进去
+2. 复制 `effects/chat-messages/hover-template.html` 贴进去
 3. 点 **Preview**
 
 看到类似 iOS 消息的对话气泡，说明挂载成功。
@@ -94,8 +94,8 @@ Work Skin 没有成功挂到作品上。先用 hover-template 验证，确认 CS
 
 ### 什么时候需要验证
 
-- 改了 `chat-messages/work-skin.css`
-- 改了 `chat-messages/*.html` 模板文件
+- 改了 `effects/chat-messages/work-skin.css`
+- 改了 `effects/chat-messages/*.html` 模板文件
 
 ### 验证流程
 
@@ -103,10 +103,7 @@ Work Skin 没有成功挂到作品上。先用 hover-template 验证，确认 CS
 node tools/verify.mjs
 ```
 
-如需真实 AO3 验证：
-```bash
-node tools/verify.mjs --ao3
-```
+如需真实 AO3 验证，请按 `docs/ao3-live-validation.md` 的流程执行。
 
 ### 验证成功标准
 

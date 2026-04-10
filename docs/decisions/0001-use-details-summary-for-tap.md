@@ -10,40 +10,38 @@ Accepted
 
 ## Context
 
-这个项目需要一条适合触屏设备的正式交互路径。
+This project needs a touch-friendly interaction path that survives AO3's HTML filtering.
 
-过去试过 `:target` 锚点方案，但真实 AO3 验证发现：
+Earlier experiments used `:target`, but live AO3 validation showed that:
 
-- AO3 会剥掉作品 HTML 里的 `id`
-- 这会让依赖 `#anchor` 的交互失效
+- AO3 strips `id` attributes from posted work HTML
+- anchor-based interaction becomes unreliable once those `id` values disappear
 
-同时，真实 AO3 验证确认：
+The same validation confirmed that AO3 keeps:
 
 - `details`
 - `summary`
 
-这两个标签可以在作品里保留下来。
-
 ## Decision
 
-正式的 tap/mobile 交互统一使用 `details/summary`。
+Use `details/summary` as the canonical tap/mobile interaction pattern for published effects.
 
-不再把 `:target` 锚点版作为正式模板，也不再在用户文档里推荐它。
+Do not treat `:target` as a supported production template path.
 
 ## Consequences
 
-好处：
+Benefits:
 
-- 结构更稳定
-- 和 AO3 真实过滤规则更匹配
-- 维护路径更清晰
+- the structure matches AO3's confirmed HTML behavior
+- touch interaction no longer depends on stripped attributes
+- maintenance stays focused on one supported mobile pattern
 
-代价：
+Tradeoffs:
 
-- 交互行为会受浏览器原生 `details` 机制约束
-- 视觉层需要围绕这个结构去适配
+- interaction behavior follows the browser's native `details` rules
+- effect CSS needs to work with that structure rather than a custom state model
 
 ## Follow-up
 
-- `envelope/tap-template.html` 保持为唯一正式触屏模板
-- `docs/user/faq.md` 明确说明为什么不用 `:target`
+- `effects/envelope/tap-template.html` remains the canonical touch template for the envelope effect
+- future effects that need explicit touch interaction should prefer the same `details/summary` pattern

@@ -4,18 +4,18 @@
 
 不懂代码？只做这几步：
 
-1. 把 `polaroid/work-skin.css` 全量复制到 AO3 的 Work Skin
-2. 把 `polaroid/hover-template.html` 贴进 AO3 的 HTML 编辑器
+1. 把 `effects/polaroid/work-skin.css` 全量复制到 AO3 的 Work Skin
+2. 把 `effects/polaroid/hover-template.html` 贴进 AO3 的 HTML 编辑器
 3. 预览成功看到拍立得效果后，再根据需求调整
 
-你真正需要关心的文件全在 `polaroid/` 目录下：
+你真正需要关心的文件全在 `effects/polaroid/` 目录下：
 
 - `work-skin.css` — 全部 CSS 样式
 - `hover-template.html` — 默认 hover 版（桌面优先）
 - `tap-template.html` — 触屏/手机友好版
 - `preview.html` — 本地预览页面
 
-其他目录（`docs/`、`local/`、`tools/`）普通用户都不需要碰。
+其他目录（`docs/`、`tools/`）普通用户都不需要碰。
 
 两个硬限制：
 - AO3 不允许 JavaScript
@@ -28,7 +28,7 @@
 ### 第一步：创建 Work Skin
 
 1. 登录 AO3 → My Dashboard → Skins → Create Work Skin
-2. 把 `polaroid/work-skin.css` 全量复制进去
+2. 把 `effects/polaroid/work-skin.css` 全量复制进去
 3. 保存
 
 ### 第二步：把 Skin 挂到作品
@@ -125,7 +125,7 @@ Work Skin 没有成功挂到作品上。先用 hover 模板验证，模板通过
 
 ### 我该忽略哪些文件
 
-普通用户只需要关心 `polaroid/` 下的内容，其他都可以忽略。
+普通用户只需要关心 `effects/polaroid/` 下的内容，其他都可以忽略。
 
 ---
 
@@ -135,16 +135,17 @@ Work Skin 没有成功挂到作品上。先用 hover 模板验证，模板通过
 
 ### 什么时候需要验证
 
-- 改了 `polaroid/work-skin.css`
-- 改了 `polaroid/*.html` 模板文件
+- 改了 `effects/polaroid/work-skin.css`
+- 改了 `effects/polaroid/*.html` 模板文件
 - 想确认 AO3 真实解析会不会过滤某种 HTML 或 CSS
 - 想确认模板不是只在本地好看
 
 ### 验证流程
 
-1. 修改 `polaroid/work-skin.css` 或模板文件
-2. 打开 `polaroid/preview.html` 在浏览器中查看效果
-3. 运行 `node tools/verify.mjs`（如果 verify 脚本已支持 polaroid）
+1. 修改 `effects/polaroid/work-skin.css` 或模板文件
+2. 打开 `effects/polaroid/preview.html` 在浏览器中查看效果
+3. 运行 `node tools/verify.mjs`
+4. 如需真实 AO3 验证，按 `docs/ao3-live-validation.md` 的流程执行
 
 ### 验证成功标准
 
