@@ -3,30 +3,6 @@
    CSS-only: hover or details/summary flip
    ======================================== */
 
-/* --- Preview helpers (not used on AO3) --- */
-
-#workskin .preview-grid > .preview-card {
-  margin-bottom: 1.2em;
-}
-
-#workskin .demo-label {
-  margin: 0 0 0.9em;
-  color: #6f6253;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.78em;
-  font-weight: bold;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-#workskin .preview-note {
-  margin: 0 0 1.1em;
-  color: #716457;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.8em;
-  line-height: 1.55;
-}
-
 /* --- Gallery container --- */
 
 #workskin .polaroid-gallery {
@@ -65,8 +41,7 @@
 }
 
 #workskin .polaroid--hover:hover .polaroid-inner,
-#workskin .polaroid--details[open] .polaroid-inner,
-#workskin .polaroid--preview-open .polaroid-inner {
+#workskin .polaroid--details[open] .polaroid-inner {
   transform: rotateY(180deg);
 }
 
@@ -94,16 +69,14 @@
 }
 
 #workskin .polaroid--hover:hover .polaroid-front,
-#workskin .polaroid--details[open] .polaroid-front,
-#workskin .polaroid--preview-open .polaroid-front {
+#workskin .polaroid--details[open] .polaroid-front {
   opacity: 0;
   z-index: 1;
   transition-delay: 0s;
 }
 
 #workskin .polaroid--hover:hover .polaroid-back,
-#workskin .polaroid--details[open] .polaroid-back,
-#workskin .polaroid--preview-open .polaroid-back {
+#workskin .polaroid--details[open] .polaroid-back {
   opacity: 1;
   z-index: 2;
   transition-delay: 0.2s;
@@ -214,8 +187,7 @@
   text-transform: uppercase;
 }
 
-#workskin .polaroid--details[open] .polaroid-hint,
-#workskin .polaroid--preview-open .polaroid-hint {
+#workskin .polaroid--details[open] .polaroid-hint {
   color: rgba(90, 80, 65, 0.7);
 }
 

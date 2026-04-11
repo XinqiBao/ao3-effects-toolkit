@@ -7,22 +7,19 @@
   <link rel="stylesheet" href="../_shared/preview-shell.css">
   <link rel="stylesheet" href="work-skin.css">
   <style>
-    #workskin .card__stage-shell {
+    #workskin .preview-card__stage-shell {
       background:
         radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 42%),
         linear-gradient(180deg, #f1e8db 0%, #e7dacb 58%, #dbc9b7 100%);
     }
 
-    #workskin .card__stage {
+    #workskin .preview-card__stage {
+      min-height: 760px;
       padding-top: 10px;
     }
 
-    #workskin .card__prop-zone {
-      letter-spacing: 0.13em;
-    }
-
-    #workskin .card__hint {
-      max-width: 34rem;
+    #workskin .preview-card__stage.envelope-preview__stage {
+      align-items: flex-start;
     }
 
     #workskin .letter-stage {
@@ -33,16 +30,6 @@
       background: none;
       border: 0;
       box-shadow: none;
-    }
-
-    #workskin .trifold-letter__stack {
-      margin: 0 auto;
-    }
-
-    #workskin .letter-cover {
-      background:
-        linear-gradient(180deg, rgba(247, 247, 244, 0.96), rgba(229, 225, 219, 0.98)),
-        linear-gradient(135deg, rgba(163, 132, 99, 0.12), rgba(255, 255, 255, 0));
     }
 
     #workskin .letter-cover-text {
@@ -59,8 +46,8 @@
       border-radius: 4px;
       background: none;
       box-shadow: 0 10px 18px rgba(46, 46, 46, 0.1);
-      transform: none;
       overflow: hidden;
+      transform: none;
     }
 
     #workskin .letter-stamp__image {
@@ -70,46 +57,9 @@
       object-fit: cover;
     }
 
-    #workskin .letter-top,
-    #workskin .letter-mid,
-    #workskin .letter-bot {
-      box-shadow: rgba(0, 0, 0, 0.046) -5px -3px 10px 1px;
-    }
-
-    #workskin .letter-top {
-      background: linear-gradient(180deg, #f7f7f4 0%, #f0ede7 100%);
-    }
-
-    #workskin .letter-mid {
-      background: linear-gradient(180deg, #f4f2ed 0%, #efebe4 100%);
-    }
-
-    #workskin .letter-bot {
-      background: linear-gradient(180deg, #f3eee7 0%, #ece5dd 100%);
-    }
-
-    #workskin .letter-kicker {
-      color: #7c746a;
-    }
-
-    #workskin .letter-body {
-      color: #3a332d;
-    }
-
-    #workskin .trifold-letter__hint {
-      bottom: 16px;
-      color: rgba(88, 74, 60, 0.58);
-    }
-
-    #workskin .trifold-letter--hover:hover .letter-stamp,
-    #workskin .trifold-letter--details[open] .letter-stamp,
-    #workskin .trifold-letter--preview-open .letter-stamp {
-      transform: none;
-    }
-
     @media (max-width: 720px) {
-      #workskin .letter-stage {
-        width: 100%;
+      #workskin .preview-card__stage {
+        min-height: 620px;
       }
 
       #workskin .letter-cover-text {
@@ -128,194 +78,100 @@
 <body>
 <main class="shell">
   <section class="hero">
-    <p class="hero__label">Curated Archive / Archive Standard</p>
+    <p class="hero__label">AO3 Effect Preview</p>
     <h1 class="hero__title">Envelope</h1>
-    <p class="hero__desc">A sealed correspondence piece presented as a careful archive study, with the pages unfolding upward into view.</p>
+    <p class="hero__desc">A sealed letter that unfolds into three visible panels.</p>
   </section>
   <div id="workskin">
-  <div class="grid">
-
-    <section class="card" data-panel="desktop-closed" data-preview-family="tall">
-      <p class="card__label">Desktop / Hover · Closed</p>
-      <p class="card__note">The outer face should feel collected and specific, with the letter still folded into itself.</p>
-      <div class="card__stage-shell">
-        <p class="card__prop-zone">Archive cover / Seal / Front leaf</p>
-        <div class="card__stage" data-stage>
-          <div class="letter-stage" data-capture-frame>
-            <div class="trifold-letter trifold-letter--hover">
-              <div class="trifold-letter__stack">
-                <span class="trifold-letter__shadow"></span>
-                <span class="letter-cover">
-                  <span class="letter-cover-text">
-                    <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
-                    <span class="letter-stamp">
-                      <img class="letter-stamp__image" src="../../assets/preview-media/envelope-stamp.png" alt="">
+    <div class="grid">
+      <section class="preview-card preview-card--hover">
+        <p class="preview-card__label">Hover</p>
+        <p class="preview-card__note">Desktop-first interaction. Hover the letter to unfold it.</p>
+        <div class="preview-card__stage-shell">
+          <div class="preview-card__stage envelope-preview__stage">
+            <div class="letter-stage">
+              <div class="trifold-letter trifold-letter--hover">
+                <div class="trifold-letter__stack">
+                  <span class="trifold-letter__shadow"></span>
+                  <span class="letter-cover">
+                    <span class="letter-cover-text">
+                      <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
+                      <span class="letter-stamp">
+                        <img class="letter-stamp__image" src="../../assets/preview-media/envelope-stamp.png" alt="">
+                      </span>
+                      <span class="letter-to">Filed for the intended reader</span>
                     </span>
-                    <span class="letter-to">Filed for the intended reader</span>
                   </span>
-                </span>
-                <span class="letter-top">
-                  <span class="letter-top-text">
-                    <span class="letter-kicker">Leaf One</span>
-                    <span class="letter-body">I kept the first page short so the archive would hold it without complaint.</span>
+                  <span class="letter-top">
+                    <span class="letter-top-text">
+                      <span class="letter-kicker">Leaf One</span>
+                      <span class="letter-body">I kept the first page short so the archive would hold it without complaint.</span>
+                    </span>
                   </span>
-                </span>
-                <span class="letter-mid">
-                  <span class="letter-mid-text">
-                    <span class="letter-kicker">Leaf Two</span>
-                    <span class="letter-body">The second fold keeps the weather and the unsent part of the note together.</span>
+                  <span class="letter-mid">
+                    <span class="letter-mid-text">
+                      <span class="letter-kicker">Leaf Two</span>
+                      <span class="letter-body">The second fold keeps the weather and the unsent part of the note together.</span>
+                    </span>
                   </span>
-                </span>
-                <span class="letter-bot">
-                  <span class="letter-bot-text">
-                    <span class="letter-kicker">Leaf Three</span>
-                    <span class="letter-body">The last leaf names what was left unsaid, then lets the paper carry it.</span>
+                  <span class="letter-bot">
+                    <span class="letter-bot-text">
+                      <span class="letter-kicker">Leaf Three</span>
+                      <span class="letter-body">The last leaf names what was left unsaid, then lets the paper carry it.</span>
+                    </span>
                   </span>
-                </span>
-                <span class="trifold-letter__hint">Sealed correspondence</span>
+                  <span class="trifold-letter__hint">Hover to open</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <p class="card__hint">The closed face should read as a preserved document, with the stamp and address holding the first glance.</p>
-    </section>
+      </section>
 
-    <section class="card" data-panel="desktop-open" data-preview-family="tall">
-      <p class="card__label">Desktop / Hover · Open</p>
-      <p class="card__note">The same correspondence, now opened so the fan of leaves can read as one gathered piece.</p>
-      <div class="card__stage-shell">
-        <p class="card__prop-zone">Archive cover / Release / Vertical fan-out</p>
-        <div class="card__stage" data-stage>
-          <div class="letter-stage" data-capture-frame>
-            <div class="trifold-letter trifold-letter--hover trifold-letter--preview-open">
-              <div class="trifold-letter__stack">
-                <span class="trifold-letter__shadow"></span>
-                <span class="letter-cover">
-                  <span class="letter-cover-text">
-                    <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
-                    <span class="letter-stamp">
-                      <img class="letter-stamp__image" src="../../assets/preview-media/envelope-stamp.png" alt="">
+      <section class="preview-card preview-card--tap preview-card--mobile">
+        <p class="preview-card__label">Tap</p>
+        <p class="preview-card__note">Touch-first interaction. Tap the summary to open the same letter.</p>
+        <div class="preview-card__stage-shell">
+          <div class="preview-card__stage envelope-preview__stage">
+            <div class="letter-stage">
+              <details class="trifold-letter trifold-letter--details">
+                <summary class="trifold-letter__stack">
+                  <span class="trifold-letter__shadow"></span>
+                  <span class="letter-cover">
+                    <span class="letter-cover-text">
+                      <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
+                      <span class="letter-stamp">
+                        <img class="letter-stamp__image" src="../../assets/preview-media/envelope-stamp.png" alt="">
+                      </span>
+                      <span class="letter-to">Filed for the intended reader</span>
                     </span>
-                    <span class="letter-to">Filed for the intended reader</span>
                   </span>
-                </span>
-                <span class="letter-top">
-                  <span class="letter-top-text">
-                    <span class="letter-kicker">Leaf One</span>
-                    <span class="letter-body">I kept the first page short so the archive would hold it without complaint.</span>
+                  <span class="letter-top">
+                    <span class="letter-top-text">
+                      <span class="letter-kicker">Leaf One</span>
+                      <span class="letter-body">The opening fold stays compact until the page is released.</span>
+                    </span>
                   </span>
-                </span>
-                <span class="letter-mid">
-                  <span class="letter-mid-text">
-                    <span class="letter-kicker">Leaf Two</span>
-                    <span class="letter-body">The second fold keeps the weather and the unsent part of the note together.</span>
+                  <span class="letter-mid">
+                    <span class="letter-mid-text">
+                      <span class="letter-kicker">Leaf Two</span>
+                      <span class="letter-body">The middle fold holds the note together in one calm block.</span>
+                    </span>
                   </span>
-                </span>
-                <span class="letter-bot">
-                  <span class="letter-bot-text">
-                    <span class="letter-kicker">Leaf Three</span>
-                    <span class="letter-body">The last leaf names what was left unsaid, then lets the paper carry it.</span>
+                  <span class="letter-bot">
+                    <span class="letter-bot-text">
+                      <span class="letter-kicker">Leaf Three</span>
+                      <span class="letter-body">The final fold waits at the bottom of the stack, ready to open.</span>
+                    </span>
                   </span>
-                </span>
-                <span class="trifold-letter__hint">Opened leaf stack</span>
-              </div>
+                  <span class="trifold-letter__hint">Tap to open</span>
+                </summary>
+              </details>
             </div>
           </div>
         </div>
-      </div>
-      <p class="card__hint">The open state should feel like a single document released from a sleeve, not a separate object.</p>
-    </section>
-
-    <section class="card card--mobile" data-panel="mobile-closed" data-preview-family="tall">
-      <p class="card__label">Mobile / Tap · Closed</p>
-      <p class="card__note">On a narrow panel, the sealed face should still carry enough weight to feel intentional.</p>
-      <div class="card__stage-shell">
-        <p class="card__prop-zone">Pocket fold / Seal / Touch surface</p>
-        <div class="card__stage" data-stage>
-          <details class="letter-stage trifold-letter trifold-letter--details" data-capture-frame>
-            <summary class="trifold-letter__stack">
-              <span class="trifold-letter__shadow"></span>
-              <span class="letter-cover">
-                <span class="letter-cover-text">
-                  <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
-                  <span class="letter-stamp">
-                    <img class="letter-stamp__image" src="../../assets/preview-media/envelope-stamp.png" alt="">
-                  </span>
-                  <span class="letter-to">Filed for the intended reader</span>
-                </span>
-              </span>
-              <span class="letter-top">
-                <span class="letter-top-text">
-                  <span class="letter-kicker">Leaf One</span>
-                  <span class="letter-body">The opening fold stays compact until the page is released.</span>
-                </span>
-              </span>
-              <span class="letter-mid">
-                <span class="letter-mid-text">
-                  <span class="letter-kicker">Leaf Two</span>
-                  <span class="letter-body">The middle fold holds the note together in one calm block.</span>
-                </span>
-              </span>
-              <span class="letter-bot">
-                <span class="letter-bot-text">
-                  <span class="letter-kicker">Leaf Three</span>
-                  <span class="letter-body">The final fold waits at the bottom of the stack, ready to open.</span>
-                </span>
-              </span>
-              <span class="trifold-letter__hint">Sealed correspondence</span>
-            </summary>
-          </details>
-        </div>
-      </div>
-      <p class="card__hint">The compact version should stay composed, with the stamp still reading as a deliberate front mark.</p>
-    </section>
-
-    <section class="card card--mobile" data-panel="mobile-open" data-preview-family="tall">
-      <p class="card__label">Mobile / Tap · Open</p>
-      <p class="card__note">The same letter, now opened so the vertical fan remains legible at the narrower width.</p>
-      <div class="card__stage-shell">
-        <p class="card__prop-zone">Pocket fold / Release / Touch surface</p>
-        <div class="card__stage" data-stage>
-          <details class="letter-stage trifold-letter trifold-letter--details trifold-letter--preview-open" open data-capture-frame>
-            <summary class="trifold-letter__stack">
-              <span class="trifold-letter__shadow"></span>
-              <span class="letter-cover">
-                <span class="letter-cover-text">
-                  <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
-                  <span class="letter-stamp">
-                    <img class="letter-stamp__image" src="../../assets/preview-media/envelope-stamp.png" alt="">
-                  </span>
-                  <span class="letter-to">Filed for the intended reader</span>
-                </span>
-              </span>
-              <span class="letter-top">
-                <span class="letter-top-text">
-                  <span class="letter-kicker">Leaf One</span>
-                  <span class="letter-body">I kept the first page short so the archive would hold it without complaint.</span>
-                </span>
-              </span>
-              <span class="letter-mid">
-                <span class="letter-mid-text">
-                  <span class="letter-kicker">Leaf Two</span>
-                  <span class="letter-body">The second fold keeps the weather and the unsent part of the note together.</span>
-                </span>
-              </span>
-              <span class="letter-bot">
-                <span class="letter-bot-text">
-                  <span class="letter-kicker">Leaf Three</span>
-                  <span class="letter-body">The last leaf names what was left unsaid, then lets the paper carry it.</span>
-                </span>
-              </span>
-              <span class="trifold-letter__hint">Opened leaf stack</span>
-            </summary>
-          </details>
-        </div>
-      </div>
-      <p class="card__hint">The open mobile view should preserve the same fan-out, only narrowed to the pocket format.</p>
-    </section>
-
-  </div>
+      </section>
+    </div>
   </div>
 </main>
 </body>
