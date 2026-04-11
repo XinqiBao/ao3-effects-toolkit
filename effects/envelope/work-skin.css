@@ -124,6 +124,10 @@
   font-weight: 600;
   line-height: 1.32;
   white-space: pre-line;
+  max-height: 88px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 #workskin .letter-stamp {
@@ -155,6 +159,10 @@
   font-size: 1.08em;
   font-weight: 700;
   text-align: center;
+  max-height: 76px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 #workskin .letter-top,
