@@ -113,13 +113,13 @@
 
 #workskin .letter-from,
 #workskin .letter-to {
-  color: #272a30;
+  color: #35383f;
 }
 
 #workskin .letter-from {
   left: 0;
   top: 0;
-  max-width: 180px;
+  max-width: 220px;
   font-size: 0.95em;
   font-weight: 600;
   line-height: 1.32;
@@ -148,9 +148,10 @@
 }
 
 #workskin .letter-to {
-  top: 94px;
-  left: 26%;
-  right: 10%;
+  top: 92px;
+  left: 22%;
+  right: 8%;
+  max-width: 60%;
   font-size: 1.08em;
   font-weight: 700;
   text-align: center;
@@ -194,25 +195,26 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  max-width: 88%;
-  color: #383c45;
+  max-width: 92%;
+  padding: 0 6%;
+  color: #35383f;
   font-size: 0.84em;
-  line-height: 1.58;
+  line-height: 1.64;
 }
 
 #workskin .letter-top-text {
-  top: -18px;
-  min-height: 150px;
+  top: -20px;
+  min-height: 165px;
 }
 
 #workskin .letter-mid-text {
   top: -6px;
-  min-height: 175px;
+  min-height: 195px;
 }
 
 #workskin .letter-bot-text {
-  top: -12px;
-  min-height: 150px;
+  top: -14px;
+  min-height: 170px;
 }
 
 #workskin .letter-kicker,
@@ -231,6 +233,8 @@
 
 #workskin .letter-body {
   white-space: pre-line;
+  color: #35383f;
+  line-height: 1.62;
 }
 
 #workskin .trifold-letter__hint {
@@ -328,8 +332,9 @@
 
   #workskin .letter-to {
     top: 90px;
-    left: 24%;
-    right: 8%;
+    left: 20%;
+    right: 10%;
+    max-width: 70%;
     font-size: 0.84em;
   }
 
@@ -342,24 +347,26 @@
   #workskin .letter-top-text,
   #workskin .letter-mid-text,
   #workskin .letter-bot-text {
-    max-width: 90%;
-    font-size: 0.72em;
-    line-height: 1.54;
+    max-width: 94%;
+    padding: 0 6%;
+    font-size: 0.74em;
+    line-height: 1.58;
+    color: #35383f;
   }
 
   #workskin .letter-top-text {
-    top: -16px;
-    min-height: 132px;
+    top: -14px;
+    min-height: 140px;
   }
 
   #workskin .letter-mid-text {
     top: -4px;
-    min-height: 150px;
+    min-height: 165px;
   }
 
   #workskin .letter-bot-text {
-    top: -10px;
-    min-height: 130px;
+    top: -12px;
+    min-height: 150px;
   }
 
   #workskin .trifold-letter--hover:hover .letter-cover,
