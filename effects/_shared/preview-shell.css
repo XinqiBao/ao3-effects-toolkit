@@ -54,9 +54,9 @@ body {
   .grid { --cols: 1; }
 }
 
-/* Temporary compatibility: keep `.card*` selectors here until previews adopt `preview-card*`. */
+/* Temporary compatibility: keep `.grid > .card*` selectors only until preview.html files adopt `preview-card*`. */
 .preview-card,
-.card {
+.grid > .card {
   background: rgba(255 250 242 / .78);
   border: 1px solid rgba(103 74 55 / .18);
   border-radius: 20px;
@@ -67,7 +67,7 @@ body {
 }
 
 .preview-card__label,
-.card__label {
+.grid > .card .card__label {
   font-size: .7rem;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -76,7 +76,7 @@ body {
 }
 
 .preview-card__note,
-.card__note {
+.grid > .card .card__note {
   font-size: .82em;
   color: #7b6b5c;
   margin-bottom: 12px;
@@ -84,7 +84,7 @@ body {
 }
 
 .preview-card__stage-shell,
-.card__stage-shell {
+.grid > .card .card__stage-shell {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -98,7 +98,7 @@ body {
 }
 
 .preview-card__prop-zone,
-.card__prop-zone {
+.grid > .card .card__prop-zone {
   min-height: 42px;
   padding: 10px 12px;
   border-radius: 12px;
@@ -111,7 +111,7 @@ body {
 }
 
 .preview-card__stage,
-.card__stage {
+.grid > .card .card__stage {
   display: flex;
   flex: 1;
   align-items: center;
@@ -120,7 +120,7 @@ body {
 }
 
 .preview-card__hint,
-.card__hint {
+.grid > .card .card__hint {
   margin-top: 12px;
   color: #6d5544;
   font-size: .78rem;
@@ -133,13 +133,13 @@ body {
 }
 
 .preview-card--mobile,
-.card--mobile {
+.grid > .card.card--mobile {
   max-width: 390px;
   justify-self: center;
   width: 100%;
 }
 
 .preview-card--mobile [data-capture-frame],
-.card--mobile [data-capture-frame] {
+.grid > .card.card--mobile [data-capture-frame] {
   width: min(100%, 22rem);
 }
