@@ -2,14 +2,14 @@
   position: relative;
   margin: 0 auto;
   max-width: 780px;
-  padding: 1.4em 1.05em 1.7em;
+  padding: 1.4em 1.05em 1.55em;
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.9) 0%, rgba(248, 246, 240, 0.96) 34%, rgba(241, 237, 229, 0.98) 100%);
-  border: 1px solid rgba(145, 140, 130, 0.18);
-  border-radius: 1.85em;
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.95) 0%, rgba(250, 248, 242, 0.92) 40%, rgba(241, 236, 229, 0.95) 90%);
+  border: 1px solid rgba(119, 112, 103, 0.18);
+  border-radius: 1.6em;
   box-shadow:
-    0 18px 38px rgba(67, 64, 58, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    0 14px 30px rgba(44, 41, 38, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
 #workskin .trifold-letter,
@@ -17,10 +17,10 @@
   position: relative;
   display: block;
   margin: 0 auto;
-  width: 600px;
+  width: 520px;
   max-width: 100%;
-  height: 272px;
-  transition: height 1.2s ease;
+  height: 240px;
+  transition: height 1.05s ease;
 }
 
 #workskin .trifold-letter--details {
@@ -76,9 +76,9 @@
 #workskin .letter-mid,
 #workskin .letter-bot {
   box-sizing: border-box;
-  color: #383c45;
-  background: #f5f5f2;
-  box-shadow: rgba(0, 0, 0, 0.063) -5px -3px 10px 1px;
+  color: #2f3135;
+  background: #fdf9f4;
+  box-shadow: rgba(0, 0, 0, 0.08) -4px -2px 10px 1px;
   transition:
     top 1.05s ease,
     left 1.05s ease,
@@ -87,17 +87,17 @@
 }
 
 #workskin .letter-cover {
-  top: -20px;
-  left: -20px;
-  width: 110%;
-  min-height: 242px;
-  max-height: 242px;
-  color: #272a30;
-  background: #e8e8e5;
-  border: 1px solid rgba(56, 60, 69, 0.314);
+  top: -18px;
+  left: -18px;
+  width: 106%;
+  min-height: 220px;
+  max-height: 220px;
+  color: #2f3135;
+  background: #f4f2ee;
+  border: 1px solid rgba(82, 78, 73, 0.18);
   box-shadow:
-    rgba(0, 0, 0, 0.063) -2px 1px 5px 1px,
-    rgba(0, 0, 0, 0.063) 1px -2px 5px 1px;
+    rgba(0, 0, 0, 0.1) -3px 2px 8px 1px,
+    rgba(0, 0, 0, 0.08) 2px -2px 10px 0px;
   z-index: 8;
 }
 
@@ -127,31 +127,31 @@
 }
 
 #workskin .letter-stamp {
-  top: -6px;
-  right: -4%;
-  width: 108px;
-  height: 122px;
+  top: -4px;
+  right: 2%;
+  width: 92px;
+  height: 102px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 244, 241, 0.98) 100%),
-    linear-gradient(135deg, rgba(72, 130, 214, 0.22) 0%, rgba(214, 126, 72, 0.2) 100%);
-  border: 1px solid rgba(154, 154, 154, 0.22);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 248, 245, 0.98) 100%),
+    linear-gradient(135deg, rgba(74, 136, 218, 0.24) 0%, rgba(214, 126, 72, 0.22) 100%);
+  border: 1px solid rgba(132, 132, 132, 0.28);
   border-radius: 4px;
-  box-shadow: 0 10px 18px rgba(46, 46, 46, 0.12);
+  box-shadow: 0 8px 14px rgba(32, 32, 32, 0.16);
   color: #4f5561;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.72em;
+  font-size: 0.78em;
   font-weight: bold;
-  letter-spacing: 0.18em;
-  line-height: 122px;
+  letter-spacing: 0.2em;
+  line-height: 102px;
   text-align: center;
-  transform: rotate(-4deg);
+  transform: rotate(-3deg);
 }
 
 #workskin .letter-to {
-  top: 108px;
-  left: 29%;
-  right: 8%;
-  font-size: 1.1em;
+  top: 94px;
+  left: 26%;
+  right: 10%;
+  font-size: 1.08em;
   font-weight: 700;
   text-align: center;
 }
@@ -162,28 +162,28 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 202px;
+  height: 168px;
 }
 
 #workskin .letter-top {
-  border-top: 1px solid rgba(56, 60, 69, 0.314);
-  border-left: 1px solid rgba(56, 60, 69, 0.314);
-  border-right: 1px solid rgba(56, 60, 69, 0.314);
+  border-top: 1px solid rgba(89, 84, 77, 0.28);
+  border-left: 1px solid rgba(89, 84, 77, 0.28);
+  border-right: 1px solid rgba(89, 84, 77, 0.28);
   border-radius: 4px 4px 0 0;
   z-index: 7;
 }
 
 #workskin .letter-mid {
-  border-left: 1px solid rgba(56, 60, 69, 0.314);
-  border-right: 1px solid rgba(56, 60, 69, 0.314);
+  border-left: 1px solid rgba(92, 87, 80, 0.26);
+  border-right: 1px solid rgba(92, 87, 80, 0.26);
   z-index: 6;
 }
 
 #workskin .letter-bot {
   left: 0.1px;
-  border-bottom: 1px solid rgba(56, 60, 69, 0.314);
-  border-left: 1px solid rgba(56, 60, 69, 0.314);
-  border-right: 1px solid rgba(56, 60, 69, 0.314);
+  border-bottom: 1px solid rgba(94, 89, 83, 0.26);
+  border-left: 1px solid rgba(94, 89, 83, 0.26);
+  border-right: 1px solid rgba(94, 89, 83, 0.26);
   border-radius: 0 0 4px 4px;
   z-index: 5;
 }
@@ -201,18 +201,18 @@
 }
 
 #workskin .letter-top-text {
-  top: -26px;
-  min-height: 170px;
+  top: -18px;
+  min-height: 150px;
 }
 
 #workskin .letter-mid-text {
-  top: -10px;
-  min-height: 210px;
+  top: -6px;
+  min-height: 175px;
 }
 
 #workskin .letter-bot-text {
-  top: -18px;
-  min-height: 160px;
+  top: -12px;
+  min-height: 150px;
 }
 
 #workskin .letter-kicker,
@@ -248,12 +248,12 @@
 
 #workskin .trifold-letter--hover:hover,
 #workskin .trifold-letter--details[open] {
-  height: 660px;
+  height: 540px;
 }
 
 #workskin .trifold-letter--hover:hover .letter-cover,
 #workskin .trifold-letter--details[open] .letter-cover {
-  top: -100px;
+  top: -80px;
   left: 0;
   transform: rotate(5deg);
   z-index: 0;
@@ -262,22 +262,22 @@
 #workskin .trifold-letter--hover:hover .letter-top,
 #workskin .trifold-letter--details[open] .letter-top {
   top: 0;
-  left: -20px;
-  transform: skew(5deg);
+  left: -16px;
+  transform: skew(4deg);
 }
 
 #workskin .trifold-letter--hover:hover .letter-mid,
 #workskin .trifold-letter--details[open] .letter-mid {
-  top: 200px;
-  left: -20px;
-  transform: skew(-5deg);
+  top: 175px;
+  left: -18px;
+  transform: skew(-4deg);
 }
 
 #workskin .trifold-letter--hover:hover .letter-bot,
 #workskin .trifold-letter--details[open] .letter-bot {
-  top: 400px;
-  left: -20px;
-  transform: skew(5deg);
+  top: 350px;
+  left: -16px;
+  transform: skew(4deg);
 }
 
 #workskin .trifold-letter--details[open] .trifold-letter__hint {
@@ -292,7 +292,7 @@
 
   #workskin .trifold-letter,
   #workskin .trifold-letter--details {
-    height: 224px;
+    height: 220px;
   }
 
   #workskin .trifold-letter--hover:hover,
@@ -302,9 +302,9 @@
 
   #workskin .letter-cover {
     top: -14px;
-    left: -14px;
-    min-height: 196px;
-    max-height: 196px;
+    left: -12px;
+    min-height: 200px;
+    max-height: 200px;
   }
 
   #workskin .letter-cover-text {
@@ -319,24 +319,24 @@
 
   #workskin .letter-stamp {
     top: -2px;
-    right: -2%;
-    width: 76px;
-    height: 88px;
-    font-size: 0.56em;
-    line-height: 88px;
+    right: 3%;
+    width: 78px;
+    height: 92px;
+    font-size: 0.64em;
+    line-height: 92px;
   }
 
   #workskin .letter-to {
-    top: 84px;
-    left: 27%;
-    right: 6%;
-    font-size: 0.82em;
+    top: 90px;
+    left: 24%;
+    right: 8%;
+    font-size: 0.84em;
   }
 
   #workskin .letter-top,
   #workskin .letter-mid,
   #workskin .letter-bot {
-    height: 164px;
+    height: 152px;
   }
 
   #workskin .letter-top-text,
@@ -348,42 +348,42 @@
   }
 
   #workskin .letter-top-text {
-    top: -18px;
-    min-height: 138px;
+    top: -16px;
+    min-height: 132px;
   }
 
   #workskin .letter-mid-text {
-    top: -6px;
-    min-height: 170px;
+    top: -4px;
+    min-height: 150px;
   }
 
   #workskin .letter-bot-text {
-    top: -12px;
-    min-height: 140px;
+    top: -10px;
+    min-height: 130px;
   }
 
   #workskin .trifold-letter--hover:hover .letter-cover,
   #workskin .trifold-letter--details[open] .letter-cover {
-    top: -74px;
+    top: -70px;
   }
 
   #workskin .trifold-letter--hover:hover .letter-top,
   #workskin .trifold-letter--details[open] .letter-top {
     left: -12px;
-    transform: skew(4deg);
+    transform: skew(3deg);
   }
 
   #workskin .trifold-letter--hover:hover .letter-mid,
   #workskin .trifold-letter--details[open] .letter-mid {
     top: 156px;
     left: -12px;
-    transform: skew(-4deg);
+    transform: skew(-3.5deg);
   }
 
   #workskin .trifold-letter--hover:hover .letter-bot,
   #workskin .trifold-letter--details[open] .letter-bot {
     top: 312px;
-    left: -12px;
-    transform: skew(4deg);
+    left: -10px;
+    transform: skew(3deg);
   }
 }
