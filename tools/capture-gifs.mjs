@@ -22,7 +22,7 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const root = join(__dir, '..');
 
 async function captureEffect(page, name, cfg) {
-  const { captureSelector, hoverSelector, toggleSelector, openClass } = cfg;
+  const { captureSelector, hoverSelector } = cfg;
   const fps = cfg.fps;
   const durationMs = cfg.durationMs;
   const interval = Math.round(1000 / fps);
@@ -39,31 +39,24 @@ async function captureEffect(page, name, cfg) {
   const clip = await measureCaptureClip(page, {
     captureSelector,
     hoverSelector,
-    toggleSelector,
-    openClass,
     measureDurationMs: cfg.measureDurationMs,
     sampleIntervalMs: cfg.sampleIntervalMs,
     resetMs: cfg.resetMs ?? interval,
   });
   await resetCaptureState(page, pageUrl, cfg.settleMs);
-  const interactionSelector = toggleSelector ?? hoverSelector;
-  const interactionEl = interactionSelector ? page.locator(interactionSelector).first() : null;
+  const interactionEl = hoverSelector ? page.locator(hoverSelector).first() : null;
   if (interactionEl) {
     await interactionEl.waitFor({ state: 'visible' });
   }
 
   for (let i = 0; i < totalFrames; i++) {
     if (i === hoverInFrame) {
-      if (toggleSelector && openClass) {
-        await setPreviewOpenState(page, toggleSelector, openClass, true);
-      } else if (interactionEl) {
+      if (interactionEl) {
         await interactionEl.hover({ force: true });
       }
     }
     if (i === hoverOutFrame) {
-      if (toggleSelector && openClass) {
-        await setPreviewOpenState(page, toggleSelector, openClass, false);
-      } else {
+      if (interactionEl) {
         await page.mouse.move(0, 0);
       }
     }
