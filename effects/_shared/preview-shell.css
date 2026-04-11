@@ -54,6 +54,7 @@ body {
   .grid { --cols: 1; }
 }
 
+.preview-card,
 .card {
   background: rgba(255 250 242 / .78);
   border: 1px solid rgba(103 74 55 / .18);
@@ -64,6 +65,7 @@ body {
   flex-direction: column;
 }
 
+.preview-card__label,
 .card__label {
   font-size: .7rem;
   letter-spacing: .18em;
@@ -72,6 +74,7 @@ body {
   margin-bottom: 6px;
 }
 
+.preview-card__note,
 .card__note {
   font-size: .82em;
   color: #7b6b5c;
@@ -79,6 +82,7 @@ body {
   line-height: 1.5;
 }
 
+.preview-card__stage-shell,
 .card__stage-shell {
   display: flex;
   flex: 1;
@@ -104,6 +108,7 @@ body {
   text-transform: uppercase;
 }
 
+.preview-card__stage,
 .card__stage {
   display: flex;
   flex: 1;
@@ -124,12 +129,14 @@ body {
   margin: 0 auto;
 }
 
+.preview-card--mobile,
 .card--mobile {
   max-width: 390px;
   justify-self: center;
   width: 100%;
 }
 
+.preview-card--mobile [data-capture-frame],
 .card--mobile [data-capture-frame] {
   width: min(100%, 22rem);
 }
