@@ -1,42 +1,3 @@
-#workskin .preview-grid > .preview-card {
-  margin-bottom: 1.2em;
-}
-
-#workskin .demo-block {
-  margin: 0 auto 3.5em;
-  max-width: 680px;
-}
-
-#workskin .preview-card {
-  padding: 1.1em 1em 1.3em;
-  background: rgba(255, 253, 249, 0.86);
-  border: 1px solid rgba(117, 103, 86, 0.14);
-  border-radius: 1.4em;
-}
-
-#workskin .preview-card--mobile {
-  max-width: 430px;
-  margin: 0 auto;
-}
-
-#workskin .preview-note {
-  margin: 0 0 1.1em;
-  color: #716457;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.8em;
-  line-height: 1.55;
-}
-
-#workskin .demo-label {
-  margin: 0 0 0.9em;
-  color: #6f6253;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.78em;
-  font-weight: bold;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
 #workskin .letter-stage {
   position: relative;
   margin: 0 auto;
@@ -286,14 +247,12 @@
 }
 
 #workskin .trifold-letter--hover:hover,
-#workskin .trifold-letter--details[open],
-#workskin .trifold-letter--preview-open {
+#workskin .trifold-letter--details[open] {
   height: 660px;
 }
 
 #workskin .trifold-letter--hover:hover .letter-cover,
-#workskin .trifold-letter--details[open] .letter-cover,
-#workskin .trifold-letter--preview-open .letter-cover {
+#workskin .trifold-letter--details[open] .letter-cover {
   top: -100px;
   left: 0;
   transform: rotate(5deg);
@@ -301,31 +260,27 @@
 }
 
 #workskin .trifold-letter--hover:hover .letter-top,
-#workskin .trifold-letter--details[open] .letter-top,
-#workskin .trifold-letter--preview-open .letter-top {
+#workskin .trifold-letter--details[open] .letter-top {
   top: 0;
   left: -20px;
   transform: skew(5deg);
 }
 
 #workskin .trifold-letter--hover:hover .letter-mid,
-#workskin .trifold-letter--details[open] .letter-mid,
-#workskin .trifold-letter--preview-open .letter-mid {
+#workskin .trifold-letter--details[open] .letter-mid {
   top: 200px;
   left: -20px;
   transform: skew(-5deg);
 }
 
 #workskin .trifold-letter--hover:hover .letter-bot,
-#workskin .trifold-letter--details[open] .letter-bot,
-#workskin .trifold-letter--preview-open .letter-bot {
+#workskin .trifold-letter--details[open] .letter-bot {
   top: 400px;
   left: -20px;
   transform: skew(5deg);
 }
 
-#workskin .trifold-letter--details[open] .trifold-letter__hint,
-#workskin .trifold-letter--preview-open .trifold-letter__hint {
+#workskin .trifold-letter--details[open] .trifold-letter__hint {
   color: rgba(77, 79, 86, 0.74);
 }
 
@@ -341,8 +296,7 @@
   }
 
   #workskin .trifold-letter--hover:hover,
-  #workskin .trifold-letter--details[open],
-  #workskin .trifold-letter--preview-open {
+  #workskin .trifold-letter--details[open] {
     height: 512px;
   }
 
@@ -409,29 +363,25 @@
   }
 
   #workskin .trifold-letter--hover:hover .letter-cover,
-  #workskin .trifold-letter--details[open] .letter-cover,
-  #workskin .trifold-letter--preview-open .letter-cover {
+  #workskin .trifold-letter--details[open] .letter-cover {
     top: -74px;
   }
 
   #workskin .trifold-letter--hover:hover .letter-top,
-  #workskin .trifold-letter--details[open] .letter-top,
-  #workskin .trifold-letter--preview-open .letter-top {
+  #workskin .trifold-letter--details[open] .letter-top {
     left: -12px;
     transform: skew(4deg);
   }
 
   #workskin .trifold-letter--hover:hover .letter-mid,
-  #workskin .trifold-letter--details[open] .letter-mid,
-  #workskin .trifold-letter--preview-open .letter-mid {
+  #workskin .trifold-letter--details[open] .letter-mid {
     top: 156px;
     left: -12px;
     transform: skew(-4deg);
   }
 
   #workskin .trifold-letter--hover:hover .letter-bot,
-  #workskin .trifold-letter--details[open] .letter-bot,
-  #workskin .trifold-letter--preview-open .letter-bot {
+  #workskin .trifold-letter--details[open] .letter-bot {
     top: 312px;
     left: -12px;
     transform: skew(4deg);

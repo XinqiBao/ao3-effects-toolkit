@@ -115,21 +115,6 @@
 }
 
 /* ======================================== */
-/* PREVIEW mode — forced open for validation */
-/* ======================================== */
-
-#workskin .secret-divider--preview-open .secret-divider__ornament {
-  color: #a08c74;
-  transform: scale(1.06);
-  letter-spacing: 0.5em;
-}
-
-#workskin .secret-divider--preview-open .secret-divider__text {
-  max-height: 15em;
-  opacity: 1;
-}
-
-/* ======================================== */
 /* FLANKING ornaments (::before / ::after)  */
 /* ======================================== */
 
@@ -158,8 +143,6 @@
 #workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::before,
 #workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::after,
 #workskin .secret-divider--with-flanks.secret-divider--details[open] .secret-divider__ornament::before,
-#workskin .secret-divider--with-flanks.secret-divider--details[open] .secret-divider__ornament::after,
-#workskin .secret-divider--with-flanks.secret-divider--preview-open .secret-divider__ornament::before,
-#workskin .secret-divider--with-flanks.secret-divider--preview-open .secret-divider__ornament::after {
+#workskin .secret-divider--with-flanks.secret-divider--details[open] .secret-divider__ornament::after {
   color: #c9b89e;
 }

@@ -14,18 +14,16 @@ import { mkdirSync, rmSync, existsSync } from 'fs';
 import { once } from 'events';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { measureCaptureClip, resetCaptureState, setPreviewOpenState } from './capture-gif-clip.mjs';
-import { EFFECTS, FAMILY_PRESETS } from './capture-gif-config.mjs';
+import { measureCaptureClip, resetCaptureState } from './capture-gif-clip.mjs';
+import { EFFECTS } from './capture-gif-config.mjs';
 import { startCaptureServer } from './capture-server.mjs';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const root = join(__dir, '..');
-const PREVIEW_CAPTURE_SELECTOR = '[data-panel="desktop-closed"] [data-capture-frame]';
 
 async function captureEffect(page, name, cfg) {
-  const preset = FAMILY_PRESETS[cfg.family];
-  const { hoverSelector, toggleSelector, openClass } = cfg;
-  const fps = cfg.fps ?? preset.fps;
+  const { captureSelector, hoverSelector } = cfg;
+  const fps = cfg.fps;
   const durationMs = cfg.durationMs;
   const interval = Math.round(1000 / fps);
   const totalFrames = Math.floor(durationMs / interval);
@@ -37,35 +35,28 @@ async function captureEffect(page, name, cfg) {
   mkdirSync(framesDir, { recursive: true });
 
   const pageUrl = `http://localhost:${cfg.port}/effects/${name}/preview.html`;
-  await resetCaptureState(page, pageUrl, preset.settleMs);
+  await resetCaptureState(page, pageUrl, cfg.settleMs);
   const clip = await measureCaptureClip(page, {
-    captureSelector: cfg.captureSelector ?? PREVIEW_CAPTURE_SELECTOR,
+    captureSelector,
     hoverSelector,
-    toggleSelector,
-    openClass,
-    measureDurationMs: cfg.measureDurationMs ?? preset.measureDurationMs,
-    sampleIntervalMs: cfg.sampleIntervalMs ?? preset.sampleIntervalMs,
+    measureDurationMs: cfg.measureDurationMs,
+    sampleIntervalMs: cfg.sampleIntervalMs,
     resetMs: cfg.resetMs ?? interval,
   });
-  await resetCaptureState(page, pageUrl, preset.settleMs);
-  const interactionSelector = toggleSelector ?? hoverSelector;
-  const interactionEl = interactionSelector ? page.locator(interactionSelector).first() : null;
+  await resetCaptureState(page, pageUrl, cfg.settleMs);
+  const interactionEl = hoverSelector ? page.locator(hoverSelector).first() : null;
   if (interactionEl) {
     await interactionEl.waitFor({ state: 'visible' });
   }
 
   for (let i = 0; i < totalFrames; i++) {
     if (i === hoverInFrame) {
-      if (toggleSelector && openClass) {
-        await setPreviewOpenState(page, toggleSelector, openClass, true);
-      } else if (interactionEl) {
+      if (interactionEl) {
         await interactionEl.hover({ force: true });
       }
     }
     if (i === hoverOutFrame) {
-      if (toggleSelector && openClass) {
-        await setPreviewOpenState(page, toggleSelector, openClass, false);
-      } else {
+      if (interactionEl) {
         await page.mouse.move(0, 0);
       }
     }
@@ -74,7 +65,7 @@ async function captureEffect(page, name, cfg) {
     await page.waitForTimeout(interval);
   }
 
-  return { framesDir, fps, outputWidth: preset.outputWidth };
+  return { framesDir, fps, outputWidth: cfg.outputWidth };
 }
 
 function buildGif(framesDir, outputPath, fps, outputWidth) {
@@ -105,10 +96,9 @@ async function main() {
 
   try {
     for (const [name, cfg] of Object.entries(effects)) {
-      const preset = FAMILY_PRESETS[cfg.family];
       process.stdout.write(`Capturing ${name}...`);
       const context = await browser.newContext({
-        viewport: preset.viewport,
+        viewport: cfg.viewport,
         deviceScaleFactor: 2,
       });
       const page = await context.newPage();

@@ -1,75 +1,57 @@
 # Repository Operations
 
-This document is the canonical operational reference for maintaining this repository.
-
-## Document Map
-
-- `README.md` — project overview and effect index
-- `docs/verification.md` — local verification workflow and limits
-- `docs/ao3-live-validation.md` — validation against a real AO3 account
-- `docs/compatibility.md` — confirmed AO3 support and known restrictions
-- `docs/maintainers/effect-authoring.md` — effect authoring contract
-- `docs/maintainers/preview-principles.md` — preview design constraints
-- `docs/maintainers/contribution-workflow.md` — repository maintenance workflow
-- `docs/history/project-evolution.md` — public history summary
-- `docs/decisions/` — architecture decisions
+This document is the canonical operational map for maintaining this repository.
 
 ## Repository Layout
 
 - `effects/`
   - `_shared/preview-shell.css` — shared local preview shell
-  - `<name>/` — one published effect per directory
-  - each effect directory includes `work-skin.css`, `hover-template.html`, `tap-template.html`, `smoke-test.html`, `preview.html`, and `guide.md`
+  - `<name>/`
+    - `work-skin.css` — AO3-facing CSS
+    - `example.html` — AO3-facing example blocks
+    - `preview.html` — local preview page
+    - `guide.md` — short usage guide
 - `assets/`
   - `demos/` — repository demo GIFs stored in Git LFS
   - `preview-media/` — shared preview-only images stored in Git LFS
-  - `*.png` — repository screenshots and validation captures stored in Git LFS
-- `docs/`
-  - cross-effect documentation, maintainer guidance, and project history
-- `tools/`
-  - repository automation scripts such as `verify.mjs` and `capture-gifs.mjs`
-- `local/`, `.context/`
-  - gitignored local notes, task state, and private artifacts
-- `.playwright-mcp/`, `.playwright-cli/`
-  - gitignored browser automation artifacts
+- `docs/` — public documentation and maintainer guidance
+- `tools/` — GIF capture scripts and their tests
+- `.context/`, `local/` — gitignored local process notes and private artifacts
 
 ## Core Repository Rules
 
-- Keep published effect behavior CSS-only. AO3 work content does not support JavaScript.
-- Scope all AO3 work-skin selectors under `#workskin`.
-- Offer both interaction paths where applicable:
-  - desktop: `:hover`
-  - touch: `<details>/<summary>`
-- Treat work skins as an enhancement layer. The underlying content still needs to read sensibly without styling.
-- Keep shared preview styling in `effects/_shared/preview-shell.css`; effect-specific visuals belong in the published effect CSS, not in preview-only overrides.
+- Keep published effect behavior CSS-only.
+- Scope all AO3-facing selectors under `#workskin`.
+- Treat work skins as an enhancement layer; underlying text still needs to read sensibly without styling.
+- Keep preview-only helpers out of `work-skin.css` and `example.html`.
+- Keep shared preview framing in `effects/_shared/preview-shell.css`.
 
 ## Maintenance Expectations
 
 ### When editing `effects/<name>/work-skin.css`
 
 - preserve the `#workskin` prefix
-- run local verification
-- if AO3-facing behavior changed, run the live validation workflow on AO3 before considering the change fully verified
+- run a local preview check
+- if AO3-facing behavior changed, run the live AO3 validation workflow before treating the change as fully verified
 
-### When editing `effects/<name>/hover-template.html`, `tap-template.html`, or `smoke-test.html`
+### When editing `effects/<name>/example.html`
 
 - keep class names aligned with `work-skin.css`
-- run local verification
-- use AO3 live validation when the edited HTML is meant for publishing or smoke testing on AO3
+- keep both hover and tap blocks only when the effect genuinely supports both paths
+- use AO3 live validation when the changed block is intended for publishing
 
 ### When editing `effects/<name>/preview.html`
 
-- confirm the preview still demonstrates the intended closed/open desktop and mobile states
-- keep the preview shell lightweight and consistent across effects
-- update public demo media only when the repository-facing demonstration actually changed
+- keep the preview focused on the effect itself
+- keep preview-only classes out of published artifacts
+- keep the shared shell lightweight and consistent across effects
 
-### When editing repository docs
+### When editing `tools/`
 
-- update cross-references in the affected docs
-- keep project-facing docs neutral with respect to who is operating the repository
-- keep tool-specific discovery files thin and point them back to the canonical docs under `docs/`
+- keep tooling focused on GIF capture and committed helper tests
+- avoid rebuilding a broad repository verification framework
 
-## Generated and Local-Only Paths
+## Generated And Local-Only Paths
 
 Do not commit content from these paths:
 
@@ -81,9 +63,8 @@ Do not commit content from these paths:
 - `node_modules/`
 - `artifacts/`
 
-## Known Repository Caveats
+## Known Caveats
 
-- `npm test` is the standard entrypoint for local repository verification. It runs the committed unit tests and `node tools/verify.mjs`.
-- `tools/verify.mjs` is a local structure and compatibility check. It does not prove that AO3 will accept or render a change correctly.
-- AO3 live validation depends on a real AO3 account, a current login session, and AO3's Cloudflare gate resolving successfully.
-- The repository includes browser-capture tooling for demo GIFs, but there is no committed end-to-end AO3 publish automation.
+- `npm test` covers committed GIF-tooling tests only.
+- Passing local tooling tests does not prove AO3 will accept or render a change correctly.
+- AO3 live validation still depends on a real AO3 account, a current login session, and AO3's Cloudflare gate resolving successfully.

@@ -7,279 +7,99 @@
   <link rel="stylesheet" href="../_shared/preview-shell.css">
   <link rel="stylesheet" href="work-skin.css">
   <style>
-    .card__prop-zone {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    #workskin .preview-card__stage-shell {
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.7), transparent 42%),
+        linear-gradient(180deg, #f4f2f6 0%, #ebe8ef 100%);
     }
 
-    .card__prop-zone::before {
-      content: "";
-      display: block;
-      width: 38px;
-      height: 10px;
-      border-radius: 999px;
-      background: #7d8993;
-      box-shadow: 14px 0 0 #a8b0b7, 28px 0 0 #cfd5da;
-      flex: 0 0 auto;
-    }
-
-    #workskin [data-capture-frame] {
-      overflow: hidden;
-      box-shadow:
-        0 24px 42px rgba(86, 60, 43, 0.16),
-        0 8px 16px rgba(86, 60, 43, 0.09);
+    #workskin .preview-card__stage {
+      min-height: 420px;
     }
 
     #workskin .chat-conversation {
       border-color: rgba(75, 57, 44, 0.14);
       background: linear-gradient(180deg, #f6f5f8 0%, #f0eff4 100%);
     }
-
-    #workskin .chat-preview {
-      min-height: 72px;
-      padding: 14px 18px;
-      background: linear-gradient(180deg, #fffefc 0%, #eceaf1 100%);
-    }
-
-    #workskin .chat-preview__text {
-      padding-right: 12px;
-    }
-
-    #workskin .chat-preview__msg {
-      display: block;
-      font-size: 0.98rem;
-      letter-spacing: 0.01em;
-    }
-
-    #workskin .chat-preview__subline {
-      display: block;
-      margin-top: 4px;
-      color: #736a66;
-      font-size: 0.78rem;
-      line-height: 1.35;
-    }
-
-    #workskin .chat-preview__chevron {
-      width: 12px;
-      height: 12px;
-      margin-left: 14px;
-      background: linear-gradient(135deg, transparent 50%, #7d7974 50%);
-    }
-
-    #workskin .chat-conversation__stack {
-      background: linear-gradient(180deg, rgba(252, 252, 253, 0.92), rgba(243, 243, 247, 0.98));
-    }
-
-    #workskin .chat-bubble {
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
-    }
   </style>
 </head>
 <body>
 <main class="shell">
   <section class="hero">
-    <p class="hero__label">Curated Archive / Archive Standard</p>
+    <p class="hero__label">AO3 Effect Preview</p>
     <h1 class="hero__title">Chat Messages</h1>
-    <p class="hero__desc">A pinned thread that opens from one unread line into a fuller exchange.</p>
+    <p class="hero__desc">A collapsed preview bar that expands into a longer exchange.</p>
   </section>
   <div id="workskin">
-  <div class="grid">
-
-    <section class="card" data-panel="desktop-closed" data-preview-family="standard">
-      <p class="card__label">Desktop / Hover · Closed</p>
-      <p class="card__note">The preview bar should read like a real unread thread instead of a light placeholder.</p>
-      <div class="card__stage-shell">
-        <p class="card__prop-zone">Pinned Thread / Platform Note / Before Reveal</p>
-        <div class="card__stage" data-stage>
-          <div class="chat-conversation chat-conversation--hover" data-capture-frame>
-            <div class="chat-preview">
-              <span class="chat-preview__text">
-                <span class="chat-preview__msg">Mia · platform 3</span>
-                <span class="chat-preview__subline">you left before i said the actual thing</span>
-              </span>
-              <span class="chat-preview__chevron"></span>
-            </div>
-            <div class="chat-conversation__stack">
-              <div class="chat-meta">
-                <span class="chat-timestamp">11:08 PM</span>
-                <div class="chat-bubbles">
-                  <span class="chat-bubble chat-bubble--received">Did you make it home?</span>
-                  <span class="chat-bubble chat-bubble--received">The platform feels wrong without your yellow umbrella.</span>
-                </div>
-              </div>
-              <div class="chat-meta chat-meta--sent">
-                <span class="chat-timestamp">11:11 PM</span>
-                <div class="chat-bubbles">
-                  <span class="chat-bubble chat-bubble--sent">Home. Still cold.</span>
-                  <span class="chat-bubble chat-bubble--sent">You had one more sentence, didn&#39;t you?</span>
-                </div>
-              </div>
-              <div class="chat-meta">
-                <span class="chat-timestamp">11:14 PM</span>
-                <div class="chat-bubbles">
-                  <span class="chat-bubble chat-bubble--received">I did.</span>
-                  <span class="chat-bubble chat-bubble--received">Hover if you want the part I couldn&#39;t say out loud.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="card__hint">Hover to trade the pinned preview bar for the full confession thread.</p>
-    </section>
-
-    <section class="card" data-panel="desktop-open" data-preview-family="standard">
-      <p class="card__label">Desktop / Hover · Open</p>
-      <p class="card__note">Expanded state swaps the bar for a denser exchange without feeling adrift inside the card.</p>
-      <div class="card__stage-shell">
-        <p class="card__prop-zone">Pinned Thread / Platform Note / Opened Exchange</p>
-        <div class="card__stage" data-stage>
-          <div class="chat-conversation chat-conversation--preview-open" data-capture-frame>
-            <div class="chat-preview">
-              <span class="chat-preview__text">
-                <span class="chat-preview__msg">Mia · platform 3</span>
-                <span class="chat-preview__subline">you left before i said the actual thing</span>
-              </span>
-              <span class="chat-preview__chevron"></span>
-            </div>
-            <div class="chat-conversation__stack">
-              <div class="chat-meta">
-                <span class="chat-timestamp">11:08 PM</span>
-                <div class="chat-bubbles">
-                  <span class="chat-bubble chat-bubble--received">Did you make it home?</span>
-                  <span class="chat-bubble chat-bubble--received">The platform feels wrong without your yellow umbrella.</span>
-                </div>
-              </div>
-              <div class="chat-meta chat-meta--sent">
-                <span class="chat-timestamp">11:11 PM</span>
-                <div class="chat-bubbles">
-                  <span class="chat-bubble chat-bubble--sent">Home. Still cold.</span>
-                  <span class="chat-bubble chat-bubble--sent">You had one more sentence, didn&#39;t you?</span>
-                </div>
-              </div>
-              <div class="chat-meta">
-                <span class="chat-timestamp">11:14 PM</span>
-                <div class="chat-bubbles">
-                  <span class="chat-bubble chat-bubble--received">I kept thinking if I asked you to stay, maybe you would.</span>
-                  <span class="chat-bubble chat-bubble--received">Not forever. Just long enough for me to be brave.</span>
-                </div>
-              </div>
-              <div class="chat-meta chat-meta--sent">
-                <span class="chat-timestamp">11:16 PM</span>
-                <div class="chat-bubbles">
-                  <span class="chat-bubble chat-bubble--sent">Mia.</span>
-                </div>
-              </div>
-              <div class="chat-meta">
-                <span class="chat-timestamp">11:17 PM</span>
-                <div class="chat-bubbles">
-                  <span class="chat-bubble chat-bubble--received">I know. Bad timing.</span>
-                  <span class="chat-bubble chat-bubble--received">But at least it&#39;s finally true.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="card__hint">Open desktop preview should feel grounded and fully staged, not like a small component in empty space.</p>
-    </section>
-
-    <section class="card card--mobile" data-panel="mobile-closed" data-preview-family="standard">
-      <p class="card__label">Mobile / Tap · Closed</p>
-      <p class="card__note">Touch entry keeps the same capture frame and enough visual weight on a narrow panel.</p>
-      <div class="card__stage-shell">
-        <p class="card__prop-zone">Pinned Draft / Narrow Screen / Before Reveal</p>
-        <div class="card__stage" data-stage>
-          <details class="chat-conversation chat-conversation--details" data-capture-frame>
-            <summary class="chat-conversation__tapper">
+    <div class="grid">
+      <section class="preview-card preview-card--hover">
+        <p class="preview-card__label">Hover</p>
+        <p class="preview-card__note">Desktop-first interaction. Hover the bar to reveal the thread.</p>
+        <div class="preview-card__stage-shell">
+          <div class="preview-card__stage">
+            <div class="chat-conversation chat-conversation--hover">
               <div class="chat-preview">
-                <span class="chat-preview__text">
-                  <span class="chat-preview__msg">Mia · unread draft</span>
-                  <span class="chat-preview__subline">tap for the message i should have sent sooner</span>
-                </span>
-                <span class="chat-preview__chevron"></span>
-              </div>
-              <div class="chat-conversation__stack">
-                <div class="chat-meta">
-                  <span class="chat-timestamp">11:14 PM</span>
-                  <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--received">I wrote it out three times.</span>
-                    <span class="chat-bubble chat-bubble--received">Tap if you want the version I kept.</span>
-                  </div>
-                </div>
-                <div class="chat-meta chat-meta--sent">
-                  <span class="chat-timestamp">11:15 PM</span>
-                  <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--sent">Okay.</span>
-                  </div>
-                </div>
-              </div>
-            </summary>
-          </details>
-        </div>
-      </div>
-      <p class="card__hint">Tap should expand from the same frame instead of shifting the rest of the card.</p>
-    </section>
-
-    <section class="card card--mobile" data-panel="mobile-open" data-preview-family="standard">
-      <p class="card__label">Mobile / Tap · Open</p>
-      <p class="card__note">Expanded mobile state stays legible without relying on extra blank space around it.</p>
-      <div class="card__stage-shell">
-        <p class="card__prop-zone">Pinned Draft / Narrow Screen / Opened Exchange</p>
-        <div class="card__stage" data-stage>
-          <details class="chat-conversation chat-conversation--details" open data-capture-frame>
-            <summary class="chat-conversation__tapper">
-              <div class="chat-preview">
-                <span class="chat-preview__text">
-                  <span class="chat-preview__msg">Mia · unread draft</span>
-                  <span class="chat-preview__subline">tap for the message i should have sent sooner</span>
-                </span>
+                <span class="chat-preview__text"><span class="chat-preview__msg">Mia</span></span>
                 <span class="chat-preview__chevron"></span>
               </div>
               <div class="chat-conversation__stack">
                 <div class="chat-meta">
                   <span class="chat-timestamp">11:08 PM</span>
                   <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--received">Made it home?</span>
+                    <span class="chat-bubble chat-bubble--received">Did you make it home?</span>
                   </div>
                 </div>
                 <div class="chat-meta chat-meta--sent">
                   <span class="chat-timestamp">11:11 PM</span>
                   <div class="chat-bubbles">
                     <span class="chat-bubble chat-bubble--sent">Barely.</span>
-                    <span class="chat-bubble chat-bubble--sent">You sounded like you had one more thing.</span>
+                    <span class="chat-bubble chat-bubble--sent">You had one more sentence, didn't you?</span>
                   </div>
                 </div>
                 <div class="chat-meta">
                   <span class="chat-timestamp">11:14 PM</span>
                   <div class="chat-bubbles">
                     <span class="chat-bubble chat-bubble--received">I did.</span>
-                    <span class="chat-bubble chat-bubble--received">I wanted to ask you to stay until the rain stopped.</span>
-                  </div>
-                </div>
-                <div class="chat-meta chat-meta--sent">
-                  <span class="chat-timestamp">11:16 PM</span>
-                  <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--sent">You can still ask.</span>
-                  </div>
-                </div>
-                <div class="chat-meta">
-                  <span class="chat-timestamp">11:17 PM</span>
-                  <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--received">Then stay.</span>
-                    <span class="chat-bubble chat-bubble--received">Just a little longer.</span>
+                    <span class="chat-bubble chat-bubble--received">Hover if you want the rest of it.</span>
                   </div>
                 </div>
               </div>
-            </summary>
-          </details>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="card__hint">Open mobile preview keeps the thread readable at one-thumb width.</p>
-    </section>
+      </section>
 
-  </div>
+      <section class="preview-card preview-card--tap preview-card--mobile">
+        <p class="preview-card__label">Tap</p>
+        <p class="preview-card__note">Touch-first interaction. Tap the summary to open the same conversation.</p>
+        <div class="preview-card__stage-shell">
+          <div class="preview-card__stage">
+            <details class="chat-conversation chat-conversation--details">
+              <summary class="chat-conversation__tapper">
+                <div class="chat-preview">
+                  <span class="chat-preview__text"><span class="chat-preview__msg">Mia</span></span>
+                  <span class="chat-preview__chevron"></span>
+                </div>
+                <div class="chat-conversation__stack">
+                <div class="chat-meta">
+                  <span class="chat-timestamp">11:08 PM</span>
+                  <div class="chat-bubbles">
+                    <span class="chat-bubble chat-bubble--received">Did you make it home?</span>
+                  </div>
+                </div>
+                <div class="chat-meta chat-meta--sent">
+                  <span class="chat-timestamp">11:11 PM</span>
+                  <div class="chat-bubbles">
+                    <span class="chat-bubble chat-bubble--sent">Barely.</span>
+                  </div>
+                </div>
+                </div>
+              </summary>
+            </details>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </main>
 </body>

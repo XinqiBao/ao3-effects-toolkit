@@ -24,9 +24,9 @@ The same validation confirmed that AO3 keeps:
 
 ## Decision
 
-Use `details/summary` as the canonical tap/mobile interaction pattern for published effects.
+Use `details/summary` as the canonical tap interaction pattern for published effects.
 
-Do not treat `:target` as a supported production template path.
+Do not treat `:target` as a supported production path.
 
 ## Consequences
 
@@ -34,7 +34,7 @@ Benefits:
 
 - the structure matches AO3's confirmed HTML behavior
 - touch interaction no longer depends on stripped attributes
-- maintenance stays focused on one supported mobile pattern
+- maintenance stays focused on one supported tap pattern
 
 Tradeoffs:
 
@@ -43,5 +43,5 @@ Tradeoffs:
 
 ## Follow-up
 
-- `effects/envelope/tap-template.html` remains the canonical touch template for the envelope effect
+- current tap examples live inside each effect's `example.html`
 - future effects that need explicit touch interaction should prefer the same `details/summary` pattern

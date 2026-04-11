@@ -41,8 +41,7 @@
   transition: max-height 0.5s ease, opacity 0.35s ease, padding 0.5s ease;
 }
 
-#workskin .chat-conversation--hover:hover .chat-conversation__stack,
-#workskin .chat-conversation--preview-open .chat-conversation__stack {
+#workskin .chat-conversation--hover:hover .chat-conversation__stack {
   max-height: 4000px;
   opacity: 1;
   padding: 10px 10px 8px;
@@ -76,39 +75,13 @@
 }
 
 /* Hover mode: hide preview when hovered */
-#workskin .chat-conversation--hover:hover .chat-preview,
-#workskin .chat-conversation--preview-open .chat-preview {
+#workskin .chat-conversation--hover:hover .chat-preview {
   display: none;
 }
 
 /* Tap mode: hide preview when open */
 #workskin .chat-conversation--details[open] .chat-preview {
   display: none;
-}
-
-/* ---------- Hint ---------- */
-
-#workskin .chat-conversation__hint {
-  display: block;
-  padding: 0 0 8px;
-  color: #9e9ea0;
-  font-size: 0.7em;
-  font-style: italic;
-  text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-    "Segoe UI", sans-serif;
-  max-height: 24px;
-  opacity: 1;
-  transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.4s ease;
-  overflow: hidden;
-}
-
-#workskin .chat-conversation--hover:hover .chat-conversation__hint,
-#workskin .chat-conversation--details[open] .chat-conversation__hint,
-#workskin .chat-conversation--preview-open .chat-conversation__hint {
-  max-height: 0;
-  opacity: 0;
-  padding: 0;
 }
 
 #workskin .chat-preview__text {
