@@ -54,7 +54,7 @@ body {
   .grid { --cols: 1; }
 }
 
-/* Temporary compatibility: keep `.grid > .card*` selectors only until preview.html files adopt `preview-card*`. */
+/* Temporary compatibility: keep legacy `.card*` rules scoped under direct `.grid > .card` preview containers until preview.html files adopt `preview-card*`. */
 .preview-card,
 .grid > .card {
   background: rgba(255 250 242 / .78);
