@@ -2,75 +2,46 @@
 
 Use verification in two layers:
 
-1. local verification in this repository
+1. local review in this repository
 2. live validation against a real AO3 account
 
-Local checks are fast and should run for routine maintenance. AO3 live validation is still required for changes that affect what gets pasted into AO3.
+## Local Review
 
-## Local Verification
+Local review is intentionally lightweight.
 
-### Run all local checks
+### For effect changes
+
+- open `effects/<name>/preview.html`
+- inspect the hover and tap cards in a browser or Playwright
+- confirm the example block still matches the published CSS structure
+
+### For tooling changes
+
+Run:
 
 ```bash
 npm test
 ```
 
-Equivalent direct command for the structure and CSS scan:
+If you changed GIF capture behavior, also run a focused smoke test such as:
 
 ```bash
-node tools/verify.mjs
+node tools/capture-gifs.mjs envelope
 ```
 
-### Run one effect only
-
-```bash
-node tools/verify.mjs --effect envelope
-```
-
-## What `tools/verify.mjs` Checks
-
-- required files exist under `effects/<name>/`
-- `work-skin.css` includes the `#workskin` scope
-- `hover-template.html` and `tap-template.html` include the expected stage and interaction classes
-- `preview.html` follows the shared four-panel preview contract
-- required effect class names appear in the CSS
-- CSS is scanned for common AO3-incompatible patterns such as `gap`, `pointer-events`, `grid-template-columns: repeat()`, and `border-radius` ellipse syntax
-- HTML templates are scanned for `id=` attributes, which AO3 strips
-
-## What `npm test` Adds
-
-- `node --test tools/*.test.mjs`
-- `node tools/verify.mjs`
-
-## What Local Verification Does Not Prove
+## What Local Review Does Not Prove
 
 - that AO3 will accept the work skin when saved
-- that the rendered result matches expectations on AO3 Preview
-- that the current `smoke-test.html` structure matches every required CSS hook
-- that an authenticated AO3 workflow is still valid
+- that AO3 Preview renders the changed example block correctly
+- that current AO3 filtering behavior still matches previous assumptions
 
 For those checks, use `docs/ao3-live-validation.md`.
 
-## When To Run Which Checks
+## When To Use AO3 Live Validation
 
-### Run local verification after:
+Run the live AO3 workflow after:
 
-- changes to any `work-skin.css`
-- changes to `hover-template.html`
-- changes to `tap-template.html`
-- changes to `smoke-test.html`
-- changes to `preview.html`
-- changes that alter the expected effect structure
-
-### Run AO3 live validation after:
-
-- CSS changes intended for publishing
-- HTML template or smoke-test changes intended for publishing
-- any change that touches AO3-specific compatibility workarounds
-- any release candidate or final pre-publish review
-
-## Related Docs
-
-- `docs/ao3-live-validation.md`
-- `docs/compatibility.md`
-- `docs/repo-operations.md`
+- changes to published CSS intended for AO3
+- changes to `example.html` blocks intended for AO3
+- changes to AO3-specific compatibility workarounds
+- any release candidate or pre-publish review

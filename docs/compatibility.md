@@ -7,17 +7,14 @@ This document records what has been confirmed against AO3 and what is still only
 Verified on 2026-04-04 against a logged-in AO3 account:
 
 - `effects/envelope/work-skin.css` can be saved as an AO3 work skin.
-- `effects/envelope/smoke-test.html`, `hover-template.html`, and `tap-template.html` render correctly in AO3 Preview.
+- The current envelope hover and tap HTML structures were validated on AO3 when they were stored as separate template files; those same structures now live in `effects/envelope/example.html`.
 - The core `trifold-letter / letter-cover / letter-top / letter-mid / letter-bot` structure survives AO3's HTML filtering.
-- Both interaction paths work:
-  - desktop preview can be checked through `.trifold-letter--preview-open`
-  - touch preview can be checked by opening the `details` element
-- The mobile breakpoint at `<= 720px` preserves the intended fold offsets and alternating tilt.
 - AO3 preserves `<details>` and `<summary>` in posted work HTML.
+- The mobile breakpoint at `<= 720px` preserves the intended fold offsets and alternating tilt.
 
 ## Verified Locally Only
 
-The following effects currently pass repository-local structure and CSS checks, but have not yet been revalidated against a live AO3 account:
+The following effects currently have local preview coverage but have not yet been revalidated against a live AO3 account after the repository simplification:
 
 - `effects/chat-messages/`
 - `effects/polaroid/`
@@ -47,12 +44,9 @@ These features work in local previews but have not been reconfirmed in a live AO
 | `@keyframes` / `animation` | Typewriter cursor behavior depends on animation support |
 | `perspective` / `transform-style: preserve-3d` | Polaroid flip behavior depends on 3D transform support |
 
-## Recommended Validation Trigger
+## Recommended Trigger
 
-Run local verification first:
+When published CSS or published example blocks change:
 
-```bash
-npm test
-```
-
-Then follow `docs/ao3-live-validation.md` whenever you change published CSS, published templates, or AO3-specific compatibility workarounds.
+1. run local review
+2. then follow `docs/ao3-live-validation.md`
