@@ -10,37 +10,40 @@
     #workskin .preview-card__stage-shell {
       background:
         radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 42%),
-        linear-gradient(180deg, #f1e8db 0%, #e7dacb 58%, #dbc9b7 100%);
+        linear-gradient(180deg, #f3ece1 0%, #eadfce 58%, #dfcfbc 100%);
     }
 
     #workskin .preview-card__stage {
       min-height: 760px;
-      padding-top: 10px;
+      padding-top: 58px;
     }
 
     #workskin .preview-card__stage.envelope-preview__stage {
       align-items: flex-start;
     }
 
+    /* Preview-only presentation helper: use the stamp art while keeping the published anchor geometry. */
+    #workskin .letter-stamp {
+      background: transparent url("../../assets/preview-media/envelope-stamp.png") center / contain no-repeat;
+      border: 0;
+      color: transparent;
+      text-shadow: none;
+    }
+
     @media (max-width: 720px) {
       #workskin .preview-card__stage {
-        min-height: 620px;
+        min-height: 700px;
+        padding-top: 54px;
       }
     }
   </style>
 </head>
 <body>
 <main class="shell">
-  <section class="hero">
-    <p class="hero__label">AO3 Effect Preview</p>
-    <h1 class="hero__title">Envelope</h1>
-    <p class="hero__desc">A sealed letter that unfolds into three visible panels.</p>
-  </section>
   <div id="workskin">
     <div class="grid">
       <section class="preview-card preview-card--hover">
         <p class="preview-card__label">Hover</p>
-        <p class="preview-card__note">Desktop-first interaction. Hover the letter to unfold it.</p>
         <div class="preview-card__stage-shell">
           <div class="preview-card__stage envelope-preview__stage">
             <div class="letter-stage">
@@ -80,9 +83,8 @@
         </div>
       </section>
 
-      <section class="preview-card preview-card--tap preview-card--mobile">
+      <section class="preview-card preview-card--tap">
         <p class="preview-card__label">Tap</p>
-        <p class="preview-card__note">Touch-first interaction. Tap the summary to open the same letter.</p>
         <div class="preview-card__stage-shell">
           <div class="preview-card__stage envelope-preview__stage">
             <div class="letter-stage">
