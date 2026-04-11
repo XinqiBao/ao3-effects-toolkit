@@ -1,7 +1,7 @@
 export const EFFECTS = {
   envelope: {
-    captureSelector: '.preview-card--hover .preview-card__stage',
-    hoverSelector: '.preview-card--hover .trifold-letter--hover',
+    captureSelector: '#workskin.envelope-preview',
+    hoverSelector: '#workskin.envelope-preview .trifold-letter',
     viewport: { width: 1400, height: 1600 },
     outputWidth: 488,
     settleMs: 450,
