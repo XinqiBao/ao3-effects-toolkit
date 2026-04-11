@@ -5,15 +5,14 @@ import { chromium } from 'playwright';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { measureCaptureClip, resetCaptureState } from './capture-gif-clip.mjs';
-import { EFFECTS, FAMILY_PRESETS } from './capture-gif-config.mjs';
+import { EFFECTS } from './capture-gif-config.mjs';
 import { startCaptureServer } from './capture-server.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 test('chat capture measurement includes the expanded conversation height', async () => {
   const effect = EFFECTS['chat-messages'];
-  assert.ok(effect.toggleSelector, 'chat-messages should expose a deterministic capture toggle target');
-  assert.ok(effect.openClass, 'chat-messages should expose a deterministic open-state class for capture');
+  assert.ok(effect.hoverSelector, 'chat-messages should expose a deterministic hover target');
 
   const server = startCaptureServer(ROOT, 0);
   await once(server, 'listening');
@@ -22,20 +21,18 @@ test('chat capture measurement includes the expanded conversation height', async
 
   try {
     const page = await browser.newPage({
-      viewport: FAMILY_PRESETS.standard.viewport,
+      viewport: effect.viewport,
       deviceScaleFactor: 2,
     });
 
     const url = `http://127.0.0.1:${port}/effects/chat-messages/preview.html`;
-    await resetCaptureState(page, url, FAMILY_PRESETS.standard.settleMs);
+    await resetCaptureState(page, url, effect.settleMs);
 
     const clip = await measureCaptureClip(page, {
-      captureSelector: '[data-panel="desktop-closed"] [data-capture-frame]',
+      captureSelector: effect.captureSelector,
       hoverSelector: effect.hoverSelector,
-      toggleSelector: effect.toggleSelector,
-      openClass: effect.openClass,
-      measureDurationMs: FAMILY_PRESETS.standard.measureDurationMs,
-      sampleIntervalMs: FAMILY_PRESETS.standard.sampleIntervalMs,
+      measureDurationMs: effect.measureDurationMs,
+      sampleIntervalMs: effect.sampleIntervalMs,
       resetMs: 100,
     });
 
