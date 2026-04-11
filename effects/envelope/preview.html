@@ -7,19 +7,16 @@
   <link rel="stylesheet" href="../_shared/preview-shell.css">
   <link rel="stylesheet" href="work-skin.css">
   <style>
-    #workskin .preview-card__stage-shell {
+    #workskin.envelope-preview {
+      max-width: 760px;
+      min-height: 760px;
+      margin: 0 auto;
+      padding: 20px 14px 24px;
       background:
         radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 42%),
         linear-gradient(180deg, #f3ece1 0%, #eadfce 58%, #dfcfbc 100%);
-    }
-
-    #workskin .preview-card__stage {
-      min-height: 760px;
-      padding-top: 46px;
-    }
-
-    #workskin .preview-card__stage.envelope-preview__stage {
-      align-items: flex-start;
+      border: 1px solid rgba(103, 74, 55, 0.18);
+      border-radius: 20px;
     }
 
     /* Preview-only presentation helper: overlay the stamp art without deleting the published text/border fallback. */
@@ -50,98 +47,44 @@
     }
 
     @media (max-width: 720px) {
-      #workskin .preview-card__stage {
+      #workskin.envelope-preview {
         min-height: 700px;
-        padding-top: 44px;
+        padding-top: 18px;
       }
     }
   </style>
 </head>
 <body>
 <main class="shell">
-  <div id="workskin">
-    <div class="grid">
-      <section class="preview-card preview-card--hover">
-        <p class="preview-card__label">Hover</p>
-        <div class="preview-card__stage-shell">
-          <div class="preview-card__stage envelope-preview__stage">
-            <div class="letter-stage">
-              <div class="trifold-letter trifold-letter--hover">
-                <div class="trifold-letter__stack">
-                  <span class="trifold-letter__shadow"></span>
-                  <span class="letter-cover">
-                    <span class="letter-cover-text">
-                      <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
-                      <span class="letter-stamp">AO3</span>
-                      <span class="letter-to">Filed for the intended reader</span>
-                    </span>
-                  </span>
-                  <span class="letter-top">
-                    <span class="letter-top-text">
-                      <span class="letter-kicker">Leaf One</span>
-                      <span class="letter-body">I kept the first page short so the archive would hold it without complaint.</span>
-                    </span>
-                  </span>
-                  <span class="letter-mid">
-                    <span class="letter-mid-text">
-                      <span class="letter-kicker">Leaf Two</span>
-                      <span class="letter-body">The second fold keeps the weather and the unsent part of the note together.</span>
-                    </span>
-                  </span>
-                  <span class="letter-bot">
-                    <span class="letter-bot-text">
-                      <span class="letter-kicker">Leaf Three</span>
-                      <span class="letter-body">The last leaf names what was left unsaid, then lets the paper carry it.</span>
-                    </span>
-                  </span>
-                  <span class="trifold-letter__hint">Hover to open</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="preview-card preview-card--tap">
-        <p class="preview-card__label">Tap</p>
-        <div class="preview-card__stage-shell">
-          <div class="preview-card__stage envelope-preview__stage">
-            <div class="letter-stage">
-              <details class="trifold-letter trifold-letter--details">
-                <summary class="trifold-letter__stack">
-                  <span class="trifold-letter__shadow"></span>
-                  <span class="letter-cover">
-                    <span class="letter-cover-text">
-                      <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
-                      <span class="letter-stamp">AO3</span>
-                      <span class="letter-to">Filed for the intended reader</span>
-                    </span>
-                  </span>
-                  <span class="letter-top">
-                    <span class="letter-top-text">
-                      <span class="letter-kicker">Leaf One</span>
-                      <span class="letter-body">The opening fold stays compact until the page is released.</span>
-                    </span>
-                  </span>
-                  <span class="letter-mid">
-                    <span class="letter-mid-text">
-                      <span class="letter-kicker">Leaf Two</span>
-                      <span class="letter-body">The middle fold holds the note together in one calm block.</span>
-                    </span>
-                  </span>
-                  <span class="letter-bot">
-                    <span class="letter-bot-text">
-                      <span class="letter-kicker">Leaf Three</span>
-                      <span class="letter-body">The final fold waits at the bottom of the stack, ready to open.</span>
-                    </span>
-                  </span>
-                  <span class="trifold-letter__hint">Tap to open</span>
-                </summary>
-              </details>
-            </div>
-          </div>
-        </div>
-      </section>
+  <section class="hero">
+    <p class="hero__label">AO3 Effect Preview</p>
+    <h1 class="hero__title">Envelope</h1>
+    <p class="hero__desc">A trifold letter that starts as a sealed cover, then opens into three folded pages for the note inside.</p>
+  </section>
+  <div id="workskin" class="envelope-preview">
+    <div class="trifold-letter">
+      <span class="letter-cover">
+        <span class="letter-cover-text">
+          <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
+          <span class="letter-stamp">AO3</span>
+          <span class="letter-to">Filed for the intended reader</span>
+        </span>
+      </span>
+      <span class="letter-top">
+        <span class="letter-top-text">
+          <span class="letter-body">I kept the first page short so the archive would hold it without complaint.</span>
+        </span>
+      </span>
+      <span class="letter-mid">
+        <span class="letter-mid-text">
+          <span class="letter-body">The second fold keeps the weather and the unsent part of the note together.</span>
+        </span>
+      </span>
+      <span class="letter-bot">
+        <span class="letter-bot-text">
+          <span class="letter-body">The last leaf names what was left unsaid, then lets the paper carry it.</span>
+        </span>
+      </span>
     </div>
   </div>
 </main>
