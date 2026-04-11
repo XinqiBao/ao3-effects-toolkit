@@ -13,30 +13,47 @@
         linear-gradient(180deg, #f3ece1 0%, #eadfce 58%, #dfcfbc 100%);
     }
 
-    #workskin .preview-card__stage {
-      min-height: 760px;
-      padding-top: 58px;
-    }
+	    #workskin .preview-card__stage {
+	      min-height: 760px;
+	      padding-top: 46px;
+	    }
 
     #workskin .preview-card__stage.envelope-preview__stage {
       align-items: flex-start;
     }
 
-    /* Preview-only presentation helper: use the stamp art while keeping the published anchor geometry. */
-    #workskin .letter-stamp {
-      background: transparent url("../../assets/preview-media/envelope-stamp.png") center / contain no-repeat;
-      border: 0;
-      color: transparent;
-      text-shadow: none;
-    }
+	    /* Preview-only presentation helper: overlay the stamp art without deleting the published text/border fallback. */
+	    #workskin .letter-stamp {
+	      overflow: hidden;
+	    }
 
-    @media (max-width: 720px) {
-      #workskin .preview-card__stage {
-        min-height: 700px;
-        padding-top: 54px;
-      }
-    }
-  </style>
+	    #workskin .letter-stamp::after {
+	      content: "";
+	      position: absolute;
+	      inset: 0;
+	      border-radius: inherit;
+	      background: transparent url("../../assets/preview-media/envelope-stamp.png") center / contain no-repeat;
+	    }
+
+	    @media (forced-colors: active) {
+	      #workskin .letter-stamp {
+	        background: Canvas;
+	        border: 1px solid CanvasText;
+	        color: CanvasText;
+	      }
+
+	      #workskin .letter-stamp::after {
+	        content: none;
+	      }
+	    }
+
+	    @media (max-width: 720px) {
+	      #workskin .preview-card__stage {
+	        min-height: 700px;
+	        padding-top: 44px;
+	      }
+	    }
+	  </style>
 </head>
 <body>
 <main class="shell">
