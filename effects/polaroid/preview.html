@@ -7,27 +7,6 @@
   <link rel="stylesheet" href="../_shared/preview-shell.css">
   <link rel="stylesheet" href="work-skin.css">
   <style>
-    #workskin.polaroid-preview .preview-card {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    #workskin.polaroid-preview .preview-card__stage-shell {
-      background:
-        linear-gradient(180deg, rgba(255, 251, 246, 0.9), rgba(235, 223, 210, 0.96)),
-        linear-gradient(135deg, rgba(167, 138, 110, 0.08), rgba(255, 255, 255, 0));
-    }
-
-    #workskin.polaroid-preview .preview-card__stage {
-      min-height: 420px;
-    }
-
-    #workskin.polaroid-preview .polaroid-gallery {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
     /* Preview-only presentation helper: use a real photo without changing the published markup. */
     #workskin.polaroid-preview .polaroid-image {
       background:
@@ -53,12 +32,6 @@
     <p class="hero__desc">A single print that flips to reveal the note on the back.</p>
   </section>
   <div id="workskin" class="polaroid-preview">
-    <section class="preview-card preview-card--hover">
-      <p class="preview-card__label">Hover</p>
-      <p class="preview-card__note">Hover the print to reveal the back.</p>
-      <div class="preview-card__stage-shell">
-        <div class="preview-card__stage">
-          <div class="polaroid-gallery">
             <div class="polaroid-container">
               <div class="polaroid-inner polaroid--hover">
                 <span class="polaroid-front">
@@ -72,12 +45,7 @@
                   </span>
                 </span>
               </div>
-              <span class="polaroid-hint">Hover to flip</span>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </main>
 </body>

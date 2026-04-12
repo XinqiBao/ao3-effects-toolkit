@@ -1,4 +1,5 @@
 .context/
+.superpowers/
 .playwright-mcp/
 .playwright-cli/
 .worktrees/

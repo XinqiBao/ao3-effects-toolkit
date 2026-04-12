@@ -21,8 +21,8 @@ const root = join(__dir, '..');
 const THIS_FILE = fileURLToPath(import.meta.url);
 
 export const EFFECTS = {
-  envelope: {
-    captureSelector: '#workskin.envelope-preview',
+  'envelope': {
+    captureSelector: '#workskin',
     hoverSelector: '#workskin.envelope-preview .trifold-letter',
     viewport: { width: 1400, height: 1600 },
     outputWidth: 488,
@@ -33,7 +33,7 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   'chat-messages': {
-    captureSelector: '.preview-card .preview-card__stage',
+    captureSelector: '#workskin',
     hoverSelector: '.preview-card .chat-conversation--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
@@ -43,8 +43,8 @@ export const EFFECTS = {
     sampleIntervalMs: 80,
     durationMs: 4000,
   },
-  polaroid: {
-    captureSelector: '.preview-card .preview-card__stage',
+  'polaroid': {
+    captureSelector: '#workskin',
     hoverSelector: '.preview-card .polaroid-inner.polaroid--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
@@ -55,7 +55,7 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   'secret-divider': {
-    captureSelector: '.preview-card .preview-card__stage',
+    captureSelector: '#workskin',
     hoverSelector: '.preview-card .secret-divider--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
@@ -65,8 +65,8 @@ export const EFFECTS = {
     sampleIntervalMs: 80,
     durationMs: 4000,
   },
-  typewriter: {
-    captureSelector: '.preview-card .preview-card__stage',
+  'typewriter': {
+    captureSelector: '#workskin',
     hoverSelector: '.preview-card .typewriter--hover',
     viewport: { width: 1400, height: 1400 },
     outputWidth: 488,
