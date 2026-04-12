@@ -22,8 +22,7 @@
       padding-top: 18px;
     }
 
-    #workskin .typewriter-hint,
-    #workskin .preview-card__note {
+    #workskin .typewriter-hint {
       color: #c0b2a1;
     }
   </style>
@@ -36,57 +35,26 @@
     <p class="hero__desc">A dark transcript panel that reveals lines in sequence.</p>
   </section>
   <div id="workskin">
-    <div class="grid">
-      <section class="preview-card preview-card--hover">
-        <p class="preview-card__label">Hover</p>
-        <p class="preview-card__note">Desktop-first interaction. Hover the prompt to reveal the text.</p>
-        <div class="preview-card__stage-shell">
-          <div class="preview-card__stage">
-            <div class="typewriter-stage">
-              <div class="typewriter-container typewriter--hover">
-                <span class="typewriter-prompt">Begin transcript...</span>
-                <div class="typewriter-text">
-                  <span class="typewriter-line">Filed transcript / room twelve</span>
-                  <span class="typewriter-line">Rain on the stairwell.</span>
-                  <span class="typewriter-line">The keys stop mid-line.</span>
-                  <span class="typewriter-line">One page leaves the stack.</span>
-                </div>
-                <span class="typewriter-cursor-wrapper">
-                  <span class="typewriter-cursor"></span>
-                </span>
-                <span class="typewriter-hint">Hover to read</span>
+    <section class="preview-card">
+      <div class="preview-card__stage-shell">
+        <div class="preview-card__stage">
+          <div class="typewriter-stage">
+            <div class="typewriter-container typewriter--hover">
+              <span class="typewriter-prompt">Begin typing to read...</span>
+              <div class="typewriter-text">
+                <span class="typewriter-line">The rain had not stopped since Tuesday.</span>
+                <span class="typewriter-line">She sat by the window with a cold cup of tea.</span>
+                <span class="typewriter-line">The answer, as always, was longer than she hoped.</span>
               </div>
+              <span class="typewriter-cursor-wrapper">
+                <span class="typewriter-cursor"></span>
+              </span>
+              <span class="typewriter-hint">Hover to read</span>
             </div>
           </div>
         </div>
-      </section>
-
-      <section class="preview-card preview-card--tap preview-card--mobile">
-        <p class="preview-card__label">Tap</p>
-        <p class="preview-card__note">Touch-first interaction. Tap the prompt to reveal the same transcript.</p>
-        <div class="preview-card__stage-shell">
-          <div class="preview-card__stage">
-            <div class="typewriter-stage">
-              <details class="typewriter-container typewriter--details">
-                <summary>
-                  <span class="typewriter-prompt">Begin transcript...</span>
-                </summary>
-                <div class="typewriter-text">
-                  <span class="typewriter-line">Filed transcript / room twelve</span>
-                  <span class="typewriter-line">Rain on the stairwell.</span>
-                  <span class="typewriter-line">The keys stop mid-line.</span>
-                  <span class="typewriter-line">One page leaves the stack.</span>
-                </div>
-                <span class="typewriter-cursor-wrapper">
-                  <span class="typewriter-cursor"></span>
-                </span>
-                <span class="typewriter-hint">Tap to read</span>
-              </details>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </main>
 </body>
