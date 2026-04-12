@@ -1,6 +1,6 @@
 # Secret Divider Guide
 
-Use these files from `effects/secret-divider/`:
+Use these files from `effects/secret-divider/` as the single source of truth:
 
 - `work-skin.css`
 - `example.html`
@@ -9,30 +9,19 @@ Use these files from `effects/secret-divider/`:
 ## Quick Start
 
 1. Copy `work-skin.css` into your AO3 work skin.
-2. Open `example.html` and choose the hover block or the tap block.
-3. Paste the chosen block into AO3's HTML editor.
-4. Replace the hidden text and, if you want, the ornament characters.
+2. Copy the hover block from `example.html` and paste it into AO3's HTML editor.
+3. Replace the hidden text (inside `secret-divider__text-inner`) and, if desired, the ornament characters.
 
-## Choose A Block
+## Canonical Hover
 
-- Use the hover block for desktop-first reading.
-- Use the tap block for touch-first reading.
+`secret-divider--hover` is the only supported reveal; both `example.html` and `preview.html` show that block so you always know what will render.
 
-## Edit Carefully
+## Edit Notes
 
-You can change:
-
-- the hidden text inside `secret-divider__text-inner`
-- the ornament symbols
-
-Do not rename the reveal wrappers or remove the summary structure from the tap block.
-
-## Notes
-
-- AO3 work content does not support JavaScript.
-- The hidden message should not carry essential plot information by itself.
+- Keep the reveal wrappers and the hover structure intact.
+- AO3 work content does not support JavaScript, so stay CSS-only.
+- The hidden text should not carry essential plot information by itself.
 
 ## Validation
 
 - Use `preview.html` for a local visual check.
-- If the AO3-facing behavior changes, follow `docs/ao3-live-validation.md`.
