@@ -11,8 +11,8 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   'chat-messages': {
-    captureSelector: '.preview-card--hover .preview-card__stage',
-    hoverSelector: '.preview-card--hover .chat-conversation--hover',
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .chat-conversation--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
     settleMs: 400,
