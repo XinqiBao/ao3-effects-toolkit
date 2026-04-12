@@ -31,14 +31,29 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'polaroid example should not keep the unused gallery wrapper'
   );
   assert.equal(
-    polaroidExample.includes('polaroid-front'),
+    polaroidExample.includes('class="polaroid polaroid--hover"'),
     true,
-    'polaroid example should restore a front face for the flip interaction'
+    'polaroid example should use polaroid itself as the published root class'
   );
   assert.equal(
-    polaroidExample.includes('polaroid-back'),
+    polaroidExample.includes('polaroid-container'),
+    false,
+    'polaroid example should not keep the old outer container wrapper'
+  );
+  assert.equal(
+    polaroidExample.includes('polaroid-card'),
+    false,
+    'polaroid example should not keep the old card wrapper name once the root absorbs that role'
+  );
+  assert.equal(
+    polaroidExample.includes('class="front"'),
     true,
-    'polaroid example should restore a back face for the flip interaction'
+    'polaroid example should keep a short front face module inside the root scope'
+  );
+  assert.equal(
+    polaroidExample.includes('class="back"'),
+    true,
+    'polaroid example should keep a short back face module inside the root scope'
   );
   assert.equal(
     polaroidExample.includes('polaroid-hint'),
@@ -61,6 +76,26 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'polaroid work skin should not keep the deprecated details fallback path'
   );
   assert.equal(
+    polaroidCss.includes('.polaroid-container'),
+    false,
+    'polaroid work skin should not keep the old outer container selector'
+  );
+  assert.equal(
+    polaroidCss.includes('.polaroid-card'),
+    false,
+    'polaroid work skin should not keep the old card selector name'
+  );
+  assert.equal(
+    polaroidCss.includes('.polaroid-front'),
+    false,
+    'polaroid work skin should not keep effect-prefixed front selectors'
+  );
+  assert.equal(
+    polaroidCss.includes('#workskin .polaroid .front'),
+    true,
+    'polaroid work skin should scope short descendant module names through the root selector'
+  );
+  assert.equal(
     polaroidCss.includes('rotateY'),
     true,
     'polaroid work skin should keep a rotateY-based flip for the canonical hover path'
@@ -74,6 +109,11 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     polaroidCss.includes('@media (max-width: 720px)'),
     false,
     'polaroid work skin should not keep a mobile-specific branch in the desktop-only pass'
+  );
+  assert.equal(
+    polaroidPreview.includes('class="polaroid polaroid--hover"'),
+    true,
+    'polaroid preview should use the same published root contract as the example'
   );
   assert.equal(
     secretDividerExample.includes('secret-divider-container'),

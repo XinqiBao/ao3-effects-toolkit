@@ -44,7 +44,7 @@ export const EFFECTS = {
   },
   polaroid: {
     ...DEFAULT_CAPTURE,
-    hoverSelector: '#workskin .polaroid-card.polaroid--hover',
+    hoverSelector: '#workskin .polaroid--hover',
   },
   'secret-divider': {
     ...DEFAULT_CAPTURE,

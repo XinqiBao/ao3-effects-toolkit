@@ -14,7 +14,7 @@ Use these files from `effects/polaroid/`:
 
 ## Editing
 
-- Only change the caption and the message on the back side; leave structural classes such as `polaroid-container`, `polaroid-card`, `polaroid-front`, `polaroid-back`, and `polaroid-message` untouched.
+- Only change the caption and the message on the back side; leave structural classes such as `polaroid`, `front`, `back`, `photo`, and `message` untouched.
 - Keep the back message concise and avoid relying on JavaScript inside AO3.
 
 ## Validation
