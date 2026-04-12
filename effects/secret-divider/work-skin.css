@@ -72,33 +72,6 @@
   opacity: 1;
 }
 
-/* ======================================== */
-/* DETAILS / SUMMARY mode — reveal on [open] */
-/* ======================================== */
-
-#workskin .secret-divider--details .secret-divider__summary {
-  display: block;
-  list-style: none;
-  cursor: pointer;
-}
-
-#workskin .secret-divider--details .secret-divider__summary::marker,
-#workskin .secret-divider--details .secret-divider__summary::-webkit-details-marker {
-  content: "";
-  display: none;
-}
-
-#workskin .secret-divider--details[open] .secret-divider__ornament {
-  color: #a08c74;
-  transform: scale(1.06);
-  letter-spacing: 0.5em;
-}
-
-#workskin .secret-divider--details[open] .secret-divider__text {
-  max-height: 15em;
-  opacity: 1;
-}
-
 #workskin .secret-divider__summary-hint {
   display: block;
   margin-top: 0.3em;
@@ -108,9 +81,6 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   transition: opacity 0.4s ease;
-}
-
-#workskin .secret-divider--details[open] .secret-divider__summary-hint {
   opacity: 0;
 }
 
@@ -141,8 +111,6 @@
 }
 
 #workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::before,
-#workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::after,
-#workskin .secret-divider--with-flanks.secret-divider--details[open] .secret-divider__ornament::before,
-#workskin .secret-divider--with-flanks.secret-divider--details[open] .secret-divider__ornament::after {
+#workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::after {
   color: #c9b89e;
 }
