@@ -8,12 +8,11 @@
   <link rel="stylesheet" href="work-skin.css">
   <style>
     #workskin {
-      width: min(580px, 100%);
-      margin: 0 auto;
-      padding: 0 20px;
+      width: 580px;
+      height: 250px;
     }
 
-    #workskin .secret-divider-container {
+    #workskin .secret-divider {
       margin: 0;
     }
   </style>
@@ -26,13 +25,11 @@
     <p class="hero__desc">A decorative divider that reveals a hidden note when readers linger.</p>
   </section>
   <div id="workskin">
-    <div class="secret-divider-container">
-      <div class="secret-divider secret-divider--hover secret-divider--with-flanks">
-        <span class="secret-divider__ornament">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
-        <span class="secret-divider__text">
-          <span class="secret-divider__text-inner">[Hidden note]&#10;Some lines can wait for readers who choose to linger.</span>
-        </span>
-      </div>
+    <div class="secret-divider secret-divider--hover secret-divider--with-flanks">
+      <span class="secret-divider__ornament">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
+      <span class="secret-divider__text">
+        <span class="secret-divider__text-inner">[Hidden note]&#10;Some lines can wait for readers who choose to linger.</span>
+      </span>
     </div>
   </div>
 </main>

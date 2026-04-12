@@ -1,6 +1,6 @@
 /* ========================================
    AO3 Polaroid Photo Frame Effect
-   CSS-only: hover or details/summary flip
+   CSS-only desktop hover flip
    ======================================== */
 
 /* --- Canonical polaroid card --- */
@@ -9,29 +9,14 @@
   position: relative;
   width: min(220px, 100%);
   height: 270px;
-  margin: 1.4em auto 1.8em;
+  margin: 1.2em auto 1.5em;
   perspective: 900px;
   cursor: pointer;
   box-sizing: border-box;
   display: block;
 }
 
-/* Hide default markers when the tap version is rendered */
-#workskin .polaroid-inner.polaroid--details summary {
-  display: block;
-  min-height: 100%;
-  cursor: pointer;
-}
-
-#workskin .polaroid-inner.polaroid--details summary::marker,
-#workskin .polaroid-inner.polaroid--details summary::-webkit-details-marker {
-  display: none;
-  content: "";
-}
-
-/* --- Flip wrapper --- */
-
-#workskin .polaroid-inner {
+#workskin .polaroid-card {
   position: relative;
   width: 100%;
   height: 100%;
@@ -39,8 +24,7 @@
   transform-style: preserve-3d;
 }
 
-#workskin .polaroid-inner.polaroid--hover:hover,
-#workskin .polaroid-inner.polaroid--details[open] {
+#workskin .polaroid-card.polaroid--hover:hover {
   transform: rotateY(180deg);
 }
 
@@ -49,15 +33,13 @@
 #workskin .polaroid-front,
 #workskin .polaroid-back {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  transition: opacity 0.6s ease 0.2s;
   backface-visibility: hidden;
+  transition: opacity 0.5s ease;
 }
 
-/* Opacity flip: front fades out, back fades in on open */
 #workskin .polaroid-front {
   opacity: 1;
   z-index: 2;
@@ -67,44 +49,65 @@
   opacity: 0;
   z-index: 1;
   transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.15em 1em 0.95em;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 242, 235, 0.98)),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 24px,
+      rgba(173, 144, 122, 0.1) 24px,
+      rgba(173, 144, 122, 0.1) 25px
+    );
+  border: 1px solid rgba(140, 130, 115, 0.25);
+  border-radius: 3px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 18px 28px rgba(63, 45, 33, 0.12);
+  box-sizing: border-box;
 }
 
-#workskin .polaroid-inner.polaroid--hover:hover .polaroid-front,
-#workskin .polaroid-inner.polaroid--details[open] .polaroid-front {
+#workskin .polaroid-back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+#workskin .polaroid-card.polaroid--hover:hover .polaroid-front {
   opacity: 0;
-  z-index: 1;
-  transition-delay: 0s;
 }
 
-#workskin .polaroid-inner.polaroid--hover:hover .polaroid-back,
-#workskin .polaroid-inner.polaroid--details[open] .polaroid-back {
+#workskin .polaroid-card.polaroid--hover:hover .polaroid-back {
   opacity: 1;
-  z-index: 2;
-  transition-delay: 0.2s;
 }
 
-/* --- Front: Polaroid frame --- */
+/* --- Front face --- */
 
 #workskin .polaroid-frame {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #ffffff 0%, #fbf9f6 68%, #f1e9df 100%);
-  border-bottom: 2.8em solid #faf7f1;
-  border-radius: 4px;
+  background: linear-gradient(180deg, #ffffff 0%, #fcfaf6 72%, #f3ece2 100%);
+  border-bottom: 2.8em solid #f8f8f6;
+  border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow:
-    0 6px 30px rgba(0, 0, 0, 0.18),
-    0 12px 32px rgba(0, 0, 0, 0.09);
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    0 18px 28px rgba(63, 45, 33, 0.14);
 }
-
-/* --- Photo placeholder area --- */
 
 #workskin .polaroid-image {
   position: absolute;
   top: 0.7em;
   left: 0.7em;
   right: 0.7em;
-  height: calc(100% - 4.2em);
+  bottom: 3.4em;
   border-radius: 2px;
   background:
     linear-gradient(135deg, #fdf6ee 0%, #d8cdbf 35%, #b09d7f 65%, #7c634d 100%);
@@ -127,24 +130,7 @@
   background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0));
   opacity: 0.7;
   filter: blur(0.6px);
-  pointer-events: none;
 }
-
-/* Subtle grain overlay via pseudo-like inner div */
-#workskin .polaroid-image--grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 1px,
-    rgba(0, 0, 0, 0.02) 1px,
-    rgba(0, 0, 0, 0.02) 2px
-  );
-}
-
-/* --- Caption on front (bottom white area) --- */
 
 #workskin .polaroid-caption {
   position: absolute;
@@ -156,47 +142,12 @@
   font-family: "Comic Sans MS", "Segoe Print", "Apple Chancery", "Bradley Hand", cursive;
   font-size: 0.82em;
   line-height: 1.3;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   z-index: 3;
 }
 
-/* --- Back face (revealed text) --- */
-
-#workskin .polaroid-back-inner {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, #fdfbf7 0%, #f8f4ed 60%, #f1eadf 100%);
-  border: 1px solid rgba(140, 130, 115, 0.35);
-  border-radius: 4px;
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.12),
-    0 8px 28px rgba(0, 0, 0, 0.09);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2em 1.2em;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-#workskin .polaroid-back-inner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0)),
-    repeating-linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.045) 0,
-      rgba(0, 0, 0, 0.045) 1px,
-      transparent 1px,
-      transparent 12px
-    );
-  pointer-events: none;
-  opacity: 0.6;
-}
+/* --- Back face text --- */
 
 #workskin .polaroid-message {
   position: relative;
@@ -208,57 +159,5 @@
   text-align: center;
   white-space: pre-line;
   letter-spacing: 0.02em;
-  max-width: 88%;
-}
-
-/* --- Hint text --- */
-
-#workskin .polaroid-hint {
-  display: block;
-  margin: 0.6em auto 0;
-  font-size: 0.62em;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-align: center;
-  color: rgba(90, 80, 65, 0.55);
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  font-weight: 300;
-}
-
-#workskin .polaroid-inner.polaroid--details[open] ~ .polaroid-hint {
-  color: rgba(90, 80, 65, 0.75);
-}
-
-/* --- Mobile / narrow screens --- */
-
-@media (max-width: 720px) {
-  #workskin .polaroid-container {
-    width: min(180px, 100%);
-    height: 222px;
-    margin: 1em auto 1.4em;
-  }
-
-  #workskin .polaroid-frame {
-    border-bottom-width: 2.2em;
-  }
-
-  #workskin .polaroid-image {
-    top: 0.55em;
-    left: 0.55em;
-    right: 0.55em;
-    height: calc(100% - 3.6em);
-  }
-
-  #workskin .polaroid-caption {
-    font-size: 0.72em;
-    bottom: 0.35em;
-  }
-
-  #workskin .polaroid-back-inner {
-    padding: 1em 0.8em;
-  }
-
-  #workskin .polaroid-message {
-    font-size: 0.68em;
-  }
+  max-width: 14em;
 }

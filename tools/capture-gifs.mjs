@@ -35,7 +35,6 @@ export const EFFECTS = {
   envelope: {
     ...DEFAULT_CAPTURE,
     hoverSelector: '#workskin .trifold-letter',
-    viewport: { width: 1400, height: 1600 },
     settleMs: 450,
     measureDurationMs: 1120,
   },
@@ -45,7 +44,7 @@ export const EFFECTS = {
   },
   polaroid: {
     ...DEFAULT_CAPTURE,
-    hoverSelector: '#workskin .polaroid-inner.polaroid--hover',
+    hoverSelector: '#workskin .polaroid-card.polaroid--hover',
   },
   'secret-divider': {
     ...DEFAULT_CAPTURE,

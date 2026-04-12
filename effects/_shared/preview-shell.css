@@ -42,3 +42,8 @@ body {
   line-height: 1.6;
   max-width: 56rem;
 }
+
+#workskin {
+  margin: 0 auto;
+  padding: 14px;
+}

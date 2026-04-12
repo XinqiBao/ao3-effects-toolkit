@@ -1,6 +1,6 @@
 /* ── AO3 Typewriter / Teletype Effect ──────────────────────────
-   All interactivity via :hover or <details>/<summary>.
-   NO JavaScript. All selectors scoped under #workskin.
+   Desktop hover only. NO JavaScript.
+   All selectors scoped under #workskin.
    ───────────────────────────────────────────────────────────── */
 
 /* ── Reset / Base ───────────────────────────────────────────── */
@@ -23,13 +23,15 @@
   margin: 0 auto;
   width: 100%;
   max-width: 600px;
-  transition: min-height 0.85s ease;
 }
 
 /* ── Prompt (initial preview text) ─────────────────────────── */
 
 #workskin .typewriter-prompt {
   display: block;
+  overflow: hidden;
+  max-height: 10em;
+  opacity: 1;
   color: #6e6e6e;
   font-family: "Courier New", Courier, "Lucida Sans Typewriter", monospace;
   font-size: 0.88em;
@@ -37,11 +39,18 @@
   letter-spacing: 0.04em;
   text-align: center;
   padding: 2.4em 0.6em;
+  transition:
+    max-height 0.45s ease,
+    opacity 0.3s ease,
+    padding 0.45s ease;
 }
 
-/* Hide prompt when revealed */
+/* Fade the prompt out instead of removing the hover target immediately. */
 #workskin .typewriter--hover:hover .typewriter-prompt {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /* ── Text area ──────────────────────────────────────────────── */
@@ -151,44 +160,4 @@
 
 #workskin .typewriter--hover {
   cursor: pointer;
-}
-
-#workskin .typewriter--hover:hover {
-  /* triggers child transitions */
-}
-
-/* ── Hint text ──────────────────────────────────────────────── */
-
-#workskin .typewriter-hint {
-  display: block;
-  color: #555;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.6em;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-align: center;
-  margin-top: 1.4em;
-}
-
-/* ── Mobile (<= 720px) ─────────────────────────────────────── */
-
-@media (max-width: 720px) {
-  #workskin .typewriter-stage {
-    padding: 1em 0.8em 1.2em;
-    border-radius: 1em;
-  }
-
-  #workskin .typewriter-text {
-    font-size: 0.84em;
-    line-height: 1.65;
-  }
-
-  #workskin .typewriter-prompt {
-    font-size: 0.8em;
-    padding: 2em 0.4em;
-  }
-
-  #workskin .typewriter-line {
-    /* slightly taller for narrower text */
-  }
 }

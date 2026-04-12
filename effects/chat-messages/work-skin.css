@@ -23,9 +23,8 @@
   padding: 10px 10px 8px;
 }
 
-/* Collapsed stack (canonical hover; tap fallback uses the same collapsed/expanded primitives). */
-#workskin .chat-conversation--hover .chat-conversation__stack,
-#workskin .chat-conversation--details .chat-conversation__stack {
+/* Collapsed stack for the canonical hover path. */
+#workskin .chat-conversation--hover .chat-conversation__stack {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -33,8 +32,7 @@
   transition: max-height 0.5s ease, opacity 0.35s ease, padding 0.5s ease;
 }
 
-#workskin .chat-conversation--hover:hover .chat-conversation__stack,
-#workskin .chat-conversation--details[open] .chat-conversation__stack {
+#workskin .chat-conversation--hover:hover .chat-conversation__stack {
   max-height: 4000px;
   opacity: 1;
   padding: 10px 10px 8px;
@@ -52,8 +50,7 @@
     "Segoe UI", sans-serif;
 }
 
-#workskin .chat-conversation--hover:hover .chat-preview,
-#workskin .chat-conversation--details[open] .chat-preview {
+#workskin .chat-conversation--hover:hover .chat-preview {
   display: none;
 }
 
@@ -156,53 +153,4 @@
 #workskin .chat-bubble--sent + .chat-bubble--sent,
 #workskin .chat-bubble--received + .chat-bubble--received {
   margin-top: 1px;
-}
-
-/* ---------- Tap fallback (non-canonical) ---------- */
-
-#workskin details.chat-conversation--details summary::-webkit-details-marker,
-#workskin details.chat-conversation--details::marker,
-#workskin details.chat-conversation--details summary::marker {
-  display: none !important;
-  content: "" !important;
-}
-
-/* ---------- Mobile responsive ---------- */
-
-@media (max-width: 540px) {
-  #workskin .chat-conversation {
-    border-radius: 14px;
-  }
-
-  #workskin .chat-conversation__stack {
-    padding: 8px 6px 6px;
-  }
-
-  #workskin .chat-bubble {
-    max-width: 85%;
-    font-size: 0.84em;
-    padding: 6px 10px 7px;
-  }
-
-  #workskin .chat-bubble--sent {
-    border-radius: 16px 16px 3px 16px;
-  }
-
-  #workskin .chat-bubble--received {
-    border-radius: 16px 16px 16px 3px;
-  }
-
-  #workskin .chat-preview {
-    font-size: 0.76em;
-    padding: 9px 12px;
-  }
-
-  #workskin .chat-timestamp {
-    font-size: 0.62em;
-    padding-left: 6px;
-  }
-
-  #workskin .chat-meta--sent .chat-timestamp {
-    padding-right: 6px;
-  }
 }
