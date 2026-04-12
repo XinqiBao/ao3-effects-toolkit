@@ -22,7 +22,12 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const root = join(__dir, '..');
 
 async function captureEffect(page, name, cfg) {
-  const { captureSelector, hoverSelector } = cfg;
+  const canonicalSelector = cfg.targetSelector ?? cfg.captureSelector ?? cfg.hoverSelector;
+  if (!canonicalSelector) {
+    throw new Error(`Missing target selector for effect ${name}`);
+  }
+  const captureSelector = cfg.captureSelector ?? canonicalSelector;
+  const hoverSelector = cfg.hoverSelector ?? canonicalSelector;
   const fps = cfg.fps;
   const durationMs = cfg.durationMs;
   const interval = Math.round(1000 / fps);

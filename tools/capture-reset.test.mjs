@@ -24,25 +24,25 @@ test('capture reset restores the envelope preview to a fully closed first frame'
     });
 
     const url = `http://127.0.0.1:${port}/effects/envelope/preview.html`;
-    const captureSelector = effect.captureSelector;
-    const hoverSelector = effect.hoverSelector;
+    const selector = effect.targetSelector ?? effect.captureSelector ?? effect.hoverSelector;
+    assert.ok(selector, 'envelope should expose a deterministic hover target');
 
     await resetCaptureState(page, url, effect.settleMs);
-    const closedBox = await page.locator(captureSelector).first().boundingBox();
+    const closedBox = await page.locator(selector).first().boundingBox();
     assert.ok(closedBox, 'closed capture frame should be measurable');
-    const closedLetterBox = await page.locator(hoverSelector).first().boundingBox();
+    const closedLetterBox = await page.locator(selector).first().boundingBox();
     assert.ok(closedLetterBox, 'closed hover target should be measurable');
 
     await measureCaptureClip(page, {
-      captureSelector,
-      hoverSelector,
+      captureSelector: selector,
+      hoverSelector: selector,
       measureDurationMs: effect.measureDurationMs,
       sampleIntervalMs: effect.sampleIntervalMs,
       resetMs: 100,
     });
 
-    const dirtyBox = await page.locator(captureSelector).first().boundingBox();
-    const dirtyLetterBox = await page.locator(hoverSelector).first().boundingBox();
+    const dirtyBox = await page.locator(selector).first().boundingBox();
+    const dirtyLetterBox = await page.locator(selector).first().boundingBox();
     assert.ok(dirtyBox, 'measured capture frame should remain measurable');
     assert.ok(dirtyLetterBox, 'hover target should remain measurable after capture measurement');
     assert.ok(
@@ -51,8 +51,8 @@ test('capture reset restores the envelope preview to a fully closed first frame'
     );
 
     await resetCaptureState(page, url, effect.settleMs);
-    const resetBox = await page.locator(captureSelector).first().boundingBox();
-    const resetLetterBox = await page.locator(hoverSelector).first().boundingBox();
+    const resetBox = await page.locator(selector).first().boundingBox();
+    const resetLetterBox = await page.locator(selector).first().boundingBox();
     assert.ok(resetBox, 'reset capture frame should be measurable');
     assert.ok(resetLetterBox, 'reset hover target should be measurable');
     assert.ok(
