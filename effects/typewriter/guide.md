@@ -6,35 +6,24 @@ Use these files from `effects/typewriter/`:
 - `example.html`
 - `preview.html`
 
-## Quick Start
+## Installation
 
 1. Copy `work-skin.css` into your AO3 work skin.
-2. Open `example.html` and choose the hover block or the tap block.
-3. Paste the chosen block into AO3's HTML editor.
-4. Replace the prompt and line text.
+2. From `example.html`, copy the hover block (`<div class="typewriter-stage">…`) and paste it into AO3's HTML editor.
+3. Replace the prompt, each `.typewriter-line`, and the hint text with your own copy.
 
-## Choose A Block
+## Customization
 
-- Use the hover block for desktop-first reading.
-- Use the tap block for touch-first reading.
-
-## Edit Carefully
-
-You can change:
-
-- the prompt text
-- each `.typewriter-line`
-- the hint text if you want
-
-Do not rename or remove the outer structure such as `typewriter-stage`, `typewriter-container`, or `typewriter-line`.
+- Keep the `.typewriter-stage`, `.typewriter-container`, `.typewriter-text`, and `.typewriter-line` wrappers as-is so the hover reveal and cursor animation keep working.
+- You can refresh the line order or hint wording, but the block should remain the single hover path that reveals lines in sequence.
 
 ## Notes
 
-- AO3 work content does not support JavaScript.
-- The staged reveal should remain readable even if you add a few more lines.
-- `@keyframes` support should still be treated as AO3-unconfirmed until revalidated live.
+- AO3 work content does not run JavaScript; this effect is CSS only.
+- Make sure each staged line reads clearly, even if you add or remove lines.
+- Treat `@keyframes` support as AO3-unconfirmed until you validate it live.
 
 ## Validation
 
 - Use `preview.html` for a local visual check.
-- If the AO3-facing behavior changes, follow `docs/ao3-live-validation.md`.
+- If anything changes on AO3, follow `docs/ao3-live-validation.md` to revalidate.
