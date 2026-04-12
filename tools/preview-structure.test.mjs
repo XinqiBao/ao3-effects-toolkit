@@ -17,6 +17,9 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
   const polaroidCss = readFileSync(join(ROOT, 'effects', 'polaroid', 'work-skin.css'), 'utf8');
   const secretDividerExample = readFileSync(join(ROOT, 'effects', 'secret-divider', 'example.html'), 'utf8');
   const secretDividerCss = readFileSync(join(ROOT, 'effects', 'secret-divider', 'work-skin.css'), 'utf8');
+  const typewriterPreview = readFileSync(join(ROOT, 'effects', 'typewriter', 'preview.html'), 'utf8');
+  const typewriterExample = readFileSync(join(ROOT, 'effects', 'typewriter', 'example.html'), 'utf8');
+  const typewriterCss = readFileSync(join(ROOT, 'effects', 'typewriter', 'work-skin.css'), 'utf8');
 
   assert.equal(
     envelopePreview.includes('<div id="workskin" class='),
@@ -197,6 +200,46 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     polaroidPreview.includes('class="polaroid polaroid--hover"'),
     true,
     'polaroid preview should use the same published root contract as the example'
+  );
+  assert.equal(
+    typewriterPreview.includes('class="typewriter typewriter--hover"'),
+    true,
+    'typewriter preview should use typewriter itself as the published root class'
+  );
+  assert.equal(
+    typewriterExample.includes('class="typewriter typewriter--hover"'),
+    true,
+    'typewriter example should use typewriter itself as the published root class'
+  );
+  assert.equal(
+    typewriterExample.includes('typewriter-stage'),
+    false,
+    'typewriter example should not keep the old stage wrapper name'
+  );
+  assert.equal(
+    typewriterExample.includes('typewriter-container'),
+    false,
+    'typewriter example should not keep the old container wrapper name'
+  );
+  assert.equal(
+    typewriterExample.includes('class="lines"'),
+    true,
+    'typewriter example should use a short lines module name'
+  );
+  assert.equal(
+    typewriterCss.includes('.typewriter-stage'),
+    false,
+    'typewriter work skin should not keep the old stage selector'
+  );
+  assert.equal(
+    typewriterCss.includes('.typewriter-container'),
+    false,
+    'typewriter work skin should not keep the old container selector'
+  );
+  assert.equal(
+    typewriterCss.includes('#workskin .typewriter .line'),
+    true,
+    'typewriter work skin should scope short descendant module names through the root selector'
   );
   assert.equal(
     secretDividerExample.includes('secret-divider-container'),

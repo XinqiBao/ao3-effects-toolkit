@@ -9,12 +9,12 @@ Use these files from `effects/typewriter/`:
 ## Installation
 
 1. Copy `work-skin.css` into your AO3 work skin.
-2. From `example.html`, copy the hover block (`<div class="typewriter-stage">…`) and paste it into AO3's HTML editor.
-3. Replace the prompt, each `.typewriter-line`, and the hint text with your own copy.
+2. From `example.html`, copy the hover block (`<div class="typewriter typewriter--hover">…`) and paste it into AO3's HTML editor.
+3. Replace the prompt and each `.line` with your own copy.
 
 ## Customization
 
-- Keep the `.typewriter-stage`, `.typewriter-container`, `.typewriter-text`, and `.typewriter-line` wrappers as-is so the hover reveal and cursor animation keep working.
+- Keep the `.typewriter`, `.lines`, `.line`, and `.cursor-row` wrappers as-is so the hover reveal and cursor animation keep working.
 - You can refresh the line order or hint wording, but the block should remain the single hover path that reveals lines in sequence.
 
 ## Notes

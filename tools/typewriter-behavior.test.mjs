@@ -31,14 +31,14 @@ test('typewriter preview hover keeps the reveal area stable long enough to show 
       await page.waitForTimeout(350);
 
       const state = await page.evaluate(() => {
-        const container = document.querySelector('#workskin .typewriter--hover');
-        const firstLine = document.querySelector('#workskin .typewriter-line');
-        if (!container || !firstLine) {
+        const root = document.querySelector('#workskin .typewriter--hover');
+        const firstLine = document.querySelector('#workskin .typewriter .line');
+        if (!root || !firstLine) {
           throw new Error('typewriter preview markup is missing the hover container or first line');
         }
 
         return {
-          containerHeight: container.getBoundingClientRect().height,
+          containerHeight: root.getBoundingClientRect().height,
           lineOpacity: Number(getComputedStyle(firstLine).opacity),
           lineMaxHeight: getComputedStyle(firstLine).maxHeight,
         };

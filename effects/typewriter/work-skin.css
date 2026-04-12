@@ -3,11 +3,12 @@
    All selectors scoped under #workskin.
    ───────────────────────────────────────────────────────────── */
 
-/* ── Reset / Base ───────────────────────────────────────────── */
+/* ── Root and geometry ──────────────────────────────────────── */
 
-#workskin .typewriter-stage {
+#workskin .typewriter {
   position: relative;
   margin: 0 auto;
+  width: 100%;
   max-width: 680px;
   padding: 1.4em 1.2em 1.6em;
   background: #1a1a1a;
@@ -15,19 +16,21 @@
   box-shadow:
     0 8px 28px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  cursor: pointer;
 }
 
-#workskin .typewriter-container {
-  position: relative;
+#workskin .typewriter .prompt,
+#workskin .typewriter .lines,
+#workskin .typewriter .cursor-row {
   display: block;
   margin: 0 auto;
   width: 100%;
   max-width: 600px;
 }
 
-/* ── Prompt (initial preview text) ─────────────────────────── */
+/* ── Named modules ──────────────────────────────────────────── */
 
-#workskin .typewriter-prompt {
+#workskin .typewriter .prompt {
   display: block;
   overflow: hidden;
   max-height: 10em;
@@ -46,27 +49,22 @@
 }
 
 /* Fade the prompt out instead of removing the hover target immediately. */
-#workskin .typewriter--hover:hover .typewriter-prompt {
+#workskin .typewriter--hover:hover .prompt {
   max-height: 0;
   opacity: 0;
   padding-top: 0;
   padding-bottom: 0;
 }
 
-/* ── Text area ──────────────────────────────────────────────── */
-
-#workskin .typewriter-text {
+#workskin .typewriter .lines {
   position: relative;
-  display: block;
   font-family: "Courier New", Courier, "Lucida Sans Typewriter", monospace;
   color: #c8c8c8;
   font-size: 0.92em;
   line-height: 1.7;
 }
 
-/* ── Individual lines ───────────────────────────────────────── */
-
-#workskin .typewriter-line {
+#workskin .typewriter .line {
   display: block;
   max-height: 0;
   opacity: 0;
@@ -80,47 +78,45 @@
 }
 
 /* Per-line staggered delays on reveal */
-#workskin .typewriter--hover:hover .typewriter-line {
+#workskin .typewriter--hover:hover .line {
   max-height: 3.5em;
   opacity: 1;
   transform: translateY(0);
 }
 
-#workskin .typewriter--hover:hover .typewriter-line:nth-child(1) {
+#workskin .typewriter--hover:hover .line:nth-child(1) {
   transition-delay: 0.05s;
 }
 
-#workskin .typewriter--hover:hover .typewriter-line:nth-child(2) {
+#workskin .typewriter--hover:hover .line:nth-child(2) {
   transition-delay: 0.22s;
 }
 
-#workskin .typewriter--hover:hover .typewriter-line:nth-child(3) {
+#workskin .typewriter--hover:hover .line:nth-child(3) {
   transition-delay: 0.39s;
 }
 
-#workskin .typewriter--hover:hover .typewriter-line:nth-child(4) {
+#workskin .typewriter--hover:hover .line:nth-child(4) {
   transition-delay: 0.56s;
 }
 
-#workskin .typewriter--hover:hover .typewriter-line:nth-child(5) {
+#workskin .typewriter--hover:hover .line:nth-child(5) {
   transition-delay: 0.73s;
 }
 
-#workskin .typewriter--hover:hover .typewriter-line:nth-child(6) {
+#workskin .typewriter--hover:hover .line:nth-child(6) {
   transition-delay: 0.9s;
 }
 
-#workskin .typewriter--hover:hover .typewriter-line:nth-child(7) {
+#workskin .typewriter--hover:hover .line:nth-child(7) {
   transition-delay: 1.07s;
 }
 
-#workskin .typewriter--hover:hover .typewriter-line:nth-child(8) {
+#workskin .typewriter--hover:hover .line:nth-child(8) {
   transition-delay: 1.24s;
 }
 
-/* ── Cursor line wrapper ────────────────────────────────────── */
-
-#workskin .typewriter-cursor-wrapper {
+#workskin .typewriter .cursor-row {
   display: block;
   max-height: 0;
   opacity: 0;
@@ -130,15 +126,15 @@
     opacity 0.45s ease;
 }
 
-#workskin .typewriter--hover:hover .typewriter-cursor-wrapper {
+#workskin .typewriter--hover:hover .cursor-row {
   max-height: 2.4em;
   opacity: 1;
   transition-delay: 1.4s;
 }
 
-/* ── Blinking cursor ────────────────────────────────────────── */
+/* ── Motion ─────────────────────────────────────────────────── */
 
-#workskin .typewriter-cursor {
+#workskin .typewriter .cursor {
   display: inline-block;
   width: 0.6em;
   height: 1.15em;
@@ -154,10 +150,4 @@
   50%, 100% {
     opacity: 0;
   }
-}
-
-/* ── Trigger area (hover zone) ─────────────────────────────── */
-
-#workskin .typewriter--hover {
-  cursor: pointer;
 }
