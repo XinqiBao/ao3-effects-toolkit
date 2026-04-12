@@ -7,37 +7,6 @@
   <link rel="stylesheet" href="../_shared/preview-shell.css">
   <link rel="stylesheet" href="work-skin.css">
   <style>
-    #workskin .preview-card__stage-shell {
-      background:
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.7), transparent 46%),
-        linear-gradient(180deg, #f2e8da 0%, #eadccd 58%, #e1d0be 100%);
-    }
-
-    #workskin .preview-card__stage {
-      min-height: 320px;
-      align-items: flex-start;
-    }
-
-    #workskin .secret-divider-preview__page {
-      width: min(100%, 34rem);
-      margin: 0 auto;
-      padding: 26px 24px;
-      border: 1px solid rgba(108, 84, 62, 0.16);
-      border-radius: 18px;
-      background:
-        linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(244, 235, 223, 0.98)),
-        repeating-linear-gradient(
-          180deg,
-          transparent 0,
-          transparent 26px,
-          rgba(156, 128, 102, 0.08) 26px,
-          rgba(156, 128, 102, 0.08) 27px
-        );
-      box-shadow:
-        0 22px 38px rgba(88, 60, 42, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.58);
-    }
-
     #workskin .secret-divider-container {
       margin: 0;
     }
@@ -46,53 +15,23 @@
 <body>
 <main class="shell">
   <section class="hero">
-    <p class="hero__label">AO3 Effect Preview</p>
     <h1 class="hero__title">Secret Divider</h1>
-    <p class="hero__desc">A decorative divider that hides a short line of text.</p>
   </section>
   <div id="workskin">
-    <div class="grid">
-      <section class="preview-card preview-card--hover">
-        <p class="preview-card__label">Hover</p>
-        <p class="preview-card__note">Desktop-first interaction. Hover the divider to reveal the note.</p>
-        <div class="preview-card__stage-shell">
-          <div class="preview-card__stage">
-            <div class="secret-divider-preview__page">
-              <div class="secret-divider-container">
-                <div class="secret-divider secret-divider--hover secret-divider--with-flanks">
-                  <span class="secret-divider__ornament">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
-                  <span class="secret-divider__text">
-                    <span class="secret-divider__text-inner">A quiet sentence kept in the margin until the page is held still.</span>
-                  </span>
-                </div>
-              </div>
+    <section class="preview-card">
+      <div class="preview-card__stage-shell">
+        <div class="preview-card__stage">
+          <div class="secret-divider-container">
+            <div class="secret-divider secret-divider--hover secret-divider--with-flanks">
+              <span class="secret-divider__ornament">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
+              <span class="secret-divider__text">
+                <span class="secret-divider__text-inner">[Hidden note]&#10;Some lines can wait for readers who choose to linger.</span>
+              </span>
             </div>
           </div>
         </div>
-      </section>
-
-      <section class="preview-card preview-card--tap preview-card--mobile">
-        <p class="preview-card__label">Tap</p>
-        <p class="preview-card__note">Touch-first interaction. Tap the summary to reveal the same line.</p>
-        <div class="preview-card__stage-shell">
-          <div class="preview-card__stage">
-            <div class="secret-divider-preview__page">
-              <div class="secret-divider-container">
-                <details class="secret-divider secret-divider--details secret-divider--with-flanks">
-                  <summary class="secret-divider__summary">
-                    <span class="secret-divider__ornament">&#10044;&#160;&#160;&#8226;&#160;&#10043;&#160;&#160;&#8226;&#160;&#10044;</span>
-                    <span class="secret-divider__summary-hint">Tap to reveal</span>
-                  </summary>
-                  <span class="secret-divider__text">
-                    <span class="secret-divider__text-inner">A quiet sentence kept in the margin until the page is held still.</span>
-                  </span>
-                </details>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </main>
 </body>
