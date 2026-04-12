@@ -3,9 +3,9 @@
    All selectors scoped under #workskin
    ============================================================ */
 
-/* ---------- Container ---------- */
+/* ---------- Root and geometry ---------- */
 
-#workskin .chat-conversation {
+#workskin .chat {
   position: relative;
   max-width: 480px;
   margin: 0 auto;
@@ -15,16 +15,16 @@
   cursor: pointer;
 }
 
-/* ---------- Stack (full message list) ---------- */
+/* ---------- Shared parts ---------- */
 
-#workskin .chat-conversation__stack {
+#workskin .chat .stack {
   display: flex;
   flex-direction: column;
   padding: 10px 10px 8px;
 }
 
 /* Collapsed stack for the canonical hover path. */
-#workskin .chat-conversation--hover .chat-conversation__stack {
+#workskin .chat--hover .stack {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -32,15 +32,15 @@
   transition: max-height 0.5s ease, opacity 0.35s ease, padding 0.5s ease;
 }
 
-#workskin .chat-conversation--hover:hover .chat-conversation__stack {
+#workskin .chat--hover:hover .stack {
   max-height: 4000px;
   opacity: 1;
   padding: 10px 10px 8px;
 }
 
-/* ---------- Preview bar (collapsed state) ---------- */
+/* ---------- Named modules ---------- */
 
-#workskin .chat-preview {
+#workskin .chat .preview {
   display: flex;
   align-items: center;
   padding: 10px 14px;
@@ -50,20 +50,20 @@
     "Segoe UI", sans-serif;
 }
 
-#workskin .chat-conversation--hover:hover .chat-preview {
+#workskin .chat--hover:hover .preview {
   display: none;
 }
 
-#workskin .chat-preview__text {
+#workskin .chat .preview-copy {
   flex: 1;
 }
 
-#workskin .chat-preview__msg {
+#workskin .chat .preview-name {
   font-weight: 500;
   color: #333;
 }
 
-#workskin .chat-preview__chevron {
+#workskin .chat .preview-chevron {
   display: block;
   width: 10px;
   height: 10px;
@@ -73,31 +73,25 @@
   margin-left: 8px;
 }
 
-/* ---------- Bubbles container ---------- */
-
-#workskin .chat-bubbles {
+#workskin .chat .bubbles {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-top: 2px;
 }
 
-/* ---------- Chat meta (timestamp + bubbles) ---------- */
-
-#workskin .chat-meta {
+#workskin .chat .entry {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   margin-top: 12px;
 }
 
-#workskin .chat-meta:first-child {
+#workskin .chat .entry:first-child {
   margin-top: 0;
 }
 
-/* ---------- Timestamp ---------- */
-
-#workskin .chat-timestamp {
+#workskin .chat .time {
   display: block;
   width: 100%;
   text-align: left;
@@ -108,15 +102,13 @@
   padding: 2px 6px 4px 8px;
 }
 
-#workskin .chat-meta--sent .chat-timestamp {
+#workskin .chat .entry--sent .time {
   text-align: right;
   padding-right: 8px;
   padding-left: 6px;
 }
 
-/* ---------- Bubble ---------- */
-
-#workskin .chat-bubble {
+#workskin .chat .bubble {
   display: block;
   max-width: 78%;
   padding: 7px 12px 8px;
@@ -129,28 +121,27 @@
   overflow-wrap: break-word;
 }
 
-#workskin .chat-bubble:last-child {
+#workskin .chat .bubble:last-child {
   margin-bottom: 0;
 }
 
-/* Sent: green, right-aligned */
-#workskin .chat-bubble--sent {
+#workskin .chat .bubble--sent {
   background: #34C759;
   color: #fff;
   align-self: flex-end;
   border-radius: 18px 18px 4px 18px;
 }
 
-/* Received: light gray, left-aligned */
-#workskin .chat-bubble--received {
+#workskin .chat .bubble--received {
   background: #E9E9EB;
   color: #1c1c1e;
   align-self: flex-start;
   border-radius: 18px 18px 18px 4px;
 }
 
-/* Consecutive same-type bubbles */
-#workskin .chat-bubble--sent + .chat-bubble--sent,
-#workskin .chat-bubble--received + .chat-bubble--received {
+/* ---------- State and interaction ---------- */
+
+#workskin .chat .bubble--sent + .bubble--sent,
+#workskin .chat .bubble--received + .bubble--received {
   margin-top: 1px;
 }

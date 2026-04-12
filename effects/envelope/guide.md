@@ -22,7 +22,7 @@ You can change:
 - recipient line
 - the three text panels
 
-Do not rename or remove structural classes such as `trifold-letter`, `letter-cover`, `letter-top`, `letter-mid`, or `letter-bot`.
+Do not rename or remove structural classes such as `envelope`, `cover`, `panel`, `panel--top`, `panel--mid`, or `panel--bottom`.
 
 ## Notes
 

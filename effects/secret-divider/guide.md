@@ -10,7 +10,7 @@ Use these files from `effects/secret-divider/` as the single source of truth:
 
 1. Copy `work-skin.css` into your AO3 work skin.
 2. Copy the hover block from `example.html` and paste it into AO3's HTML editor.
-3. Replace the hidden text (inside `secret-divider__text-inner`) and, if desired, the ornament characters.
+3. Replace the hidden text (inside `.message`) and, if desired, the ornament characters.
 
 ## Canonical Hover
 

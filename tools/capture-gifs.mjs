@@ -34,17 +34,17 @@ const DEFAULT_CAPTURE = {
 export const EFFECTS = {
   envelope: {
     ...DEFAULT_CAPTURE,
-    hoverSelector: '#workskin .trifold-letter',
+    hoverSelector: '#workskin .envelope--hover',
     settleMs: 450,
     measureDurationMs: 1120,
   },
   'chat-messages': {
     ...DEFAULT_CAPTURE,
-    hoverSelector: '#workskin .chat-conversation--hover',
+    hoverSelector: '#workskin .chat--hover',
   },
   polaroid: {
     ...DEFAULT_CAPTURE,
-    hoverSelector: '#workskin .polaroid-card.polaroid--hover',
+    hoverSelector: '#workskin .polaroid--hover',
   },
   'secret-divider': {
     ...DEFAULT_CAPTURE,

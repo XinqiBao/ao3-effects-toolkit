@@ -6,16 +6,14 @@ This document records what has been confirmed against AO3 and what is still only
 
 Verified on 2026-04-04 against a logged-in AO3 account:
 
-- `effects/envelope/work-skin.css` can be saved as an AO3 work skin.
-- The current envelope canonical HTML structure derives from the previously validated envelope template path and now lives in `effects/envelope/example.html`.
-- The core `trifold-letter / letter-cover / letter-top / letter-mid / letter-bot` structure survives AO3's HTML filtering.
+- the pre-standardization `effects/envelope/work-skin.css` revision used on 2026-04-04 could be saved as an AO3 work skin
 - AO3 preserves `<details>` and `<summary>` in posted work HTML.
-- The mobile breakpoint at `<= 720px` preserves the intended fold offsets and alternating tilt.
 
 ## Verified Locally Only
 
-The following effects currently have local preview coverage but have not yet been revalidated against a live AO3 account after the repository simplification:
+The current published structures below have local preview coverage but have not yet been revalidated against a live AO3 account after the root-scoped structure standardization completed on 2026-04-12:
 
+- `effects/envelope/`
 - `effects/chat-messages/`
 - `effects/polaroid/`
 - `effects/secret-divider/`
