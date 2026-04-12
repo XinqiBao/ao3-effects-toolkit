@@ -28,76 +28,62 @@
   <section class="hero">
     <p class="hero__label">AO3 Effect Preview</p>
     <h1 class="hero__title">Chat Messages</h1>
-    <p class="hero__desc">A collapsed preview bar that expands into a longer exchange.</p>
   </section>
   <div id="workskin">
-    <div class="grid">
-      <section class="preview-card preview-card--hover">
-        <p class="preview-card__label">Hover</p>
-        <p class="preview-card__note">Desktop-first interaction. Hover the bar to reveal the thread.</p>
+    <div class="grid" style="--cols: 1;">
+      <section class="preview-card">
         <div class="preview-card__stage-shell">
           <div class="preview-card__stage">
             <div class="chat-conversation chat-conversation--hover">
               <div class="chat-preview">
-                <span class="chat-preview__text"><span class="chat-preview__msg">Mia</span></span>
+                <span class="chat-preview__text"><span class="chat-preview__msg">Mia</span> • 7 messages</span>
                 <span class="chat-preview__chevron"></span>
               </div>
               <div class="chat-conversation__stack">
                 <div class="chat-meta">
                   <span class="chat-timestamp">11:08 PM</span>
                   <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--received">Did you make it home?</span>
+                    <span class="chat-bubble chat-bubble--received">You make it home?</span>
                   </div>
                 </div>
                 <div class="chat-meta chat-meta--sent">
                   <span class="chat-timestamp">11:11 PM</span>
                   <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--sent">Barely.</span>
-                    <span class="chat-bubble chat-bubble--sent">You had one more sentence, didn't you?</span>
+                    <span class="chat-bubble chat-bubble--sent">Just got in.</span>
+                    <span class="chat-bubble chat-bubble--sent">You were about to say something.</span>
                   </div>
                 </div>
                 <div class="chat-meta">
+                  <span class="chat-timestamp">11:13 PM</span>
+                  <div class="chat-bubbles">
+                    <span class="chat-bubble chat-bubble--received">Maybe.</span>
+                    <span class="chat-bubble chat-bubble--received">But not here.</span>
+                  </div>
+                </div>
+                <div class="chat-meta chat-meta--sent">
                   <span class="chat-timestamp">11:14 PM</span>
                   <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--received">I did.</span>
-                    <span class="chat-bubble chat-bubble--received">Hover if you want the rest of it.</span>
+                    <span class="chat-bubble chat-bubble--sent">Then where?</span>
+                  </div>
+                </div>
+                <div class="chat-meta">
+                  <span class="chat-timestamp">11:15 PM</span>
+                  <div class="chat-bubbles">
+                    <span class="chat-bubble chat-bubble--received">Same place as last time.</span>
+                    <span class="chat-bubble chat-bubble--received">Bring the red notebook.</span>
+                  </div>
+                </div>
+                <div class="chat-meta chat-meta--sent">
+                  <span class="chat-timestamp">11:17 PM</span>
+                  <div class="chat-bubbles">
+                    <span class="chat-bubble chat-bubble--sent">On my way.</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <section class="preview-card preview-card--tap preview-card--mobile">
-        <p class="preview-card__label">Tap</p>
-        <p class="preview-card__note">Touch-first interaction. Tap the summary to open the same conversation.</p>
-        <div class="preview-card__stage-shell">
-          <div class="preview-card__stage">
-            <details class="chat-conversation chat-conversation--details">
-              <summary class="chat-conversation__tapper">
-                <div class="chat-preview">
-                  <span class="chat-preview__text"><span class="chat-preview__msg">Mia</span></span>
-                  <span class="chat-preview__chevron"></span>
-                </div>
-                <div class="chat-conversation__stack">
-                <div class="chat-meta">
-                  <span class="chat-timestamp">11:08 PM</span>
-                  <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--received">Did you make it home?</span>
-                  </div>
-                </div>
-                <div class="chat-meta chat-meta--sent">
-                  <span class="chat-timestamp">11:11 PM</span>
-                  <div class="chat-bubbles">
-                    <span class="chat-bubble chat-bubble--sent">Barely.</span>
-                  </div>
-                </div>
-                </div>
-              </summary>
-            </details>
-          </div>
-        </div>
+        <p class="preview-card__hint">Hover the bar to expand the thread.</p>
       </section>
     </div>
   </div>
