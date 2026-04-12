@@ -7,21 +7,21 @@
   <link rel="stylesheet" href="../_shared/preview-shell.css">
   <link rel="stylesheet" href="work-skin.css">
   <style>
-    #workskin.polaroid-preview {
+    #workskin {
       width: min(260px, 100%);
       margin: 0 auto;
       padding: 12px 20px 28px;
     }
 
     /* Preview-only presentation helper: use a real photo without changing the published markup. */
-    #workskin.polaroid-preview .polaroid-image {
+    #workskin .polaroid-image {
       background:
         url("../../assets/preview-media/polaroid-photo-a.jpg") center 20% / cover no-repeat,
         linear-gradient(135deg, #fdf6ee 0%, #d8cdbf 35%, #b09d7f 65%, #7c634d 100%);
     }
 
     @media (forced-colors: active) {
-      #workskin.polaroid-preview .polaroid-image {
+      #workskin .polaroid-image {
         background: Canvas;
         border: 1px solid CanvasText;
         box-shadow: none;
@@ -37,7 +37,7 @@
     <h1 class="hero__title">Polaroid</h1>
     <p class="hero__desc">A single print that flips to reveal the note on the back.</p>
   </section>
-  <div id="workskin" class="polaroid-preview">
+  <div id="workskin">
     <div class="polaroid-container">
       <div class="polaroid-inner polaroid--hover">
         <span class="polaroid-front">

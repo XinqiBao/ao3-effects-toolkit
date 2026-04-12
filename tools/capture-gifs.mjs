@@ -34,15 +34,10 @@ const DEFAULT_CAPTURE = {
 export const EFFECTS = {
   envelope: {
     ...DEFAULT_CAPTURE,
-    captureSelector: '#workskin',
-    hoverSelector: '#workskin.envelope-preview .trifold-letter',
+    hoverSelector: '#workskin .trifold-letter',
     viewport: { width: 1400, height: 1600 },
-    outputWidth: 488,
     settleMs: 450,
-    fps: 10,
     measureDurationMs: 1120,
-    sampleIntervalMs: 80,
-    durationMs: 4000,
   },
   'chat-messages': {
     ...DEFAULT_CAPTURE,

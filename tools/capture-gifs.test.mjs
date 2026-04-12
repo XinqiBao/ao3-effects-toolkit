@@ -173,5 +173,10 @@ test('lean preview capture config uses #workskin and effect-local hover selector
       false,
       `${name} should not depend on preview-card wrappers`
     );
+    assert.equal(
+      effect.hoverSelector.includes('#workskin.'),
+      false,
+      `${name} should not depend on preview-only #workskin classes`
+    );
   }
 });
