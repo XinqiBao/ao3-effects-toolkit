@@ -15,15 +15,6 @@
   cursor: pointer;
 }
 
-/* ---------- Details/summary — hide default marker ---------- */
-
-#workskin details.chat-conversation--details summary::-webkit-details-marker,
-#workskin details.chat-conversation--details::marker,
-#workskin details.chat-conversation--details summary::marker {
-  display: none !important;
-  content: "" !important;
-}
-
 /* ---------- Stack (full message list) ---------- */
 
 #workskin .chat-conversation__stack {
@@ -32,30 +23,17 @@
   padding: 10px 10px 8px;
 }
 
-/* Hover mode: stack is hidden until hover */
-#workskin .chat-conversation--hover .chat-conversation__stack {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  padding: 0 10px;
-  transition: max-height 0.5s ease, opacity 0.35s ease, padding 0.5s ease;
-}
-
-#workskin .chat-conversation--hover:hover .chat-conversation__stack {
-  max-height: 4000px;
-  opacity: 1;
-  padding: 10px 10px 8px;
-}
-
-/* Tap mode: stack is hidden until details[open] */
+/* Collapsed stack (canonical hover; tap fallback uses the same collapsed/expanded primitives). */
+#workskin .chat-conversation--hover .chat-conversation__stack,
 #workskin .chat-conversation--details .chat-conversation__stack {
+  overflow: hidden;
   max-height: 0;
   opacity: 0;
-  overflow: hidden;
   padding: 0 10px;
   transition: max-height 0.5s ease, opacity 0.35s ease, padding 0.5s ease;
 }
 
+#workskin .chat-conversation--hover:hover .chat-conversation__stack,
 #workskin .chat-conversation--details[open] .chat-conversation__stack {
   max-height: 4000px;
   opacity: 1;
@@ -74,12 +52,7 @@
     "Segoe UI", sans-serif;
 }
 
-/* Hover mode: hide preview when hovered */
-#workskin .chat-conversation--hover:hover .chat-preview {
-  display: none;
-}
-
-/* Tap mode: hide preview when open */
+#workskin .chat-conversation--hover:hover .chat-preview,
 #workskin .chat-conversation--details[open] .chat-preview {
   display: none;
 }
@@ -108,6 +81,8 @@
 #workskin .chat-bubbles {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin-top: 2px;
 }
 
 /* ---------- Chat meta (timestamp + bubbles) ---------- */
@@ -115,8 +90,8 @@
 #workskin .chat-meta {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-top: 10px;
+  align-items: stretch;
+  margin-top: 12px;
 }
 
 #workskin .chat-meta:first-child {
@@ -126,11 +101,20 @@
 /* ---------- Timestamp ---------- */
 
 #workskin .chat-timestamp {
+  display: block;
+  width: 100%;
+  text-align: left;
   font-size: 0.65em;
   color: #8e8e93;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
     "Segoe UI", sans-serif;
   padding: 2px 6px 4px 8px;
+}
+
+#workskin .chat-meta--sent .chat-timestamp {
+  text-align: right;
+  padding-right: 8px;
+  padding-left: 6px;
 }
 
 /* ---------- Bubble ---------- */
@@ -143,9 +127,13 @@
     "Segoe UI", sans-serif;
   font-size: 0.88em;
   line-height: 1.38;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+#workskin .chat-bubble:last-child {
+  margin-bottom: 0;
 }
 
 /* Sent: green, right-aligned */
@@ -167,8 +155,16 @@
 /* Consecutive same-type bubbles */
 #workskin .chat-bubble--sent + .chat-bubble--sent,
 #workskin .chat-bubble--received + .chat-bubble--received {
-  margin-top: -1px;
-  padding-top: 6px;
+  margin-top: 1px;
+}
+
+/* ---------- Tap fallback (non-canonical) ---------- */
+
+#workskin details.chat-conversation--details summary::-webkit-details-marker,
+#workskin details.chat-conversation--details::marker,
+#workskin details.chat-conversation--details summary::marker {
+  display: none !important;
+  content: "" !important;
 }
 
 /* ---------- Mobile responsive ---------- */
@@ -204,5 +200,9 @@
   #workskin .chat-timestamp {
     font-size: 0.62em;
     padding-left: 6px;
+  }
+
+  #workskin .chat-meta--sent .chat-timestamp {
+    padding-right: 6px;
   }
 }
