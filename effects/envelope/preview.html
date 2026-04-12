@@ -11,33 +11,6 @@
       width: 640px;
       height: 640px;
     }
-
-    /* Preview-only presentation helper: overlay the stamp art without deleting the published text/border fallback. */
-    #workskin .envelope .stamp {
-      overflow: hidden;
-    }
-
-    #workskin .envelope .stamp::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: transparent url("../../assets/preview-media/envelope-stamp.png") center / contain no-repeat;
-      pointer-events: none;
-    }
-
-    @media (forced-colors: active) {
-      #workskin .envelope .stamp {
-        background: Canvas;
-        border: 1px solid CanvasText;
-        box-shadow: none;
-        color: CanvasText;
-      }
-
-      #workskin .envelope .stamp::after {
-        content: none;
-      }
-    }
   </style>
 </head>
 <body>
@@ -52,7 +25,9 @@
       <span class="cover">
         <span class="cover-copy">
           <span class="from">E. Voss&#10;Rain File&#10;October</span>
-          <span class="stamp">AO3</span>
+          <span class="stamp">
+            <img src="../../assets/preview-media/envelope-stamp.png" alt="Decorative stamp preview">
+          </span>
           <span class="to">Filed for the intended reader</span>
         </span>
       </span>

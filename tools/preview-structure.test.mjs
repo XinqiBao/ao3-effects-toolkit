@@ -33,6 +33,11 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'envelope preview should use envelope itself as the published root class'
   );
   assert.equal(
+    envelopePreview.includes('../../assets/preview-media/envelope-stamp.png'),
+    true,
+    'envelope preview should demonstrate the image-rich state through the published stamp slot'
+  );
+  assert.equal(
     envelopeCss.includes('.trifold-letter'),
     false,
     'envelope work skin should not keep the old root selector name'
@@ -53,9 +58,19 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'envelope work skin should model fold layers with panel modifiers'
   );
   assert.equal(
+    envelopeCss.includes('#workskin .envelope .stamp img'),
+    true,
+    'envelope work skin should support an optional image inside the stamp slot'
+  );
+  assert.equal(
     chatPreview.includes('class="chat chat--hover"'),
     true,
     'chat preview should use chat itself as the published root class'
+  );
+  assert.equal(
+    chatPreview.includes('#workskin .chat {'),
+    false,
+    'chat preview should not keep a cosmetic preview-only root override'
   );
   assert.equal(
     chatExample.includes('class="chat chat--hover"'),
@@ -203,6 +218,16 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'polaroid preview should use the same published root contract as the example'
   );
   assert.equal(
+    polaroidPreview.includes('../../assets/preview-media/polaroid-photo-a.jpg'),
+    true,
+    'polaroid preview should demonstrate the image-rich state through the published photo slot'
+  );
+  assert.equal(
+    polaroidCss.includes('#workskin .polaroid .photo img'),
+    true,
+    'polaroid work skin should support an optional image inside the photo slot'
+  );
+  assert.equal(
     typewriterPreview.includes('class="typewriter typewriter--hover"'),
     true,
     'typewriter preview should use typewriter itself as the published root class'
@@ -251,6 +276,11 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     secretDividerPreview.includes('class="secret-divider secret-divider--hover secret-divider--with-flanks"'),
     true,
     'secret-divider preview should keep the published root and modifier contract'
+  );
+  assert.equal(
+    secretDividerPreview.includes('#workskin .secret-divider { margin: 0;'),
+    false,
+    'secret-divider preview should not keep a cosmetic margin reset'
   );
   assert.equal(
     secretDividerExample.includes('secret-divider__ornament'),

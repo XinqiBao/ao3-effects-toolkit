@@ -13,6 +13,8 @@ Use these files from `effects/envelope/`:
 3. Paste that block into AO3's HTML editor.
 4. Replace the placeholder text with your own content.
 
+If you want a real stamp image on AO3, replace the default text-only stamp with the optional `<img>` snippet shown in `example.html`.
+
 ## Edit Carefully
 
 You can change:
@@ -21,6 +23,7 @@ You can change:
 - address lines
 - recipient line
 - the three text panels
+- the optional stamp image URL, if you choose to use one
 
 Do not rename or remove structural classes such as `envelope`, `cover`, `panel`, `panel--top`, `panel--mid`, or `panel--bottom`.
 
@@ -28,6 +31,8 @@ Do not rename or remove structural classes such as `envelope`, `cover`, `panel`,
 
 - AO3 work content does not support JavaScript.
 - This effect works best with short text on each fold.
+- The default example works with no image at all; the text stamp is the built-in fallback.
+- AO3 does not host work images for you. If you use an image stamp, point `src` to a stable external direct image URL.
 - If creator styles are disabled, the underlying text still needs to read sensibly.
 
 ## Validation

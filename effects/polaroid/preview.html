@@ -10,22 +10,6 @@
     #workskin {
       width: 260px;
     }
-
-    /* Preview-only presentation helper: use a real photo without changing the published markup. */
-    #workskin .polaroid .photo {
-      background:
-        url("../../assets/preview-media/polaroid-photo-a.jpg") center 20% / cover no-repeat,
-        linear-gradient(135deg, #fdf6ee 0%, #d8cdbf 35%, #b09d7f 65%, #7c634d 100%);
-    }
-
-    @media (forced-colors: active) {
-      #workskin .polaroid .photo {
-        background: Canvas;
-        border: 1px solid CanvasText;
-        box-shadow: none;
-        filter: none;
-      }
-    }
   </style>
 </head>
 <body>
@@ -39,7 +23,9 @@
     <div class="polaroid polaroid--hover">
       <span class="front">
         <span class="frame"></span>
-        <span class="photo"></span>
+        <span class="photo">
+          <img src="../../assets/preview-media/polaroid-photo-a.jpg" alt="Preview portrait">
+        </span>
         <span class="caption">studio portrait</span>
       </span>
       <span class="back">
