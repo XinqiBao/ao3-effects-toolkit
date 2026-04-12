@@ -8,28 +8,215 @@
  *   node tools/capture-gifs.mjs            # all effects
  *   node tools/capture-gifs.mjs envelope   # one effect
  */
-import { chromium } from 'playwright';
 import { execSync } from 'child_process';
-import { mkdirSync, rmSync, existsSync } from 'fs';
 import { once } from 'events';
-import { join, dirname } from 'path';
+import { createServer } from 'http';
+import { existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
+import { chromium } from 'playwright';
+import { extname, join, dirname, resolve, sep } from 'path';
 import { fileURLToPath } from 'url';
-import { measureCaptureClip, resetCaptureState } from './capture-gif-clip.mjs';
-import { EFFECTS } from './capture-gif-config.mjs';
-import { startCaptureServer } from './capture-server.mjs';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const root = join(__dir, '..');
+const THIS_FILE = fileURLToPath(import.meta.url);
+
+export const EFFECTS = {
+  envelope: {
+    captureSelector: '#workskin.envelope-preview',
+    hoverSelector: '#workskin.envelope-preview .trifold-letter',
+    viewport: { width: 1400, height: 1600 },
+    outputWidth: 488,
+    settleMs: 450,
+    fps: 10,
+    measureDurationMs: 1120,
+    sampleIntervalMs: 80,
+    durationMs: 4000,
+  },
+  'chat-messages': {
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .chat-conversation--hover',
+    viewport: { width: 1400, height: 1200 },
+    outputWidth: 488,
+    settleMs: 400,
+    fps: 10,
+    measureDurationMs: 720,
+    sampleIntervalMs: 80,
+    durationMs: 4000,
+  },
+  polaroid: {
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .polaroid-inner.polaroid--hover',
+    viewport: { width: 1400, height: 1200 },
+    outputWidth: 488,
+    settleMs: 400,
+    fps: 10,
+    measureDurationMs: 720,
+    sampleIntervalMs: 80,
+    durationMs: 4000,
+  },
+  'secret-divider': {
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .secret-divider--hover',
+    viewport: { width: 1400, height: 1200 },
+    outputWidth: 488,
+    settleMs: 400,
+    fps: 10,
+    measureDurationMs: 720,
+    sampleIntervalMs: 80,
+    durationMs: 4000,
+  },
+  typewriter: {
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .typewriter--hover',
+    viewport: { width: 1400, height: 1400 },
+    outputWidth: 488,
+    settleMs: 450,
+    fps: 10,
+    measureDurationMs: 1120,
+    sampleIntervalMs: 80,
+    durationMs: 4500,
+  },
+};
+
+const MIME = {
+  '.html': 'text/html',
+  '.css': 'text/css',
+  '.js': 'text/javascript',
+  '.mjs': 'text/javascript',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+};
+
+function evenCeil(value) {
+  const rounded = Math.ceil(value);
+  return rounded % 2 === 0 ? rounded : rounded + 1;
+}
+
+export function computeClipRect(...boxes) {
+  const definedBoxes = boxes.filter(Boolean);
+  if (definedBoxes.length === 0) {
+    throw new Error('computeClipRect requires at least one bounding box');
+  }
+
+  const left = Math.min(...definedBoxes.map((box) => box.x));
+  const top = Math.min(...definedBoxes.map((box) => box.y));
+  const right = Math.max(...definedBoxes.map((box) => box.x + box.width));
+  const bottom = Math.max(...definedBoxes.map((box) => box.y + box.height));
+
+  const x = Math.floor(left);
+  const y = Math.floor(top);
+
+  return {
+    x,
+    y,
+    width: evenCeil(right - x),
+    height: evenCeil(bottom - y),
+  };
+}
+
+export async function measureCaptureClip(page, options) {
+  const {
+    captureSelector,
+    hoverSelector = captureSelector,
+    measureDurationMs = 320,
+    sampleIntervalMs = 80,
+    resetMs = 120,
+  } = options;
+
+  const captureEl = page.locator(captureSelector).first();
+  const interactionEl = hoverSelector ? page.locator(hoverSelector).first() : null;
+
+  await captureEl.waitFor({ state: 'visible' });
+  if (interactionEl) {
+    await interactionEl.waitFor({ state: 'visible' });
+  }
+
+  const closedBox = await captureEl.boundingBox();
+  if (!closedBox) {
+    throw new Error(`Element not found: ${captureSelector}`);
+  }
+
+  if (interactionEl) {
+    await interactionEl.hover({ force: true });
+  }
+  const boxes = [closedBox];
+
+  let elapsed = 0;
+  while (elapsed < measureDurationMs) {
+    const waitMs = Math.min(sampleIntervalMs, measureDurationMs - elapsed);
+    await page.waitForTimeout(waitMs);
+    elapsed += waitMs;
+
+    const sampledBox = await captureEl.boundingBox();
+    if (sampledBox) {
+      boxes.push(sampledBox);
+    }
+  }
+
+  if (interactionEl) {
+    await page.mouse.move(0, 0);
+  }
+  await page.waitForTimeout(resetMs);
+
+  return computeClipRect(...boxes);
+}
+
+export async function resetCaptureState(page, pageUrl, settleMs = 0) {
+  await page.goto(pageUrl);
+  if (settleMs > 0) {
+    await page.waitForTimeout(settleMs);
+  }
+}
+
+export function contentTypeForPath(filePath) {
+  return MIME[extname(filePath)] || 'application/octet-stream';
+}
+
+export function resolveRequestPath(rootPath, requestUrl) {
+  const pathname = decodeURIComponent(requestUrl.split('?')[0] || '/');
+  const filePath = resolve(rootPath, `.${pathname}`);
+  const rootPrefix = rootPath.endsWith(sep) ? rootPath : `${rootPath}${sep}`;
+
+  return filePath === rootPath || filePath.startsWith(rootPrefix) ? filePath : null;
+}
+
+export function startCaptureServer(rootPath, port) {
+  const server = createServer((req, res) => {
+    try {
+      const filePath = resolveRequestPath(rootPath, req.url || '/');
+      if (!filePath) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+      }
+
+      const data = readFileSync(filePath);
+      res.writeHead(200, { 'Content-Type': contentTypeForPath(filePath) });
+      res.end(data);
+    } catch (error) {
+      if (error instanceof URIError) {
+        res.writeHead(400);
+        res.end('Bad Request');
+        return;
+      }
+
+      res.writeHead(404);
+      res.end('Not found');
+    }
+  });
+
+  server.listen(port);
+  return server;
+}
 
 async function captureEffect(page, name, cfg) {
-  const canonicalSelector = cfg.targetSelector ?? cfg.captureSelector ?? cfg.hoverSelector;
-  if (!canonicalSelector) {
-    throw new Error(`Missing target selector for effect ${name}`);
+  const { captureSelector, hoverSelector = captureSelector, fps, durationMs } = cfg;
+  if (!captureSelector) {
+    throw new Error(`Missing capture selector for effect ${name}`);
   }
-  const captureSelector = cfg.captureSelector ?? canonicalSelector;
-  const hoverSelector = cfg.hoverSelector ?? canonicalSelector;
-  const fps = cfg.fps;
-  const durationMs = cfg.durationMs;
+
   const interval = Math.round(1000 / fps);
   const totalFrames = Math.floor(durationMs / interval);
   const hoverInFrame  = Math.floor(totalFrames * 0.15);
@@ -39,7 +226,7 @@ async function captureEffect(page, name, cfg) {
   if (existsSync(framesDir)) rmSync(framesDir, { recursive: true });
   mkdirSync(framesDir, { recursive: true });
 
-  const pageUrl = `http://localhost:${cfg.port}/effects/${name}/preview.html`;
+  const pageUrl = `http://127.0.0.1:${cfg.port}/effects/${name}/preview.html`;
   await resetCaptureState(page, pageUrl, cfg.settleMs);
   const clip = await measureCaptureClip(page, {
     captureSelector,
@@ -86,8 +273,8 @@ function buildGif(framesDir, outputPath, fps, outputWidth) {
   );
 }
 
-async function main() {
-  const target = process.argv[2];
+export async function main(argv = process.argv.slice(2)) {
+  const target = argv[0];
   if (target && !EFFECTS[target]) {
     console.error(`Unknown effect: ${target}\nValid: ${Object.keys(EFFECTS).join(', ')}`);
     process.exit(1);
@@ -120,4 +307,9 @@ async function main() {
   }
 }
 
-main().catch(e => { console.error(e.message); process.exit(1); });
+if (process.argv[1] && resolve(process.argv[1]) === THIS_FILE) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exit(1);
+  });
+}

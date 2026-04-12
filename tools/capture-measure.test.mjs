@@ -4,16 +4,13 @@ import { once } from 'node:events';
 import { chromium } from 'playwright';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { measureCaptureClip, resetCaptureState } from './capture-gif-clip.mjs';
-import { EFFECTS } from './capture-gif-config.mjs';
-import { startCaptureServer } from './capture-server.mjs';
+import { EFFECTS, measureCaptureClip, resetCaptureState, startCaptureServer } from './capture-gifs.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 test('chat capture measurement includes the expanded conversation height', async () => {
   const effect = EFFECTS['chat-messages'];
-  const selector = effect.targetSelector ?? effect.captureSelector ?? effect.hoverSelector;
-  assert.ok(selector, 'chat-messages should expose a deterministic hover target');
+  assert.ok(effect.hoverSelector, 'chat-messages should expose a deterministic hover target');
 
   const server = startCaptureServer(ROOT, 0);
   await once(server, 'listening');
@@ -30,8 +27,8 @@ test('chat capture measurement includes the expanded conversation height', async
     await resetCaptureState(page, url, effect.settleMs);
 
     const clip = await measureCaptureClip(page, {
-      captureSelector: selector,
-      hoverSelector: selector,
+      captureSelector: effect.captureSelector,
+      hoverSelector: effect.hoverSelector,
       measureDurationMs: effect.measureDurationMs,
       sampleIntervalMs: effect.sampleIntervalMs,
       resetMs: 100,
