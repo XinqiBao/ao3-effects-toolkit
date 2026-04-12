@@ -34,7 +34,7 @@ const DEFAULT_CAPTURE = {
 export const EFFECTS = {
   envelope: {
     ...DEFAULT_CAPTURE,
-    hoverSelector: '#workskin .trifold-letter',
+    hoverSelector: '#workskin .envelope--hover',
     settleMs: 450,
     measureDurationMs: 1120,
   },

@@ -24,6 +24,31 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'envelope preview should not require a preview-only class on #workskin'
   );
   assert.equal(
+    envelopePreview.includes('class="envelope envelope--hover"'),
+    true,
+    'envelope preview should use envelope itself as the published root class'
+  );
+  assert.equal(
+    envelopeCss.includes('.trifold-letter'),
+    false,
+    'envelope work skin should not keep the old root selector name'
+  );
+  assert.equal(
+    envelopeCss.includes('.letter-top'),
+    false,
+    'envelope work skin should not keep separate top panel naming once panel modifiers are introduced'
+  );
+  assert.equal(
+    envelopeCss.includes('#workskin .envelope .panel'),
+    true,
+    'envelope work skin should scope panel modules through the envelope root selector'
+  );
+  assert.equal(
+    envelopeCss.includes('.panel--top'),
+    true,
+    'envelope work skin should model fold layers with panel modifiers'
+  );
+  assert.equal(
     chatPreview.includes('class="chat chat--hover"'),
     true,
     'chat preview should use chat itself as the published root class'

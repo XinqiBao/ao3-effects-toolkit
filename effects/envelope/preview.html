@@ -13,11 +13,11 @@
     }
 
     /* Preview-only presentation helper: overlay the stamp art without deleting the published text/border fallback. */
-    #workskin .letter-stamp {
+    #workskin .envelope .stamp {
       overflow: hidden;
     }
 
-    #workskin .letter-stamp::after {
+    #workskin .envelope .stamp::after {
       content: "";
       position: absolute;
       inset: 0;
@@ -27,14 +27,14 @@
     }
 
     @media (forced-colors: active) {
-      #workskin .letter-stamp {
+      #workskin .envelope .stamp {
         background: Canvas;
         border: 1px solid CanvasText;
         box-shadow: none;
         color: CanvasText;
       }
 
-      #workskin .letter-stamp::after {
+      #workskin .envelope .stamp::after {
         content: none;
       }
     }
@@ -48,27 +48,27 @@
     <p class="hero__desc">A trifold letter that starts as a sealed cover, then opens into three folded pages for the note inside.</p>
   </section>
   <div id="workskin">
-    <div class="trifold-letter">
-      <span class="letter-cover">
-        <span class="letter-cover-text">
-          <span class="letter-from">E. Voss&#10;Rain File&#10;October</span>
-          <span class="letter-stamp">AO3</span>
-          <span class="letter-to">Filed for the intended reader</span>
+    <div class="envelope envelope--hover">
+      <span class="cover">
+        <span class="cover-copy">
+          <span class="from">E. Voss&#10;Rain File&#10;October</span>
+          <span class="stamp">AO3</span>
+          <span class="to">Filed for the intended reader</span>
         </span>
       </span>
-      <span class="letter-top">
-        <span class="letter-top-text">
-          <span class="letter-body">I kept the first page short so the archive would hold it without complaint.</span>
+      <span class="panel panel--top">
+        <span class="panel-copy">
+          <span class="body">I kept the first page short so the archive would hold it without complaint.</span>
         </span>
       </span>
-      <span class="letter-mid">
-        <span class="letter-mid-text">
-          <span class="letter-body">The second fold keeps the weather and the unsent part of the note together.</span>
+      <span class="panel panel--mid">
+        <span class="panel-copy">
+          <span class="body">The second fold keeps the weather and the unsent part of the note together.</span>
         </span>
       </span>
-      <span class="letter-bot">
-        <span class="letter-bot-text">
-          <span class="letter-body">The last leaf names what was left unsaid, then lets the paper carry it.</span>
+      <span class="panel panel--bottom">
+        <span class="panel-copy">
+          <span class="body">The last leaf names what was left unsaid, then lets the paper carry it.</span>
         </span>
       </span>
     </div>
