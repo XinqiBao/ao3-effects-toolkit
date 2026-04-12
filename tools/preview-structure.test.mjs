@@ -7,6 +7,9 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 test('lean preview and example markup avoid obsolete wrapper-only classes', () => {
+  const chatPreview = readFileSync(join(ROOT, 'effects', 'chat-messages', 'preview.html'), 'utf8');
+  const chatExample = readFileSync(join(ROOT, 'effects', 'chat-messages', 'example.html'), 'utf8');
+  const chatCss = readFileSync(join(ROOT, 'effects', 'chat-messages', 'work-skin.css'), 'utf8');
   const envelopePreview = readFileSync(join(ROOT, 'effects', 'envelope', 'preview.html'), 'utf8');
   const envelopeCss = readFileSync(join(ROOT, 'effects', 'envelope', 'work-skin.css'), 'utf8');
   const polaroidPreview = readFileSync(join(ROOT, 'effects', 'polaroid', 'preview.html'), 'utf8');
@@ -19,6 +22,61 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     envelopePreview.includes('<div id="workskin" class='),
     false,
     'envelope preview should not require a preview-only class on #workskin'
+  );
+  assert.equal(
+    chatPreview.includes('class="chat chat--hover"'),
+    true,
+    'chat preview should use chat itself as the published root class'
+  );
+  assert.equal(
+    chatExample.includes('class="chat chat--hover"'),
+    true,
+    'chat example should use chat itself as the published root class'
+  );
+  assert.equal(
+    chatExample.includes('chat-conversation'),
+    false,
+    'chat example should not keep the old conversation root name'
+  );
+  assert.equal(
+    chatExample.includes('chat-meta'),
+    false,
+    'chat example should not keep the old entry wrapper name'
+  );
+  assert.equal(
+    chatExample.includes('class="preview"'),
+    true,
+    'chat example should use a short preview module name'
+  );
+  assert.equal(
+    chatExample.includes('class="stack"'),
+    true,
+    'chat example should use a short stack module name'
+  );
+  assert.equal(
+    chatExample.includes('class="entry entry--sent"'),
+    true,
+    'chat example should model sent exchanges as entry modifiers'
+  );
+  assert.equal(
+    chatExample.includes('class="bubble bubble--received"'),
+    true,
+    'chat example should keep received bubbles through base-plus-modifier naming'
+  );
+  assert.equal(
+    chatCss.includes('.chat-conversation'),
+    false,
+    'chat work skin should not keep the old conversation selectors'
+  );
+  assert.equal(
+    chatCss.includes('.chat-meta'),
+    false,
+    'chat work skin should not keep the old entry selectors'
+  );
+  assert.equal(
+    chatCss.includes('#workskin .chat .preview'),
+    true,
+    'chat work skin should scope short descendant module names through the root selector'
   );
   assert.equal(
     polaroidPreview.includes('<div id="workskin" class='),

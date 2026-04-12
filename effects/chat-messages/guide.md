@@ -20,13 +20,13 @@ You can change:
 - timestamps
 - message text
 
-Do not rename or remove structural wrappers such as `chat-conversation`, `chat-meta`, or `chat-bubble`.
+Do not rename or remove structural wrappers such as `chat`, `entry`, or `bubble`.
 
 ## Notes
 
 - AO3 work content does not support JavaScript.
 - The conversation should still read sensibly as plain text if creator styles are disabled.
-- Duplicate a full `chat-meta` block to add additional exchanges.
+- Duplicate a full `entry` block to add additional exchanges.
 - Use `preview.html` to confirm the hover layout mirrors `example.html`.
 
 ## Validation

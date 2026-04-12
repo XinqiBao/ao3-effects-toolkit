@@ -40,7 +40,7 @@ export const EFFECTS = {
   },
   'chat-messages': {
     ...DEFAULT_CAPTURE,
-    hoverSelector: '#workskin .chat-conversation--hover',
+    hoverSelector: '#workskin .chat--hover',
   },
   polaroid: {
     ...DEFAULT_CAPTURE,
