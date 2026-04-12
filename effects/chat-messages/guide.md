@@ -9,14 +9,8 @@ Use these files from `effects/chat-messages/`:
 ## Quick Start
 
 1. Copy `work-skin.css` into your AO3 work skin.
-2. Open `example.html` and choose the hover block or the tap block.
-3. Paste the chosen block into AO3's HTML editor.
-4. Replace the sample names, timestamps, and message text.
-
-## Choose A Block
-
-- Use the hover block for desktop-first reading.
-- Use the tap block for touch-first reading.
+2. Copy the canonical hover-only block from `example.html` (top section) into AO3's HTML editor.
+3. Replace the sample names, timestamps, and message text with your own content.
 
 ## Edit Carefully
 
@@ -32,7 +26,8 @@ Do not rename or remove structural wrappers such as `chat-conversation`, `chat-m
 
 - AO3 work content does not support JavaScript.
 - The conversation should still read sensibly as plain text if creator styles are disabled.
-- Duplicate a full `chat-meta` block if you want more messages.
+- Duplicate a full `chat-meta` block to add additional exchanges.
+- Use `preview.html` to confirm the hover layout mirrors `example.html`.
 
 ## Validation
 

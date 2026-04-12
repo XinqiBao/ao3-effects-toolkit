@@ -7,7 +7,7 @@ This document records what has been confirmed against AO3 and what is still only
 Verified on 2026-04-04 against a logged-in AO3 account:
 
 - `effects/envelope/work-skin.css` can be saved as an AO3 work skin.
-- The current envelope hover and tap HTML structures were validated on AO3 when they were stored as separate template files; those same structures now live in `effects/envelope/example.html`.
+- The current envelope canonical HTML structure derives from the previously validated envelope template path and now lives in `effects/envelope/example.html`.
 - The core `trifold-letter / letter-cover / letter-top / letter-mid / letter-bot` structure survives AO3's HTML filtering.
 - AO3 preserves `<details>` and `<summary>` in posted work HTML.
 - The mobile breakpoint at `<= 720px` preserves the intended fold offsets and alternating tilt.

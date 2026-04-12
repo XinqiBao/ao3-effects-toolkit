@@ -21,9 +21,9 @@ Each published effect lives in `effects/<name>/` and should include:
 
 ## Example Rules
 
-- Current interactive effects keep both hover and tap blocks in `example.html`.
-- Future effects do not automatically require both paths.
-- Provide both blocks only when the effect genuinely needs both interaction models.
+- Default to one canonical block in `example.html`.
+- Default that canonical block to `hover`.
+- Add a secondary variant only when the difference is materially larger than a small trigger-path change.
 
 ## Verification Expectations
 

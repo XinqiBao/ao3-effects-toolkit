@@ -26,7 +26,7 @@ Each effect directory now contains the same four files:
 Basic flow:
 
 1. Copy `effects/<name>/work-skin.css` into your AO3 work skin.
-2. Open `effects/<name>/example.html` and choose the block you want to publish.
+2. Open `effects/<name>/example.html` and copy the canonical block.
 3. Paste that block into AO3's HTML editor and replace the placeholder text.
 4. Open `effects/<name>/preview.html` locally if you want a quick visual check.
 5. If you are publishing or changing AO3-facing behavior, follow [docs/ao3-live-validation.md](docs/ao3-live-validation.md).

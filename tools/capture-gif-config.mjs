@@ -1,6 +1,7 @@
 export const EFFECTS = {
   envelope: {
-    targetSelector: '#workskin.envelope-preview .trifold-letter',
+    captureSelector: '#workskin.envelope-preview',
+    hoverSelector: '#workskin.envelope-preview .trifold-letter',
     viewport: { width: 1400, height: 1600 },
     outputWidth: 488,
     settleMs: 450,
@@ -10,7 +11,8 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   'chat-messages': {
-    targetSelector: '#workskin .chat-conversation--hover',
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .chat-conversation--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
     settleMs: 400,
@@ -20,7 +22,8 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   polaroid: {
-    targetSelector: '#workskin .polaroid-inner.polaroid--hover',
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .polaroid-inner.polaroid--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
     settleMs: 400,
@@ -30,7 +33,8 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   'secret-divider': {
-    targetSelector: '#workskin .secret-divider.secret-divider--hover',
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .secret-divider--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
     settleMs: 400,
@@ -40,7 +44,8 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   typewriter: {
-    targetSelector: '#workskin .typewriter-container.typewriter--hover',
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .typewriter--hover',
     viewport: { width: 1400, height: 1400 },
     outputWidth: 488,
     settleMs: 450,
