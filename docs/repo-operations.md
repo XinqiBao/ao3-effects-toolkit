@@ -37,7 +37,8 @@ This document is the canonical operational map for maintaining this repository.
 ### When editing `effects/<name>/example.html`
 
 - keep class names aligned with `work-skin.css`
-- keep both hover and tap blocks only when the effect genuinely supports both paths
+- keep the canonical block as the default published example
+- only keep a secondary variant when it is materially different and intentionally preserved
 - use AO3 live validation when the changed block is intended for publishing
 
 ### When editing `effects/<name>/preview.html`

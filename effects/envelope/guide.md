@@ -9,14 +9,9 @@ Use these files from `effects/envelope/`:
 ## Quick Start
 
 1. Copy `work-skin.css` into your AO3 work skin.
-2. Open `example.html` and choose either the hover block or the tap block.
-3. Paste the chosen block into AO3's HTML editor.
+2. Copy the canonical block from `example.html`.
+3. Paste that block into AO3's HTML editor.
 4. Replace the placeholder text with your own content.
-
-## Choose A Block
-
-- Use the hover block for desktop-first reading.
-- Use the tap block for touch-heavy reading.
 
 ## Edit Carefully
 

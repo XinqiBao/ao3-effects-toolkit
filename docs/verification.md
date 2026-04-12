@@ -12,7 +12,7 @@ Local review is intentionally lightweight.
 ### For effect changes
 
 - open `effects/<name>/preview.html`
-- inspect the hover and tap cards in a browser or Playwright
+- inspect the canonical preview in a browser or Playwright
 - confirm the example block still matches the published CSS structure
 
 ### For tooling changes

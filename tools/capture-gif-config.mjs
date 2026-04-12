@@ -22,8 +22,8 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   polaroid: {
-    captureSelector: '.preview-card--hover .preview-card__stage',
-    hoverSelector: '.preview-card--hover .polaroid-inner',
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .polaroid-inner.polaroid--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
     settleMs: 400,
@@ -33,8 +33,8 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   'secret-divider': {
-    captureSelector: '.preview-card--hover .preview-card__stage',
-    hoverSelector: '.preview-card--hover .secret-divider--hover',
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .secret-divider--hover',
     viewport: { width: 1400, height: 1200 },
     outputWidth: 488,
     settleMs: 400,
@@ -44,8 +44,8 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   typewriter: {
-    captureSelector: '.preview-card--hover .preview-card__stage',
-    hoverSelector: '.preview-card--hover .typewriter--hover',
+    captureSelector: '.preview-card .preview-card__stage',
+    hoverSelector: '.preview-card .typewriter--hover',
     viewport: { width: 1400, height: 1400 },
     outputWidth: 488,
     settleMs: 450,
