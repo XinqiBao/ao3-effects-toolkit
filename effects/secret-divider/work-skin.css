@@ -12,9 +12,9 @@
   cursor: default;
 }
 
-/* ---- Ornament line (always visible) ---- */
+/* ---- Named modules ---- */
 
-#workskin .secret-divider__ornament {
+#workskin .secret-divider .ornament {
   display: block;
   color: #8a7d6b;
   font-size: 1em;
@@ -26,9 +26,7 @@
     letter-spacing 0.6s ease;
 }
 
-/* ---- Hidden text ---- */
-
-#workskin .secret-divider__text {
+#workskin .secret-divider .reveal {
   display: block;
   max-height: 0;
   opacity: 0;
@@ -38,7 +36,7 @@
     opacity 0.6s ease;
 }
 
-#workskin .secret-divider__text-inner {
+#workskin .secret-divider .message {
   display: block;
   margin: 0.7em auto;
   max-width: 460px;
@@ -56,13 +54,13 @@
 /* HOVER mode — reveal on :hover            */
 /* ======================================== */
 
-#workskin .secret-divider--hover:hover .secret-divider__ornament {
+#workskin .secret-divider--hover:hover .ornament {
   color: #a08c74;
   transform: scale(1.06);
   letter-spacing: 0.5em;
 }
 
-#workskin .secret-divider--hover:hover .secret-divider__text {
+#workskin .secret-divider--hover:hover .reveal {
   max-height: 15em;
   opacity: 1;
 }
@@ -71,29 +69,29 @@
 /* FLANKING ornaments (::before / ::after)  */
 /* ======================================== */
 
-#workskin .secret-divider--with-flanks .secret-divider__ornament {
+#workskin .secret-divider--with-flanks .ornament {
   position: relative;
 }
 
-#workskin .secret-divider--with-flanks .secret-divider__ornament::before,
-#workskin .secret-divider--with-flanks .secret-divider__ornament::after {
+#workskin .secret-divider--with-flanks .ornament::before,
+#workskin .secret-divider--with-flanks .ornament::after {
   display: inline;
   color: #b5a892;
   font-size: 0.82em;
   transition: color 0.6s ease;
 }
 
-#workskin .secret-divider--with-flanks .secret-divider__ornament::before {
+#workskin .secret-divider--with-flanks .ornament::before {
   content: "\2726";
   margin-right: 0.6em;
 }
 
-#workskin .secret-divider--with-flanks .secret-divider__ornament::after {
+#workskin .secret-divider--with-flanks .ornament::after {
   content: "\2726";
   margin-left: 0.6em;
 }
 
-#workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::before,
-#workskin .secret-divider--with-flanks.secret-divider--hover:hover .secret-divider__ornament::after {
+#workskin .secret-divider--with-flanks.secret-divider--hover:hover .ornament::before,
+#workskin .secret-divider--with-flanks.secret-divider--hover:hover .ornament::after {
   color: #c9b89e;
 }

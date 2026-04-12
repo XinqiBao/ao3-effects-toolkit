@@ -15,6 +15,7 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
   const polaroidPreview = readFileSync(join(ROOT, 'effects', 'polaroid', 'preview.html'), 'utf8');
   const polaroidExample = readFileSync(join(ROOT, 'effects', 'polaroid', 'example.html'), 'utf8');
   const polaroidCss = readFileSync(join(ROOT, 'effects', 'polaroid', 'work-skin.css'), 'utf8');
+  const secretDividerPreview = readFileSync(join(ROOT, 'effects', 'secret-divider', 'preview.html'), 'utf8');
   const secretDividerExample = readFileSync(join(ROOT, 'effects', 'secret-divider', 'example.html'), 'utf8');
   const secretDividerCss = readFileSync(join(ROOT, 'effects', 'secret-divider', 'work-skin.css'), 'utf8');
   const typewriterPreview = readFileSync(join(ROOT, 'effects', 'typewriter', 'preview.html'), 'utf8');
@@ -247,6 +248,31 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'secret-divider example should not keep a layout-only outer container'
   );
   assert.equal(
+    secretDividerPreview.includes('class="secret-divider secret-divider--hover secret-divider--with-flanks"'),
+    true,
+    'secret-divider preview should keep the published root and modifier contract'
+  );
+  assert.equal(
+    secretDividerExample.includes('secret-divider__ornament'),
+    false,
+    'secret-divider example should not keep effect-prefixed ornament module names'
+  );
+  assert.equal(
+    secretDividerExample.includes('class="ornament"'),
+    true,
+    'secret-divider example should use a short ornament module name'
+  );
+  assert.equal(
+    secretDividerExample.includes('class="reveal"'),
+    true,
+    'secret-divider example should use a short reveal module name'
+  );
+  assert.equal(
+    secretDividerExample.includes('class="message"'),
+    true,
+    'secret-divider example should use a short message module name'
+  );
+  assert.equal(
     secretDividerCss.includes('secret-divider--details'),
     false,
     'secret-divider work skin should not keep the deprecated details fallback path'
@@ -255,6 +281,16 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     secretDividerCss.includes('secret-divider__summary-hint'),
     false,
     'secret-divider work skin should not keep summary-only hint styling'
+  );
+  assert.equal(
+    secretDividerCss.includes('secret-divider__ornament'),
+    false,
+    'secret-divider work skin should not keep effect-prefixed descendant selectors'
+  );
+  assert.equal(
+    secretDividerCss.includes('#workskin .secret-divider .reveal'),
+    true,
+    'secret-divider work skin should scope short descendant module names through the root selector'
   );
   assert.equal(
     envelopeCss.includes('@media (max-width: 720px)'),
