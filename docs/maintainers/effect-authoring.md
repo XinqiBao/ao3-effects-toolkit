@@ -20,11 +20,39 @@ Each published effect lives in `effects/<name>/` and should include:
 - Keep preview-only helpers out of `work-skin.css` and `example.html`.
 - Keep `preview.html` structurally close to the canonical published example.
 
+## Structure Rules
+
+- Use the effect name itself as the published root class.
+- Put trigger or state modifiers on that same root class.
+- Anchor published CSS from `#workskin .<effect-root>`.
+- Prefer short, role-based descendant names inside the root scope instead of repeating the effect prefix.
+- Prefer a base class plus modifier when sibling parts are the same kind of structure with small role differences.
+
+Examples:
+
+- `polaroid polaroid--hover`
+- `chat chat--hover`
+- `panel panel--top`
+- `entry entry--sent`
+- `bubble bubble--received`
+
+Avoid vague descendant names such as `inner`, `wrapper`, or `container` unless the element truly has no stronger role.
+
+Keep a wrapper only when it has a clear responsibility, such as:
+
+- positioning context
+- 3D transform context
+- overflow or clipping boundary
+- spacing or geometry control that cannot live on a more meaningful element
+- pseudo-element attachment point
+- hover-area preservation
+
 ## Example Rules
 
 - Default to one canonical block in `example.html`.
 - Default that canonical block to `hover`.
 - Add a secondary variant only when the difference is materially larger than a small trigger-path change.
+- Keep the example block aligned with the current root and descendant naming contract.
 
 ## Verification Expectations
 
