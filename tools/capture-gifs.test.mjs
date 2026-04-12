@@ -163,3 +163,15 @@ test('chat-messages capture window stays long enough to sample the expanded stac
     'chat-messages needs a measure window that outlasts its delayed full-height expansion'
   );
 });
+
+test('lean preview capture config uses #workskin and effect-local hover selectors', () => {
+  for (const [name, effect] of Object.entries(EFFECTS)) {
+    assert.equal(effect.captureSelector, '#workskin', `${name} should capture #workskin`);
+    assert.ok(effect.hoverSelector, `${name} should expose a hover selector`);
+    assert.equal(
+      effect.hoverSelector.includes('.preview-card'),
+      false,
+      `${name} should not depend on preview-card wrappers`
+    );
+  }
+});

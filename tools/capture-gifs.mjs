@@ -20,8 +20,20 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const root = join(__dir, '..');
 const THIS_FILE = fileURLToPath(import.meta.url);
 
+const DEFAULT_CAPTURE = {
+  captureSelector: '#workskin',
+  viewport: { width: 1400, height: 1200 },
+  outputWidth: 488,
+  settleMs: 400,
+  fps: 10,
+  measureDurationMs: 720,
+  sampleIntervalMs: 80,
+  durationMs: 4000,
+};
+
 export const EFFECTS = {
-  'envelope': {
+  envelope: {
+    ...DEFAULT_CAPTURE,
     captureSelector: '#workskin',
     hoverSelector: '#workskin.envelope-preview .trifold-letter',
     viewport: { width: 1400, height: 1600 },
@@ -33,47 +45,23 @@ export const EFFECTS = {
     durationMs: 4000,
   },
   'chat-messages': {
-    captureSelector: '#workskin',
-    hoverSelector: '.preview-card .chat-conversation--hover',
-    viewport: { width: 1400, height: 1200 },
-    outputWidth: 488,
-    settleMs: 400,
-    fps: 10,
-    measureDurationMs: 720,
-    sampleIntervalMs: 80,
-    durationMs: 4000,
+    ...DEFAULT_CAPTURE,
+    hoverSelector: '#workskin .chat-conversation--hover',
   },
-  'polaroid': {
-    captureSelector: '#workskin',
-    hoverSelector: '.preview-card .polaroid-inner.polaroid--hover',
-    viewport: { width: 1400, height: 1200 },
-    outputWidth: 488,
-    settleMs: 400,
-    fps: 10,
-    measureDurationMs: 720,
-    sampleIntervalMs: 80,
-    durationMs: 4000,
+  polaroid: {
+    ...DEFAULT_CAPTURE,
+    hoverSelector: '#workskin .polaroid-inner.polaroid--hover',
   },
   'secret-divider': {
-    captureSelector: '#workskin',
-    hoverSelector: '.preview-card .secret-divider--hover',
-    viewport: { width: 1400, height: 1200 },
-    outputWidth: 488,
-    settleMs: 400,
-    fps: 10,
-    measureDurationMs: 720,
-    sampleIntervalMs: 80,
-    durationMs: 4000,
+    ...DEFAULT_CAPTURE,
+    hoverSelector: '#workskin .secret-divider--hover',
   },
-  'typewriter': {
-    captureSelector: '#workskin',
-    hoverSelector: '.preview-card .typewriter--hover',
+  typewriter: {
+    ...DEFAULT_CAPTURE,
+    hoverSelector: '#workskin .typewriter--hover',
     viewport: { width: 1400, height: 1400 },
-    outputWidth: 488,
     settleMs: 450,
-    fps: 10,
     measureDurationMs: 1120,
-    sampleIntervalMs: 80,
     durationMs: 4500,
   },
 };
