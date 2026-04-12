@@ -25,6 +25,8 @@ This document is the canonical operational map for maintaining this repository.
 - Treat work skins as an enhancement layer; underlying text still needs to read sensibly without styling.
 - Keep preview-only helpers out of `work-skin.css` and `example.html`.
 - Keep shared preview framing in `effects/_shared/preview-shell.css`.
+- Keep that shared preview shell page-level only.
+- Treat `#workskin` as the default local preview and GIF capture boundary.
 
 ## Maintenance Expectations
 
@@ -44,12 +46,16 @@ This document is the canonical operational map for maintaining this repository.
 ### When editing `effects/<name>/preview.html`
 
 - keep the preview focused on the effect itself
+- default to `hero + #workskin + canonical effect markup`
 - keep preview-only classes out of published artifacts
 - keep the shared shell lightweight and consistent across effects
+- keep preview-only helpers limited to geometry reservation or effect-local asset reinforcement
 
 ### When editing `tools/`
 
 - keep tooling focused on GIF capture and committed helper tests
+- keep capture defaults tied to `#workskin`
+- prefer effect-local interaction selectors over preview-shell wrapper selectors
 - avoid rebuilding a broad repository verification framework
 
 ## Generated And Local-Only Paths
@@ -57,6 +63,7 @@ This document is the canonical operational map for maintaining this repository.
 Do not commit content from these paths:
 
 - `.context/`
+- `.superpowers/`
 - `local/`
 - `.playwright-mcp/`
 - `.playwright-cli/`
