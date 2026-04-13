@@ -10,7 +10,7 @@ Published AO3 content stays JavaScript-free. Local previews exist only to review
 |---|---|---|---|
 | **Envelope** | <img src="assets/demos/envelope.gif" width="220" alt="Envelope effect" /> | A trifold letter that unfolds to reveal three pages of content | [guide](effects/envelope/guide.md) |
 | **Chat Messages** | <img src="assets/demos/chat-messages.gif" width="220" alt="Chat messages effect" /> | A collapsed message bar that opens into a longer exchange | [guide](effects/chat-messages/guide.md) |
-| **Polaroid** | <img src="assets/demos/polaroid.gif" width="220" alt="Polaroid effect" /> | A polaroid frame that flips to reveal the note on the back | [guide](effects/polaroid/guide.md) |
+| **Polaroid** | <img src="assets/demos/polaroid.gif" width="220" alt="Polaroid effect" /> | A polaroid frame that reveals the note on the back | [guide](effects/polaroid/guide.md) |
 | **Secret Divider** | <img src="assets/demos/secret-divider.gif" width="220" alt="Secret divider effect" /> | A decorative divider that hides a short line of text | [guide](effects/secret-divider/guide.md) |
 | **Typewriter** | <img src="assets/demos/typewriter.gif" width="220" alt="Typewriter effect" /> | A dark transcript panel with staged line reveal | [guide](effects/typewriter/guide.md) |
 

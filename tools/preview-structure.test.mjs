@@ -63,6 +63,11 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'envelope work skin should support an optional image inside the stamp slot'
   );
   assert.equal(
+    envelopeCss.includes('object-fit'),
+    false,
+    'envelope work skin should avoid object-fit because AO3 rejects it'
+  );
+  assert.equal(
     chatPreview.includes('class="chat chat--hover"'),
     true,
     'chat preview should use chat itself as the published root class'
@@ -199,8 +204,18 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
   );
   assert.equal(
     polaroidCss.includes('rotateY'),
+    false,
+    'polaroid work skin should not require rotateY once the AO3-compatible fade reveal is adopted'
+  );
+  assert.equal(
+    polaroidCss.includes('#workskin .polaroid--hover:hover .front'),
     true,
-    'polaroid work skin should keep a rotateY-based flip for the canonical hover path'
+    'polaroid work skin should still define a hover reveal path for the front face'
+  );
+  assert.equal(
+    polaroidCss.includes('#workskin .polaroid--hover:hover .back'),
+    true,
+    'polaroid work skin should still define a hover reveal path for the back face'
   );
   assert.equal(
     polaroidCss.includes('summary::marker'),
@@ -226,6 +241,41 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     polaroidCss.includes('#workskin .polaroid .photo img'),
     true,
     'polaroid work skin should support an optional image inside the photo slot'
+  );
+  assert.equal(
+    polaroidCss.includes('object-fit'),
+    false,
+    'polaroid work skin should avoid object-fit because AO3 rejects it'
+  );
+  assert.equal(
+    polaroidCss.includes('perspective'),
+    false,
+    'polaroid work skin should avoid perspective because AO3 rejects it'
+  );
+  assert.equal(
+    polaroidCss.includes('backface-visibility'),
+    false,
+    'polaroid work skin should avoid backface-visibility because AO3 rejects it'
+  );
+  assert.equal(
+    polaroidCss.includes('inset:'),
+    false,
+    'polaroid work skin should avoid inset because AO3 rejects it'
+  );
+  assert.equal(
+    polaroidCss.includes('pointer-events'),
+    false,
+    'polaroid work skin should avoid pointer-events because AO3 rejects it'
+  );
+  assert.equal(
+    polaroidCss.includes('cubic-bezier'),
+    false,
+    'polaroid work skin should avoid the rejected transition timing syntax'
+  );
+  assert.equal(
+    polaroidCss.includes('repeating-linear-gradient'),
+    false,
+    'polaroid work skin should avoid the rejected repeating-linear-gradient background'
   );
   assert.equal(
     typewriterPreview.includes('class="typewriter typewriter--hover"'),

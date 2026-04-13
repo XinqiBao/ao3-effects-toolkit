@@ -19,6 +19,7 @@ If you want a real front-side photo on AO3, replace the empty `.photo` slot with
 - Only change the caption and the message on the back side; leave structural classes such as `polaroid`, `front`, `back`, `photo`, and `message` untouched.
 - The default example remains valid without any image; the gradient photo area is the built-in fallback.
 - If you add a photo, point `src` to a stable external direct image URL because AO3 does not host work images for you.
+- AO3 accepts the current hover reveal path, but not the earlier 3D-only flip approach that relied on rejected properties such as `perspective` or `backface-visibility`.
 - Keep the back message concise and avoid relying on JavaScript inside AO3.
 
 ## Validation
