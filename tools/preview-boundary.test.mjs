@@ -55,3 +55,70 @@ test('lean preview pages keep #workskin bounded to the visible effect', async ()
     server.close();
   }
 });
+
+test('preview example images stay inside their published slots', async () => {
+  const server = startCaptureServer(ROOT, 0);
+  await once(server, 'listening');
+  const { port } = server.address();
+  const browser = await chromium.launch();
+
+  try {
+    const cases = [
+      {
+        name: 'envelope',
+        imageSelector: '#workskin .envelope .stamp img',
+        slotSelector: '#workskin .envelope .stamp',
+        requireFullWidth: false,
+      },
+      {
+        name: 'polaroid',
+        imageSelector: '#workskin .polaroid .photo img',
+        slotSelector: '#workskin .polaroid .photo',
+        requireFullWidth: true,
+      },
+    ];
+
+    for (const effect of cases) {
+      const page = await browser.newPage({
+        viewport: { width: 1400, height: 1200 },
+        deviceScaleFactor: 2,
+      });
+
+      try {
+        const url = `http://127.0.0.1:${port}/effects/${effect.name}/preview.html`;
+        await page.goto(url);
+
+        const image = page.locator(effect.imageSelector);
+        const slot = page.locator(effect.slotSelector);
+        await image.waitFor({ state: 'visible' });
+        await slot.waitFor({ state: 'visible' });
+
+        const imageBox = await image.boundingBox();
+        const slotBox = await slot.boundingBox();
+
+        assert.ok(imageBox, `${effect.name} preview should expose the example image`);
+        assert.ok(slotBox, `${effect.name} preview should expose the published image slot`);
+        assert.ok(
+          imageBox.width <= slotBox.width + 1,
+          `${effect.name} preview image should not render wider than its slot`
+        );
+        if (effect.requireFullWidth) {
+          assert.ok(
+            imageBox.width >= slotBox.width - 4,
+            `${effect.name} preview image should still read as a filled photo surface`
+          );
+        } else {
+          assert.ok(
+            imageBox.height <= slotBox.height + 1,
+            `${effect.name} preview image should not render taller than its slot`
+          );
+        }
+      } finally {
+        await page.close();
+      }
+    }
+  } finally {
+    await browser.close();
+    server.close();
+  }
+});

@@ -38,6 +38,11 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'envelope preview should demonstrate the image-rich state through the published stamp slot'
   );
   assert.equal(
+    envelopePreview.includes('.envelope .stamp img'),
+    false,
+    'envelope preview should not need a preview-only image sizing override'
+  );
+  assert.equal(
     envelopeCss.includes('.trifold-letter'),
     false,
     'envelope work skin should not keep the old root selector name'
@@ -236,6 +241,11 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     polaroidPreview.includes('../../assets/preview-media/polaroid-photo-a.jpg'),
     true,
     'polaroid preview should demonstrate the image-rich state through the published photo slot'
+  );
+  assert.equal(
+    polaroidPreview.includes('.polaroid .photo img'),
+    false,
+    'polaroid preview should not need a preview-only image sizing override'
   );
   assert.equal(
     polaroidCss.includes('#workskin .polaroid .photo img'),
