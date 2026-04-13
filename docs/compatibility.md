@@ -7,10 +7,10 @@ This document records what has been confirmed against AO3 and what is still only
 Verified against a logged-in AO3 account:
 
 - on 2026-04-04, the pre-standardization `effects/envelope/work-skin.css` revision used on that date could be saved as an AO3 work skin
-- on 2026-04-12, the current `effects/envelope/` root-scoped structure could be saved as an AO3 work skin and previewed correctly in AO3, including both:
+- on 2026-04-13, the current `effects/envelope/` root-scoped structure could be saved as an AO3 work skin and previewed correctly in AO3, including both:
   - the default text-stamp example
   - the optional image-stamp path when given a hotlinkable direct image URL
-- on 2026-04-12, the current `effects/polaroid/` root-scoped structure could be saved as an AO3 work skin and previewed correctly in AO3, including both:
+- on 2026-04-13, the current `effects/polaroid/` root-scoped structure could be saved as an AO3 work skin and previewed correctly in AO3, including both:
   - the default no-image example
   - the optional image path when given a hotlinkable direct image URL
 - AO3 preserves `<details>` and `<summary>` in posted work HTML.
@@ -33,7 +33,7 @@ Avoid these CSS and HTML patterns in published artifacts:
 |---|---|
 | `gap` | Use `margin` |
 | `grid-template-columns: repeat()` | Use `inline-block` or `flex` |
-| `object-fit` | Use absolute centering plus `min-width` / `min-height` on the image element |
+| `object-fit` | Use absolute centering plus `width: 100%` and `height: auto` on the image element |
 | `pointer-events` | Avoid entirely |
 | `border-radius` ellipse syntax with `/` | Remove the `/` clause |
 | HTML `id` attributes | Use classes instead |
