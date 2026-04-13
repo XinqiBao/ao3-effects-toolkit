@@ -253,6 +253,11 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     'polaroid work skin should support an optional image inside the photo slot'
   );
   assert.equal(
+    polaroidCss.includes('#workskin .polaroid .photo::before'),
+    false,
+    'polaroid work skin should not keep a photo-surface glare pseudo-element'
+  );
+  assert.equal(
     polaroidCss.includes('object-fit'),
     false,
     'polaroid work skin should avoid object-fit because AO3 rejects it'
@@ -334,13 +339,18 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
   );
   assert.equal(
     secretDividerPreview.includes('class="secret-divider secret-divider--hover secret-divider--with-flanks"'),
-    true,
-    'secret-divider preview should keep the published root and modifier contract'
+    false,
+    'secret-divider preview should not depend on a flank-only modifier class'
   );
   assert.equal(
     secretDividerPreview.includes('#workskin .secret-divider { margin: 0;'),
     false,
     'secret-divider preview should not keep a cosmetic margin reset'
+  );
+  assert.equal(
+    secretDividerExample.includes('secret-divider--with-flanks'),
+    false,
+    'secret-divider example should not depend on a flank-only modifier class'
   );
   assert.equal(
     secretDividerExample.includes('secret-divider__ornament'),
@@ -351,6 +361,16 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     secretDividerExample.includes('class="ornament"'),
     true,
     'secret-divider example should use a short ornament module name'
+  );
+  assert.equal(
+    secretDividerExample.includes('&#10022;&#10044;&#8226;&#10043;&#8226;&#10044;&#10022;'),
+    true,
+    'secret-divider example should keep the ornament string inline without spacer characters'
+  );
+  assert.equal(
+    secretDividerExample.includes('&#10022; &#10044;'),
+    false,
+    'secret-divider example should not depend on literal spaces between ornament symbols'
   );
   assert.equal(
     secretDividerExample.includes('class="reveal"'),
@@ -376,6 +396,31 @@ test('lean preview and example markup avoid obsolete wrapper-only classes', () =
     secretDividerCss.includes('secret-divider__ornament'),
     false,
     'secret-divider work skin should not keep effect-prefixed descendant selectors'
+  );
+  assert.equal(
+    secretDividerCss.includes('secret-divider--with-flanks'),
+    false,
+    'secret-divider work skin should not keep a flank-only modifier branch'
+  );
+  assert.equal(
+    secretDividerCss.includes('.ornament::before'),
+    false,
+    'secret-divider work skin should not generate ornament flanks through pseudo-elements'
+  );
+  assert.equal(
+    secretDividerCss.includes('letter-spacing: 0.75em;'),
+    true,
+    'secret-divider work skin should use a deliberate base ornament spacing value'
+  );
+  assert.equal(
+    secretDividerCss.includes('letter-spacing: 1.5em;'),
+    true,
+    'secret-divider hover state should widen the ornament spacing enough to feel revealed'
+  );
+  assert.equal(
+    secretDividerCss.includes('transform: scale(1.05);'),
+    true,
+    'secret-divider hover state should keep a modest ornament scale-up'
   );
   assert.equal(
     secretDividerCss.includes('#workskin .secret-divider .reveal'),
