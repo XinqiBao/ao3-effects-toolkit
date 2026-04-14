@@ -35,10 +35,15 @@ Basic flow:
 
 ```bash
 npm test
+npm run test:tooling
+npm run test:contracts
 node tools/capture-gifs.mjs envelope
 ```
 
-- `npm test` covers the committed GIF-tooling tests only.
+- `npm run test:tooling` covers long-lived regressions for the local GIF capture workflow.
+- `npm run test:contracts` covers committed repository contracts for previews, examples, and published CSS boundaries.
+- `npm test` runs both buckets.
+- `ffmpeg` must be installed locally before running `node tools/capture-gifs.mjs ...`.
 - Local preview validation is primarily manual or browser-assisted.
 
 ## Documentation
@@ -64,4 +69,4 @@ AO3 strips or rejects some CSS and HTML features. This toolkit avoids them in pu
 | `border-radius` with `/` | Remove the ellipse syntax |
 | HTML `id` attributes | Use classes only; AO3 strips `id` |
 
-All AO3-facing CSS stays scoped under `#workskin`. Desktop interaction uses `:hover`; touch interaction uses `<details>/<summary>` where an effect needs an explicit tap path.
+All AO3-facing CSS stays scoped under `#workskin`. Current published examples are hover-first. If a future effect needs an explicit touch path, prefer `<details>/<summary>`.

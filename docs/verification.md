@@ -23,11 +23,37 @@ Run:
 npm test
 ```
 
+Use the narrower entrypoints when they match the change:
+
+```bash
+npm run test:tooling
+npm run test:contracts
+```
+
 If you changed GIF capture behavior, also run a focused smoke test such as:
 
 ```bash
 node tools/capture-gifs.mjs envelope
 ```
+
+## Committed Test Boundary
+
+Commit tests only when they protect a durable repository contract or a long-lived local workflow.
+
+Good candidates:
+
+- capture math or timing regressions that would break committed demo generation
+- browser-backed checks for stable preview boundaries or hover behavior
+- structure and compatibility assertions that are already documented in the public maintainer docs
+
+Keep out of the repository:
+
+- one-off investigation scripts
+- migration-only assertions that are no longer part of the active contract
+- temporary experiment checks
+- personal visual-preference assertions that are not documented as repository policy
+
+Keep temporary validation in `local/` or the active `.context/work/` packet until it either proves unnecessary or gets promoted into a documented repository contract.
 
 ## What Local Review Does Not Prove
 

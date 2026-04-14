@@ -15,7 +15,10 @@ This document is the canonical operational map for maintaining this repository.
   - `demos/` — repository demo GIFs stored in Git LFS
   - `preview-media/` — shared preview-only images stored in Git LFS
 - `docs/` — public documentation and maintainer guidance
-- `tools/` — GIF capture scripts and their tests
+- `tools/` — GIF capture scripts
+- `tests/`
+  - `tooling/` — committed regressions for local capture helpers
+  - `contracts/` — committed repository contracts for preview/example/CSS structure
 - `.context/`, `local/` — gitignored local process notes and private artifacts
 
 ## Core Repository Rules
@@ -53,10 +56,17 @@ This document is the canonical operational map for maintaining this repository.
 
 ### When editing `tools/`
 
-- keep tooling focused on GIF capture and committed helper tests
+- keep tooling focused on executable GIF capture helpers
 - keep capture defaults tied to `#workskin`
 - prefer effect-local interaction selectors over preview-shell wrapper selectors
 - avoid rebuilding a broad repository verification framework
+
+### When editing `tests/`
+
+- keep `tests/tooling/` focused on stable local capture regressions
+- keep `tests/contracts/` focused on documented repository contracts
+- do not commit one-off migration guards, temporary experiment probes, or personal style-preference assertions
+- move temporary validation into `local/` or the active `.context/work/` packet unless it has become a durable repository contract
 
 ## Generated And Local-Only Paths
 
@@ -73,6 +83,6 @@ Do not commit content from these paths:
 
 ## Known Caveats
 
-- `npm test` covers committed GIF-tooling tests only.
+- `npm test` covers committed tooling and repository contract tests only.
 - Passing local tooling tests does not prove AO3 will accept or render a change correctly.
 - AO3 live validation still depends on a real AO3 account, a current login session, and AO3's Cloudflare gate resolving successfully.

@@ -43,5 +43,5 @@ Tradeoffs:
 
 ## Follow-up
 
-- current tap examples live inside each effect's `example.html`
-- future effects that need explicit touch interaction should prefer the same `details/summary` pattern
+- the current simplified repository defaults to hover-first canonical examples
+- if a future published effect restores an explicit touch path, prefer the same `details/summary` pattern
