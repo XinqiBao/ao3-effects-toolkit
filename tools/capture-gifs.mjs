@@ -9,12 +9,10 @@
  *   node tools/capture-gifs.mjs envelope   # one effect
  */
 import { execSync } from 'child_process';
-import { once } from 'events';
-import { createServer } from 'http';
-import { existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
+import { existsSync, mkdirSync, rmSync } from 'fs';
 import { chromium } from 'playwright';
-import { extname, join, dirname, resolve, sep } from 'path';
-import { fileURLToPath } from 'url';
+import { join, dirname, resolve } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const root = join(__dir, '..');
@@ -58,17 +56,6 @@ export const EFFECTS = {
     measureDurationMs: 1120,
     durationMs: 4500,
   },
-};
-
-const MIME = {
-  '.html': 'text/html',
-  '.css': 'text/css',
-  '.js': 'text/javascript',
-  '.mjs': 'text/javascript',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
-  '.jpeg': 'image/jpeg',
-  '.gif': 'image/gif',
 };
 
 function evenCeil(value) {
@@ -152,45 +139,8 @@ export async function resetCaptureState(page, pageUrl, settleMs = 0) {
   }
 }
 
-export function contentTypeForPath(filePath) {
-  return MIME[extname(filePath)] || 'application/octet-stream';
-}
-
-export function resolveRequestPath(rootPath, requestUrl) {
-  const pathname = decodeURIComponent(requestUrl.split('?')[0] || '/');
-  const filePath = resolve(rootPath, `.${pathname}`);
-  const rootPrefix = rootPath.endsWith(sep) ? rootPath : `${rootPath}${sep}`;
-
-  return filePath === rootPath || filePath.startsWith(rootPrefix) ? filePath : null;
-}
-
-export function startCaptureServer(rootPath, port) {
-  const server = createServer((req, res) => {
-    try {
-      const filePath = resolveRequestPath(rootPath, req.url || '/');
-      if (!filePath) {
-        res.writeHead(403);
-        res.end('Forbidden');
-        return;
-      }
-
-      const data = readFileSync(filePath);
-      res.writeHead(200, { 'Content-Type': contentTypeForPath(filePath) });
-      res.end(data);
-    } catch (error) {
-      if (error instanceof URIError) {
-        res.writeHead(400);
-        res.end('Bad Request');
-        return;
-      }
-
-      res.writeHead(404);
-      res.end('Not found');
-    }
-  });
-
-  server.listen(port);
-  return server;
+export function previewUrlForEffect(name) {
+  return pathToFileURL(join(root, 'effects', name, 'preview.html')).href;
 }
 
 async function captureEffect(page, name, cfg) {
@@ -208,7 +158,7 @@ async function captureEffect(page, name, cfg) {
   if (existsSync(framesDir)) rmSync(framesDir, { recursive: true });
   mkdirSync(framesDir, { recursive: true });
 
-  const pageUrl = `http://127.0.0.1:${cfg.port}/effects/${name}/preview.html`;
+  const pageUrl = previewUrlForEffect(name);
   await resetCaptureState(page, pageUrl, cfg.settleMs);
   const clip = await measureCaptureClip(page, {
     captureSelector,
@@ -263,9 +213,6 @@ export async function main(argv = process.argv.slice(2)) {
   }
   const effects = target ? { [target]: EFFECTS[target] } : EFFECTS;
 
-  const port = 7892;
-  const server = startCaptureServer(root, port);
-  await once(server, 'listening');
   const browser = await chromium.launch();
 
   try {
@@ -276,7 +223,7 @@ export async function main(argv = process.argv.slice(2)) {
         deviceScaleFactor: 2,
       });
       const page = await context.newPage();
-      const { framesDir, fps, outputWidth } = await captureEffect(page, name, { ...cfg, port });
+      const { framesDir, fps, outputWidth } = await captureEffect(page, name, cfg);
       await context.close();
 
       const outputPath = join(root, 'assets', 'demos', `${name}.gif`);
@@ -285,7 +232,6 @@ export async function main(argv = process.argv.slice(2)) {
     }
   } finally {
     await browser.close();
-    server.close();
   }
 }
 

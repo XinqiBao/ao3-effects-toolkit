@@ -1,12 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { once } from 'node:events';
 import { chromium } from 'playwright';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { EFFECTS, measureCaptureClip, resetCaptureState, startCaptureServer } from './capture-gifs.mjs';
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+import { EFFECTS, measureCaptureClip, previewUrlForEffect, resetCaptureState } from '../../tools/capture-gifs.mjs';
 
 test('capture reset restores the envelope preview to a fully closed first frame', async () => {
   const effect = EFFECTS.envelope;
@@ -14,9 +10,7 @@ test('capture reset restores the envelope preview to a fully closed first frame'
   const hoverSelector = effect.hoverSelector;
   assert.ok(captureSelector, 'envelope should expose a deterministic capture frame');
   assert.ok(hoverSelector, 'envelope should expose a deterministic hover target');
-  const server = startCaptureServer(ROOT, 0);
-  await once(server, 'listening');
-  const { port } = server.address();
+
   const browser = await chromium.launch();
 
   try {
@@ -25,7 +19,7 @@ test('capture reset restores the envelope preview to a fully closed first frame'
       deviceScaleFactor: 2,
     });
 
-    const url = `http://127.0.0.1:${port}/effects/envelope/preview.html`;
+    const url = previewUrlForEffect('envelope');
     await resetCaptureState(page, url, effect.settleMs);
     const closedBox = await page.locator(captureSelector).first().boundingBox();
     assert.ok(closedBox, 'closed capture frame should be measurable');
@@ -64,6 +58,5 @@ test('capture reset restores the envelope preview to a fully closed first frame'
     );
   } finally {
     await browser.close();
-    server.close();
   }
 });

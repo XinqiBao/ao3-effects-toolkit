@@ -1,22 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { once } from 'node:events';
-import { mkdtempSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { get } from 'node:http';
+import { fileURLToPath } from 'node:url';
+import { join, dirname } from 'node:path';
 
-import {
-  EFFECTS,
-  computeClipRect,
-  contentTypeForPath,
-  measureCaptureClip,
-  resolveRequestPath,
-  startCaptureServer,
-} from './capture-gifs.mjs';
+import * as captureGifs from '../../tools/capture-gifs.mjs';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+
+test('previewUrlForEffect resolves a local file URL for the effect preview page', () => {
+  assert.equal(typeof captureGifs.previewUrlForEffect, 'function');
+
+  const previewUrl = captureGifs.previewUrlForEffect('envelope');
+  const previewPath = fileURLToPath(previewUrl);
+
+  assert.equal(previewPath, join(ROOT, 'effects', 'envelope', 'preview.html'));
+});
 
 test('computeClipRect unions pre-hover and hovered boxes from the same panel', () => {
-  const clip = computeClipRect(
+  const clip = captureGifs.computeClipRect(
     { x: 120.8, y: 611.98, width: 458, height: 74 },
     { x: 120.8, y: 385.44, width: 458, height: 528.06 }
   );
@@ -30,7 +31,7 @@ test('computeClipRect unions pre-hover and hovered boxes from the same panel', (
 });
 
 test('computeClipRect keeps the full union on even pixel dimensions', () => {
-  const clip = computeClipRect(
+  const clip = captureGifs.computeClipRect(
     { x: 100.7, y: 200.2, width: 401.3, height: 201.7 },
     { x: 98.3, y: 190.4, width: 392.2, height: 210.4 }
   );
@@ -92,7 +93,7 @@ test('measureCaptureClip unions progressive hover growth across the full measure
     },
   };
 
-  const clip = await measureCaptureClip(page, {
+  const clip = await captureGifs.measureCaptureClip(page, {
     captureSelector: 'capture',
     hoverSelector: 'hover',
     measureDurationMs: 320,
@@ -117,46 +118,8 @@ test('measureCaptureClip unions progressive hover growth across the full measure
   ]);
 });
 
-test('contentTypeForPath serves preview media with image MIME types', () => {
-  assert.equal(contentTypeForPath('/tmp/example.html'), 'text/html');
-  assert.equal(contentTypeForPath('/tmp/example.css'), 'text/css');
-  assert.equal(contentTypeForPath('/tmp/example.js'), 'text/javascript');
-  assert.equal(contentTypeForPath('/tmp/example.mjs'), 'text/javascript');
-  assert.equal(contentTypeForPath('/tmp/stamp.png'), 'image/png');
-  assert.equal(contentTypeForPath('/tmp/photo.jpg'), 'image/jpeg');
-  assert.equal(contentTypeForPath('/tmp/photo.jpeg'), 'image/jpeg');
-  assert.equal(contentTypeForPath('/tmp/demo.gif'), 'image/gif');
-  assert.equal(contentTypeForPath('/tmp/archive.bin'), 'application/octet-stream');
-});
-
-test('resolveRequestPath rejects traversal outside the capture root', () => {
-  const root = '/repo/root';
-
-  assert.equal(
-    resolveRequestPath(root, '/assets/preview-media/envelope-stamp.png'),
-    '/repo/root/assets/preview-media/envelope-stamp.png'
-  );
-  assert.equal(resolveRequestPath(root, '/../../README.md'), null);
-});
-
-test('startCaptureServer returns 400 for malformed percent-encoded paths', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'ao3-capture-server-'));
-  writeFileSync(join(root, 'index.html'), '<!doctype html>');
-
-  const server = startCaptureServer(root, 0);
-  await once(server, 'listening');
-  const port = server.address().port;
-
-  const response = await new Promise((resolve, reject) => {
-    get(`http://127.0.0.1:${port}/%E0%A4%A`, resolve).on('error', reject);
-  });
-
-  assert.equal(response.statusCode, 400);
-  server.close();
-});
-
 test('chat-messages capture window stays long enough to sample the expanded stack', () => {
-  const measureDurationMs = EFFECTS['chat-messages'].measureDurationMs;
+  const measureDurationMs = captureGifs.EFFECTS['chat-messages'].measureDurationMs;
 
   assert.ok(
     measureDurationMs >= 640,
@@ -165,7 +128,7 @@ test('chat-messages capture window stays long enough to sample the expanded stac
 });
 
 test('lean preview capture config uses #workskin and effect-local hover selectors', () => {
-  for (const [name, effect] of Object.entries(EFFECTS)) {
+  for (const [name, effect] of Object.entries(captureGifs.EFFECTS)) {
     assert.equal(effect.captureSelector, '#workskin', `${name} should capture #workskin`);
     assert.ok(effect.hoverSelector, `${name} should expose a hover selector`);
     assert.equal(

@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "CSS-only visual effects toolkit for Archive of Our Own works.",
   "scripts": {
-    "test": "node --test tools/*.test.mjs"
+    "test": "npm run test:tooling && npm run test:contracts",
+    "test:tooling": "node --test tests/tooling/*.test.mjs",
+    "test:contracts": "node --test tests/contracts/*.test.mjs"
   },
   "repository": {
     "type": "git",

@@ -1,18 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { once } from 'node:events';
 import { chromium } from 'playwright';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-import { startCaptureServer } from './capture-gifs.mjs';
-
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+import { previewUrlForEffect } from '../../tools/capture-gifs.mjs';
 
 test('lean preview pages keep #workskin bounded to the visible effect', async () => {
-  const server = startCaptureServer(ROOT, 0);
-  await once(server, 'listening');
-  const { port } = server.address();
   const browser = await chromium.launch();
 
   try {
@@ -31,8 +23,7 @@ test('lean preview pages keep #workskin bounded to the visible effect', async ()
       });
 
       try {
-        const url = `http://127.0.0.1:${port}/effects/${effect.name}/preview.html`;
-        await page.goto(url);
+        await page.goto(previewUrlForEffect(effect.name));
         const workskin = page.locator('#workskin');
         await workskin.waitFor({ state: 'visible' });
 
@@ -52,14 +43,10 @@ test('lean preview pages keep #workskin bounded to the visible effect', async ()
     }
   } finally {
     await browser.close();
-    server.close();
   }
 });
 
 test('preview example images stay inside their published slots', async () => {
-  const server = startCaptureServer(ROOT, 0);
-  await once(server, 'listening');
-  const { port } = server.address();
   const browser = await chromium.launch();
 
   try {
@@ -85,8 +72,7 @@ test('preview example images stay inside their published slots', async () => {
       });
 
       try {
-        const url = `http://127.0.0.1:${port}/effects/${effect.name}/preview.html`;
-        await page.goto(url);
+        await page.goto(previewUrlForEffect(effect.name));
 
         const image = page.locator(effect.imageSelector);
         const slot = page.locator(effect.slotSelector);
@@ -119,6 +105,5 @@ test('preview example images stay inside their published slots', async () => {
     }
   } finally {
     await browser.close();
-    server.close();
   }
 });

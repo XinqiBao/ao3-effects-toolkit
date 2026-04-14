@@ -1,18 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { once } from 'node:events';
 import { chromium } from 'playwright';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-import { startCaptureServer } from './capture-gifs.mjs';
-
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+import { previewUrlForEffect } from '../../tools/capture-gifs.mjs';
 
 test('typewriter preview hover keeps the reveal area stable long enough to show the first line', async () => {
-  const server = startCaptureServer(ROOT, 0);
-  await once(server, 'listening');
-  const { port } = server.address();
   const browser = await chromium.launch();
 
   try {
@@ -22,8 +14,7 @@ test('typewriter preview hover keeps the reveal area stable long enough to show 
     });
 
     try {
-      const url = `http://127.0.0.1:${port}/effects/typewriter/preview.html`;
-      await page.goto(url);
+      await page.goto(previewUrlForEffect('typewriter'));
 
       const hoverTarget = page.locator('#workskin .typewriter--hover').first();
       await hoverTarget.waitFor({ state: 'visible' });
@@ -62,6 +53,5 @@ test('typewriter preview hover keeps the reveal area stable long enough to show 
     }
   } finally {
     await browser.close();
-    server.close();
   }
 });
