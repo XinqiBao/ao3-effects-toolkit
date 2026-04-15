@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 
-import { EFFECTS, measureCaptureClip, previewUrlForEffect, resetCaptureState } from '../../tools/capture-gifs.mjs';
+import { measureCaptureClip, previewUrlForEffect, resetCaptureState, resolveEffectConfig } from '../../tools/capture-gifs.mjs';
 
 test('chat capture measurement includes the expanded conversation height', async () => {
-  const effect = EFFECTS['chat-messages'];
+  const effect = resolveEffectConfig('chat-messages');
   assert.ok(effect.hoverSelector, 'chat-messages should expose a deterministic hover target');
 
   const browser = await chromium.launch();
