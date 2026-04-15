@@ -20,43 +20,88 @@ const THIS_FILE = fileURLToPath(import.meta.url);
 
 const DEFAULT_CAPTURE = {
   captureSelector: '#workskin',
-  viewport: { width: 1400, height: 1200 },
+  viewport: { width: 1400, height: 1400 },
   outputWidth: 488,
-  settleMs: 400,
+  settleMs: 500,
   fps: 10,
-  measureDurationMs: 720,
+  measureDurationMs: 1200,
   sampleIntervalMs: 80,
-  durationMs: 4000,
+  durationMs: 4500,
 };
 
 export const EFFECTS = {
-  envelope: {
-    ...DEFAULT_CAPTURE,
+  'envelope': {
     hoverSelector: '#workskin .envelope--hover',
-    settleMs: 450,
-    measureDurationMs: 1120,
   },
   'chat-messages': {
-    ...DEFAULT_CAPTURE,
     hoverSelector: '#workskin .chat--hover',
   },
-  polaroid: {
-    ...DEFAULT_CAPTURE,
+  'polaroid': {
     hoverSelector: '#workskin .polaroid--hover',
   },
   'secret-divider': {
-    ...DEFAULT_CAPTURE,
     hoverSelector: '#workskin .secret-divider--hover',
   },
-  typewriter: {
-    ...DEFAULT_CAPTURE,
+  'typewriter': {
     hoverSelector: '#workskin .typewriter--hover',
-    viewport: { width: 1400, height: 1400 },
-    settleMs: 450,
-    measureDurationMs: 1120,
-    durationMs: 4500,
   },
 };
+
+function effectNames() {
+  return Object.keys(EFFECTS);
+}
+
+function unknownEffectError(name) {
+  return new Error(`Unknown effect: ${name}\nValid: ${effectNames().join(', ')}`);
+}
+
+function validateResolvedEffectConfig(name, config) {
+  if (typeof config.captureSelector !== 'string' || config.captureSelector.length === 0) {
+    throw new Error(`Invalid capture selector for effect ${name}`);
+  }
+  if (typeof config.hoverSelector !== 'string' || config.hoverSelector.length === 0) {
+    throw new Error(`Invalid hover selector for effect ${name}`);
+  }
+  if (
+    !config.viewport ||
+    !Number.isFinite(config.viewport.width) ||
+    config.viewport.width <= 0 ||
+    !Number.isFinite(config.viewport.height) ||
+    config.viewport.height <= 0
+  ) {
+    throw new Error(`Invalid viewport for effect ${name}`);
+  }
+
+  for (const field of ['outputWidth', 'fps', 'measureDurationMs', 'sampleIntervalMs', 'durationMs']) {
+    if (!Number.isFinite(config[field]) || config[field] <= 0) {
+      throw new Error(`Invalid ${field} for effect ${name}`);
+    }
+  }
+
+  if (!Number.isFinite(config.settleMs) || config.settleMs < 0) {
+    throw new Error(`Invalid settleMs for effect ${name}`);
+  }
+
+  return config;
+}
+
+export function resolveEffectConfig(name) {
+  const effect = EFFECTS[name];
+  if (!effect) {
+    throw unknownEffectError(name);
+  }
+
+  const viewport = effect.viewport ?? {};
+
+  return validateResolvedEffectConfig(name, {
+    ...DEFAULT_CAPTURE,
+    ...effect,
+    viewport: {
+      ...DEFAULT_CAPTURE.viewport,
+      ...viewport,
+    },
+  });
+}
 
 function evenCeil(value) {
   const rounded = Math.ceil(value);
@@ -207,16 +252,13 @@ function buildGif(framesDir, outputPath, fps, outputWidth) {
 
 export async function main(argv = process.argv.slice(2)) {
   const target = argv[0];
-  if (target && !EFFECTS[target]) {
-    console.error(`Unknown effect: ${target}\nValid: ${Object.keys(EFFECTS).join(', ')}`);
-    process.exit(1);
-  }
-  const effects = target ? { [target]: EFFECTS[target] } : EFFECTS;
+  const names = target ? [target] : effectNames();
 
   const browser = await chromium.launch();
 
   try {
-    for (const [name, cfg] of Object.entries(effects)) {
+    for (const name of names) {
+      const cfg = resolveEffectConfig(name);
       process.stdout.write(`Capturing ${name}...`);
       const context = await browser.newContext({
         viewport: cfg.viewport,

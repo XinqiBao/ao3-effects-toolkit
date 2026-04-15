@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 
-import { EFFECTS, measureCaptureClip, previewUrlForEffect, resetCaptureState } from '../../tools/capture-gifs.mjs';
+import { measureCaptureClip, previewUrlForEffect, resetCaptureState, resolveEffectConfig } from '../../tools/capture-gifs.mjs';
 
 test('capture reset restores the envelope preview to a fully closed first frame', async () => {
-  const effect = EFFECTS.envelope;
+  const effect = resolveEffectConfig('envelope');
   const captureSelector = effect.captureSelector;
   const hoverSelector = effect.hoverSelector;
   assert.ok(captureSelector, 'envelope should expose a deterministic capture frame');

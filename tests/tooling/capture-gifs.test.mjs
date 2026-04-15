@@ -6,6 +6,13 @@ import { join, dirname } from 'node:path';
 import * as captureGifs from '../../tools/capture-gifs.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const SHARED_CAPTURE_DEFAULTS = {
+  captureSelector: '#workskin',
+  viewport: { width: 1400, height: 1400 },
+  settleMs: 500,
+  measureDurationMs: 1200,
+  durationMs: 4500,
+};
 
 test('previewUrlForEffect resolves a local file URL for the effect preview page', () => {
   assert.equal(typeof captureGifs.previewUrlForEffect, 'function');
@@ -118,8 +125,39 @@ test('measureCaptureClip unions progressive hover growth across the full measure
   ]);
 });
 
+test('resolveEffectConfig rejects unknown effects clearly', () => {
+  assert.equal(typeof captureGifs.resolveEffectConfig, 'function');
+  assert.throws(
+    () => captureGifs.resolveEffectConfig('missing-effect'),
+    /Unknown effect: missing-effect/
+  );
+});
+
+test('raw effect entries only hardcode explicit hover selectors', () => {
+  for (const [name, effect] of Object.entries(captureGifs.EFFECTS)) {
+    assert.deepEqual(
+      Object.keys(effect),
+      ['hoverSelector'],
+      `${name} should only hardcode its hover selector`
+    );
+    assert.equal(typeof effect.hoverSelector, 'string', `${name} should expose a hover selector`);
+  }
+});
+
+test('resolved effect configs inherit the shared capture defaults', () => {
+  for (const name of Object.keys(captureGifs.EFFECTS)) {
+    const effect = captureGifs.resolveEffectConfig(name);
+
+    assert.equal(effect.captureSelector, SHARED_CAPTURE_DEFAULTS.captureSelector);
+    assert.deepEqual(effect.viewport, SHARED_CAPTURE_DEFAULTS.viewport);
+    assert.equal(effect.settleMs, SHARED_CAPTURE_DEFAULTS.settleMs);
+    assert.equal(effect.measureDurationMs, SHARED_CAPTURE_DEFAULTS.measureDurationMs);
+    assert.equal(effect.durationMs, SHARED_CAPTURE_DEFAULTS.durationMs);
+  }
+});
+
 test('chat-messages capture window stays long enough to sample the expanded stack', () => {
-  const measureDurationMs = captureGifs.EFFECTS['chat-messages'].measureDurationMs;
+  const measureDurationMs = captureGifs.resolveEffectConfig('chat-messages').measureDurationMs;
 
   assert.ok(
     measureDurationMs >= 640,
@@ -128,9 +166,11 @@ test('chat-messages capture window stays long enough to sample the expanded stac
 });
 
 test('lean preview capture config uses #workskin and effect-local hover selectors', () => {
-  for (const [name, effect] of Object.entries(captureGifs.EFFECTS)) {
+  for (const name of Object.keys(captureGifs.EFFECTS)) {
+    const effect = captureGifs.resolveEffectConfig(name);
+
     assert.equal(effect.captureSelector, '#workskin', `${name} should capture #workskin`);
-    assert.ok(effect.hoverSelector, `${name} should expose a hover selector`);
+    assert.equal(typeof effect.hoverSelector, 'string', `${name} should expose a hover selector`);
     assert.equal(
       effect.hoverSelector.includes('.preview-card'),
       false,
