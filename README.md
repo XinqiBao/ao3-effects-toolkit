@@ -66,6 +66,7 @@ AO3 strips or rejects some CSS and HTML features. This toolkit avoids them in pu
 | `gap` | Use `margin` instead |
 | `grid-template-columns: repeat()` | Use `flex` or `inline-block` |
 | `pointer-events` | Avoid entirely |
+| `animation` and `@keyframes` | Use transitions and static end states instead |
 | `border-radius` with `/` | Remove the ellipse syntax |
 | HTML `id` attributes | Use classes only; AO3 strips `id` |
 

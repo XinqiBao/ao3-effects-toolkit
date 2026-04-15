@@ -14,14 +14,14 @@ Use these files from `effects/typewriter/`:
 
 ## Customization
 
-- Keep the `.typewriter`, `.lines`, `.line`, and `.cursor-row` wrappers as-is so the hover reveal and cursor animation keep working.
+- Keep the `.typewriter`, `.lines`, `.line`, and `.cursor-row` wrappers as-is so the hover reveal and delayed cursor still work.
 - You can refresh the line order or hint wording, but the block should remain the single hover path that reveals lines in sequence.
 
 ## Notes
 
 - AO3 work content does not run JavaScript; this effect is CSS only.
 - Make sure each staged line reads clearly, even if you add or remove lines.
-- Treat `@keyframes` support as AO3-unconfirmed until you validate it live.
+- AO3 rejects `animation` and `@keyframes` in work skins, so the published cursor appears as a static block after reveal instead of blinking.
 
 ## Validation
 
