@@ -13,6 +13,9 @@ Published AO3 content stays JavaScript-free. Local previews exist only to review
 | **Polaroid** | <img src="assets/demos/polaroid.gif" width="220" alt="Polaroid effect" /> | A polaroid frame that reveals the note on the back | [guide](effects/polaroid/guide.md) |
 | **Secret Divider** | <img src="assets/demos/secret-divider.gif" width="220" alt="Secret divider effect" /> | A decorative divider that hides a short line of text | [guide](effects/secret-divider/guide.md) |
 | **Typewriter** | <img src="assets/demos/typewriter.gif" width="220" alt="Typewriter effect" /> | A dark transcript panel with staged line reveal | [guide](effects/typewriter/guide.md) |
+| **Marginalia** | <img src="assets/demos/marginalia.gif" width="220" alt="Marginalia effect" /> | A manuscript-style passage that reveals revisions and margin notes | [guide](effects/marginalia/guide.md) |
+| **Casefile** | <img src="assets/demos/casefile.gif" width="220" alt="Casefile effect" /> | A case-file summary sheet with two tucked evidence slips | [guide](effects/casefile/guide.md) |
+| **Route Map** | <img src="assets/demos/route-map.gif" width="220" alt="Route map effect" /> | A three-stop route that reveals short notes at each waypoint | [guide](effects/route-map/guide.md) |
 
 ## Quick Start
 

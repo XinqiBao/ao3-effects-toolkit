@@ -7,12 +7,15 @@ This document records what has been confirmed against AO3 and what is still only
 Verified against a logged-in AO3 account:
 
 - on 2026-04-04, the pre-standardization `effects/envelope/work-skin.css` revision used on that date could be saved as an AO3 work skin
-- on 2026-04-15, the current default published variants for all five root-scoped effects could be saved as AO3 work skins and previewed correctly in AO3:
+- on 2026-04-16, the current default published variants for all eight root-scoped effects could be saved as AO3 work skins and previewed correctly in AO3:
   - `effects/chat-messages/`
   - `effects/envelope/`
   - `effects/polaroid/`
   - `effects/secret-divider/`
   - `effects/typewriter/`
+  - `effects/marginalia/`
+  - `effects/casefile/`
+  - `effects/route-map/`
 - on 2026-04-13, the current `effects/envelope/` root-scoped structure could be saved as an AO3 work skin and previewed correctly in AO3, including both:
   - the default text-stamp example
   - the optional image-stamp path when given a hotlinkable direct image URL
@@ -24,7 +27,7 @@ Verified against a logged-in AO3 account:
 
 ## Verified Locally Only
 
-None of the current published effect roots are waiting on post-standardization AO3 revalidation.
+Current published effect roots are not waiting on post-standardization AO3 revalidation.
 
 ## Known AO3 Restrictions
 
