@@ -6,6 +6,16 @@ import { join, dirname } from 'node:path';
 import * as captureGifs from '../../tools/capture-gifs.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const PUBLISHED_EFFECTS = [
+  'envelope',
+  'chat-messages',
+  'polaroid',
+  'secret-divider',
+  'typewriter',
+  'marginalia',
+  'casefile',
+  'route-map',
+];
 const SHARED_CAPTURE_DEFAULTS = {
   captureSelector: '#workskin',
   viewport: { width: 1400, height: 1400 },
@@ -142,6 +152,10 @@ test('raw effect entries only hardcode explicit hover selectors', () => {
     );
     assert.equal(typeof effect.hoverSelector, 'string', `${name} should expose a hover selector`);
   }
+});
+
+test('capture config covers all published effect roots', () => {
+  assert.deepEqual(Object.keys(captureGifs.EFFECTS), PUBLISHED_EFFECTS);
 });
 
 test('resolved effect configs inherit the shared capture defaults', () => {

@@ -45,6 +45,15 @@ export const EFFECTS = {
   'typewriter': {
     hoverSelector: '#workskin .typewriter--hover',
   },
+  'marginalia': {
+    hoverSelector: '#workskin .marginalia--hover',
+  },
+  'casefile': {
+    hoverSelector: '#workskin .casefile--hover',
+  },
+  'route-map': {
+    hoverSelector: '#workskin .route-map--hover',
+  },
 };
 
 function effectNames() {
