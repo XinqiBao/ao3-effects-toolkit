@@ -4,6 +4,102 @@ import { chromium } from 'playwright';
 
 import { previewUrlForEffect } from '../../tools/capture-gifs.mjs';
 
+test('marginalia preview keeps #workskin bounded to the visible effect', async () => {
+  const browser = await chromium.launch();
+
+  try {
+    const page = await browser.newPage({
+      viewport: { width: 1400, height: 1200 },
+      deviceScaleFactor: 2,
+    });
+
+    try {
+      await page.goto(previewUrlForEffect('marginalia'));
+      const workskin = page.locator('#workskin');
+      await workskin.waitFor({ state: 'visible' });
+
+      const workskinBox = await workskin.boundingBox();
+      assert.ok(workskinBox, 'marginalia preview should expose #workskin');
+      assert.ok(
+        workskinBox.width >= 420,
+        'marginalia preview should keep #workskin wide enough for the note rail'
+      );
+      assert.ok(
+        workskinBox.width <= 820,
+        'marginalia preview should not stretch #workskin across the full shell width'
+      );
+    } finally {
+      await page.close();
+    }
+  } finally {
+    await browser.close();
+  }
+});
+
+test('casefile preview keeps #workskin bounded to the visible effect', async () => {
+  const browser = await chromium.launch();
+
+  try {
+    const page = await browser.newPage({
+      viewport: { width: 1400, height: 1200 },
+      deviceScaleFactor: 2,
+    });
+
+    try {
+      await page.goto(previewUrlForEffect('casefile'));
+      const workskin = page.locator('#workskin');
+      await workskin.waitFor({ state: 'visible' });
+
+      const workskinBox = await workskin.boundingBox();
+      assert.ok(workskinBox, 'casefile preview should expose #workskin');
+      assert.ok(
+        workskinBox.width >= 440,
+        'casefile preview should keep #workskin wide enough for layered cards'
+      );
+      assert.ok(
+        workskinBox.width <= 840,
+        'casefile preview should not stretch #workskin across the full shell width'
+      );
+    } finally {
+      await page.close();
+    }
+  } finally {
+    await browser.close();
+  }
+});
+
+test('route-map preview keeps #workskin bounded to the visible effect', async () => {
+  const browser = await chromium.launch();
+
+  try {
+    const page = await browser.newPage({
+      viewport: { width: 1400, height: 1200 },
+      deviceScaleFactor: 2,
+    });
+
+    try {
+      await page.goto(previewUrlForEffect('route-map'));
+      const workskin = page.locator('#workskin');
+      await workskin.waitFor({ state: 'visible' });
+
+      const workskinBox = await workskin.boundingBox();
+      assert.ok(workskinBox, 'route-map preview should expose #workskin');
+      assert.ok(
+        workskinBox.width >= 500,
+        'route-map preview should keep #workskin wide enough for a three-stop route'
+      );
+      assert.ok(
+        workskinBox.width <= 920,
+        'route-map preview should not stretch #workskin across the full shell width'
+      );
+    } finally {
+      await page.close();
+    }
+  } finally {
+    await browser.close();
+  }
+});
+
 test('lean preview pages keep #workskin bounded to the visible effect', async () => {
   const browser = await chromium.launch();
 

@@ -6,6 +6,85 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
+test('marginalia artifacts follow the documented root-scoped structure contract', () => {
+  const preview = readFileSync(join(ROOT, 'effects', 'marginalia', 'preview.html'), 'utf8');
+  const example = readFileSync(join(ROOT, 'effects', 'marginalia', 'example.html'), 'utf8');
+  const css = readFileSync(join(ROOT, 'effects', 'marginalia', 'work-skin.css'), 'utf8');
+
+  assert.equal(preview.includes('class="marginalia marginalia--hover"'), true);
+  assert.equal(example.includes('class="marginalia marginalia--hover"'), true);
+  assert.equal(css.includes('#workskin .marginalia .sheet'), true);
+  assert.equal(example.includes('class="notes"'), true);
+  assert.equal(css.includes('#workskin .marginalia .note'), true);
+});
+
+test('marginalia artifacts avoid the documented AO3-incompatible patterns', () => {
+  const css = readFileSync(join(ROOT, 'effects', 'marginalia', 'work-skin.css'), 'utf8');
+  const example = readFileSync(join(ROOT, 'effects', 'marginalia', 'example.html'), 'utf8');
+
+  assert.equal(css.includes('gap:'), false);
+  assert.equal(css.includes('object-fit'), false);
+  assert.equal(css.includes('pointer-events'), false);
+  assert.equal(/\banimation\s*:/.test(css), false);
+  assert.equal(/@keyframes\b/.test(css), false);
+  assert.equal(css.includes('grid-template-columns: repeat('), false);
+  assert.equal(/border-radius:[^;]*\//.test(css), false);
+  assert.equal(example.includes(' id='), false);
+});
+
+test('casefile artifacts follow the documented root-scoped structure contract', () => {
+  const preview = readFileSync(join(ROOT, 'effects', 'casefile', 'preview.html'), 'utf8');
+  const example = readFileSync(join(ROOT, 'effects', 'casefile', 'example.html'), 'utf8');
+  const css = readFileSync(join(ROOT, 'effects', 'casefile', 'work-skin.css'), 'utf8');
+
+  assert.equal(preview.includes('class="casefile casefile--hover"'), true);
+  assert.equal(example.includes('class="casefile casefile--hover"'), true);
+  assert.equal(css.includes('#workskin .casefile .summary'), true);
+  assert.equal(example.includes('class="slip slip--ticket"'), true);
+  assert.equal(css.includes('#workskin .casefile .summary-label'), true);
+  assert.equal(example.includes('class="tabs"'), false);
+});
+
+test('casefile artifacts avoid the documented AO3-incompatible patterns', () => {
+  const css = readFileSync(join(ROOT, 'effects', 'casefile', 'work-skin.css'), 'utf8');
+  const example = readFileSync(join(ROOT, 'effects', 'casefile', 'example.html'), 'utf8');
+
+  assert.equal(css.includes('gap:'), false);
+  assert.equal(css.includes('object-fit'), false);
+  assert.equal(css.includes('pointer-events'), false);
+  assert.equal(/\banimation\s*:/.test(css), false);
+  assert.equal(/@keyframes\b/.test(css), false);
+  assert.equal(css.includes('grid-template-columns: repeat('), false);
+  assert.equal(/border-radius:[^;]*\//.test(css), false);
+  assert.equal(example.includes(' id='), false);
+});
+
+test('route-map artifacts follow the documented root-scoped structure contract', () => {
+  const preview = readFileSync(join(ROOT, 'effects', 'route-map', 'preview.html'), 'utf8');
+  const example = readFileSync(join(ROOT, 'effects', 'route-map', 'example.html'), 'utf8');
+  const css = readFileSync(join(ROOT, 'effects', 'route-map', 'work-skin.css'), 'utf8');
+
+  assert.equal(preview.includes('class="route-map route-map--hover"'), true);
+  assert.equal(example.includes('class="route-map route-map--hover"'), true);
+  assert.equal(css.includes('#workskin .route-map .track'), true);
+  assert.equal(example.includes('class="stop stop--start"'), true);
+  assert.equal(css.includes('#workskin .route-map .note'), true);
+});
+
+test('route-map artifacts avoid the documented AO3-incompatible patterns', () => {
+  const css = readFileSync(join(ROOT, 'effects', 'route-map', 'work-skin.css'), 'utf8');
+  const example = readFileSync(join(ROOT, 'effects', 'route-map', 'example.html'), 'utf8');
+
+  assert.equal(css.includes('gap:'), false);
+  assert.equal(css.includes('object-fit'), false);
+  assert.equal(css.includes('pointer-events'), false);
+  assert.equal(/\banimation\s*:/.test(css), false);
+  assert.equal(/@keyframes\b/.test(css), false);
+  assert.equal(css.includes('grid-template-columns: repeat('), false);
+  assert.equal(/border-radius:[^;]*\//.test(css), false);
+  assert.equal(example.includes(' id='), false);
+});
+
 test('published examples and previews use the documented root-scoped structure contract', () => {
   const chatPreview = readFileSync(join(ROOT, 'effects', 'chat-messages', 'preview.html'), 'utf8');
   const chatExample = readFileSync(join(ROOT, 'effects', 'chat-messages', 'example.html'), 'utf8');
@@ -65,6 +144,9 @@ test('published artifacts avoid the documented AO3-incompatible patterns', () =>
     readFileSync(join(ROOT, 'effects', 'polaroid', 'work-skin.css'), 'utf8'),
     readFileSync(join(ROOT, 'effects', 'secret-divider', 'work-skin.css'), 'utf8'),
     readFileSync(join(ROOT, 'effects', 'typewriter', 'work-skin.css'), 'utf8'),
+    readFileSync(join(ROOT, 'effects', 'marginalia', 'work-skin.css'), 'utf8'),
+    readFileSync(join(ROOT, 'effects', 'casefile', 'work-skin.css'), 'utf8'),
+    readFileSync(join(ROOT, 'effects', 'route-map', 'work-skin.css'), 'utf8'),
   ].join('\n');
   const allExamples = [
     readFileSync(join(ROOT, 'effects', 'chat-messages', 'example.html'), 'utf8'),
@@ -72,6 +154,9 @@ test('published artifacts avoid the documented AO3-incompatible patterns', () =>
     readFileSync(join(ROOT, 'effects', 'polaroid', 'example.html'), 'utf8'),
     readFileSync(join(ROOT, 'effects', 'secret-divider', 'example.html'), 'utf8'),
     readFileSync(join(ROOT, 'effects', 'typewriter', 'example.html'), 'utf8'),
+    readFileSync(join(ROOT, 'effects', 'marginalia', 'example.html'), 'utf8'),
+    readFileSync(join(ROOT, 'effects', 'casefile', 'example.html'), 'utf8'),
+    readFileSync(join(ROOT, 'effects', 'route-map', 'example.html'), 'utf8'),
   ].join('\n');
 
   assert.equal(allCss.includes('gap:'), false);

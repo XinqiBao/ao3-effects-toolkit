@@ -1,0 +1,148 @@
+/* ========================================
+   AO3 Casefile Effect
+   Summary sheet with tucked evidence slips
+   ======================================== */
+
+/* ---------- Root and geometry ---------- */
+
+#workskin .casefile {
+  position: relative;
+  display: block;
+  width: 560px;
+  max-width: 100%;
+  height: 280px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+/* ---------- Shared parts ---------- */
+
+#workskin .casefile .summary,
+#workskin .casefile .summary-label,
+#workskin .casefile .summary-title,
+#workskin .casefile .summary-copy,
+#workskin .casefile .slip,
+#workskin .casefile .slip-label,
+#workskin .casefile .slip-title,
+#workskin .casefile .slip-copy {
+  display: block;
+}
+
+#workskin .casefile .summary,
+#workskin .casefile .slip {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid rgba(119, 105, 90, 0.2);
+  box-shadow: 0 12px 26px rgba(56, 43, 31, 0.1);
+  transition:
+    top 0.38s ease,
+    left 0.38s ease,
+    transform 0.38s ease,
+    box-shadow 0.38s ease,
+    opacity 0.3s ease;
+}
+
+#workskin .casefile .summary {
+  top: 28px;
+  left: 0;
+  width: 392px;
+  min-height: 202px;
+  padding: 1em 1.1em 1.1em;
+  background: linear-gradient(180deg, #f6f1e9 0%, #ece4d7 100%);
+  z-index: 3;
+}
+
+#workskin .casefile .summary-label {
+  color: #7a6a5b;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.68em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#workskin .casefile .summary-title {
+  margin-top: 0.95em;
+  color: #43362e;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.34em;
+  line-height: 1.25;
+}
+
+#workskin .casefile .summary-copy {
+  margin-top: 1.1em;
+  color: #594c40;
+  font-size: 0.89em;
+  line-height: 1.72;
+  white-space: pre-line;
+}
+
+#workskin .casefile .slip {
+  width: 176px;
+  padding: 0.78em 0.86em 0.84em;
+  background: linear-gradient(180deg, #fbf7ef 0%, #f2eadf 100%);
+  z-index: 1;
+}
+
+#workskin .casefile .slip-label {
+  color: #836f5f;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.64em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#workskin .casefile .slip-title {
+  margin-top: 0.72em;
+  color: #4c4037;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.94em;
+  line-height: 1.3;
+}
+
+#workskin .casefile .slip-copy {
+  margin-top: 0.72em;
+  color: #67584b;
+  font-size: 0.75em;
+  line-height: 1.58;
+  white-space: pre-line;
+}
+
+#workskin .casefile .slip--ticket {
+  top: 20px;
+  left: 330px;
+  min-height: 100px;
+  transform: rotate(-2deg);
+  z-index: 2;
+}
+
+#workskin .casefile .slip--note {
+  top: 148px;
+  left: 342px;
+  min-height: 112px;
+  opacity: 0.9;
+  transform: rotate(2deg);
+}
+
+/* ---------- State and interaction ---------- */
+
+#workskin .casefile--hover:hover .summary {
+  left: -8px;
+  box-shadow: 0 16px 30px rgba(56, 43, 31, 0.14);
+}
+
+#workskin .casefile--hover:hover .slip {
+  box-shadow: 0 14px 26px rgba(56, 43, 31, 0.12);
+}
+
+#workskin .casefile--hover:hover .slip--ticket {
+  top: 10px;
+  left: 374px;
+  transform: rotate(-4deg);
+}
+
+#workskin .casefile--hover:hover .slip--note {
+  top: 132px;
+  left: 390px;
+  opacity: 1;
+  transform: rotate(3deg);
+}

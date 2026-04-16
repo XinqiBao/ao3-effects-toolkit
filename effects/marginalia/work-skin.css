@@ -1,0 +1,133 @@
+/* ========================================
+   AO3 Marginalia Effect
+   Annotated passage with hover notes
+   ======================================== */
+
+/* ---------- Root and geometry ---------- */
+
+#workskin .marginalia {
+  position: relative;
+  display: block;
+  width: 560px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-right: 178px;
+  cursor: pointer;
+}
+
+/* ---------- Shared parts ---------- */
+
+#workskin .marginalia .sheet,
+#workskin .marginalia .passage,
+#workskin .marginalia .addition,
+#workskin .marginalia .notes,
+#workskin .marginalia .note {
+  display: block;
+}
+
+#workskin .marginalia .sheet {
+  position: relative;
+  min-height: 188px;
+  padding: 1.2em 1.25em 1.05em;
+  background: linear-gradient(180deg, #f8f3ea 0%, #f2eadf 100%);
+  border: 1px solid rgba(138, 118, 97, 0.24);
+  box-shadow:
+    0 10px 24px rgba(67, 49, 35, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  color: #46382d;
+}
+
+#workskin .marginalia .passage {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.97em;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+#workskin .marginalia .revision {
+  color: #5f4c3f;
+  text-decoration: underline;
+  text-decoration-color: rgba(153, 112, 90, 0.35);
+}
+
+#workskin .marginalia .addition {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 1px solid transparent;
+  color: #6c5747;
+  font-size: 0.9em;
+  line-height: 1.7;
+  transition:
+    max-height 0.45s ease,
+    opacity 0.3s ease,
+    margin-top 0.45s ease,
+    padding-top 0.45s ease,
+    border-color 0.45s ease;
+}
+
+#workskin .marginalia .notes {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 160px;
+  opacity: 0.12;
+  transform: translateX(-10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.45s ease;
+}
+
+#workskin .marginalia .note {
+  padding: 0.72em 0.84em;
+  margin-top: 12px;
+  background: rgba(251, 246, 238, 0.94);
+  border: 1px solid rgba(159, 132, 110, 0.2);
+  border-left: 3px solid rgba(133, 100, 78, 0.45);
+  box-shadow: 0 7px 18px rgba(67, 49, 35, 0.08);
+  color: #755d4a;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.74em;
+  line-height: 1.55;
+}
+
+#workskin .marginalia .note:first-child {
+  margin-top: 0;
+}
+
+#workskin .marginalia .note--a {
+  transform: rotate(-1deg);
+}
+
+#workskin .marginalia .note--b {
+  transform: rotate(1deg);
+}
+
+/* ---------- State and interaction ---------- */
+
+#workskin .marginalia--hover:hover .sheet {
+  box-shadow:
+    0 14px 28px rgba(67, 49, 35, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+#workskin .marginalia--hover:hover .revision {
+  color: rgba(96, 76, 63, 0.8);
+  text-decoration: line-through;
+  text-decoration-color: rgba(140, 92, 75, 0.7);
+}
+
+#workskin .marginalia--hover:hover .addition {
+  max-height: 7em;
+  opacity: 1;
+  margin-top: 0.9em;
+  padding-top: 0.8em;
+  border-top-color: rgba(137, 115, 96, 0.26);
+}
+
+#workskin .marginalia--hover:hover .notes {
+  opacity: 1;
+  transform: translateX(0);
+}
