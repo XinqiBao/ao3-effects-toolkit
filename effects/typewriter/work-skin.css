@@ -7,6 +7,7 @@
 
 #workskin .typewriter {
   position: relative;
+  display: block;
   margin: 0 auto;
   width: 100%;
   max-width: 680px;
@@ -17,9 +18,9 @@
     0 8px 28px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
   cursor: pointer;
+  overflow: hidden;
 }
 
-#workskin .typewriter .prompt,
 #workskin .typewriter .lines,
 #workskin .typewriter .cursor-row {
   display: block;
@@ -31,29 +32,37 @@
 /* ── Named modules ──────────────────────────────────────────── */
 
 #workskin .typewriter .prompt {
-  display: block;
-  overflow: hidden;
-  max-height: 10em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 0.6em;
+  box-sizing: border-box;
   opacity: 1;
+  transform: translateY(0);
   color: #6e6e6e;
   font-family: "Courier New", Courier, "Lucida Sans Typewriter", monospace;
   font-size: 0.88em;
   line-height: 1.5;
   letter-spacing: 0.04em;
   text-align: center;
-  padding: 2.4em 0.6em;
   transition:
-    max-height 0.45s ease,
     opacity 0.3s ease,
-    padding 0.45s ease;
+    transform 0.35s ease;
+  z-index: 2;
 }
 
-/* Fade the prompt out instead of removing the hover target immediately. */
+/* Keep the prompt as a visual overlay so the hover target geometry stays stable. */
 #workskin .typewriter--hover:hover .prompt {
-  max-height: 0;
   opacity: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  transform: translateY(-0.45em);
 }
 
 #workskin .typewriter .lines {
@@ -62,16 +71,14 @@
   color: #c8c8c8;
   font-size: 0.92em;
   line-height: 1.7;
+  z-index: 1;
 }
 
 #workskin .typewriter .line {
   display: block;
-  max-height: 0;
   opacity: 0;
-  overflow: hidden;
-  transform: translateY(4px);
+  transform: translateY(0.35em);
   transition:
-    max-height 0.55s ease,
     opacity 0.45s ease,
     transform 0.55s ease;
   white-space: pre-line;
@@ -79,7 +86,6 @@
 
 /* Per-line staggered delays on reveal */
 #workskin .typewriter--hover:hover .line {
-  max-height: 3.5em;
   opacity: 1;
   transform: translateY(0);
 }
@@ -118,17 +124,19 @@
 
 #workskin .typewriter .cursor-row {
   display: block;
-  max-height: 0;
+  position: relative;
+  margin-top: 0.2em;
   opacity: 0;
-  overflow: hidden;
+  transform: translateY(0.35em);
   transition:
-    max-height 0.55s ease,
-    opacity 0.45s ease;
+    opacity 0.45s ease,
+    transform 0.55s ease;
+  z-index: 1;
 }
 
 #workskin .typewriter--hover:hover .cursor-row {
-  max-height: 2.4em;
   opacity: 1;
+  transform: translateY(0);
   transition-delay: 1.4s;
 }
 

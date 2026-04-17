@@ -22,7 +22,7 @@ Verified against a logged-in AO3 account:
 - on 2026-04-13, the current `effects/polaroid/` root-scoped structure could be saved as an AO3 work skin and previewed correctly in AO3, including both:
   - the default no-image example
   - the optional image path when given a hotlinkable direct image URL
-- on 2026-04-15, the current `effects/typewriter/` root-scoped structure could be saved and previewed after removing the rejected `animation`/`@keyframes` cursor blink; the cursor now appears as a static block after reveal
+- on 2026-04-16, the current `effects/typewriter/` root-scoped structure could be saved and previewed after refactoring the prompt into a stable hover-stage overlay; the lower-edge hover regression no longer reproduced and the cursor still appears as a static block after reveal
 - AO3 preserves `<details>` and `<summary>` in posted work HTML.
 
 ## Verified Locally Only

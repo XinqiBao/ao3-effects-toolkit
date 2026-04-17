@@ -20,6 +20,7 @@ Use these files from `effects/typewriter/`:
 ## Notes
 
 - AO3 work content does not run JavaScript; this effect is CSS only.
+- The prompt now fades as an overlay while the transcript panel keeps a stable hover surface, so the lower edge does not flicker when the pointer rests near it.
 - Make sure each staged line reads clearly, even if you add or remove lines.
 - AO3 rejects `animation` and `@keyframes` in work skins, so the published cursor appears as a static block after reveal instead of blinking.
 
