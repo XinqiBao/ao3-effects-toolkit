@@ -8,11 +8,13 @@
 #workskin .chat {
   position: relative;
   max-width: 480px;
+  min-height: 37px;
   margin: 0 auto;
   border-radius: 18px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: #f2f2f7;
   cursor: pointer;
+  overflow: hidden;
 }
 
 /* ---------- Shared parts ---------- */
@@ -29,33 +31,63 @@
   max-height: 0;
   opacity: 0;
   padding: 0 10px;
-  transition: max-height 0.5s ease, opacity 0.35s ease, padding 0.5s ease;
+  transform: translateY(-0.25em);
+  transition:
+    max-height 0.45s ease,
+    opacity 0.28s ease,
+    padding 0.45s ease,
+    transform 0.45s ease;
 }
 
 #workskin .chat--hover:hover .stack {
   max-height: 4000px;
   opacity: 1;
   padding: 10px 10px 8px;
+  transform: translateY(0);
 }
 
 /* ---------- Named modules ---------- */
 
 #workskin .chat .preview {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   display: flex;
   align-items: center;
+  overflow: hidden;
+  max-height: 56px;
   padding: 10px 14px;
+  background: #f2f2f7;
   color: #6b6b6e;
   font-size: 0.8em;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
     "Segoe UI", sans-serif;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    max-height 0.32s ease,
+    opacity 0.18s ease,
+    padding 0.32s ease,
+    transform 0.32s ease;
+  z-index: 1;
 }
 
 #workskin .chat--hover:hover .preview {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transform: translateY(-0.35em);
 }
 
 #workskin .chat .preview-copy {
+  display: block;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #workskin .chat .preview-name {
