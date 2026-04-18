@@ -45,5 +45,7 @@ body {
 
 #workskin {
   margin: 0 auto;
-  padding: 14px;
+  padding: 24px;
+  width: fit-content;
+  max-width: 100%;
 }

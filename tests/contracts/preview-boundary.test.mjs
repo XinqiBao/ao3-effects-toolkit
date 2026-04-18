@@ -4,112 +4,19 @@ import { chromium } from 'playwright';
 
 import { previewUrlForEffect } from '../../tools/capture-gifs.mjs';
 
-test('marginalia preview keeps #workskin bounded to the visible effect', async () => {
-  const browser = await chromium.launch();
-
-  try {
-    const page = await browser.newPage({
-      viewport: { width: 1400, height: 1200 },
-      deviceScaleFactor: 2,
-    });
-
-    try {
-      await page.goto(previewUrlForEffect('marginalia'));
-      const workskin = page.locator('#workskin');
-      await workskin.waitFor({ state: 'visible' });
-
-      const workskinBox = await workskin.boundingBox();
-      assert.ok(workskinBox, 'marginalia preview should expose #workskin');
-      assert.ok(
-        workskinBox.width >= 420,
-        'marginalia preview should keep #workskin wide enough for the note rail'
-      );
-      assert.ok(
-        workskinBox.width <= 820,
-        'marginalia preview should not stretch #workskin across the full shell width'
-      );
-    } finally {
-      await page.close();
-    }
-  } finally {
-    await browser.close();
-  }
-});
-
-test('casefile preview keeps #workskin bounded to the visible effect', async () => {
-  const browser = await chromium.launch();
-
-  try {
-    const page = await browser.newPage({
-      viewport: { width: 1400, height: 1200 },
-      deviceScaleFactor: 2,
-    });
-
-    try {
-      await page.goto(previewUrlForEffect('casefile'));
-      const workskin = page.locator('#workskin');
-      await workskin.waitFor({ state: 'visible' });
-
-      const workskinBox = await workskin.boundingBox();
-      assert.ok(workskinBox, 'casefile preview should expose #workskin');
-      assert.ok(
-        workskinBox.width >= 440,
-        'casefile preview should keep #workskin wide enough for layered cards'
-      );
-      assert.ok(
-        workskinBox.width <= 840,
-        'casefile preview should not stretch #workskin across the full shell width'
-      );
-    } finally {
-      await page.close();
-    }
-  } finally {
-    await browser.close();
-  }
-});
-
-test('route-map preview keeps #workskin bounded to the visible effect', async () => {
-  const browser = await chromium.launch();
-
-  try {
-    const page = await browser.newPage({
-      viewport: { width: 1400, height: 1200 },
-      deviceScaleFactor: 2,
-    });
-
-    try {
-      await page.goto(previewUrlForEffect('route-map'));
-      const workskin = page.locator('#workskin');
-      await workskin.waitFor({ state: 'visible' });
-
-      const workskinBox = await workskin.boundingBox();
-      assert.ok(workskinBox, 'route-map preview should expose #workskin');
-      assert.ok(
-        workskinBox.width >= 500,
-        'route-map preview should keep #workskin wide enough for a three-stop route'
-      );
-      assert.ok(
-        workskinBox.width <= 920,
-        'route-map preview should not stretch #workskin across the full shell width'
-      );
-    } finally {
-      await page.close();
-    }
-  } finally {
-    await browser.close();
-  }
-});
-
-test('lean preview pages keep #workskin bounded to the visible effect', async () => {
+test('preview boundary contract keeps reviewed #workskin frames bounded to the visible effect', async () => {
   const browser = await chromium.launch();
 
   try {
     const cases = [
-      { name: 'chat-messages', minWidth: 300, maxWidth: 560 },
-      { name: 'polaroid', minWidth: 200, maxWidth: 320 },
-      { name: 'secret-divider', minWidth: 320, maxWidth: 620 },
-      { name: 'typewriter', minWidth: 420, maxWidth: 760 },
-      { name: 'envelope', minWidth: 500, maxWidth: 820 },
+      { name: 'envelope', hoverSelector: '#workskin .envelope--hover', minWidth: 520, maxWidth: 580, minHeight: 600, maxHeight: 660 },
+      { name: 'chat-messages', hoverSelector: '#workskin .chat--hover', minWidth: 500, maxWidth: 540, minHeight: 560, maxHeight: 620 },
+      { name: 'polaroid', hoverSelector: '#workskin .polaroid--hover', minWidth: 230, maxWidth: 270, minHeight: 330, maxHeight: 380 },
+      { name: 'secret-divider', hoverSelector: '#workskin .secret-divider--hover', minWidth: 380, maxWidth: 460, minHeight: 160, maxHeight: 220 },
+      { name: 'typewriter', hoverSelector: '#workskin .typewriter--hover', minWidth: 460, maxWidth: 540, minHeight: 160, maxHeight: 220 },
+      { name: 'marginalia', hoverSelector: '#workskin .marginalia--hover', minWidth: 560, maxWidth: 620, minHeight: 220, maxHeight: 280 },
+      { name: 'casefile', hoverSelector: '#workskin .casefile--hover', minWidth: 560, maxWidth: 620, minHeight: 280, maxHeight: 330 },
+      { name: 'route-map', hoverSelector: '#workskin .route-map--hover', minWidth: 620, maxWidth: 680, minHeight: 220, maxHeight: 260 },
     ];
 
     for (const effect of cases) {
@@ -124,6 +31,7 @@ test('lean preview pages keep #workskin bounded to the visible effect', async ()
         await workskin.waitFor({ state: 'visible' });
 
         const workskinBox = await workskin.boundingBox();
+        const hoverTarget = page.locator(effect.hoverSelector).first();
         assert.ok(workskinBox, `${effect.name} preview should expose #workskin`);
         assert.ok(
           workskinBox.width >= effect.minWidth,
@@ -132,6 +40,36 @@ test('lean preview pages keep #workskin bounded to the visible effect', async ()
         assert.ok(
           workskinBox.width <= effect.maxWidth,
           `${effect.name} preview should not leave #workskin stretched across the full shell width`
+        );
+        assert.ok(
+          workskinBox.height >= effect.minHeight,
+          `${effect.name} preview should keep #workskin tall enough for the visible effect`
+        );
+        assert.ok(
+          workskinBox.height <= effect.maxHeight,
+          `${effect.name} preview should keep #workskin from growing past the visible effect`
+        );
+
+        await hoverTarget.hover({ force: true });
+        await page.waitForTimeout(1800);
+
+        const openBox = await hoverTarget.boundingBox();
+        assert.ok(openBox, `${effect.name} preview should expose the hovered effect root`);
+        assert.ok(
+          openBox.x >= workskinBox.x - 1,
+          `${effect.name} hover state should stay inside the #workskin left boundary`
+        );
+        assert.ok(
+          openBox.y >= workskinBox.y - 1,
+          `${effect.name} hover state should stay inside the #workskin top boundary`
+        );
+        assert.ok(
+          openBox.x + openBox.width <= workskinBox.x + workskinBox.width + 1,
+          `${effect.name} hover state should stay inside the #workskin right boundary`
+        );
+        assert.ok(
+          openBox.y + openBox.height <= workskinBox.y + workskinBox.height + 1,
+          `${effect.name} hover state should stay inside the #workskin bottom boundary`
         );
       } finally {
         await page.close();
