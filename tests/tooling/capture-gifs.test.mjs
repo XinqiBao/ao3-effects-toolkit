@@ -19,8 +19,12 @@ const PUBLISHED_EFFECTS = [
 const SHARED_CAPTURE_DEFAULTS = {
   captureSelector: '#workskin',
   viewport: { width: 1400, height: 1400 },
+  outputWidth: 560,
+  paletteColors: 192,
   settleMs: 500,
+  fps: 10,
   measureDurationMs: 1200,
+  sampleIntervalMs: 80,
   durationMs: 4500,
 };
 
@@ -143,6 +147,47 @@ test('resolveEffectConfig rejects unknown effects clearly', () => {
   );
 });
 
+test('resolveEffectConfig rejects invalid paletteColors clearly', () => {
+  captureGifs.EFFECTS['invalid-palette-colors'] = {
+    hoverSelector: '#workskin .invalid-palette-colors--hover',
+    paletteColors: 0,
+  };
+
+  try {
+    assert.throws(
+      () => captureGifs.resolveEffectConfig('invalid-palette-colors'),
+      /Invalid paletteColors for effect invalid-palette-colors/
+    );
+  } finally {
+    delete captureGifs.EFFECTS['invalid-palette-colors'];
+  }
+});
+
+test('resolveEffectConfig rejects paletteColors outside the ffmpeg range', () => {
+  captureGifs.EFFECTS['palette-colors-too-low'] = {
+    hoverSelector: '#workskin .palette-colors-too-low--hover',
+    paletteColors: 1,
+  };
+  captureGifs.EFFECTS['palette-colors-too-high'] = {
+    hoverSelector: '#workskin .palette-colors-too-high--hover',
+    paletteColors: 257,
+  };
+
+  try {
+    assert.throws(
+      () => captureGifs.resolveEffectConfig('palette-colors-too-low'),
+      /Invalid paletteColors for effect palette-colors-too-low/
+    );
+    assert.throws(
+      () => captureGifs.resolveEffectConfig('palette-colors-too-high'),
+      /Invalid paletteColors for effect palette-colors-too-high/
+    );
+  } finally {
+    delete captureGifs.EFFECTS['palette-colors-too-low'];
+    delete captureGifs.EFFECTS['palette-colors-too-high'];
+  }
+});
+
 test('raw effect entries only hardcode explicit hover selectors', () => {
   for (const [name, effect] of Object.entries(captureGifs.EFFECTS)) {
     assert.deepEqual(
@@ -164,8 +209,12 @@ test('resolved effect configs inherit the shared capture defaults', () => {
 
     assert.equal(effect.captureSelector, SHARED_CAPTURE_DEFAULTS.captureSelector);
     assert.deepEqual(effect.viewport, SHARED_CAPTURE_DEFAULTS.viewport);
+    assert.equal(effect.outputWidth, SHARED_CAPTURE_DEFAULTS.outputWidth);
+    assert.equal(effect.paletteColors, SHARED_CAPTURE_DEFAULTS.paletteColors);
     assert.equal(effect.settleMs, SHARED_CAPTURE_DEFAULTS.settleMs);
+    assert.equal(effect.fps, SHARED_CAPTURE_DEFAULTS.fps);
     assert.equal(effect.measureDurationMs, SHARED_CAPTURE_DEFAULTS.measureDurationMs);
+    assert.equal(effect.sampleIntervalMs, SHARED_CAPTURE_DEFAULTS.sampleIntervalMs);
     assert.equal(effect.durationMs, SHARED_CAPTURE_DEFAULTS.durationMs);
   }
 });

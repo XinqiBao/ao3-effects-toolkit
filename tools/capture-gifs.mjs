@@ -21,7 +21,8 @@ const THIS_FILE = fileURLToPath(import.meta.url);
 const DEFAULT_CAPTURE = {
   captureSelector: '#workskin',
   viewport: { width: 1400, height: 1400 },
-  outputWidth: 488,
+  outputWidth: 560,
+  paletteColors: 192,
   settleMs: 500,
   fps: 10,
   measureDurationMs: 1200,
@@ -85,6 +86,10 @@ function validateResolvedEffectConfig(name, config) {
     if (!Number.isFinite(config[field]) || config[field] <= 0) {
       throw new Error(`Invalid ${field} for effect ${name}`);
     }
+  }
+
+  if (!Number.isInteger(config.paletteColors) || config.paletteColors < 2 || config.paletteColors > 256) {
+    throw new Error(`Invalid paletteColors for effect ${name}`);
   }
 
   if (!Number.isFinite(config.settleMs) || config.settleMs < 0) {
@@ -243,14 +248,14 @@ async function captureEffect(page, name, cfg) {
     await page.waitForTimeout(interval);
   }
 
-  return { framesDir, fps, outputWidth: cfg.outputWidth };
+  return { framesDir, fps, outputWidth: cfg.outputWidth, paletteColors: cfg.paletteColors };
 }
 
-function buildGif(framesDir, outputPath, fps, outputWidth) {
+function buildGif(framesDir, outputPath, fps, outputWidth, paletteColors) {
   const palette = join(framesDir, 'palette.png');
   const pattern = join(framesDir, 'frame-%04d.png');
   execSync(
-    `ffmpeg -y -framerate ${fps} -i "${pattern}" -vf "scale=${outputWidth}:-1:flags=lanczos,palettegen=max_colors=128:stats_mode=diff" "${palette}"`,
+    `ffmpeg -y -framerate ${fps} -i "${pattern}" -vf "scale=${outputWidth}:-1:flags=lanczos,palettegen=max_colors=${paletteColors}:stats_mode=diff" "${palette}"`,
     { stdio: 'pipe' }
   );
   execSync(
@@ -274,11 +279,11 @@ export async function main(argv = process.argv.slice(2)) {
         deviceScaleFactor: 2,
       });
       const page = await context.newPage();
-      const { framesDir, fps, outputWidth } = await captureEffect(page, name, cfg);
+      const { framesDir, fps, outputWidth, paletteColors } = await captureEffect(page, name, cfg);
       await context.close();
 
       const outputPath = join(root, 'assets', 'demos', `${name}.gif`);
-      buildGif(framesDir, outputPath, fps, outputWidth);
+      buildGif(framesDir, outputPath, fps, outputWidth, paletteColors);
       console.log(` done -> assets/demos/${name}.gif`);
     }
   } finally {
