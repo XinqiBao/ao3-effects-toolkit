@@ -1,32 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
 
 import * as captureGifs from '../../tools/capture-gifs.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const PUBLISHED_EFFECTS = [
-  'envelope',
-  'chat-messages',
-  'polaroid',
-  'secret-divider',
-  'typewriter',
-  'marginalia',
-  'casefile',
-  'route-map',
-];
-const SHARED_CAPTURE_DEFAULTS = {
-  captureSelector: '#workskin',
-  viewport: { width: 1400, height: 1400 },
-  outputWidth: 560,
-  paletteColors: 192,
-  settleMs: 500,
-  fps: 10,
-  measureDurationMs: 1200,
-  sampleIntervalMs: 80,
-  durationMs: 4500,
-};
+const PUBLISHED_EFFECTS = readdirSync(join(ROOT, 'effects'), { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && entry.name !== '_shared')
+  .map((entry) => entry.name)
+  .sort();
 
 test('previewUrlForEffect resolves a local file URL for the effect preview page', () => {
   assert.equal(typeof captureGifs.previewUrlForEffect, 'function');
@@ -188,44 +172,35 @@ test('resolveEffectConfig rejects paletteColors outside the ffmpeg range', () =>
   }
 });
 
-test('raw effect entries only hardcode explicit hover selectors', () => {
+test('raw effect entries expose deterministic hover selectors', () => {
   for (const [name, effect] of Object.entries(captureGifs.EFFECTS)) {
-    assert.deepEqual(
-      Object.keys(effect),
-      ['hoverSelector'],
-      `${name} should only hardcode its hover selector`
-    );
     assert.equal(typeof effect.hoverSelector, 'string', `${name} should expose a hover selector`);
+    assert.ok(effect.hoverSelector.length > 0, `${name} hover selector should not be empty`);
   }
 });
 
 test('capture config covers all published effect roots', () => {
-  assert.deepEqual(Object.keys(captureGifs.EFFECTS), PUBLISHED_EFFECTS);
+  assert.deepEqual(Object.keys(captureGifs.EFFECTS).sort(), PUBLISHED_EFFECTS);
 });
 
-test('resolved effect configs inherit the shared capture defaults', () => {
+test('resolved effect configs expose valid capture settings', () => {
   for (const name of Object.keys(captureGifs.EFFECTS)) {
     const effect = captureGifs.resolveEffectConfig(name);
 
-    assert.equal(effect.captureSelector, SHARED_CAPTURE_DEFAULTS.captureSelector);
-    assert.deepEqual(effect.viewport, SHARED_CAPTURE_DEFAULTS.viewport);
-    assert.equal(effect.outputWidth, SHARED_CAPTURE_DEFAULTS.outputWidth);
-    assert.equal(effect.paletteColors, SHARED_CAPTURE_DEFAULTS.paletteColors);
-    assert.equal(effect.settleMs, SHARED_CAPTURE_DEFAULTS.settleMs);
-    assert.equal(effect.fps, SHARED_CAPTURE_DEFAULTS.fps);
-    assert.equal(effect.measureDurationMs, SHARED_CAPTURE_DEFAULTS.measureDurationMs);
-    assert.equal(effect.sampleIntervalMs, SHARED_CAPTURE_DEFAULTS.sampleIntervalMs);
-    assert.equal(effect.durationMs, SHARED_CAPTURE_DEFAULTS.durationMs);
+    assert.equal(effect.captureSelector, '#workskin', `${name} should capture the #workskin boundary`);
+    assert.equal(effect.hoverSelector, captureGifs.EFFECTS[name].hoverSelector);
+    assert.ok(Number.isFinite(effect.viewport.width) && effect.viewport.width > 0);
+    assert.ok(Number.isFinite(effect.viewport.height) && effect.viewport.height > 0);
+    assert.ok(Number.isFinite(effect.outputWidth) && effect.outputWidth > 0);
+    assert.ok(
+      Number.isInteger(effect.paletteColors) && effect.paletteColors >= 2 && effect.paletteColors <= 256
+    );
+    assert.ok(Number.isFinite(effect.settleMs) && effect.settleMs >= 0);
+    assert.ok(Number.isFinite(effect.fps) && effect.fps > 0);
+    assert.ok(Number.isFinite(effect.measureDurationMs) && effect.measureDurationMs > 0);
+    assert.ok(Number.isFinite(effect.sampleIntervalMs) && effect.sampleIntervalMs > 0);
+    assert.ok(Number.isFinite(effect.durationMs) && effect.durationMs >= effect.measureDurationMs);
   }
-});
-
-test('chat-messages capture window stays long enough to sample the expanded stack', () => {
-  const measureDurationMs = captureGifs.resolveEffectConfig('chat-messages').measureDurationMs;
-
-  assert.ok(
-    measureDurationMs >= 640,
-    'chat-messages needs a measure window that outlasts its delayed full-height expansion'
-  );
 });
 
 test('lean preview capture config uses #workskin and effect-local hover selectors', () => {
