@@ -28,6 +28,13 @@ Local previews exist to review AO3 effects, not to invent a separate presentatio
 - extra repository-wide abstractions for one or two outlier effects
 - repository-wide card or stage wrapper systems
 
+## Frame Sizing
+
+- treat shared `#workskin` padding as a starting point, not a public numeric contract
+- add effect-local width or `min-height` only when the visible effect needs extra stage or would otherwise collapse too narrow
+- review preview sizing by looking at the rendered effect and capture boundary together
+- keep exact sizing heuristics in maintainer docs and manual review unless the repository intentionally promotes them into a documented contract
+
 ## GIF Capture Boundary
 
 - capture `#workskin` by default
