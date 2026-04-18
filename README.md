@@ -48,6 +48,7 @@ node tools/capture-gifs.mjs envelope
 - `npm test` runs both buckets.
 - `ffmpeg` must be installed locally before running `node tools/capture-gifs.mjs ...`.
 - Local preview validation is primarily manual or browser-assisted.
+- The committed suite is intentionally narrower than visual review; exact framing and tuning still live in maintainer docs and manual checks.
 
 ## Documentation
 
@@ -57,6 +58,7 @@ node tools/capture-gifs.mjs envelope
 - [AO3 Compatibility](docs/compatibility.md) — confirmed AO3 support and known restrictions
 - [Effect Authoring](docs/maintainers/effect-authoring.md) — effect directory contract and authoring rules
 - [Preview Principles](docs/maintainers/preview-principles.md) — preview design constraints
+- [Testing Boundaries](docs/maintainers/testing-boundaries.md) — what belongs in committed tests versus docs or manual review
 - [Contribution Workflow](docs/maintainers/contribution-workflow.md) — maintenance workflow for repository changes
 - [Project Evolution](docs/history/project-evolution.md) — how the repository structure evolved
 

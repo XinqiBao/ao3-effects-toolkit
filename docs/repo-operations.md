@@ -65,8 +65,10 @@ This document is the canonical operational map for maintaining this repository.
 
 - keep `tests/tooling/` focused on stable local capture regressions
 - keep `tests/contracts/` focused on documented repository contracts
+- prefer observable behavior and documented compatibility over exact pixel windows, naming-style assertions, or migration scars
 - do not commit one-off migration guards, temporary experiment probes, or personal style-preference assertions
 - move temporary validation into `local/` or the active `.context/work/` packet unless it has become a durable repository contract
+- use `docs/maintainers/testing-boundaries.md` when deciding whether a check belongs in the committed suite
 
 ## Generated And Local-Only Paths
 

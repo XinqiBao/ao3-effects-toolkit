@@ -40,11 +40,14 @@ node tools/capture-gifs.mjs envelope
 
 Commit tests only when they protect a durable repository contract or a long-lived local workflow.
 
+For detailed test-design guidance, see `docs/maintainers/testing-boundaries.md`.
+
 Good candidates:
 
 - capture math or timing regressions that would break committed demo generation
 - browser-backed checks for stable preview boundaries or hover behavior
 - structure and compatibility assertions that are already documented in the public maintainer docs
+- config validation that protects the long-lived GIF capture workflow
 
 Keep out of the repository:
 
@@ -52,6 +55,7 @@ Keep out of the repository:
 - migration-only assertions that are no longer part of the active contract
 - temporary experiment checks
 - personal visual-preference assertions that are not documented as repository policy
+- exact preview sizing or framing calibration that still belongs in maintainer docs or manual review
 
 Keep temporary validation in `local/` or the active `.context/work/` packet until it either proves unnecessary or gets promoted into a documented repository contract.
 
