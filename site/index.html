@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Try CSS-only interactive effects designed for Archive of Our Own works.">
+  <title>AO3 Effects Toolkit</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.mjs" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#preview">Skip to preview</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <p class="brand__eyebrow">Interactive gallery</p>
+      <h1 class="brand__title">AO3 Effects Toolkit</h1>
+    </div>
+    <a class="repo-link" href="https://github.com/XinqiBao/ao3-effects-toolkit" target="_blank" rel="noreferrer">
+      View on GitHub
+    </a>
+  </header>
+
+  <main class="workspace">
+    <aside class="effect-panel" aria-labelledby="effects-heading">
+      <div class="effect-panel__header">
+        <h2 id="effects-heading">Effects</h2>
+        <span class="effect-count" id="effect-count">00</span>
+      </div>
+
+      <label class="effect-select-label" for="effect-select">Choose an effect</label>
+      <select class="effect-select" id="effect-select"></select>
+
+      <nav class="effect-list" aria-label="Effect previews"></nav>
+
+      <p class="effect-panel__note">CSS-only effects for AO3 work skins.</p>
+    </aside>
+
+    <section class="preview-panel" id="preview" aria-labelledby="preview-heading">
+      <div class="preview-toolbar">
+        <h2 id="preview-heading">Live preview</h2>
+        <div class="source-links">
+          <a id="guide-link" href="https://github.com/XinqiBao/ao3-effects-toolkit/blob/main/effects/envelope/guide.md" target="_blank" rel="noreferrer">Guide</a>
+          <a id="html-link" href="https://github.com/XinqiBao/ao3-effects-toolkit/blob/main/effects/envelope/example.html" target="_blank" rel="noreferrer">HTML</a>
+          <a id="css-link" href="https://github.com/XinqiBao/ao3-effects-toolkit/blob/main/effects/envelope/work-skin.css" target="_blank" rel="noreferrer">CSS</a>
+        </div>
+      </div>
+
+      <div class="preview-stage">
+        <div class="preview-frame">
+          <iframe
+            id="effect-preview"
+            title="Interactive effect preview"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -7,5 +7,6 @@ local/
 output/
 node_modules/
 artifacts/
+dist/
 .DS_Store
 tags
