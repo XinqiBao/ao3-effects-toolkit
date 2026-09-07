@@ -1,8 +1,14 @@
 # AO3 Effects Toolkit
 
+[![Deploy GitHub Pages](https://github.com/XinqiBao/ao3-effects-toolkit/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/XinqiBao/ao3-effects-toolkit/actions/workflows/deploy-pages.yml)
+
 CSS-only interactive effects for [Archive of Our Own](https://archiveofourown.org/) works.
 
 Published AO3 content stays JavaScript-free. Local previews exist only to review each effect and generate repository demo media.
+
+## Live Gallery
+
+[Open the interactive gallery](https://xinqibao.github.io/ao3-effects-toolkit/) to try every effect in a live preview and jump directly to its guide, HTML, or CSS source.
 
 ## Effects
 
@@ -40,12 +46,16 @@ Basic flow:
 npm test
 npm run test:tooling
 npm run test:contracts
+npm run build:site
+npm run verify
 node tools/capture-gifs.mjs envelope
 ```
 
 - `npm run test:tooling` covers long-lived regressions for the local GIF capture workflow.
 - `npm run test:contracts` covers committed repository contracts for previews, examples, and published CSS boundaries.
 - `npm test` runs both buckets.
+- `npm run build:site` assembles the static GitHub Pages site in `dist/`.
+- `npm run verify` runs the full committed suite and assembles the site.
 - `ffmpeg` must be installed locally before running `node tools/capture-gifs.mjs ...`.
 - Local preview validation is primarily manual or browser-assisted.
 - The committed suite is intentionally narrower than visual review; exact framing and tuning still live in maintainer docs and manual checks.

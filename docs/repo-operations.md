@@ -16,10 +16,12 @@ This document is the canonical operational map for maintaining this repository.
   - `preview-media/` — shared preview-only images stored in Git LFS
 - `docs/` — public documentation and maintainer guidance
 - `tools/` — GIF capture scripts
+- `site/` — static interactive gallery shell for GitHub Pages
 - `tests/`
   - `tooling/` — committed regressions for local capture helpers
   - `contracts/` — committed repository contracts for preview/example/CSS structure
 - `.context/`, `local/` — gitignored local process notes and private artifacts
+- `dist/` — generated GitHub Pages output
 
 ## Core Repository Rules
 
@@ -30,6 +32,7 @@ This document is the canonical operational map for maintaining this repository.
 - Keep shared preview framing in `effects/_shared/preview-shell.css`.
 - Keep that shared preview shell page-level only.
 - Treat `#workskin` as the default local preview and GIF capture boundary.
+- Keep the gallery as a consumer of existing effect previews; do not duplicate AO3-facing effect markup in `site/`.
 
 ## Maintenance Expectations
 
@@ -82,6 +85,7 @@ Do not commit content from these paths:
 - `.worktrees/`
 - `node_modules/`
 - `artifacts/`
+- `dist/`
 
 ## Known Caveats
 

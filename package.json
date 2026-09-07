@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "CSS-only visual effects toolkit for Archive of Our Own works.",
   "scripts": {
+    "build:site": "node tools/build-site.mjs",
     "test": "npm run test:tooling && npm run test:contracts",
     "test:tooling": "node --test tests/tooling/*.test.mjs",
-    "test:contracts": "node --test tests/contracts/*.test.mjs"
+    "test:contracts": "node --test tests/contracts/*.test.mjs",
+    "verify": "npm test && npm run build:site"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/XinqiBao/ao3-effects-toolkit/issues"
   },
-  "homepage": "https://github.com/XinqiBao/ao3-effects-toolkit#readme",
+  "homepage": "https://xinqibao.github.io/ao3-effects-toolkit/",
   "dependencies": {
     "playwright": "^1.59.1"
   }
