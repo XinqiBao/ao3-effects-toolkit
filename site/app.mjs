@@ -47,17 +47,17 @@ function selectEffect(effectName, updateHash = true) {
     return;
   }
 
-  document.querySelectorAll('[data-effect]').forEach((button) => {
+  effectList.querySelectorAll('[data-effect]').forEach((button) => {
     const active = button.dataset.effect === effectName;
     button.classList.toggle('is-active', active);
     button.toggleAttribute('aria-current', active);
   });
 
   effectSelect.value = effectName;
-  if (previewFrame.dataset.effect !== effectName) {
+  if (previewFrame.dataset.currentEffect !== effectName) {
     const previewUrl = new URL(`./effects/${effectName}/preview.html`, window.location.href);
     previewFrame.contentWindow.location.replace(previewUrl.href);
-    previewFrame.dataset.effect = effectName;
+    previewFrame.dataset.currentEffect = effectName;
   }
   previewFrame.title = `${effect.name} interactive preview`;
   guideLink.href = `${githubRoot}/${effectName}/guide.md`;
