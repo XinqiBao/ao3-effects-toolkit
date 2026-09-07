@@ -11,6 +11,7 @@ test('Pages deployment fetches LFS assets and publishes the verified build', () 
 
   assert.match(workflow, /pull_request:/);
   assert.match(workflow, /lfs:\s*true/);
+  assert.match(workflow, /playwright install --with-deps chromium/);
   assert.match(workflow, /npm run verify/);
   assert.match(workflow, /path:\s*dist/);
   assert.match(workflow, /github\.event_name != 'pull_request'/);
