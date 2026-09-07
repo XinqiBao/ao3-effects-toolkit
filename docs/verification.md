@@ -36,6 +36,16 @@ If you changed GIF capture behavior, also run a focused smoke test such as:
 node tools/capture-gifs.mjs envelope
 ```
 
+### For gallery changes
+
+Run:
+
+```bash
+npm run verify
+```
+
+Then serve `dist/` and review the effect picker, source links, and embedded previews in a browser.
+
 ## Committed Test Boundary
 
 Commit tests only when they protect a durable repository contract or a long-lived local workflow.
