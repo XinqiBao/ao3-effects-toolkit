@@ -9,7 +9,19 @@
   max-width: 540px;
   padding: 0;
   text-align: center;
-  cursor: default;
+  cursor: pointer;
+}
+
+#workskin .secret-divider > .trigger {
+  display: block;
+  color: inherit;
+  list-style: none;
+}
+
+#workskin .secret-divider > .trigger::marker,
+#workskin .secret-divider > .trigger::-webkit-details-marker {
+  content: "";
+  display: none;
 }
 
 /* ---- Named modules ---- */
@@ -50,17 +62,13 @@
   white-space: pre-line;
 }
 
-/* ======================================== */
-/* HOVER mode — reveal on :hover            */
-/* ======================================== */
-
-#workskin .secret-divider--hover:hover .ornament {
+#workskin .secret-divider[open] .ornament {
   color: #a08c74;
   transform: scale(1.05);
   letter-spacing: 1.5em;
 }
 
-#workskin .secret-divider--hover:hover .reveal {
+#workskin .secret-divider[open] .reveal {
   max-height: 15em;
   opacity: 1;
 }

@@ -85,4 +85,4 @@ AO3 strips or rejects some CSS and HTML features. This toolkit avoids them in pu
 | `border-radius` with `/` | Remove the ellipse syntax |
 | HTML `id` attributes | Use classes only; AO3 strips `id` |
 
-All AO3-facing CSS stays scoped under `#workskin`. Current published examples are hover-first. If a future effect needs an explicit touch path, prefer `<details>/<summary>`.
+All AO3-facing CSS stays scoped under `#workskin`. Published effects use a single tap interaction on desktop and touch devices, implemented with `<details>/<summary>` and styled through `[open]`.

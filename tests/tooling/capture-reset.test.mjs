@@ -7,9 +7,9 @@ import { measureCaptureClip, previewUrlForEffect, resetCaptureState, resolveEffe
 test('capture reset restores the envelope preview to a fully closed first frame', async () => {
   const effect = resolveEffectConfig('envelope');
   const captureSelector = effect.captureSelector;
-  const hoverSelector = effect.hoverSelector;
+  const interactionSelector = effect.interactionSelector;
   assert.ok(captureSelector, 'envelope should expose a deterministic capture frame');
-  assert.ok(hoverSelector, 'envelope should expose a deterministic hover target');
+  assert.ok(interactionSelector, 'envelope should expose a deterministic interaction target');
 
   const browser = await chromium.launch();
 
@@ -23,21 +23,21 @@ test('capture reset restores the envelope preview to a fully closed first frame'
     await resetCaptureState(page, url, effect.settleMs);
     const closedBox = await page.locator(captureSelector).first().boundingBox();
     assert.ok(closedBox, 'closed capture frame should be measurable');
-    const closedLetterBox = await page.locator(hoverSelector).first().boundingBox();
-    assert.ok(closedLetterBox, 'closed hover target should be measurable');
+    const closedLetterBox = await page.locator(interactionSelector).first().boundingBox();
+    assert.ok(closedLetterBox, 'closed interaction target should be measurable');
 
     await measureCaptureClip(page, {
       captureSelector,
-      hoverSelector,
+      interactionSelector,
       measureDurationMs: effect.measureDurationMs,
       sampleIntervalMs: effect.sampleIntervalMs,
       resetMs: 100,
     });
 
     const dirtyBox = await page.locator(captureSelector).first().boundingBox();
-    const dirtyLetterBox = await page.locator(hoverSelector).first().boundingBox();
+    const dirtyLetterBox = await page.locator(interactionSelector).first().boundingBox();
     assert.ok(dirtyBox, 'measured capture frame should remain measurable');
-    assert.ok(dirtyLetterBox, 'hover target should remain measurable after capture measurement');
+    assert.ok(dirtyLetterBox, 'interaction target should remain measurable after capture measurement');
     assert.ok(
       dirtyLetterBox.height > closedLetterBox.height + 100,
       'short reset waits should leave the envelope itself partially opened before capture starts'
@@ -45,9 +45,9 @@ test('capture reset restores the envelope preview to a fully closed first frame'
 
     await resetCaptureState(page, url, effect.settleMs);
     const resetBox = await page.locator(captureSelector).first().boundingBox();
-    const resetLetterBox = await page.locator(hoverSelector).first().boundingBox();
+    const resetLetterBox = await page.locator(interactionSelector).first().boundingBox();
     assert.ok(resetBox, 'reset capture frame should be measurable');
-    assert.ok(resetLetterBox, 'reset hover target should be measurable');
+    assert.ok(resetLetterBox, 'reset interaction target should be measurable');
     assert.ok(
       Math.abs(resetBox.height - closedBox.height) <= 2,
       'reset should restore the closed capture height before screenshots begin'

@@ -30,6 +30,7 @@ Do not rename or remove structural classes such as `envelope`, `cover`, `panel`,
 ## Notes
 
 - AO3 work content does not support JavaScript.
+- Tap the envelope surface to unfold it, then tap the same surface to close it.
 - This effect works best with short text on each fold.
 - The default example works with no image at all; the text stamp is the built-in fallback.
 - AO3 does not host work images for you. If you use an image stamp, point `src` to a stable external direct image URL.

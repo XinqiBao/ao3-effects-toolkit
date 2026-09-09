@@ -55,7 +55,7 @@ For detailed test-design guidance, see `docs/maintainers/testing-boundaries.md`.
 Good candidates:
 
 - capture math or timing regressions that would break committed demo generation
-- browser-backed checks for stable preview boundaries or hover behavior
+- browser-backed checks for stable preview boundaries or tap behavior
 - structure and compatibility assertions that are already documented in the public maintainer docs
 - config validation that protects the long-lived GIF capture workflow
 

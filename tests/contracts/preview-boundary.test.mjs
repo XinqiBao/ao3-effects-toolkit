@@ -6,14 +6,14 @@ import { previewUrlForEffect } from '../../tools/capture-gifs.mjs';
 
 const VIEWPORT = { width: 1400, height: 1200 };
 const PREVIEW_CASES = [
-  { name: 'envelope', hoverSelector: '#workskin .envelope--hover' },
-  { name: 'chat-messages', hoverSelector: '#workskin .chat--hover' },
-  { name: 'polaroid', hoverSelector: '#workskin .polaroid--hover' },
-  { name: 'secret-divider', hoverSelector: '#workskin .secret-divider--hover' },
-  { name: 'typewriter', hoverSelector: '#workskin .typewriter--hover' },
-  { name: 'marginalia', hoverSelector: '#workskin .marginalia--hover' },
-  { name: 'casefile', hoverSelector: '#workskin .casefile--hover' },
-  { name: 'route-map', hoverSelector: '#workskin .route-map--hover' },
+  { name: 'envelope', rootSelector: '#workskin .envelope' },
+  { name: 'chat-messages', rootSelector: '#workskin .chat' },
+  { name: 'polaroid', rootSelector: '#workskin .polaroid' },
+  { name: 'secret-divider', rootSelector: '#workskin .secret-divider' },
+  { name: 'typewriter', rootSelector: '#workskin .typewriter' },
+  { name: 'marginalia', rootSelector: '#workskin .marginalia' },
+  { name: 'casefile', rootSelector: '#workskin .casefile' },
+  { name: 'route-map', rootSelector: '#workskin .route-map' },
 ];
 const MAX_WIDTH_SLACK = 120;
 const MAX_HEIGHT_SLACK = 160;
@@ -32,9 +32,11 @@ test('preview boundary contract keeps #workskin close to the visible effect with
         await page.goto(previewUrlForEffect(effect.name));
         const workskin = page.locator('#workskin');
         const shell = page.locator('.shell');
-        const hoverTarget = page.locator(effect.hoverSelector).first();
+        const effectRoot = page.locator(effect.rootSelector).first();
+        const interactionTarget = effectRoot.locator(':scope > .trigger');
         await workskin.waitFor({ state: 'visible' });
-        await hoverTarget.waitFor({ state: 'visible' });
+        await effectRoot.waitFor({ state: 'visible' });
+        await interactionTarget.waitFor({ state: 'visible' });
 
         const workskinBox = await workskin.boundingBox();
         const shellBox = await shell.boundingBox();
@@ -49,26 +51,26 @@ test('preview boundary contract keeps #workskin close to the visible effect with
           `${effect.name} preview should keep #workskin from dominating most of the viewport`
         );
 
-        await hoverTarget.hover({ force: true });
+        await interactionTarget.click({ force: true });
         await page.waitForTimeout(1800);
 
-        const openBox = await hoverTarget.boundingBox();
-        assert.ok(openBox, `${effect.name} preview should expose the hovered effect root`);
+        const openBox = await effectRoot.boundingBox();
+        assert.ok(openBox, `${effect.name} preview should expose the open effect root`);
         assert.ok(
           openBox.x >= workskinBox.x - 1,
-          `${effect.name} hover state should stay inside the #workskin left boundary`
+          `${effect.name} open state should stay inside the #workskin left boundary`
         );
         assert.ok(
           openBox.y >= workskinBox.y - 1,
-          `${effect.name} hover state should stay inside the #workskin top boundary`
+          `${effect.name} open state should stay inside the #workskin top boundary`
         );
         assert.ok(
           openBox.x + openBox.width <= workskinBox.x + workskinBox.width + 1,
-          `${effect.name} hover state should stay inside the #workskin right boundary`
+          `${effect.name} open state should stay inside the #workskin right boundary`
         );
         assert.ok(
           openBox.y + openBox.height <= workskinBox.y + workskinBox.height + 1,
-          `${effect.name} hover state should stay inside the #workskin bottom boundary`
+          `${effect.name} open state should stay inside the #workskin bottom boundary`
         );
         assert.ok(
           workskinBox.width + 1 >= openBox.width,

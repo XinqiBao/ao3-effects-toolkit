@@ -9,7 +9,7 @@ Use these files from `effects/marginalia/`:
 ## Installation
 
 1. Copy `work-skin.css` into your AO3 work skin.
-2. From `example.html`, copy the hover block (`<div class="marginalia marginalia--hover">…`) into AO3's HTML editor.
+2. Copy the tap block (`<details class="marginalia">…`) from `example.html` into AO3's HTML editor.
 3. Replace the passage text, the revised phrase, the added sentence, and the two notes with your own copy.
 
 ## Customization
@@ -21,6 +21,7 @@ Use these files from `effects/marginalia/`:
 ## Notes
 
 - AO3 work content does not run JavaScript; this effect is CSS only.
+- Tap the manuscript surface to reveal its revisions, then tap the same surface to close it.
 - If creator styles are disabled, the passage, addition, and notes should still read sensibly in source order.
 - This effect works best for annotations, unreliable narration, memory corrections, and unsent-text framing.
 

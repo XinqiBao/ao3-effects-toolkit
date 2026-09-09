@@ -21,7 +21,7 @@ test('previewUrlForEffect resolves a local file URL for the effect preview page'
   assert.equal(previewPath, join(ROOT, 'effects', 'envelope', 'preview.html'));
 });
 
-test('computeClipRect unions pre-hover and hovered boxes from the same panel', () => {
+test('computeClipRect unions closed and open boxes from the same panel', () => {
   const clip = captureGifs.computeClipRect(
     { x: 120.8, y: 611.98, width: 458, height: 74 },
     { x: 120.8, y: 385.44, width: 458, height: 528.06 }
@@ -49,13 +49,13 @@ test('computeClipRect keeps the full union on even pixel dimensions', () => {
   });
 });
 
-test('measureCaptureClip unions progressive hover growth across the full measure window', async () => {
+test('measureCaptureClip unions progressive open growth across the full measure window', async () => {
   const actions = [];
-  let hovered = false;
+  let open = false;
   let sampleIndex = 0;
 
   const closedBox = { x: 196, y: 612, width: 458, height: 74 };
-  const hoveredBoxes = [
+  const openBoxes = [
     { x: 196, y: 475.34, width: 458, height: 420 },
     { x: 196, y: 443.25, width: 458, height: 484.18 },
     { x: 196, y: 405.54, width: 458, height: 559.6 },
@@ -66,41 +66,35 @@ test('measureCaptureClip unions progressive hover growth across the full measure
     first() { return this; },
     async waitFor() {},
     async boundingBox() {
-      if (!hovered) return closedBox;
-      return hoveredBoxes[Math.min(sampleIndex, hoveredBoxes.length - 1)];
+      if (!open) return closedBox;
+      return openBoxes[Math.min(sampleIndex, openBoxes.length - 1)];
     },
   };
 
-  const hoverLocator = {
+  const interactionLocator = {
     first() { return this; },
     async waitFor() {},
-    async hover() {
-      actions.push('hover');
-      hovered = true;
+    async click() {
+      actions.push('click');
+      open = !open;
     },
   };
 
   const page = {
     locator(selector) {
       if (selector === 'capture') return captureLocator;
-      if (selector === 'hover') return hoverLocator;
+      if (selector === 'interaction') return interactionLocator;
       throw new Error(`Unexpected selector: ${selector}`);
-    },
-    mouse: {
-      async move(x, y) {
-        actions.push(`move:${x},${y}`);
-        hovered = false;
-      },
     },
     async waitForTimeout(ms) {
       actions.push(`wait:${ms}`);
-      if (hovered) sampleIndex += 1;
+      if (open) sampleIndex += 1;
     },
   };
 
   const clip = await captureGifs.measureCaptureClip(page, {
     captureSelector: 'capture',
-    hoverSelector: 'hover',
+    interactionSelector: 'interaction',
     measureDurationMs: 320,
     sampleIntervalMs: 80,
     resetMs: 60,
@@ -113,12 +107,12 @@ test('measureCaptureClip unions progressive hover growth across the full measure
     height: 662,
   });
   assert.deepEqual(actions, [
-    'hover',
+    'click',
     'wait:80',
     'wait:80',
     'wait:80',
     'wait:80',
-    'move:0,0',
+    'click',
     'wait:60',
   ]);
 });
@@ -133,7 +127,7 @@ test('resolveEffectConfig rejects unknown effects clearly', () => {
 
 test('resolveEffectConfig rejects invalid paletteColors clearly', () => {
   captureGifs.EFFECTS['invalid-palette-colors'] = {
-    hoverSelector: '#workskin .invalid-palette-colors--hover',
+    interactionSelector: '#workskin .invalid-palette-colors > .trigger',
     paletteColors: 0,
   };
 
@@ -149,11 +143,11 @@ test('resolveEffectConfig rejects invalid paletteColors clearly', () => {
 
 test('resolveEffectConfig rejects paletteColors outside the ffmpeg range', () => {
   captureGifs.EFFECTS['palette-colors-too-low'] = {
-    hoverSelector: '#workskin .palette-colors-too-low--hover',
+    interactionSelector: '#workskin .palette-colors-too-low > .trigger',
     paletteColors: 1,
   };
   captureGifs.EFFECTS['palette-colors-too-high'] = {
-    hoverSelector: '#workskin .palette-colors-too-high--hover',
+    interactionSelector: '#workskin .palette-colors-too-high > .trigger',
     paletteColors: 257,
   };
 
@@ -172,10 +166,10 @@ test('resolveEffectConfig rejects paletteColors outside the ffmpeg range', () =>
   }
 });
 
-test('raw effect entries expose deterministic hover selectors', () => {
+test('raw effect entries expose deterministic interaction selectors', () => {
   for (const [name, effect] of Object.entries(captureGifs.EFFECTS)) {
-    assert.equal(typeof effect.hoverSelector, 'string', `${name} should expose a hover selector`);
-    assert.ok(effect.hoverSelector.length > 0, `${name} hover selector should not be empty`);
+    assert.equal(typeof effect.interactionSelector, 'string', `${name} should expose an interaction selector`);
+    assert.ok(effect.interactionSelector.length > 0, `${name} interaction selector should not be empty`);
   }
 });
 
@@ -188,7 +182,7 @@ test('resolved effect configs expose valid capture settings', () => {
     const effect = captureGifs.resolveEffectConfig(name);
 
     assert.equal(effect.captureSelector, '#workskin', `${name} should capture the #workskin boundary`);
-    assert.equal(effect.hoverSelector, captureGifs.EFFECTS[name].hoverSelector);
+    assert.equal(effect.interactionSelector, captureGifs.EFFECTS[name].interactionSelector);
     assert.ok(Number.isFinite(effect.viewport.width) && effect.viewport.width > 0);
     assert.ok(Number.isFinite(effect.viewport.height) && effect.viewport.height > 0);
     assert.ok(Number.isFinite(effect.outputWidth) && effect.outputWidth > 0);
@@ -203,19 +197,19 @@ test('resolved effect configs expose valid capture settings', () => {
   }
 });
 
-test('lean preview capture config uses #workskin and effect-local hover selectors', () => {
+test('lean preview capture config uses #workskin and effect-local interaction selectors', () => {
   for (const name of Object.keys(captureGifs.EFFECTS)) {
     const effect = captureGifs.resolveEffectConfig(name);
 
     assert.equal(effect.captureSelector, '#workskin', `${name} should capture #workskin`);
-    assert.equal(typeof effect.hoverSelector, 'string', `${name} should expose a hover selector`);
+    assert.equal(typeof effect.interactionSelector, 'string', `${name} should expose an interaction selector`);
     assert.equal(
-      effect.hoverSelector.includes('.preview-card'),
+      effect.interactionSelector.includes('.preview-card'),
       false,
       `${name} should not depend on preview-card wrappers`
     );
     assert.equal(
-      effect.hoverSelector.includes('#workskin.'),
+      effect.interactionSelector.includes('#workskin.'),
       false,
       `${name} should not depend on preview-only #workskin classes`
     );

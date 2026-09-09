@@ -15,6 +15,20 @@
   cursor: pointer;
 }
 
+#workskin .casefile > .trigger {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  list-style: none;
+}
+
+#workskin .casefile > .trigger::marker,
+#workskin .casefile > .trigger::-webkit-details-marker {
+  content: "";
+  display: none;
+}
+
 /* ---------- Shared parts ---------- */
 
 #workskin .casefile .summary,
@@ -125,22 +139,22 @@
 
 /* ---------- State and interaction ---------- */
 
-#workskin .casefile--hover:hover .summary {
+#workskin .casefile[open] .summary {
   left: -8px;
   box-shadow: 0 16px 30px rgba(56, 43, 31, 0.14);
 }
 
-#workskin .casefile--hover:hover .slip {
+#workskin .casefile[open] .slip {
   box-shadow: 0 14px 26px rgba(56, 43, 31, 0.12);
 }
 
-#workskin .casefile--hover:hover .slip--ticket {
+#workskin .casefile[open] .slip--ticket {
   top: 10px;
   left: 374px;
   transform: rotate(-4deg);
 }
 
-#workskin .casefile--hover:hover .slip--note {
+#workskin .casefile[open] .slip--note {
   top: 132px;
   left: 390px;
   opacity: 1;

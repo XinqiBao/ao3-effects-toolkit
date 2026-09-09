@@ -9,7 +9,7 @@ Use these files from `effects/chat-messages/`:
 ## Quick Start
 
 1. Copy `work-skin.css` into your AO3 work skin.
-2. Copy the canonical hover-only block from `example.html` (top section) into AO3's HTML editor.
+2. Copy the canonical tap block from `example.html` into AO3's HTML editor.
 3. Replace the sample names, timestamps, and message text with your own content.
 
 ## Edit Carefully
@@ -25,9 +25,10 @@ Do not rename or remove structural wrappers such as `chat`, `entry`, or `bubble`
 ## Notes
 
 - AO3 work content does not support JavaScript.
+- Tap the message surface to open the conversation, then tap the same surface to close it.
 - The conversation should still read sensibly as plain text if creator styles are disabled.
 - Duplicate a full `entry` block to add additional exchanges.
-- Use `preview.html` to confirm the hover layout mirrors `example.html`.
+- Use `preview.html` to confirm the tap layout mirrors `example.html`.
 
 ## Validation
 

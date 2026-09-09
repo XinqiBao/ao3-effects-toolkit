@@ -28,7 +28,9 @@ Verified against a logged-in AO3 account:
 
 ## Verified Locally Only
 
-Current published effect roots are not waiting on post-standardization AO3 revalidation.
+- the tap-only `<details>/<summary>` structure for all eight published effects
+
+The tap-only published roots are waiting on AO3 revalidation before they can be treated as confirmed on the live platform.
 
 ## Known AO3 Restrictions
 

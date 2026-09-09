@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 
 import { previewUrlForEffect } from '../../tools/capture-gifs.mjs';
 
-test('chat-messages hover stays engaged when the pointer rests on the closed preview row', async () => {
+test('chat-messages tap remains open after the pointer moves away', async () => {
   const browser = await chromium.launch();
 
   try {
@@ -16,60 +16,34 @@ test('chat-messages hover stays engaged when the pointer rests on the closed pre
     try {
       await page.goto(previewUrlForEffect('chat-messages'));
 
-      const hoverTarget = page.locator('#workskin .chat--hover').first();
-      await hoverTarget.waitFor({ state: 'visible' });
-
-      const initialBox = await hoverTarget.boundingBox();
-      assert.ok(initialBox, 'chat-messages preview should expose a visible hover target');
-
-      await page.mouse.move(10, 10);
-      await page.evaluate(() => {
-        const root = document.querySelector('#workskin .chat--hover');
-        if (!root) {
-          throw new Error('chat-messages preview is missing the hover container');
-        }
-
-        window.__chatHoverEvents = [];
-        ['mouseenter', 'mouseleave'].forEach((type) => {
-          root.addEventListener(type, () => {
-            window.__chatHoverEvents.push(type);
-          });
-        });
-      });
-
-      await page.mouse.move(
-        initialBox.x + initialBox.width / 2,
-        initialBox.y + initialBox.height / 2
-      );
+      const root = page.locator('#workskin .chat').first();
+      const interactionTarget = root.locator(':scope > .trigger');
+      await interactionTarget.waitFor({ state: 'visible' });
+      await interactionTarget.click({ force: true });
       await page.waitForTimeout(220);
+      await page.mouse.move(10, 10);
 
       const state = await page.evaluate(() => {
-        const root = document.querySelector('#workskin .chat--hover');
-        const stack = document.querySelector('#workskin .chat--hover .stack');
+        const root = document.querySelector('#workskin .chat');
+        const stack = document.querySelector('#workskin .chat .stack');
         if (!root || !stack) {
-          throw new Error('chat-messages preview is missing the hover container or message stack');
+          throw new Error('chat-messages preview is missing the effect root or message stack');
         }
 
         return {
-          hover: root.matches(':hover'),
-          leaveCount: window.__chatHoverEvents.filter((type) => type === 'mouseleave').length,
+          open: root.open,
           stackOpacity: Number(getComputedStyle(stack).opacity),
         };
       });
 
       assert.equal(
-        state.leaveCount,
-        0,
-        'chat-messages hover should not drop and re-enter while the pointer rests on the closed preview row'
-      );
-      assert.equal(
-        state.hover,
+        state.open,
         true,
-        'chat-messages should still be hovered while the pointer rests on the initial preview row'
+        'chat-messages should remain open after the pointer leaves the trigger'
       );
       assert.ok(
         state.stackOpacity > 0.2,
-        'chat-messages hover should start revealing the conversation without losing the hover state'
+        'chat-messages tap should start revealing the conversation'
       );
     } finally {
       await page.close();
@@ -94,11 +68,11 @@ test('chat-messages keeps the closed preview row compact when the preview copy i
       await page.waitForTimeout(80);
 
       const state = await page.evaluate(() => {
-        const root = document.querySelector('#workskin .chat--hover');
+        const root = document.querySelector('#workskin .chat');
         const preview = root?.querySelector('.preview');
         const copy = root?.querySelector('.preview-copy');
         if (!root || !preview || !copy) {
-          throw new Error('chat-messages preview is missing the hover root, preview row, or preview copy');
+          throw new Error('chat-messages preview is missing the effect root, preview row, or preview copy');
         }
 
         copy.textContent =

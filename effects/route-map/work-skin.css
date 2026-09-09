@@ -17,6 +17,18 @@
   cursor: pointer;
 }
 
+#workskin .route-map > .trigger {
+  display: block;
+  color: inherit;
+  list-style: none;
+}
+
+#workskin .route-map > .trigger::marker,
+#workskin .route-map > .trigger::-webkit-details-marker {
+  content: "";
+  display: none;
+}
+
 /* ---------- Shared parts ---------- */
 
 #workskin .route-map .track,
@@ -104,12 +116,12 @@
 
 /* ---------- State and interaction ---------- */
 
-#workskin .route-map--hover:hover .marker {
+#workskin .route-map[open] .marker {
   background: #506a71;
   transform: scale(1.08);
 }
 
-#workskin .route-map--hover:hover .note {
+#workskin .route-map[open] .note {
   max-height: 7.5em;
   opacity: 1;
   margin-top: 0.82em;
