@@ -1,6 +1,6 @@
 /* ========================================
    AO3 Marginalia Effect
-   Annotated passage with hover notes
+   Annotated passage with tap notes
    ======================================== */
 
 /* ---------- Root and geometry ---------- */
@@ -13,6 +13,18 @@
   margin: 0 auto;
   padding-right: 178px;
   cursor: pointer;
+}
+
+#workskin .marginalia > .trigger {
+  display: block;
+  color: inherit;
+  list-style: none;
+}
+
+#workskin .marginalia > .trigger::marker,
+#workskin .marginalia > .trigger::-webkit-details-marker {
+  content: "";
+  display: none;
 }
 
 /* ---------- Shared parts ---------- */
@@ -107,19 +119,19 @@
 
 /* ---------- State and interaction ---------- */
 
-#workskin .marginalia--hover:hover .sheet {
+#workskin .marginalia[open] .sheet {
   box-shadow:
     0 14px 28px rgba(67, 49, 35, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
-#workskin .marginalia--hover:hover .revision {
+#workskin .marginalia[open] .revision {
   color: rgba(96, 76, 63, 0.8);
   text-decoration: line-through;
   text-decoration-color: rgba(140, 92, 75, 0.7);
 }
 
-#workskin .marginalia--hover:hover .addition {
+#workskin .marginalia[open] .addition {
   max-height: 7em;
   opacity: 1;
   margin-top: 0.9em;
@@ -127,7 +139,7 @@
   border-top-color: rgba(137, 115, 96, 0.26);
 }
 
-#workskin .marginalia--hover:hover .notes {
+#workskin .marginalia[open] .notes {
   opacity: 1;
   transform: translateX(0);
 }

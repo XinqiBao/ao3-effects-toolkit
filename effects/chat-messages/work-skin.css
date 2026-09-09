@@ -17,6 +17,19 @@
   overflow: hidden;
 }
 
+#workskin .chat > .trigger {
+  display: block;
+  min-height: 37px;
+  color: inherit;
+  list-style: none;
+}
+
+#workskin .chat > .trigger::marker,
+#workskin .chat > .trigger::-webkit-details-marker {
+  content: "";
+  display: none;
+}
+
 /* ---------- Shared parts ---------- */
 
 #workskin .chat .stack {
@@ -25,8 +38,7 @@
   padding: 10px 10px 8px;
 }
 
-/* Collapsed stack for the canonical hover path. */
-#workskin .chat--hover .stack {
+#workskin .chat .stack {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -39,7 +51,7 @@
     transform 0.45s ease;
 }
 
-#workskin .chat--hover:hover .stack {
+#workskin .chat[open] .stack {
   max-height: 4000px;
   opacity: 1;
   padding: 10px 10px 8px;
@@ -73,7 +85,7 @@
   z-index: 1;
 }
 
-#workskin .chat--hover:hover .preview {
+#workskin .chat[open] .preview {
   max-height: 0;
   opacity: 0;
   padding-top: 0;

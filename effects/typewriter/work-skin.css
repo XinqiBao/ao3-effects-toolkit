@@ -1,5 +1,5 @@
 /* ── AO3 Typewriter / Teletype Effect ──────────────────────────
-   Desktop hover only. NO JavaScript.
+   Tap interaction. NO JavaScript.
    All selectors scoped under #workskin.
    ───────────────────────────────────────────────────────────── */
 
@@ -19,6 +19,18 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
   cursor: pointer;
   overflow: hidden;
+}
+
+#workskin .typewriter > .trigger {
+  display: block;
+  color: inherit;
+  list-style: none;
+}
+
+#workskin .typewriter > .trigger::marker,
+#workskin .typewriter > .trigger::-webkit-details-marker {
+  content: "";
+  display: none;
 }
 
 #workskin .typewriter .lines,
@@ -59,8 +71,8 @@
   z-index: 2;
 }
 
-/* Keep the prompt as a visual overlay so the hover target geometry stays stable. */
-#workskin .typewriter--hover:hover .prompt {
+/* Keep the prompt as an overlay so the trigger geometry stays stable. */
+#workskin .typewriter[open] .prompt {
   opacity: 0;
   transform: translateY(-0.45em);
 }
@@ -85,40 +97,40 @@
 }
 
 /* Per-line staggered delays on reveal */
-#workskin .typewriter--hover:hover .line {
+#workskin .typewriter[open] .line {
   opacity: 1;
   transform: translateY(0);
 }
 
-#workskin .typewriter--hover:hover .line:nth-child(1) {
+#workskin .typewriter[open] .line:nth-child(1) {
   transition-delay: 0.05s;
 }
 
-#workskin .typewriter--hover:hover .line:nth-child(2) {
+#workskin .typewriter[open] .line:nth-child(2) {
   transition-delay: 0.22s;
 }
 
-#workskin .typewriter--hover:hover .line:nth-child(3) {
+#workskin .typewriter[open] .line:nth-child(3) {
   transition-delay: 0.39s;
 }
 
-#workskin .typewriter--hover:hover .line:nth-child(4) {
+#workskin .typewriter[open] .line:nth-child(4) {
   transition-delay: 0.56s;
 }
 
-#workskin .typewriter--hover:hover .line:nth-child(5) {
+#workskin .typewriter[open] .line:nth-child(5) {
   transition-delay: 0.73s;
 }
 
-#workskin .typewriter--hover:hover .line:nth-child(6) {
+#workskin .typewriter[open] .line:nth-child(6) {
   transition-delay: 0.9s;
 }
 
-#workskin .typewriter--hover:hover .line:nth-child(7) {
+#workskin .typewriter[open] .line:nth-child(7) {
   transition-delay: 1.07s;
 }
 
-#workskin .typewriter--hover:hover .line:nth-child(8) {
+#workskin .typewriter[open] .line:nth-child(8) {
   transition-delay: 1.24s;
 }
 
@@ -134,7 +146,7 @@
   z-index: 1;
 }
 
-#workskin .typewriter--hover:hover .cursor-row {
+#workskin .typewriter[open] .cursor-row {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 1.4s;

@@ -17,15 +17,17 @@
   <section class="hero">
     <p class="hero__label">AO3 Effect Preview</p>
     <h1 class="hero__title">Secret Divider</h1>
-    <p class="hero__desc">A decorative divider that reveals a hidden note when readers linger.</p>
+    <p class="hero__desc">A decorative divider that reveals a hidden note when tapped.</p>
   </section>
   <div id="workskin">
-    <div class="secret-divider secret-divider--hover">
-      <span class="ornament">&#10022;&#10044;&#8226;&#10043;&#8226;&#10044;&#10022;</span>
-      <span class="reveal">
-        <span class="message">[Hidden note]&#10;Some lines can wait for readers who choose to linger.</span>
-      </span>
-    </div>
+    <details class="secret-divider">
+      <summary class="trigger">
+        <span class="ornament">&#10022;&#10044;&#8226;&#10043;&#8226;&#10044;&#10022;</span>
+        <span class="reveal">
+          <span class="message">[Hidden note]&#10;Some lines can wait for readers who choose to linger.</span>
+        </span>
+      </summary>
+    </details>
   </div>
 </main>
 </body>

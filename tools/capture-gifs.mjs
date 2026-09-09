@@ -32,28 +32,28 @@ const DEFAULT_CAPTURE = {
 
 export const EFFECTS = {
   'envelope': {
-    hoverSelector: '#workskin .envelope--hover',
+    interactionSelector: '#workskin .envelope > .trigger',
   },
   'chat-messages': {
-    hoverSelector: '#workskin .chat--hover',
+    interactionSelector: '#workskin .chat > .trigger',
   },
   'polaroid': {
-    hoverSelector: '#workskin .polaroid--hover',
+    interactionSelector: '#workskin .polaroid > .trigger',
   },
   'secret-divider': {
-    hoverSelector: '#workskin .secret-divider--hover',
+    interactionSelector: '#workskin .secret-divider > .trigger',
   },
   'typewriter': {
-    hoverSelector: '#workskin .typewriter--hover',
+    interactionSelector: '#workskin .typewriter > .trigger',
   },
   'marginalia': {
-    hoverSelector: '#workskin .marginalia--hover',
+    interactionSelector: '#workskin .marginalia > .trigger',
   },
   'casefile': {
-    hoverSelector: '#workskin .casefile--hover',
+    interactionSelector: '#workskin .casefile > .trigger',
   },
   'route-map': {
-    hoverSelector: '#workskin .route-map--hover',
+    interactionSelector: '#workskin .route-map > .trigger',
   },
 };
 
@@ -69,8 +69,8 @@ function validateResolvedEffectConfig(name, config) {
   if (typeof config.captureSelector !== 'string' || config.captureSelector.length === 0) {
     throw new Error(`Invalid capture selector for effect ${name}`);
   }
-  if (typeof config.hoverSelector !== 'string' || config.hoverSelector.length === 0) {
-    throw new Error(`Invalid hover selector for effect ${name}`);
+  if (typeof config.interactionSelector !== 'string' || config.interactionSelector.length === 0) {
+    throw new Error(`Invalid interaction selector for effect ${name}`);
   }
   if (
     !config.viewport ||
@@ -147,14 +147,14 @@ export function computeClipRect(...boxes) {
 export async function measureCaptureClip(page, options) {
   const {
     captureSelector,
-    hoverSelector = captureSelector,
+    interactionSelector = captureSelector,
     measureDurationMs = 320,
     sampleIntervalMs = 80,
     resetMs = 120,
   } = options;
 
   const captureEl = page.locator(captureSelector).first();
-  const interactionEl = hoverSelector ? page.locator(hoverSelector).first() : null;
+  const interactionEl = interactionSelector ? page.locator(interactionSelector).first() : null;
 
   await captureEl.waitFor({ state: 'visible' });
   if (interactionEl) {
@@ -167,7 +167,7 @@ export async function measureCaptureClip(page, options) {
   }
 
   if (interactionEl) {
-    await interactionEl.hover({ force: true });
+    await interactionEl.click({ force: true });
   }
   const boxes = [closedBox];
 
@@ -184,7 +184,7 @@ export async function measureCaptureClip(page, options) {
   }
 
   if (interactionEl) {
-    await page.mouse.move(0, 0);
+    await interactionEl.click({ force: true });
   }
   await page.waitForTimeout(resetMs);
 
@@ -203,15 +203,15 @@ export function previewUrlForEffect(name) {
 }
 
 async function captureEffect(page, name, cfg) {
-  const { captureSelector, hoverSelector = captureSelector, fps, durationMs } = cfg;
+  const { captureSelector, interactionSelector = captureSelector, fps, durationMs } = cfg;
   if (!captureSelector) {
     throw new Error(`Missing capture selector for effect ${name}`);
   }
 
   const interval = Math.round(1000 / fps);
   const totalFrames = Math.floor(durationMs / interval);
-  const hoverInFrame  = Math.floor(totalFrames * 0.15);
-  const hoverOutFrame = Math.floor(totalFrames * 0.75);
+  const openFrame = Math.floor(totalFrames * 0.15);
+  const closeFrame = Math.floor(totalFrames * 0.75);
 
   const framesDir = join(root, '.playwright-mcp', `frames-${name}`);
   if (existsSync(framesDir)) rmSync(framesDir, { recursive: true });
@@ -221,26 +221,26 @@ async function captureEffect(page, name, cfg) {
   await resetCaptureState(page, pageUrl, cfg.settleMs);
   const clip = await measureCaptureClip(page, {
     captureSelector,
-    hoverSelector,
+    interactionSelector,
     measureDurationMs: cfg.measureDurationMs,
     sampleIntervalMs: cfg.sampleIntervalMs,
     resetMs: cfg.resetMs ?? interval,
   });
   await resetCaptureState(page, pageUrl, cfg.settleMs);
-  const interactionEl = hoverSelector ? page.locator(hoverSelector).first() : null;
+  const interactionEl = interactionSelector ? page.locator(interactionSelector).first() : null;
   if (interactionEl) {
     await interactionEl.waitFor({ state: 'visible' });
   }
 
   for (let i = 0; i < totalFrames; i++) {
-    if (i === hoverInFrame) {
+    if (i === openFrame) {
       if (interactionEl) {
-        await interactionEl.hover({ force: true });
+        await interactionEl.click({ force: true });
       }
     }
-    if (i === hoverOutFrame) {
+    if (i === closeFrame) {
       if (interactionEl) {
-        await page.mouse.move(0, 0);
+        await interactionEl.click({ force: true });
       }
     }
     const framePath = join(framesDir, `frame-${String(i).padStart(4, '0')}.png`);

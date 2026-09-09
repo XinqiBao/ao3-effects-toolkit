@@ -1,6 +1,6 @@
 /* ========================================
    AO3 Polaroid Photo Frame Effect
-   CSS-only desktop hover flip
+   CSS-only tap flip
    ======================================== */
 
 /* --- Root and geometry --- */
@@ -14,6 +14,20 @@
   cursor: pointer;
   box-sizing: border-box;
   display: block;
+}
+
+#workskin .polaroid > .trigger {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  list-style: none;
+}
+
+#workskin .polaroid > .trigger::marker,
+#workskin .polaroid > .trigger::-webkit-details-marker {
+  content: "";
+  display: none;
 }
 
 /* --- Shared parts --- */
@@ -135,10 +149,10 @@
 
 /* --- State and interaction --- */
 
-#workskin .polaroid--hover:hover .front {
+#workskin .polaroid[open] .front {
   opacity: 0;
 }
 
-#workskin .polaroid--hover:hover .back {
+#workskin .polaroid[open] .back {
   opacity: 1;
 }

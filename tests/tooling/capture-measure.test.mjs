@@ -6,7 +6,7 @@ import { measureCaptureClip, previewUrlForEffect, resetCaptureState, resolveEffe
 
 test('chat capture measurement includes the expanded conversation height', async () => {
   const effect = resolveEffectConfig('chat-messages');
-  assert.ok(effect.hoverSelector, 'chat-messages should expose a deterministic hover target');
+  assert.ok(effect.interactionSelector, 'chat-messages should expose a deterministic interaction target');
 
   const browser = await chromium.launch();
 
@@ -21,7 +21,7 @@ test('chat capture measurement includes the expanded conversation height', async
 
     const clip = await measureCaptureClip(page, {
       captureSelector: effect.captureSelector,
-      hoverSelector: effect.hoverSelector,
+      interactionSelector: effect.interactionSelector,
       measureDurationMs: effect.measureDurationMs,
       sampleIntervalMs: effect.sampleIntervalMs,
       resetMs: 100,

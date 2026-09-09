@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 
 import { previewUrlForEffect } from '../../tools/capture-gifs.mjs';
 
-test('typewriter preview hover keeps the reveal area stable long enough to show the first line', async () => {
+test('typewriter tap keeps the reveal area stable long enough to show the first line', async () => {
   const browser = await chromium.launch();
 
   try {
@@ -16,16 +16,16 @@ test('typewriter preview hover keeps the reveal area stable long enough to show 
     try {
       await page.goto(previewUrlForEffect('typewriter'));
 
-      const hoverTarget = page.locator('#workskin .typewriter--hover').first();
-      await hoverTarget.waitFor({ state: 'visible' });
-      await hoverTarget.hover({ force: true });
+      const interactionTarget = page.locator('#workskin .typewriter > .trigger').first();
+      await interactionTarget.waitFor({ state: 'visible' });
+      await interactionTarget.click({ force: true });
       await page.waitForTimeout(350);
 
       const state = await page.evaluate(() => {
-        const root = document.querySelector('#workskin .typewriter--hover');
+        const root = document.querySelector('#workskin .typewriter');
         const firstLine = document.querySelector('#workskin .typewriter .line');
         if (!root || !firstLine) {
-          throw new Error('typewriter preview markup is missing the hover container or first line');
+          throw new Error('typewriter preview markup is missing the effect root or first line');
         }
 
         return {
@@ -37,16 +37,16 @@ test('typewriter preview hover keeps the reveal area stable long enough to show 
 
       assert.ok(
         state.containerHeight > 40,
-        'typewriter hover should preserve a visible hover area instead of collapsing to zero height'
+        'typewriter tap should preserve a visible trigger area instead of collapsing to zero height'
       );
       assert.ok(
         state.lineOpacity > 0.2,
-        'typewriter hover should start revealing the first line before the hover state drops'
+        'typewriter tap should start revealing the first line'
       );
       assert.notEqual(
         state.lineMaxHeight,
         '0px',
-        'typewriter hover should expand the first line instead of leaving it fully collapsed'
+        'typewriter tap should expand the first line instead of leaving it fully collapsed'
       );
     } finally {
       await page.close();
@@ -56,7 +56,7 @@ test('typewriter preview hover keeps the reveal area stable long enough to show 
   }
 });
 
-test('typewriter preview does not thrash hover when the pointer rests on the initial lower edge', async () => {
+test('typewriter summary supports keyboard toggling', async () => {
   const browser = await chromium.launch();
 
   try {
@@ -68,55 +68,14 @@ test('typewriter preview does not thrash hover when the pointer rests on the ini
     try {
       await page.goto(previewUrlForEffect('typewriter'));
 
-      const hoverTarget = page.locator('#workskin .typewriter--hover').first();
-      await hoverTarget.waitFor({ state: 'visible' });
-
-      const initialBox = await hoverTarget.boundingBox();
-      assert.ok(initialBox, 'typewriter preview should expose a visible hover target');
-
-      await page.mouse.move(10, 10);
-      await page.evaluate(() => {
-        const root = document.querySelector('#workskin .typewriter--hover');
-        if (!root) {
-          throw new Error('typewriter preview markup is missing the hover container');
-        }
-
-        window.__typewriterHoverEvents = [];
-        ['mouseenter', 'mouseleave'].forEach((type) => {
-          root.addEventListener(type, () => {
-            window.__typewriterHoverEvents.push(type);
-          });
-        });
-      });
-
-      await page.mouse.move(
-        initialBox.x + initialBox.width / 2,
-        initialBox.y + initialBox.height - 1
-      );
-      await page.waitForTimeout(450);
-
-      const state = await page.evaluate(() => {
-        const root = document.querySelector('#workskin .typewriter--hover');
-        if (!root) {
-          throw new Error('typewriter preview markup is missing the hover container');
-        }
-
-        return {
-          hover: root.matches(':hover'),
-          leaveCount: window.__typewriterHoverEvents.filter((type) => type === 'mouseleave').length,
-        };
-      });
-
-      assert.equal(
-        state.leaveCount,
-        0,
-        'typewriter hover should not oscillate on and off when the pointer stays on the initial lower edge'
-      );
-      assert.equal(
-        state.hover,
-        true,
-        'typewriter should still be hovered while the pointer rests near the initial lower edge'
-      );
+      const root = page.locator('#workskin .typewriter').first();
+      const interactionTarget = root.locator(':scope > .trigger');
+      await interactionTarget.waitFor({ state: 'visible' });
+      await interactionTarget.focus();
+      await page.keyboard.press('Enter');
+      assert.equal(await root.evaluate((element) => element.open), true);
+      await page.keyboard.press('Space');
+      assert.equal(await root.evaluate((element) => element.open), false);
     } finally {
       await page.close();
     }

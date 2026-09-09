@@ -24,9 +24,9 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function hoverRootPattern(root) {
+function tapRootPattern(root) {
   const escaped = escapeRegExp(root);
-  return new RegExp(`class="[^"]*\\b${escaped}\\b[^"]*\\b${escaped}--hover\\b[^"]*"`);
+  return new RegExp(`<details class="${escaped}">\\s*<summary class="trigger">`);
 }
 
 test('published effect directories keep the documented artifact set', () => {
@@ -41,28 +41,30 @@ test('published effect directories keep the documented artifact set', () => {
   }
 });
 
-test('published examples and previews keep the documented hover-first root contract', () => {
+test('published examples and previews keep the documented tap-only root contract', () => {
   for (const effect of EFFECTS) {
     const preview = readFileSync(effectPath(effect, 'preview.html'), 'utf8');
     const example = readFileSync(effectPath(effect, 'example.html'), 'utf8');
     const css = readFileSync(effectPath(effect, 'work-skin.css'), 'utf8');
-    const rootPattern = hoverRootPattern(effect.root);
+    const rootPattern = tapRootPattern(effect.root);
 
     assert.match(
       preview,
       rootPattern,
-      `${effect.directory} preview should expose the documented hover-first root classes`
+      `${effect.directory} preview should expose a details root with one trigger summary`
     );
     assert.match(
       example,
       rootPattern,
-      `${effect.directory} example should expose the documented hover-first root classes`
+      `${effect.directory} example should expose a details root with one trigger summary`
     );
     assert.equal(
       css.includes(`#workskin .${effect.root}`),
       true,
       `${effect.directory} CSS should stay anchored under #workskin .${effect.root}`
     );
+    assert.equal(css.includes(':hover'), false, `${effect.directory} CSS should not retain hover triggers`);
+    assert.equal(example.includes('--hover'), false, `${effect.directory} example should not retain hover modifiers`);
   }
 });
 
