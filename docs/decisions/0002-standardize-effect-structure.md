@@ -4,6 +4,8 @@
 
 Accepted
 
+Last amended: 2026-09-09
+
 ## Date
 
 2026-04-12
@@ -17,7 +19,7 @@ Those passes removed a large amount of obsolete preview-only structure and depre
 Current pain points:
 
 - root nodes are not named consistently across effects
-- trigger/state classes are not attached consistently to the root node
+- trigger/state structures are not attached consistently to the root node
 - many descendant classes repeat the effect prefix even when the root already defines the scope
 - some effects still use parallel class families where a base class plus modifier would be clearer
 - some wrappers remain harder to justify because they mainly preserve historical structure rather than a current responsibility
@@ -36,22 +38,23 @@ Adopt one repository-wide structure contract for published effect markup and eff
 
 Examples of the intended direction:
 
-- `polaroid polaroid--hover` instead of `polaroid-container > polaroid-card polaroid--hover`
-- `chat chat--hover` with descendants such as `preview`, `stack`, `entry`, `bubble`
-- `envelope envelope--hover` with descendants such as `cover`, `panel`, `panel--top`
+- `details.polaroid > summary.trigger` instead of parallel trigger variants
+- `details.chat > summary.trigger` with descendants such as `preview`, `stack`, `entry`, `bubble`
+- `details.envelope > summary.trigger` with descendants such as `cover`, `panel`, `panel--top`
 
 ## Structure Contract
 
 ### Root And State
 
 - The root class is the canonical effect identifier.
-- Interaction modifiers such as `--hover` live on that same root.
+- The root is a `details` element and its direct `summary.trigger` owns interaction.
+- State comes from the root's `[open]` attribute.
 - Published selectors should anchor from `#workskin .<effect-root>`.
 
 Examples:
 
 - `#workskin .polaroid`
-- `#workskin .polaroid--hover:hover`
+- `#workskin .polaroid[open]`
 - `#workskin .chat .bubble`
 
 ### Descendant Modules
@@ -95,7 +98,7 @@ Keep a wrapper only if it provides at least one of these responsibilities:
 - overflow or clipping boundary
 - spacing or geometry control that cannot live on a more meaningful element
 - pseudo-element attachment point
-- hover area preservation
+- stable interaction-area preservation
 
 If a wrapper does not carry one of those responsibilities, remove it.
 
@@ -127,7 +130,7 @@ Example pattern:
   /* shared face rules */
 }
 
-#workskin .polaroid--hover:hover .card {
+#workskin .polaroid[open] .card {
   /* interaction */
 }
 ```
@@ -172,7 +175,7 @@ Local custom properties are allowed only when a single effect repeats the same d
 ### Typewriter
 
 - Use `typewriter` as the root.
-- Be conservative about wrapper removal because hover-area stability and staged reveal timing are behavior-critical.
+- Be conservative about wrapper removal because trigger geometry and staged reveal timing are behavior-critical.
 - Prefer descendants such as `prompt`, `lines`, `line`, `cursor-row`, `cursor`.
 
 ### Secret Divider
@@ -221,7 +224,7 @@ Verification remains two-layered:
 For this cleanup, local review should confirm:
 
 - `example.html`, `preview.html`, and `work-skin.css` still describe the same structure
-- hover targets still remain stable
+- tap targets remain stable through both open and closed states
 - absolute-positioned and transformed layers still use the correct positioning context
 - the effect looks and behaves the same before and after the rename and wrapper cleanup
 

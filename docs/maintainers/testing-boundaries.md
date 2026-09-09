@@ -4,7 +4,7 @@ Committed tests in this repository should protect durable contracts and repeat r
 
 ## What Belongs In Committed Tests
 
-- browser-backed checks for visible preview or hover regressions that have already proven easy to reintroduce
+- browser-backed checks for visible preview or tap regressions that have already proven easy to reintroduce
 - GIF capture helper logic such as clip math, reset behavior, config validation, and effect coverage
 - AO3 compatibility restrictions already documented in the public repository docs
 - artifact-shape contracts that contributors are expected to preserve across `work-skin.css`, `example.html`, and `preview.html`
@@ -30,7 +30,7 @@ Start uncertain checks outside the committed test suite:
 Preview-boundary automation should verify the repository contract, not a frozen screenshot calibration:
 
 - `#workskin` remains the visible preview and GIF capture boundary
-- the open hover state stays inside `#workskin`
+- the open tap state stays inside `#workskin`
 - the preview frame stays close to the visible effect instead of stretching across the shell
 - exact pixel windows should stay out of committed tests unless the repository intentionally documents a numeric contract
 

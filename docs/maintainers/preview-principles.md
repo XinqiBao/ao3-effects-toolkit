@@ -7,7 +7,7 @@ Local previews exist to review AO3 effects, not to invent a separate presentatio
 - Keep the shared shell in `effects/_shared/preview-shell.css`.
 - Keep that shared shell page-level only.
 - Default each preview to one canonical display surface.
-- Default that canonical preview to the hover version of the effect.
+- Default that canonical preview to the tap version of the effect.
 - Keep supporting copy minimal so the effect remains the main subject.
 - Default preview structure to `hero + #workskin + canonical effect markup`.
 
@@ -22,7 +22,7 @@ Local previews exist to review AO3 effects, not to invent a separate presentatio
 ## What Does Not Belong
 
 - a four-panel closed/open matrix
-- a default hover/tap comparison layout
+- a comparison layout with multiple trigger modes
 - preview-only behavior that AO3 cannot use
 - decorative chrome that overwhelms the effect
 - extra repository-wide abstractions for one or two outlier effects

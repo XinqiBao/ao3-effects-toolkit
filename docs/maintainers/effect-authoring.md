@@ -22,16 +22,19 @@ Each published effect lives in `effects/<name>/` and should include:
 
 ## Structure Rules
 
-- Use the effect name itself as the published root class.
-- Put trigger or state modifiers on that same root class.
+- Use a `details` element with the effect name as the published root class.
+- Use one direct-child `summary.trigger` as the complete interaction surface.
+- Keep animated effect content inside the trigger so closing transitions remain visible.
+- Use phrasing elements such as `span` inside `summary`; style their layout through effect classes.
+- Derive the open state from `[open]`; do not add hover or device-specific trigger branches.
 - Anchor published CSS from `#workskin .<effect-root>`.
 - Prefer short, role-based descendant names inside the root scope instead of repeating the effect prefix.
 - Prefer a base class plus modifier when sibling parts are the same kind of structure with small role differences.
 
 Examples:
 
-- `polaroid polaroid--hover`
-- `chat chat--hover`
+- `<details class="polaroid"><summary class="trigger">…`
+- `<details class="chat"><summary class="trigger">…`
 - `panel panel--top`
 - `entry entry--sent`
 - `bubble bubble--received`
@@ -45,12 +48,12 @@ Keep a wrapper only when it has a clear responsibility, such as:
 - overflow or clipping boundary
 - spacing or geometry control that cannot live on a more meaningful element
 - pseudo-element attachment point
-- hover-area preservation
+- stable interaction-area preservation
 
 ## Example Rules
 
 - Default to one canonical block in `example.html`.
-- Default that canonical block to `hover`.
+- Default that canonical block to tap using `details/summary`.
 - Add a secondary variant only when the difference is materially larger than a small trigger-path change.
 - Keep the example block aligned with the current root and descendant naming contract.
 
@@ -81,6 +84,8 @@ Disallowed preview-only helpers:
 
 - Does the effect still read sensibly when styling is disabled?
 - Does the published CSS stay inside `#workskin`?
+- Does one direct-child `summary.trigger` open and close the effect?
+- Does keyboard activation work through the native summary control?
 - Do `work-skin.css` and `example.html` still agree on structure?
 - Does the preview keep `#workskin` as the visible effect boundary?
 - Does the preview use the shared shell without changing the published behavior?

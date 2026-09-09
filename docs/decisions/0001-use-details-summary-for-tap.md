@@ -8,6 +8,8 @@ Accepted
 
 2026-04-04
 
+Last amended: 2026-09-09
+
 ## Context
 
 This project needs a touch-friendly interaction path that survives AO3's HTML filtering.
@@ -40,8 +42,12 @@ Tradeoffs:
 
 - interaction behavior follows the browser's native `details` rules
 - effect CSS needs to work with that structure rather than a custom state model
+- the same `summary` surface opens and closes the effect; CSS-only outside-click dismissal is not supported
 
-## Follow-up
+## Current Structure
 
-- the current simplified repository defaults to hover-first canonical examples
-- if a future published effect restores an explicit touch path, prefer the same `details/summary` pattern
+- published effects use tap as their only interaction on desktop and touch devices
+- the effect root is a `details` element
+- one direct-child `summary.trigger` owns both opening and closing
+- animated content stays inside the summary so removing `open` can play the reverse transition
+- published CSS derives state from `[open]`; no hover or device-detection branch is retained
