@@ -59,7 +59,7 @@ function selectEffect(effectName, updateHash = true) {
     previewFrame.contentWindow.location.replace(previewUrl.href);
     previewFrame.dataset.currentEffect = effectName;
   }
-  previewFrame.title = `${effect.name} interactive preview`;
+  previewFrame.title = `${effect.name} preview`;
   guideLink.href = `${githubRoot}/${effectName}/guide.md`;
   htmlLink.href = `${githubRoot}/${effectName}/example.html`;
   cssLink.href = `${githubRoot}/${effectName}/work-skin.css`;

@@ -2,13 +2,13 @@
 
 [![Deploy GitHub Pages](https://github.com/XinqiBao/ao3-effects-toolkit/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/XinqiBao/ao3-effects-toolkit/actions/workflows/deploy-pages.yml)
 
-CSS-only interactive effects for [Archive of Our Own](https://archiveofourown.org/) works.
+CSS-only visual and interactive effects for [Archive of Our Own](https://archiveofourown.org/) works.
 
 Published AO3 content stays JavaScript-free. Local previews exist only to review each effect and generate repository demo media.
 
 ## Live Gallery
 
-[Open the interactive gallery](https://xinqibao.github.io/ao3-effects-toolkit/) to try every effect in a live preview and jump directly to its guide, HTML, or CSS source.
+[Open the effects gallery](https://xinqibao.github.io/ao3-effects-toolkit/) to preview every effect and jump directly to its guide, HTML, or CSS source.
 
 ## Effects
 
@@ -22,6 +22,7 @@ Published AO3 content stays JavaScript-free. Local previews exist only to review
 | **Marginalia** | <img src="assets/demos/marginalia.gif" width="220" alt="Marginalia effect" /> | A manuscript-style passage that reveals revisions and margin notes | [guide](effects/marginalia/guide.md) |
 | **Casefile** | <img src="assets/demos/casefile.gif" width="220" alt="Casefile effect" /> | A case-file summary sheet with two tucked evidence slips | [guide](effects/casefile/guide.md) |
 | **Route Map** | <img src="assets/demos/route-map.gif" width="220" alt="Route map effect" /> | A three-stop route that reveals short notes at each waypoint | [guide](effects/route-map/guide.md) |
+| **Search Page** | <img src="assets/demos/search-page.png" width="220" alt="Static search page mockup" /> | A static search page with a colored wordmark and muted prompt | [guide](effects/search-page/guide.md) |
 
 ## Quick Start
 
@@ -56,7 +57,7 @@ node tools/capture-gifs.mjs envelope
 - `npm test` runs both buckets.
 - `npm run build:site` assembles the static GitHub Pages site in `dist/`.
 - `npm run verify` runs the full committed suite and assembles the site.
-- `ffmpeg` must be installed locally before running `node tools/capture-gifs.mjs ...`.
+- `ffmpeg` must be installed locally before running `node tools/capture-gifs.mjs ...` for interactive effects.
 - Local preview validation is primarily manual or browser-assisted.
 - The committed suite is intentionally narrower than visual review; exact framing and tuning still live in maintainer docs and manual checks.
 
@@ -85,4 +86,4 @@ AO3 strips or rejects some CSS and HTML features. This toolkit avoids them in pu
 | `border-radius` with `/` | Remove the ellipse syntax |
 | HTML `id` attributes | Use classes only; AO3 strips `id` |
 
-All AO3-facing CSS stays scoped under `#workskin`. Published effects use a single tap interaction on desktop and touch devices, implemented with `<details>/<summary>` and styled through `[open]`.
+All AO3-facing CSS stays scoped under `#workskin`. Interactive effects use a single tap interaction on desktop and touch devices, implemented with `<details>/<summary>` and styled through `[open]`. Static effects have no trigger.

@@ -7,7 +7,7 @@ import { effects } from '../../site/effects.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-test('interactive gallery manifest matches every published effect directory', () => {
+test('gallery manifest matches every published effect directory', () => {
   const publishedEffects = readdirSync(join(ROOT, 'effects'), { withFileTypes: true })
     .filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
     .map((entry) => entry.name)

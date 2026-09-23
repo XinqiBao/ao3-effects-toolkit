@@ -7,7 +7,7 @@ Local previews exist to review AO3 effects, not to invent a separate presentatio
 - Keep the shared shell in `effects/_shared/preview-shell.css`.
 - Keep that shared shell page-level only.
 - Default each preview to one canonical display surface.
-- Default that canonical preview to the tap version of the effect.
+- Default interactive previews to the tap version of the effect; keep static previews noninteractive.
 - Keep supporting copy minimal so the effect remains the main subject.
 - Default preview structure to `hero + #workskin + canonical effect markup`.
 

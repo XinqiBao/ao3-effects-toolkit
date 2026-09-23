@@ -7,4 +7,5 @@ export const effects = [
   { id: 'marginalia', name: 'Marginalia', summary: 'Annotated passage' },
   { id: 'casefile', name: 'Casefile', summary: 'Evidence dossier' },
   { id: 'route-map', name: 'Route Map', summary: 'Three-stop trail' },
+  { id: 'search-page', name: 'Search Page', summary: 'Static search mockup', interactive: false },
 ];

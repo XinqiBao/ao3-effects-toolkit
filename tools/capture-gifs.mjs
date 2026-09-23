@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * capture-gifs.mjs — Record animated GIFs for each AO3 effect.
+ * capture-gifs.mjs — Record animated GIFs for interactive AO3 effects.
  * Uses Playwright for frame capture, ffmpeg for GIF assembly.
  *
  * Output: assets/demos/<effect>.gif
