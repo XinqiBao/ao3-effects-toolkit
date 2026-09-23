@@ -32,6 +32,7 @@ This document is the canonical operational map for maintaining this repository.
 - Keep shared preview framing in `effects/_shared/preview-shell.css`.
 - Keep that shared preview shell page-level only.
 - Treat `#workskin` as the default local preview and GIF capture boundary.
+- Keep static effects outside the GIF capture workflow; use a still image for README media.
 - Keep the gallery as a consumer of existing effect previews; do not duplicate AO3-facing effect markup in `site/`.
 
 ## Maintenance Expectations

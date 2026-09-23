@@ -22,22 +22,9 @@ Each published effect lives in `effects/<name>/` and should include:
 
 ## Structure Rules
 
-- Use a `details` element with the effect name as the published root class.
-- Use one direct-child `summary.trigger` as the complete interaction surface.
-- Keep animated effect content inside the trigger so closing transitions remain visible.
-- Use phrasing elements such as `span` inside `summary`; style their layout through effect classes.
-- Derive the open state from `[open]`; do not add hover or device-specific trigger branches.
 - Anchor published CSS from `#workskin .<effect-root>`.
 - Prefer short, role-based descendant names inside the root scope instead of repeating the effect prefix.
 - Prefer a base class plus modifier when sibling parts are the same kind of structure with small role differences.
-
-Examples:
-
-- `<details class="polaroid"><summary class="trigger">…`
-- `<details class="chat"><summary class="trigger">…`
-- `panel panel--top`
-- `entry entry--sent`
-- `bubble bubble--received`
 
 Avoid vague descendant names such as `inner`, `wrapper`, or `container` unless the element truly has no stronger role.
 
@@ -50,10 +37,30 @@ Keep a wrapper only when it has a clear responsibility, such as:
 - pseudo-element attachment point
 - stable interaction-area preservation
 
+## Interactive Structure Rules
+
+- Use a `details` element with the effect name as the published root class for interactive effects.
+- Use one direct-child `summary.trigger` as the complete interaction surface.
+- Keep animated effect content inside the trigger so closing transitions remain visible.
+- Use phrasing elements such as `span` inside `summary`; style their layout through effect classes.
+- Derive the open state from `[open]`; do not add hover or device-specific trigger branches.
+
+Examples:
+
+- `<details class="polaroid"><summary class="trigger">…`
+- `<details class="chat"><summary class="trigger">…`
+- `panel panel--top`
+- `entry entry--sent`
+- `bubble bubble--received`
+
+## Static Structure Rules
+
+For a static effect, use a noninteractive root and do not style a decorative element as an actionable control. Keep the same four-file directory contract, `#workskin` scope, and readable source order. Do not add a `details` trigger when the effect has no open state.
+
 ## Example Rules
 
 - Default to one canonical block in `example.html`.
-- Default that canonical block to tap using `details/summary`.
+- For interactive effects, default that canonical block to tap using `details/summary`.
 - Add a secondary variant only when the difference is materially larger than a small trigger-path change.
 - Keep the example block aligned with the current root and descendant naming contract.
 
@@ -84,8 +91,8 @@ Disallowed preview-only helpers:
 
 - Does the effect still read sensibly when styling is disabled?
 - Does the published CSS stay inside `#workskin`?
-- Does one direct-child `summary.trigger` open and close the effect?
-- Does keyboard activation work through the native summary control?
+- For interactive effects, does one direct-child `summary.trigger` open and close the effect?
+- For interactive effects, does keyboard activation work through the native summary control?
 - Do `work-skin.css` and `example.html` still agree on structure?
 - Does the preview keep `#workskin` as the visible effect boundary?
 - Does the preview use the shared shell without changing the published behavior?

@@ -29,8 +29,10 @@ Verified against a logged-in AO3 account:
 ## Verified Locally Only
 
 - the tap-only `<details>/<summary>` structure for all eight published effects
+- the static `effects/search-page/` mockup, including its externally hosted search icon
 
 The tap-only published roots are waiting on AO3 revalidation before they can be treated as confirmed on the live platform.
+The search-page HTML and work skin also require AO3 live validation before being treated as confirmed there.
 
 ## Known AO3 Restrictions
 
