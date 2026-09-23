@@ -1,15 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
 
 import * as captureGifs from '../../tools/capture-gifs.mjs';
+import { effects } from '../../site/effects.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const PUBLISHED_EFFECTS = readdirSync(join(ROOT, 'effects'), { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && entry.name !== '_shared')
-  .map((entry) => entry.name)
+const INTERACTIVE_EFFECTS = effects.filter((effect) => effect.interactive !== false)
+  .map((effect) => effect.id)
   .sort();
 
 test('previewUrlForEffect resolves a local file URL for the effect preview page', () => {
@@ -173,8 +172,8 @@ test('raw effect entries expose deterministic interaction selectors', () => {
   }
 });
 
-test('capture config covers all published effect roots', () => {
-  assert.deepEqual(Object.keys(captureGifs.EFFECTS).sort(), PUBLISHED_EFFECTS);
+test('capture config covers all interactive effects', () => {
+  assert.deepEqual(Object.keys(captureGifs.EFFECTS).sort(), INTERACTIVE_EFFECTS);
 });
 
 test('resolved effect configs expose valid capture settings', () => {

@@ -5,7 +5,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const EFFECTS = [
+const INTERACTIVE_EFFECTS = [
   { directory: 'envelope', root: 'envelope' },
   { directory: 'chat-messages', root: 'chat' },
   { directory: 'polaroid', root: 'polaroid' },
@@ -15,6 +15,10 @@ const EFFECTS = [
   { directory: 'casefile', root: 'casefile' },
   { directory: 'route-map', root: 'route-map' },
 ];
+const STATIC_EFFECTS = [
+  { directory: 'search-page', root: 'search-page' },
+];
+const EFFECTS = [...INTERACTIVE_EFFECTS, ...STATIC_EFFECTS];
 
 function effectPath(effect, filename) {
   return join(ROOT, 'effects', effect.directory, filename);
@@ -41,8 +45,8 @@ test('published effect directories keep the documented artifact set', () => {
   }
 });
 
-test('published examples and previews keep the documented tap-only root contract', () => {
-  for (const effect of EFFECTS) {
+test('interactive examples and previews keep the documented tap-only root contract', () => {
+  for (const effect of INTERACTIVE_EFFECTS) {
     const preview = readFileSync(effectPath(effect, 'preview.html'), 'utf8');
     const example = readFileSync(effectPath(effect, 'example.html'), 'utf8');
     const css = readFileSync(effectPath(effect, 'work-skin.css'), 'utf8');
@@ -65,6 +69,20 @@ test('published examples and previews keep the documented tap-only root contract
     );
     assert.equal(css.includes(':hover'), false, `${effect.directory} CSS should not retain hover triggers`);
     assert.equal(example.includes('--hover'), false, `${effect.directory} example should not retain hover modifiers`);
+  }
+});
+
+test('static examples and previews keep a noninteractive root', () => {
+  for (const effect of STATIC_EFFECTS) {
+    const preview = readFileSync(effectPath(effect, 'preview.html'), 'utf8');
+    const example = readFileSync(effectPath(effect, 'example.html'), 'utf8');
+    const css = readFileSync(effectPath(effect, 'work-skin.css'), 'utf8');
+
+    for (const html of [preview, example]) {
+      assert.match(html, new RegExp(`class="${escapeRegExp(effect.root)}"`));
+      assert.doesNotMatch(html, /<details\b|<summary\b/);
+    }
+    assert.equal(css.includes(`#workskin .${effect.root}`), true);
   }
 });
 

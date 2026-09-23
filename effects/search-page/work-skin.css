@@ -1,0 +1,73 @@
+/* Static search-page mockup for AO3 work skins. */
+
+#workskin .search-page {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 84px 24px 120px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+#workskin .search-page .wordmark {
+  display: block;
+  margin-bottom: 36px;
+  font-size: 92px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+#workskin .search-page .letter--blue { color: #4285f4; }
+#workskin .search-page .letter--red { color: #ea4335; }
+#workskin .search-page .letter--yellow { color: #fbbc05; }
+#workskin .search-page .letter--green { color: #34a853; }
+
+#workskin .search-page .search-field {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 58px;
+  padding: 0 22px;
+  border: 1px solid #dfe1e5;
+  border-radius: 30px;
+  box-shadow: 0 2px 6px rgba(32, 33, 36, .12);
+  text-align: left;
+}
+
+#workskin .search-page .search-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-right: 14px;
+  flex-shrink: 0;
+}
+
+#workskin .search-page .search-hint {
+  color: #80868b;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+@media (max-width: 540px) {
+  #workskin .search-page {
+    padding: 72px 18px 100px;
+  }
+
+  #workskin .search-page .wordmark {
+    margin-bottom: 30px;
+    font-size: 60px;
+  }
+
+  #workskin .search-page .search-field {
+    min-height: 54px;
+    padding: 0 18px;
+  }
+
+  #workskin .search-page .search-hint {
+    font-size: 15px;
+  }
+}
