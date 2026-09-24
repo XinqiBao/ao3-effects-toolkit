@@ -25,14 +25,16 @@ Verified against a logged-in AO3 account:
 - on 2026-04-16, the current `effects/typewriter/` root-scoped structure could be saved and previewed after refactoring the prompt into a stable hover-stage overlay; the lower-edge hover regression no longer reproduced and the cursor still appears as a static block after reveal
 - on 2026-04-17, the current `effects/chat-messages/` hover-stability revision could be saved and previewed correctly after replacing the instant preview removal with a stable hover surface; the collapsed bar still renders and the conversation opens without hover dropouts
 - AO3 preserves `<details>` and `<summary>` in posted work HTML.
+- on 2026-09-24, the current CSS for all eight interactive effects saved in one work skin, and their example HTML rendered in AO3 Preview; each opened and closed by click, and typewriter also closed with Enter
+- on 2026-09-24, the static `effects/search-page/` CSS saved and its current example HTML rendered in AO3 Preview, including the externally hosted search icon
+- on 2026-09-24, route-map's expanded notes showed their full text at a 320px viewport after increasing the reveal height; the search page, route-map, and typewriter fit within the same viewport
 
-## Verified Locally Only
+## Known Mobile Limits
 
-- the tap-only `<details>/<summary>` structure for all eight published effects
-- the static `effects/search-page/` mockup, including its externally hosted search icon
+- `casefile` clips the evidence slips on narrow screens.
+- `marginalia` clips the right-hand notes on narrow screens.
 
-The tap-only published roots are waiting on AO3 revalidation before they can be treated as confirmed on the live platform.
-The search-page HTML and work skin also require AO3 live validation before being treated as confirmed there.
+Both retain their desktop paper layouts; their narrow-screen presentation needs a separate design pass.
 
 ## Known AO3 Restrictions
 
@@ -47,6 +49,9 @@ Avoid these CSS and HTML patterns in published artifacts:
 | `animation` and `@keyframes` | Use transitions and static end states instead |
 | `border-radius` ellipse syntax with `/` | Remove the `/` clause |
 | HTML `id` attributes | Use classes instead |
+| `@media` in work skins | AO3 removes the wrapper and applies its inner rules unconditionally; use viewport-independent rules |
+| `clamp()` CSS values | AO3 rejects the work skin; use supported fixed values |
+| Newlines between inline search-field contents | AO3 may insert `<br>`; keep the image and hint together on one line |
 
 ## Recommended Trigger
 
