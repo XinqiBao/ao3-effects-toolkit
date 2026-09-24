@@ -6,6 +6,7 @@
 /* ---------- Root and geometry ---------- */
 
 #workskin .route-map {
+  box-sizing: border-box;
   display: block;
   width: 620px;
   max-width: 100%;
@@ -122,7 +123,7 @@
 }
 
 #workskin .route-map[open] .note {
-  max-height: 7.5em;
+  max-height: 20em;
   opacity: 1;
   margin-top: 0.82em;
   padding-top: 0.72em;
