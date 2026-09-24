@@ -34,8 +34,9 @@ Confirm:
 
 - `#workskin` exists
 - the expected effect classes still appear
+- the saved skin has not had layout rules changed by AO3's CSS filter
 - the interaction path you pasted behaves correctly
-- the result still looks acceptable in AO3 Preview
+- the result still looks acceptable in AO3 Preview on desktop and a narrow viewport
 
 ### 4. Record the result
 
@@ -46,6 +47,11 @@ Track:
 - whether AO3 accepted the CSS
 - whether AO3 Preview rendered the block correctly
 - any screenshots or notes kept under `local/`
+
+### 5. Clean up
+
+- delete only the temporary draft and work skin created for this validation
+- remove temporary browser artifacts after recording the result
 
 ## Notes
 

@@ -97,6 +97,8 @@ test('published artifacts avoid the documented AO3-incompatible patterns', () =>
   assert.equal(allCss.includes('gap:'), false);
   assert.equal(allCss.includes('object-fit'), false);
   assert.equal(allCss.includes('pointer-events'), false);
+  assert.equal(allCss.includes('@media'), false);
+  assert.equal(allCss.includes('clamp('), false);
   assert.equal(/\banimation\s*:/.test(allCss), false);
   assert.equal(/@keyframes\b/.test(allCss), false);
   assert.equal(allCss.includes('grid-template-columns: repeat('), false);
