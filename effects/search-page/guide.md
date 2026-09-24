@@ -16,6 +16,7 @@ Use these files from `effects/search-page/`:
 
 - This is a static mockup. The search field does not accept input or open results.
 - The decorative search icon loads from a direct Google-hosted PNG URL. It may not appear when external images are blocked; the prompt remains readable.
+- Keep the image and hint on the same source line when editing the search field; AO3 inserts a line break between them otherwise.
 - Without the work skin, the wordmark and prompt remain in reading order.
 
 ## Validation
